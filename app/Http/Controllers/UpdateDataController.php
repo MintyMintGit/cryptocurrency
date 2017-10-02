@@ -66,6 +66,7 @@ class UpdateDataController extends Controller
                 ]
             );
         }
+        return 'Updated successfully';
     }
     function updateValue($number) {
         $value = rand(0,1) == 1;

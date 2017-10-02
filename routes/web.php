@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.one');
-});
 
 Route::get('/storeAllFrom','UpdateDataController@storeAllFrom');
+Route::get('/','GlobalDataController@index');
