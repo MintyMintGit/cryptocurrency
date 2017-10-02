@@ -9,7 +9,7 @@ class Base
     /**
      * @var string
      */
-    const API_URL = "https://api.coinmarketcap.com/v1/ticker/?limit=1000";
+    const API_URL = "https://api.coinmarketcap.com/v1/ticker/?limit=10";
     /**
      * Returns Ticker data.
      *

@@ -15,21 +15,19 @@ class CreateGlobalDatasTable extends Migration
     {
         Schema::create('global_datas', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('name');
-            $table->string('symbol');
-            $table->string('rank');
-            $table->float('price_usd');
-            $table->float('price_btc');
-            $table->float('24h_volume_usd');
-            $table->float('market_cap_usd');
-            $table->float('available_supply');
-            $table->float('total_supply');
-            $table->float('available_supply');
-            $table->float('percent_change_1h');
-            $table->float('percent_change_24h');
-            $table->float('percent_change_7d');
-            $table->timestamp('last_updated');
-            $table->timestamps();
+            $table->string('name')->default(null);
+            $table->string('symbol')->default(null);
+            $table->double('rank')->default(null);
+            $table->double('price_usd')->default(null);
+            $table->double('price_btc')->default(null);
+            $table->double('24h_volume_usd')->default(null);
+            $table->double('market_cap_usd')->default(null);
+            $table->double('available_supply')->default(null);
+            $table->double('total_supply')->default(null);
+            $table->double('percent_change_1h')->default(null);
+            $table->double('percent_change_24h')->default(null);
+            $table->double('percent_change_7d')->default(null);
+            $table->string('last_updated')->default(null);
         });
     }
 
