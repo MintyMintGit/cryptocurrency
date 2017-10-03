@@ -55,7 +55,7 @@ class UpdateDataController extends Controller
                     'rank' => "{$item['rank']}",
                     'price_usd' => $this->updateValue($item['price_usd']),
                     'price_btc' => $this->updateValue($item['price_btc']),
-                    '24h_volume_usd' => $this->updateValue($item['24h_volume_usd']),
+                    'volume_usd_24h' => $this->updateValue($item['24h_volume_usd']),
                     'market_cap_usd' => $this->updateValue($item['market_cap_usd']),
                     'available_supply' => $this->updateValue($item['available_supply']),
                     'total_supply' => $this->updateValue($item['total_supply']),

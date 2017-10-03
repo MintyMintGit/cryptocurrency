@@ -20,7 +20,7 @@ class CreateGlobalDatasTable extends Migration
             $table->double('rank')->default(null);
             $table->double('price_usd')->default(null);
             $table->double('price_btc')->default(null);
-            $table->double('24h_volume_usd')->default(null);
+            $table->double('volume_usd_24h')->default(null);
             $table->double('market_cap_usd')->default(null);
             $table->double('available_supply')->default(null);
             $table->double('total_supply')->default(null);

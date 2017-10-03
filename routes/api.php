@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Http\Resources\GlobalDataResource;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/GlobalDataApi', function (Request $request) {
+    $globalDatas = \App\GlobalData::orderBy('market_cap_usd', 'DESC')->paginate(100);
+    return GlobalDataResource::collection($globalDatas);
+});
+Route::get('/displayAll', function (Request $request) {
+    $globalDatas = \App\GlobalData::orderBy('market_cap_usd', 'DESC')->get();
+    return GlobalDataResource::collection($globalDatas);
+})->name('displayAll');

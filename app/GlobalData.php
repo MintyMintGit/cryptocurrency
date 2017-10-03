@@ -15,7 +15,7 @@ class GlobalData extends Model
         "rank",
         "price_usd",
         "price_btc",
-        "24h_volume_usd",
+        "volume_usd_24h",
         "market_cap_usd",
         "available_supply",
         "total_supply",
