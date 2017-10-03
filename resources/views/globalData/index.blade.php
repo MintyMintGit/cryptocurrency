@@ -127,10 +127,10 @@
                     <div class="pull-right">
                         <ul class="pagination top-paginator">
 
-                            <li><a href="1">← Previous 100</a></li>
+                            <li><a id="previousLink" href="1">← Previous 100</a></li>
 
 
-                            <li><a href="3">Next 100  →</a></li>
+                            <li><a id="nextLink" href="3">Next 100  →</a></li>
 
                             <li><a id="ViewAll" href="/api/displayAll">View All</a></li>
                         </ul>

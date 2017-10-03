@@ -3,8 +3,21 @@ $(document).ready(function () {
 
     var table = $('#marketCapitalizations')
         .on('xhr.dt', function (e, settings, json, xhr) {
+            if(typeof json.links != 'undefined') {
+                if(json.links.next != null) {
+                    $("#nextLink").show();
+                    $("#nextLink").attr('href', json.links.next);
+                } else {
+                    $("#nextLink").hide();
+                }
+                if(json.links.prev != null) {
+                    $("#previousLink").show();
+                    $("#previousLink").attr('href', json.links.prev);
+                } else {
+                    $("#previousLink").hide();
+                }
 
-            var a = 10;
+            }
         })
         .dataTable({
             "pageLength": 100,
@@ -23,10 +36,45 @@ $(document).ready(function () {
         });
     viewAll.on('click', function (event) {
         event.preventDefault();
-        //table.fnClearTable();
         table.DataTable().destroy();
         table.dataTable({
             "ajax": $("#viewAllLink").val(),
+            "paging": false,
+            "columns": [
+                {"data": "rank"},
+                {"data": "name"},
+                {"data": "market_cap_usd"},
+                {"data": "price_usd"},
+                {"data": "total_supply"},
+                {"data": "volume_usd_24h"},
+                {"data": "percent_change_24h"},
+                {"data": ""}
+            ]
+        });
+    });
+    $("#nextLink").on('click', function (event) {
+        event.preventDefault();
+        table.DataTable().destroy();
+        table.dataTable({
+            "ajax": $("#nextLink").attr('href'),
+            "paging": false,
+            "columns": [
+                {"data": "rank"},
+                {"data": "name"},
+                {"data": "market_cap_usd"},
+                {"data": "price_usd"},
+                {"data": "total_supply"},
+                {"data": "volume_usd_24h"},
+                {"data": "percent_change_24h"},
+                {"data": ""}
+            ]
+        });
+    });
+    $("#previousLink").on('click', function (event) {
+        event.preventDefault();
+        table.DataTable().destroy();
+        table.dataTable({
+            "ajax": $("#previousLink").attr('href'),
             "paging": false,
             "columns": [
                 {"data": "rank"},
