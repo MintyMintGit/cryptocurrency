@@ -20,8 +20,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/GlobalDataApi', function (Request $request) {
     $globalDatas = \App\GlobalData::orderBy('market_cap_usd', 'DESC')->paginate(100);
     return GlobalDataResource::collection($globalDatas);
-});
+})->name('getGlobalDataApi');
 Route::get('/displayAll', function (Request $request) {
     $globalDatas = \App\GlobalData::orderBy('market_cap_usd', 'DESC')->get();
     return GlobalDataResource::collection($globalDatas);
 })->name('displayAll');
+
+Route::get('/getExchangeRates', function (Request $request) {
+    $all = \App\ExchangeRate::all();
+    return \App\Http\Resources\ExchangeRates::collection($all);
+})->name('getExchangeRates');

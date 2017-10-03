@@ -3,6 +3,8 @@
 @section('content')
 
     <input type="hidden" id="viewAllLink" value="{{route('displayAll')}}" >
+    <input type="hidden" id="GlobalDataLink" value="{{route('getGlobalDataApi')}}" >
+    <input type="hidden" id="ExchangeRatesLink" value="{{route('getExchangeRates')}}" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
 
     </div>

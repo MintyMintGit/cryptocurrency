@@ -21,7 +21,7 @@ $(document).ready(function () {
         })
         .dataTable({
             "pageLength": 100,
-            "ajax": "http://cryptocurrency.local/api/GlobalDataApi",
+            "ajax": $("#GlobalDataLink").val(),
             "columns": [
                 {"data": "rank"},
                 {"data": "name"},
@@ -89,7 +89,24 @@ $(document).ready(function () {
         });
     });
 
+    getExchangeRates();
 });
+function getExchangeRates() {
+
+
+    $.ajax({
+        url: $("#ExchangeRatesLink").val(),
+        dataType: "json",
+        type: 'GET',
+        success: function (data) {
+            for(let i=0; i<data['data'].length; i++) {
+                data['data'][i].name_quotes;
+                data['data'][i].value_quotes;
+            }
+
+        }
+    });
+}
 
 // $.ajaxSetup({
 //     headers: {
