@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\ExchangeRate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\CoinMarketCap;
 use App\GlobalData;
+use App\ExchangeRatesCap;
 
 class UpdateDataController extends Controller
 {
@@ -17,32 +19,9 @@ class UpdateDataController extends Controller
      */
     public function storeAllFrom()
     {
+        $data = CoinMarketCap\Base::getGlobalData();
 
-//        $flight = GlobalData::updateOrCreate(
-//            [
-//                'id' => 'name222',
-//            ],
-//            [
-//                'name' => "name1",
-//                'symbol' => "123456",
-//                'rank' => 1,
-//                'price_usd' => 301.988,
-//                'price_btc' => 0.0675865,
-//                '24h_volume_usd' => 327982000.0,
-//                'market_cap_usd' => 28568523357.0,
-//                'available_supply' => 94915822.0,
-//                'total_supply' => 94915822.0,
-//                'percent_change_1h' => 0.23,
-//                'percent_change_24h' => 3.28,
-//                'percent_change_7d' => 17.46,
-//                'last_updated' => '11111111111'
-//                //2017-10-02 11:03:16
-//            ]
-//        );
-        $base = new CoinMarketCap\Base();
-        $data = $base->getGlobalData();
-
-        foreach ($data as $key => $item) {
+        foreach ($data as $item) {
 
 
             $globalData = GlobalData::updateOrCreate(
@@ -63,6 +42,28 @@ class UpdateDataController extends Controller
                     'percent_change_24h' => $this->updateValue($item['percent_change_24h']),
                     'percent_change_7d' => $this->updateValue($item['percent_change_7d']),
                     'last_updated' => $this->updateValue($item['last_updated'])
+                ]
+            );
+        }
+        return 'Updated successfully';
+    }
+    /**
+     * Store all data from the ExchangeRates
+     *
+     * @return Response
+     */
+    public function storeExchangeRates()
+    {
+        $data = ExchangeRatesCap\Base::getExchangeRates();
+        foreach ($data['quotes'] as $key => $item) {
+            ExchangeRate::updateOrCreate(
+                [
+                    'name_quotes' => $key
+                ] ,
+                [
+                    'value_quotes' => $item,
+                    'timestamp' => $data['timestamp'],
+                    'source' => $data['source']
                 ]
             );
         }

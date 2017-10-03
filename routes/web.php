@@ -13,4 +13,5 @@
 
 
 Route::get('/storeAllFrom','UpdateDataController@storeAllFrom');
+Route::get('/storeExchangeRates','UpdateDataController@storeExchangeRates');
 Route::get('/','GlobalDataController@index');
