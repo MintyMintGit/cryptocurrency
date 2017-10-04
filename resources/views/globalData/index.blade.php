@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-
+<link href="/css/cryptoIcons.css" rel="stylesheet" type="text/css">
     <input type="hidden" id="viewAllLink" value="{{route('displayAll')}}" >
     <input type="hidden" id="GlobalDataLink" value="{{route('getGlobalDataApi')}}" >
     <input type="hidden" id="ExchangeRatesLink" value="{{route('getExchangeRates')}}" >
@@ -158,5 +158,6 @@
         </div>
     </div>
 
-
+<div id="currency-exchange-rates">
+</div>
 @endsection

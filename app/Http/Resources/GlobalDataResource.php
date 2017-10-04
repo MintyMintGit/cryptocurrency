@@ -17,6 +17,7 @@ class GlobalDataResource extends Resource
         return [
             'rank' => $this->rank,
             'name' => $this->name,
+            'symbol' => $this->symbol,
             'market_cap_usd' => $this->market_cap_usd,
             'price_usd' => $this->price_usd,
             'available_supply' => $this->available_supply,

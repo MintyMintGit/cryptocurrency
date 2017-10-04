@@ -61,7 +61,7 @@ class UpdateDataController extends Controller
                     'name_quotes' => $key
                 ] ,
                 [
-                    'value_quotes' => $item,
+                    'value_quotes' => round($item, 2),
                     'timestamp' => $data['timestamp'],
                     'source' => $data['source']
                 ]
@@ -72,9 +72,9 @@ class UpdateDataController extends Controller
     function updateValue($number) {
         $value = rand(0,1) == 1;
         if($value) {
-            $number = $number + ($number * 0.05 / 100);
+            $number = round($number + ($number * 0.05 / 100), 2);
         } else {
-            $number = $number - ($number * 0.05 / 100);
+            $number = round( $number - ($number * 0.05 / 100),2);
         }
         return $number;
     }

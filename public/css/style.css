@@ -8,3 +8,9 @@ body {
 #marketCapitalizations {
     width: 100%
 }
+.makeItRed {
+    color: #d14836;
+}
+.makeItGreen {
+    color: #093;
+}
