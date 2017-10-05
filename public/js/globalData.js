@@ -1,4 +1,4 @@
-
+var currencyExchangeRates = $("#currency-exchange-rates");
 let currency_symbols = {
     "aud": "$",
     "brl": "R$",
@@ -84,6 +84,7 @@ var configDataTable = {
 };
 
 $(document).ready(function () {
+    getExchangeRates();
     var viewAll = $("#ViewAll");
     $("#navigation li").removeClass('active');
     $("#homeTab").addClass("active");
@@ -176,7 +177,21 @@ function mapShortCodetoSymbol(shortCode) {
 function makeBeautyMoney(someMoney) {
     return someMoney.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 }
-
+function getExchangeRates(callback) {
+    $.ajax({
+        url: $("#ExchangeRatesLink").val(),
+        dataType: "json",
+        type: 'GET',
+        success: function (data) {
+            for (let i = 0; i < data['data'].length; i++) {
+                currencyExchangeRates.attr('data-' + data['data'][i].name_quotes, data['data'][i].value_quotes);
+            }
+            if(i == data['data'].length && callback) {
+                callback();
+            }
+        }
+    });
+}
 // $.ajaxSetup({
 //     headers: {
 //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
