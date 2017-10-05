@@ -7,7 +7,7 @@ use \App\Http\Controllers\CalculatorController;
 <link href="/css/cryptoIcons.css" rel="stylesheet" type="text/css">
     <input type="hidden" id="viewAllLink" value="{{route('displayAll')}}" >
     <input type="hidden" id="GlobalDataLink" value="{{route('getGlobalDataApi')}}" >
-    <input type="hidden" id="ExchangeRatesLink" value="{{route('getExchangeRates')}}" >
+
     <input type="hidden" id="bitcoinPrice" value="{{$bitcoinPrice}}">
     <input type="hidden" id="ethPrice" value="{{$ethPrice}}">
 
@@ -164,6 +164,5 @@ use \App\Http\Controllers\CalculatorController;
         </div>
     </div>
 
-<div id="currency-exchange-rates">
-</div>
+
 @endsection
