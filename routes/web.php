@@ -14,4 +14,8 @@
 
 Route::get('/storeAllFrom','UpdateDataController@storeAllFrom');
 Route::get('/storeExchangeRates','UpdateDataController@storeExchangeRates');
-Route::get('/','GlobalDataController@index');
+Route::get('/','GlobalDataController@index')->name('Home');
+Route::get('/calculator','CalculatorController@index')->name('CalculatorIndex');
+//Route::get('/','CalculatorController@index');
+Route::get('/calculator/{id}','CalculatorController@calc');
+

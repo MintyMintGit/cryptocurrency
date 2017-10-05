@@ -29,9 +29,9 @@
 </head>
 <body id="page-top" class="index">
 
-@include('layouts.partials._navigation')
-
 @include('layouts.partials._header')
+
+@include('layouts.partials._navigation')
 
 @yield('content')
 

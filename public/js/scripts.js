@@ -85,7 +85,8 @@ var configDataTable = {
 
 $(document).ready(function () {
     var viewAll = $("#ViewAll");
-
+    $("#navigation li").removeClass('active');
+    $("#homeTab").addClass("active");
     var table = $('#marketCapitalizations');
     configDataTable.ajax = $("#GlobalDataLink").val();
     table.on('xhr.dt', function (e, settings, json, xhr) {

@@ -1,3 +1,6 @@
+<?php
+use \App\Http\Controllers\CalculatorController;
+?>
 @extends('layouts.master')
 
 @section('content')
@@ -8,10 +11,10 @@
     <input type="hidden" id="bitcoinPrice" value="{{$bitcoinPrice}}">
     <input type="hidden" id="ethPrice" value="{{$ethPrice}}">
 
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
 
-    </div>
-    <div class="row">
+
+
+    <div class="row" id="firstPage">
         <div class="col-xs-12">
             <div class="row">
                 <div class="hidden-xs hidden-sm col-md-4">
