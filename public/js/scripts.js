@@ -130,27 +130,40 @@ $(document).ready(function () {
         coefficient = currencyExchangeRates.attr('data-usd' + dataCurrency);
         $("#currency-switch-button").text(dataCurrency.toUpperCase());
         //market_cap_usd
-        table.find('tbody tr .market_cap_usd').each(function(indx, element){
-            var costInDollars = $(element).attr('data-usd');
-            element.innerHTML = mapShortCodetoSymbol(dataCurrency) + makeBeautyMoney(parseFloat(costInDollars) * coefficient);
+
+        table.find('tbody tr .market_cap_usd').each(function (indx, element) {
+            if (dataCurrency == "btc") {
+                element.innerHTML = parseInt(parseFloat(element.getAttribute('data-usd')) / parseFloat($("#bitcoinPrice").val())) + " BTC";
+            } else if (dataCurrency == "eth") {
+                element.innerHTML = parseInt(parseFloat(element.getAttribute('data-usd')) / parseFloat($("#ethPrice").val())) + " ETH";
+            } else {
+                var costInDollars = $(element).attr('data-usd');
+                element.innerHTML = mapShortCodetoSymbol(dataCurrency) + makeBeautyMoney(parseFloat(costInDollars) * coefficient);
+            }
         });
 
         //price
-        table.find('tbody tr .price').each(function(indx, element){
-            var costInDollars = $(element).attr('data-usd');
-            element.innerHTML = mapShortCodetoSymbol(dataCurrency) + parseFloat(costInDollars) * coefficient;
-        });
-
-        //Circulating supply
-        table.find('tbody tr .total_supply').each(function(indx, element){
-            var costInDollars = $(element).attr('data-usd');
-            element.innerHTML = makeBeautyMoney(parseFloat(costInDollars) * coefficient) + " " + dataCurrency.toUpperCase();
+        table.find('tbody tr .price').each(function (indx, element) {
+            if (dataCurrency == "btc") {
+                element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#bitcoinPrice").val())).toFixed(8) + " BTC";
+            } else if (dataCurrency == "eth") {
+                element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#ethPrice").val())).toFixed(8) + " ETH";
+            } else {
+                var costInDollars = $(element).attr('data-usd');
+                element.innerHTML = mapShortCodetoSymbol(dataCurrency) + parseFloat(costInDollars) * coefficient;
+            }
         });
 
         //Volume
-        table.find('tbody tr .volume').each(function(indx, element){
-            var costInDollars = $(element).attr('data-usd');
-            element.innerHTML = mapShortCodetoSymbol(dataCurrency) + makeBeautyMoney(parseFloat(costInDollars) * coefficient);
+        table.find('tbody tr .volume').each(function (indx, element) {
+            if (dataCurrency == "btc") {
+                element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#bitcoinPrice").val())).toFixed(3) + " BTC";
+            } else if (dataCurrency == "eth") {
+                element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#ethPrice").val())).toFixed(3) + " ETH";
+            } else {
+                var costInDollars = $(element).attr('data-usd');
+                element.innerHTML = mapShortCodetoSymbol(dataCurrency) + makeBeautyMoney(parseFloat(costInDollars) * coefficient);
+            }
         });
     });
 });
@@ -168,13 +181,16 @@ function getExchangeRates() {
         }
     });
 }
+
 function mapShortCodetoSymbol(shortCode) {
     shortCode = shortCode.toLowerCase();
     return currency_symbols[shortCode];
 }
+
 function makeBeautyMoney(someMoney) {
     return someMoney.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 }
+
 // $.ajaxSetup({
 //     headers: {
 //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
