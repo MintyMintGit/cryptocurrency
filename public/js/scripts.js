@@ -35,12 +35,59 @@ let currency_symbols = {
 };
 var dataCurrency = 0;
 var coefficient = 0;
+var configDataTable = {
+    "ajax": $("#viewAllLink").val(),
+    "paging": false,
+    "columns": [
+        {"data": "rank"},
+        {"data": "name"},
+        {"data": "market_cap_usd", "className": "market_cap_usd"},
+        {"data": "price_usd", "className": "price"},
+        {"data": "total_supply", "className": "total_supply"},
+        {"data": "volume_usd_24h", "className": "volume"},
+        {"data": "percent_change_24h"},
+        {"data": ""}
+    ],
+    "aoColumnDefs": [{
+        "aTargets": [1, 2, 3, 4, 5, 6],
+        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            $(nTd).attr('data-usd', sData);
+            switch (iCol) {
+                case 1:
+                    var linkCrypto = sData.toLowerCase();
+                    linkCrypto = linkCrypto.split(" ").join("-");
+                    var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
+                    nTd.innerHTML = icon + '<a href="crypto/' + linkCrypto + '">' + nTd.innerHTML + '</a>';
+                    break;
+                case 2:
+                    nTd.innerHTML = '$' + makeBeautyMoney(sData);
+                    break;
+                case 3:
+                    nTd.innerHTML = '$' + sData;
+                    break;
+                case 4:
+                    nTd.innerHTML = makeBeautyMoney(sData) + " " + oData.symbol;
+                    break;
+                case 5:
+                    nTd.innerHTML = '$' + makeBeautyMoney(sData);
+                    break;
+                case 6:
+                    var temp = "<span class='"
+                    temp += sData >= 0 ? "makeItGreen" : "makeItRed";
+                    temp += "'>" + sData + "%</span>";
+                    nTd.innerHTML = temp;
+                    break;
+            }
+        }
+    }]
+
+};
 
 $(document).ready(function () {
     var viewAll = $("#ViewAll");
 
-
     var table = $('#marketCapitalizations');
+    configDataTable.ajax = $("#GlobalDataLink").val();
     table.on('xhr.dt', function (e, settings, json, xhr) {
         if (typeof json.links != 'undefined') {
             if (json.links.next != null) {
@@ -56,202 +103,24 @@ $(document).ready(function () {
                 $("#previousLink").hide();
             }
         }
-    }).dataTable({
-            "pageLength": 100,
-            "ajax": $("#GlobalDataLink").val(),
-            "columns": [
-                {"data": "rank"},
-                {"data": "name"},
-                {"data": "market_cap_usd", "className" : "market_cap_usd"},
-                {"data": "price_usd", "className" : "price"},
-                {"data": "total_supply", "className" : "total_supply"},
-                {"data": "volume_usd_24h", "className" : "volume"},
-                {"data": "percent_change_24h"},
-                {"data": ""}
-            ],
-            "aoColumnDefs": [ {
-                "aTargets": [1,2,3,4,5,6],
-                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).attr('data-usd',sData);
-                    switch (iCol) {
-                        case 1:
-                            var linkCrypto = sData.toLowerCase();
-                            linkCrypto = linkCrypto.split(" ").join("-");
-                            var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
-                            nTd.innerHTML = icon + '<a href="crypto/' + linkCrypto + '">' + nTd.innerHTML + '</a>';
-                            break;
-                        case 2:
-                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
-                            break;
-                        case 3:
-                            nTd.innerHTML = '$' + sData;
-                            break;
-                        case 4:
-                            nTd.innerHTML = makeBeautyMoney(sData) + " " + oData.symbol;
-                            break;
-                        case 5:
-                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
-                            break;
-                        case 6:
-                            var temp = "<span class='"
-                            temp += sData >= 0 ? "makeItGreen" : "makeItRed";
-                            temp += "'>" + sData + "%</span>";
-                            nTd.innerHTML = temp;
-                            break;
-                    }
-                }
-            } ]
-        });
+    }).dataTable(configDataTable);
     viewAll.on('click', function (event) {
         event.preventDefault();
         table.DataTable().destroy();
-        table.dataTable({
-            "ajax": $("#viewAllLink").val(),
-            "paging": false,
-            "columns": [
-                {"data": "rank"},
-                {"data": "name"},
-                {"data": "market_cap_usd", "className" : "market_cap_usd"},
-                {"data": "price_usd", "className" : "price"},
-                {"data": "total_supply", "className" : "total_supply"},
-                {"data": "volume_usd_24h", "className" : "volume"},
-                {"data": "percent_change_24h"},
-                {"data": ""}
-            ],
-            "aoColumnDefs": [ {
-                "aTargets": [1,2,3,4,5,6],
-                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).attr('data-usd',sData);
-                    switch (iCol) {
-                        case 1:
-                            var linkCrypto = sData.toLowerCase();
-                            linkCrypto = linkCrypto.split(" ").join("-");
-                            var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
-                            nTd.innerHTML = icon + '<a href="crypto/' + linkCrypto + '">' + nTd.innerHTML + '</a>';
-                            break;
-                        case 2:
-                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
-                            break;
-                        case 3:
-                            nTd.innerHTML = '$' + sData;
-                            break;
-                        case 4:
-                            nTd.innerHTML = makeBeautyMoney(sData) + " " + oData.symbol;
-                            break;
-                        case 5:
-                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
-                            break;
-                        case 6:
-                            var temp = "<span class='"
-                            temp += sData >= 0 ? "makeItGreen" : "makeItRed";
-                            temp += "'>" + sData + "%</span>";
-                            nTd.innerHTML = temp;
-                            break;
-                    }
-                }
-            } ]
-
-        });
+        configDataTable.ajax = $("#viewAllLink").val();
+        table.dataTable(configDataTable);
     });
     $("#nextLink").on('click', function (event) {
         event.preventDefault();
         table.DataTable().destroy();
-        table.dataTable({
-            "ajax": $("#nextLink").attr('href'),
-            "paging": false,
-            "columns": [
-                {"data": "rank"},
-                {"data": "name"},
-                {"data": "market_cap_usd", "className" : "market_cap_usd"},
-                {"data": "price_usd", "className" : "price"},
-                {"data": "total_supply", "className" : "total_supply"},
-                {"data": "volume_usd_24h", "className" : "volume"},
-                {"data": "percent_change_24h"},
-                {"data": ""}
-            ],
-            "aoColumnDefs": [ {
-                "aTargets": [1,2,3,4,5,6],
-                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).attr('data-usd',sData);
-                    switch (iCol) {
-                        case 1:
-                            var linkCrypto = sData.toLowerCase();
-                            linkCrypto = linkCrypto.split(" ").join("-");
-                            var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
-                            nTd.innerHTML = icon + '<a href="crypto/' + linkCrypto + '">' + nTd.innerHTML + '</a>';
-                            break;
-                        case 2:
-                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
-                            break;
-                        case 3:
-                            nTd.innerHTML = '$' + sData;
-                            break;
-                        case 4:
-                            nTd.innerHTML = makeBeautyMoney(sData) + " " + oData.symbol;
-                            break;
-                        case 5:
-                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
-                            break;
-                        case 6:
-                            var temp = "<span class='"
-                            temp += sData >= 0 ? "makeItGreen" : "makeItRed";
-                            temp += "'>" + sData + "%</span>";
-                            nTd.innerHTML = temp;
-                            break;
-                    }
-                }
-            } ]
-        });
+        configDataTable.ajax = $("#nextLink").attr('href');
+        table.dataTable(configDataTable);
     });
     $("#previousLink").on('click', function (event) {
         event.preventDefault();
         table.DataTable().destroy();
-        table.dataTable({
-            "ajax": $("#previousLink").attr('href'),
-            "paging": false,
-            "columns": [
-                {"data": "rank"},
-                {"data": "name"},
-                {"data": "market_cap_usd", "className" : "market_cap_usd"},
-                {"data": "price_usd", "className" : "price"},
-                {"data": "total_supply", "className" : "total_supply"},
-                {"data": "volume_usd_24h", "className" : "volume"},
-                {"data": "percent_change_24h"},
-                {"data": ""}
-            ],
-            "aoColumnDefs": [ {
-                "aTargets": [1,2,3,4,5,6],
-                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).attr('data-usd',sData);
-                    switch (iCol) {
-                        case 1:
-                            var linkCrypto = sData.toLowerCase();
-                            linkCrypto = linkCrypto.split(" ").join("-");
-                            var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
-                            nTd.innerHTML = icon + '<a href="crypto/' + linkCrypto + '">' + nTd.innerHTML + '</a>';
-                            break;
-                        case 2:
-                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
-                            break;
-                        case 3:
-                            nTd.innerHTML = '$' + sData;
-                            break;
-                        case 4:
-                            nTd.innerHTML = makeBeautyMoney(sData) + " " + oData.symbol;
-                            break;
-                        case 5:
-                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
-                            break;
-                        case 6:
-                            var temp = "<span class='"
-                            temp += sData >= 0 ? "makeItGreen" : "makeItRed";
-                            temp += "'>" + sData + "%</span>";
-                            nTd.innerHTML = temp;
-                            break;
-                    }
-                }
-            } ]
-        });
+        configDataTable.ajax = $("#previousLink").attr('href');
+        table.dataTable(configDataTable);
     });
 
     getExchangeRates();
