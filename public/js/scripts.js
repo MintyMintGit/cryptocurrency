@@ -117,7 +117,40 @@ $(document).ready(function () {
                 {"data": "volume_usd_24h", "className" : "volume"},
                 {"data": "percent_change_24h"},
                 {"data": ""}
-            ]
+            ],
+            "aoColumnDefs": [ {
+                "aTargets": [1,2,3,4,5,6],
+                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).attr('data-usd',sData);
+                    switch (iCol) {
+                        case 1:
+                            var linkCrypto = sData.toLowerCase();
+                            linkCrypto = linkCrypto.split(" ").join("-");
+                            var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
+                            nTd.innerHTML = icon + '<a href="crypto/' + linkCrypto + '">' + nTd.innerHTML + '</a>';
+                            break;
+                        case 2:
+                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
+                            break;
+                        case 3:
+                            nTd.innerHTML = '$' + sData;
+                            break;
+                        case 4:
+                            nTd.innerHTML = makeBeautyMoney(sData) + " " + oData.symbol;
+                            break;
+                        case 5:
+                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
+                            break;
+                        case 6:
+                            var temp = "<span class='"
+                            temp += sData >= 0 ? "makeItGreen" : "makeItRed";
+                            temp += "'>" + sData + "%</span>";
+                            nTd.innerHTML = temp;
+                            break;
+                    }
+                }
+            } ]
+
         });
     });
     $("#nextLink").on('click', function (event) {
@@ -135,7 +168,39 @@ $(document).ready(function () {
                 {"data": "volume_usd_24h", "className" : "volume"},
                 {"data": "percent_change_24h"},
                 {"data": ""}
-            ]
+            ],
+            "aoColumnDefs": [ {
+                "aTargets": [1,2,3,4,5,6],
+                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).attr('data-usd',sData);
+                    switch (iCol) {
+                        case 1:
+                            var linkCrypto = sData.toLowerCase();
+                            linkCrypto = linkCrypto.split(" ").join("-");
+                            var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
+                            nTd.innerHTML = icon + '<a href="crypto/' + linkCrypto + '">' + nTd.innerHTML + '</a>';
+                            break;
+                        case 2:
+                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
+                            break;
+                        case 3:
+                            nTd.innerHTML = '$' + sData;
+                            break;
+                        case 4:
+                            nTd.innerHTML = makeBeautyMoney(sData) + " " + oData.symbol;
+                            break;
+                        case 5:
+                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
+                            break;
+                        case 6:
+                            var temp = "<span class='"
+                            temp += sData >= 0 ? "makeItGreen" : "makeItRed";
+                            temp += "'>" + sData + "%</span>";
+                            nTd.innerHTML = temp;
+                            break;
+                    }
+                }
+            } ]
         });
     });
     $("#previousLink").on('click', function (event) {
@@ -153,7 +218,39 @@ $(document).ready(function () {
                 {"data": "volume_usd_24h", "className" : "volume"},
                 {"data": "percent_change_24h"},
                 {"data": ""}
-            ]
+            ],
+            "aoColumnDefs": [ {
+                "aTargets": [1,2,3,4,5,6],
+                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).attr('data-usd',sData);
+                    switch (iCol) {
+                        case 1:
+                            var linkCrypto = sData.toLowerCase();
+                            linkCrypto = linkCrypto.split(" ").join("-");
+                            var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
+                            nTd.innerHTML = icon + '<a href="crypto/' + linkCrypto + '">' + nTd.innerHTML + '</a>';
+                            break;
+                        case 2:
+                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
+                            break;
+                        case 3:
+                            nTd.innerHTML = '$' + sData;
+                            break;
+                        case 4:
+                            nTd.innerHTML = makeBeautyMoney(sData) + " " + oData.symbol;
+                            break;
+                        case 5:
+                            nTd.innerHTML = '$' + makeBeautyMoney(sData);
+                            break;
+                        case 6:
+                            var temp = "<span class='"
+                            temp += sData >= 0 ? "makeItGreen" : "makeItRed";
+                            temp += "'>" + sData + "%</span>";
+                            nTd.innerHTML = temp;
+                            break;
+                    }
+                }
+            } ]
         });
     });
 
