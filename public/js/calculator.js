@@ -1,7 +1,5 @@
 var currencyExchangeRates = [];
-var searchListItems = $("#autoFrom li, #autoTo li");
 var hardcoded = ['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'BTC', 'ETH', 'XRP', 'BCH', 'LTC'];
-var hardcodedRates = $("#hardcoded li");
 function getExchangeRates() {
     $.ajax({
         url: $("#ExchangeRatesLink").val(),
@@ -40,38 +38,57 @@ $(document).ready(function () {
 
     $("#to, #from").on('keyup', function (event) {
         var currentItem = $(event.currentTarget);
-        //searchListItems = currentItem.siblings('ul');
-        searchListItems.html('');
+        var ulSelected = $("#" + currentItem.attr('id') + "Auto");
+        $("#fromAuto li,#toAuto li").remove();
         var key = event.currentTarget.value.toUpperCase();
-        searchListItems.append(hardcodedRates.clone());
-        $.each(currencyExchangeRates, function (indx) {
-            if (currencyExchangeRates[indx].substring(0, key.length) == key) {
-                searchListItems.append("<li>" + currencyExchangeRates[indx] + "</li>");
-            }
-        });
-        searchListItems.find('li').on('click', function (event) {
+
+        ///по идее необходим такой же поиск как и далее
+        ulSelected.append( getReadyList(hardcoded, key) );
+        ulSelected.append( getReadyList(currencyExchangeRates, key) );
+
+        ulSelected.find('li').on('click', function (event) {
             var selectedItem = $(event.currentTarget);
-            var inputSel = selectedItem.parent().siblings('input');
+            var id = selectedItem.parent().attr('id');
+
+            var inputSel = id.substring(0, id.indexOf('Auto'));
+
+            inputSel = $("#" + inputSel);
             inputSel.val(selectedItem.text());
-            searchListItems.html('');
+            $("#fromAuto li,#toAuto li").remove();
         });
     });
 
     //show all drop down list
     $("#to, #from").on('focusin', function (event) {
         var currentItem = $(event.currentTarget);
-        //searchListItems = currentItem.siblings('ul');
-        searchListItems.html('');
-        $.each(currencyExchangeRates, function (indx) {
-            searchListItems.append("<li>" + currencyExchangeRates[indx] + "</li>");
-        });
+        $("#fromAuto li,#toAuto li").remove();
+        var ulSelected = $("#" + currentItem.attr('id') + "Auto");
+
+        ulSelected.append(getFullList(hardcoded));
+        ulSelected.append(getFullList(currencyExchangeRates));
+
     });
-    $("#to, #from").on('focusout', function (event) {
-        var currentItem = $(event.currentTarget);
-        searchListItems = currentItem.siblings('ul');
-        searchListItems.html('');
-    });
-    $("#amount").on('click', function (event) {
-        //if ($("#from").length
-    });
+
+
 });
+function getFullList(array) {
+    var readyList = [];
+
+    $.each(array, function (indx) {
+            readyList.push("<li>" + array[indx] + "</li>");
+    });
+
+    return readyList;
+}
+
+function getReadyList(array, item) {
+    var readyList = [];
+
+    $.each(array, function (indx) {
+        if(array[indx].indexOf(item) != -1) {
+            readyList.push("<li>" + array[indx] + "</li>");
+        }
+    });
+
+    return readyList;
+}

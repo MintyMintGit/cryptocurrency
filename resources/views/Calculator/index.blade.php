@@ -3,18 +3,6 @@
 @section('content')
     <input type="hidden" id="GlobalDataNames" value="{{ route('GlobalDataNames') }}">
     <link rel="stylesheet" href="css/calculator.css">
-    <ul id="hardcoded">
-        <li>USD</li>
-        <li>EUR</li>
-        <li>GBP</li>
-        <li>CAD</li>
-        <li>AUD</li>
-        <li>BTC</li>
-        <li>ETH</li>
-        <li>XRP</li>
-        <li>BCH</li>
-        <li>LTC</li>
-    </ul>
     <h1>Enter Currency Amount</h1>
     <table>
         <tbody>
@@ -27,7 +15,7 @@
             </td>
             <td>
                 <input type="text" id="from">
-                <ul id="autoFrom" class="autocomplete">
+                <ul id="fromAuto" class="autocomplete">
                 </ul>
             </td>
             <td>
@@ -38,7 +26,7 @@
             </td>
             <td>
                 <input type="text" id="to">
-                <ul id="autoTo" class="autocomplete">
+                <ul id="toAuto" class="autocomplete">
                 </ul>
             </td>
             <td>
