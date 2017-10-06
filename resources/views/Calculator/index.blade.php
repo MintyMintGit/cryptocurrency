@@ -8,7 +8,7 @@
         <tbody>
         <tr>
             <td>
-                <input type="text" id="count">
+                <input type="number" id="amount">
             </td>
             <td>
                 From:
@@ -19,7 +19,7 @@
                 </ul>
             </td>
             <td>
-                <div id="amount">Amount</div>
+                <div id="inversion">Inversion</div>
             </td>
             <td>
                 To:

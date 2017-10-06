@@ -1,5 +1,6 @@
 var currencyExchangeRates = [];
 var hardcoded = ['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'BTC', 'ETH', 'XRP', 'BCH', 'LTC'];
+
 function getExchangeRates() {
     $.ajax({
         url: $("#ExchangeRatesLink").val(),
@@ -15,6 +16,7 @@ function getExchangeRates() {
         }
     });
 }
+
 function getGlobaldata() {
     $.ajax({
         url: $("#GlobalDataNames").val(),
@@ -43,8 +45,8 @@ $(document).ready(function () {
         var key = event.currentTarget.value.toUpperCase();
 
         ///по идее необходим такой же поиск как и далее
-        ulSelected.append( getReadyList(hardcoded, key) );
-        ulSelected.append( getReadyList(currencyExchangeRates, key) );
+        ulSelected.append(getReadyList(hardcoded, key));
+        ulSelected.append(getReadyList(currencyExchangeRates, key));
 
         ulSelected.find('li').on('click', function (event) {
             var selectedItem = $(event.currentTarget);
@@ -69,13 +71,32 @@ $(document).ready(function () {
 
     });
 
+    $("#inversion, #convert").on('click', function (event) {
+        var currentItem = $(event.currentTarget);
+        var amount = $("#amount").val();
+        var from = $("#from").val();
+        var to = $("#to").val();
 
+        switch (currentItem.attr("id")) {
+            case "inversion" :
+                window.location = createRedirectLink(amount, to, from);
+                break;
+            case "convert":
+                window.location = createRedirectLink(amount, from, to);
+                break;
+        }
+    });
 });
+
+function createRedirectLink(amount, from, to) {
+    return window.location.href + "/" + from + "-" + to + "?" + amount;
+}
+
 function getFullList(array) {
     var readyList = [];
 
     $.each(array, function (indx) {
-            readyList.push("<li>" + array[indx] + "</li>");
+        readyList.push("<li>" + array[indx] + "</li>");
     });
 
     return readyList;
@@ -85,7 +106,7 @@ function getReadyList(array, item) {
     var readyList = [];
 
     $.each(array, function (indx) {
-        if(array[indx].indexOf(item) != -1) {
+        if (array[indx].indexOf(item) != -1) {
             readyList.push("<li>" + array[indx] + "</li>");
         }
     });
