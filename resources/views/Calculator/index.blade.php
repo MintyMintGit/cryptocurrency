@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
+    <input type="hidden" id="GlobalDataNames" value="{{ route('GlobalDataNames') }}">
+    <link rel="stylesheet" href="css/calculator.css">
     <ul id="hardcoded">
         <li>USD</li>
         <li>EUR</li>
@@ -26,11 +28,10 @@
             <td>
                 <input type="text" id="from">
                 <ul id="autoFrom" class="autocomplete">
-
                 </ul>
             </td>
             <td>
-                <div id="amount"></div>
+                <div id="amount">Amount</div>
             </td>
             <td>
                 To:
@@ -38,7 +39,6 @@
             <td>
                 <input type="text" id="to">
                 <ul id="autoTo" class="autocomplete">
-
                 </ul>
             </td>
             <td>

@@ -30,3 +30,8 @@ Route::get('/getExchangeRates', function (Request $request) {
     $all = \App\ExchangeRate::all();
     return \App\Http\Resources\ExchangeRates::collection($all);
 })->name('getExchangeRates');
+
+Route::get('/GlobalDataNames', function (Request $request) {
+    $globalDatas = \App\GlobalData::get(['name', 'symbol']);
+    return $globalDatas;
+})->name('GlobalDataNames');

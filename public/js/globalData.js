@@ -175,7 +175,7 @@ function mapShortCodetoSymbol(shortCode) {
 }
 
 function makeBeautyMoney(someMoney) {
-    return someMoney.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+    return parseFloat(someMoney).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 }
 function getExchangeRates(callback) {
     $.ajax({
@@ -185,9 +185,6 @@ function getExchangeRates(callback) {
         success: function (data) {
             for (let i = 0; i < data['data'].length; i++) {
                 currencyExchangeRates.attr('data-' + data['data'][i].name_quotes, data['data'][i].value_quotes);
-            }
-            if(i == data['data'].length && callback) {
-                callback();
             }
         }
     });
