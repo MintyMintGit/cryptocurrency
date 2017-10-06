@@ -61,7 +61,7 @@ class UpdateDataController extends Controller
                     'name_quotes' => $key
                 ] ,
                 [
-                    'value_quotes' => round($item, 2),
+                    'value_quotes' => $item,
                     'timestamp' => $data['timestamp'],
                     'source' => $data['source']
                 ]

@@ -1,6 +1,6 @@
 var currencyExchangeRates = [];
 var hardcoded = ['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'BTC', 'ETH', 'XRP', 'BCH', 'LTC'];
-
+var crossRates = {'USD' : '', 'EUR' : '', 'GBP' : '', 'CAD' : '', 'AUD' : '', 'CHF' : '', 'INR' : '', 'CNY' : '', 'JPY' : ''};
 function getExchangeRates() {
     $.ajax({
         url: $("#ExchangeRatesLink").val(),
@@ -12,7 +12,11 @@ function getExchangeRates() {
                 if (hardcoded.indexOf(name) == -1) {
                     currencyExchangeRates.push(name);
                 }
+                if (crossRates[name] != undefined) {
+                    crossRates[name] = data['data'][i].value_quotes;
+                }
             }
+            putValuesToTable();
         }
     });
 }
@@ -38,13 +42,16 @@ $(document).ready(function () {
     getExchangeRates();
     getGlobaldata();
 
+    //$("")
+
+
+
     $("#to, #from").on('keyup', function (event) {
         var currentItem = $(event.currentTarget);
         var ulSelected = $("#" + currentItem.attr('id') + "Auto");
         $("#fromAuto li,#toAuto li").remove();
         var key = event.currentTarget.value.toUpperCase();
 
-        ///по идее необходим такой же поиск как и далее
         ulSelected.append(getReadyList(hardcoded, key));
         ulSelected.append(getReadyList(currencyExchangeRates, key));
 
@@ -86,6 +93,8 @@ $(document).ready(function () {
                 break;
         }
     });
+
+
 });
 
 function createRedirectLink(amount, from, to) {
@@ -112,4 +121,21 @@ function getReadyList(array, item) {
     });
 
     return readyList;
+}
+function putValuesToTable() {
+    //putFirstRow();
+
+    $.each($("#crossRatesTable thead th"), function (key, value) {
+
+        if(key > 0) {
+            putFirstRow(key, value);
+        }
+    });
+}
+function putFirstRow(key, value) {
+
+        var body = $("#crossRatesTable tbody tr");
+        var currence = $(value).find('p').html();
+        var itemInVhichPutValue = $(body[0]).find('td')[key];
+        $(itemInVhichPutValue).text(crossRates[currence]);
 }

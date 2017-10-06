@@ -151,11 +151,11 @@ $(document).ready(function () {
                 element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#ethPrice").val())).toFixed(8) + " ETH";
             } else {
                 var costInDollars = $(element).attr('data-usd');
-                element.innerHTML = mapShortCodetoSymbol(dataCurrency) + parseFloat(costInDollars) * coefficient;
+                element.innerHTML = mapShortCodetoSymbol(dataCurrency) + (parseFloat(costInDollars) * coefficient).toFixed(2);
             }
         });
 
-        //Volume
+            //Volume
         table.find('tbody tr .volume').each(function (indx, element) {
             if (dataCurrency == "btc") {
                 element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#bitcoinPrice").val())).toFixed(3) + " BTC";
