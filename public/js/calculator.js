@@ -127,7 +127,7 @@ function convert() {
 
     var result = 0;
     if(from < to) {
-        result = amount * to;
+        result = amount * to * from;
     } else {
         result = amount / from;
     }
@@ -174,6 +174,13 @@ function putValuesToTable() {
 
         if (key > 0) {
             putFirstRow(key, value);
+            putSecondRow(key, value);
+            putThirdRow(key, value);
+            putFourthRow(key, value);
+            putFifthRow(key, value);
+            putSixthRow(key, value);
+            putSeventhRow(key, value);
+            putEigthRow(key, value);
         }
     });
 }
@@ -183,5 +190,64 @@ function putFirstRow(key, value) {
     var body = $("#crossRatesTable tbody tr");
     var currence = $(value).find('p').html();
     var itemInVhichPutValue = $(body[0]).find('td')[key];
-    $(itemInVhichPutValue).text(crossRates[currence]);
+    $(itemInVhichPutValue).text(crossRates[currence].price_usd);
+}
+function putSecondRow(key, value) {
+    //1 $ поделить на 0,852299...
+
+    var body = $("#crossRatesTable tbody tr");
+    var currence = $(value).find('p').html();
+    var itemInVhichPutValue = $(body[1]).find('td')[key];
+    var temp = 1 / crossRates[currence].price_usd;
+    $(itemInVhichPutValue).text(temp.toFixed(5));
+}
+function putThirdRow(key, value) {
+    var body = $("#crossRatesTable tbody tr");
+    var currence = $(value).find('p').html();
+    var oneEuro = 1 / crossRates.EUR.price_usd;
+    var itemInVhichPutValue = $(body[2]).find('td')[key];
+    var temp = oneEuro * crossRates[currence].price_usd;
+    $(itemInVhichPutValue).text(temp.toFixed(5));
+}
+function putFourthRow(key, value) {
+    var body = $("#crossRatesTable tbody tr");
+    var currence = $(value).find('p').html();
+    var oneEuro = 1 / crossRates.EUR.price_usd;
+    var itemInVhichPutValue = $(body[3]).find('td')[key];
+    var temp = 1 / (oneEuro * crossRates[currence].price_usd);
+    $(itemInVhichPutValue).text(temp.toFixed(5));
+}
+function putFifthRow(key, value) {
+    var body = $("#crossRatesTable tbody tr");
+    var currence = $(value).find('p').html();
+    var oneGBP = 1 / crossRates.GBP.price_usd;
+    var itemInVhichPutValue = $(body[4]).find('td')[key];
+    var temp = oneGBP * crossRates[currence].price_usd;
+    $(itemInVhichPutValue).text(temp.toFixed(5));
+}
+function putSeventhRow(key, value) {
+    var body = $("#crossRatesTable tbody tr");
+    var currence = $(value).find('p').html();
+    var oneGBP = 1 / crossRates.GBP.price_usd;
+    var itemInVhichPutValue = $(body[5]).find('td')[key];
+    var temp = 1 / (oneGBP * crossRates[currence].price_usd);
+    $(itemInVhichPutValue).text(temp.toFixed(5));
+}
+
+function putEigthRow(key, value) {
+    var body = $("#crossRatesTable tbody tr");
+    var currence = $(value).find('p').html();
+    var oneBTC = 1 / hardcoded.BTC.price_usd;
+    var itemInVhichPutValue = $(body[6]).find('td')[key];
+    var temp = oneBTC * crossRates[currence].price_usd;
+    $(itemInVhichPutValue).text(temp.toFixed(2));
+}
+
+function putSixthRow(key, value) {
+    var body = $("#crossRatesTable tbody tr");
+    var currence = $(value).find('p').html();
+    var oneBTC = 1 / hardcoded.BTC.price_usd;
+    var itemInVhichPutValue = $(body[7]).find('td')[key];
+    var temp = 1 / (oneBTC * crossRates[currence].price_usd);
+    $(itemInVhichPutValue).text(temp.toFixed(5));
 }
