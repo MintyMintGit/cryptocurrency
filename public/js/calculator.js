@@ -139,27 +139,11 @@ function convert() {
     var to = parseFloat(document.getElementById("to").getAttribute('price_usd'));
 
     var result = 0;
-    if (from > to) {
-
-        if ( from <= 1 ) {
-            result = amount * from * to;
-        }
-        else {
-            result = amount / (from * to);
-        }
-
-    }
-
-    else {
-
-        if (from <= 1) {
-            result = amount / (from * to);
-        }
-        else {
-            result = amount * from * to;
-        }
-
-    }
+    var valuefrom = 1 / from * amount;
+    console.log('value from = ' + valuefrom);
+    var valueTo = 1 / to;
+    console.log('valueTo from = ' + valueTo);
+result = valuefrom / valueTo;
     document.getElementById("result").innerHTML = result;
 }
 function appendSelectedItem(selectedItem) {
