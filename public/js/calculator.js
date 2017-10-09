@@ -1,6 +1,6 @@
 var currencyExchangeRates = [];
-var hardcoded = ['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'BTC', 'ETH', 'XRP', 'BCH', 'LTC'];
-var crossRates = {'USD': '', 'EUR': '', 'GBP': '', 'CAD': '', 'AUD': '', 'CHF': '', 'INR': '', 'CNY': '', 'JPY': ''};
+var hardcoded = {'USD' : {}, 'EUR': {}, 'GBP': {}, 'CAD': {}, 'AUD': {}, 'BTC': {}, 'ETH': {}, 'XRP': {}, 'BCH': {}, 'LTC': {}};
+var crossRates = {'USD': {}, 'EUR': {}, 'GBP': {}, 'CAD': {}, 'AUD': {}, 'CHF': {}, 'INR': {}, 'CNY': {}, 'JPY': {}};
 
 function getExchangeRates() {
     $.ajax({
@@ -10,11 +10,33 @@ function getExchangeRates() {
         success: function (data) {
             for (let i = 0; i < data['data'].length; i++) {
                 var name = data['data'][i].name_quotes.substring(3);
-                if (hardcoded.indexOf(name) == -1) {
-                    currencyExchangeRates.push(name);
+
+                var flag = false;
+                for (var item in hardcoded) {
+                    if(item == name) {
+                        var obj = {};
+                        obj.name = name;
+                        obj.price_usd = data['data'][i].value_quotes;
+                        obj.fullName = "";
+                        hardcoded[item] = obj;
+                        flag = true;
+                    }
                 }
-                if (crossRates[name] != undefined) {
-                    crossRates[name] = data['data'][i].value_quotes;
+                if(!flag) {
+                    var obj = {};
+                    obj.name = name;
+                    obj.price_usd = data['data'][i].value_quotes;
+                    obj.fullName = "";
+                    currencyExchangeRates.push(obj);
+                }
+                for (var item in crossRates) {
+                    if(item == name) {
+                        var obj = {};
+                        obj.name = name;
+                        obj.price_usd = data['data'][i].value_quotes;
+                        obj.fullName = "";
+                        crossRates[name] = obj;
+                    }
                 }
             }
             putValuesToTable();
@@ -29,8 +51,25 @@ function getGlobaldata() {
         type: 'GET',
         success: function (data) {
             for (let i = 0; i < data.length; i++) {
-                if (hardcoded.indexOf(data[i].symbol) == -1) {
-                    currencyExchangeRates.push(data[i].symbol);
+
+                var flag = false;
+
+                for (var item in hardcoded) {
+                    if (item == data[i].symbol) {
+                        var obj = {};
+                        obj.name = data[i].symbol;
+                        obj.price_usd = data[i].price_usd;
+                        obj.fullName = "";
+                        hardcoded[item] = obj;
+                        flag = true;
+                    }
+                }
+                if(!flag) {
+                    var obj = {};
+                    obj.name = data[i].symbol;
+                    obj.price_usd = data[i].price_usd;
+                    obj.fullName = "";
+                    currencyExchangeRates.push(obj);
                 }
             }
         }
@@ -69,65 +108,67 @@ $(document).ready(function () {
             appendSelectedItem(event);
         });
     });
-
-    $("#inversion, #convert").on('click', function (event) {
-        var currentItem = $(event.currentTarget);
-        var amount = $("#amount").val();
-        var from = $("#from").val();
-        var to = $("#to").val();
-
-        switch (currentItem.attr("id")) {
-            case "inversion" :
-                window.location = createRedirectLink(amount, to, from);
-                break;
-            case "convert":
-                window.location = createRedirectLink(amount, from, to);
-                break;
+});
+function checkIsConvert() {
+    var counter = 0;
+    $.each($("#converterTable input"), function (key, element) {
+        if(element.value != '') {
+            counter++;
+        }
+        if(counter == 3) {
+            convert();
         }
     });
+}
+function convert() {
+    var amount = parseInt(document.getElementById("amount").value);
+    var from = parseFloat(document.getElementById("from").getAttribute('price_usd'));
+    var to = parseFloat(document.getElementById("to").getAttribute('price_usd'));
 
-
-});
-
+    var result = 0;
+    if(from < to) {
+        result = amount * to;
+    } else {
+        result = amount / from;
+    }
+    document.getElementById("result").innerHTML = result;
+}
 function appendSelectedItem(selectedItem) {
     var selectedItem = $(event.currentTarget);
     var id = selectedItem.parent().attr('id');
-
+    var price_usd = selectedItem.attr('price_usd');
     var inputSel = id.substring(0, id.indexOf('Auto'));
 
     inputSel = $("#" + inputSel);
     inputSel.val(selectedItem.text());
+    inputSel.attr('price_usd', price_usd);
     $("#fromAuto li,#toAuto li").remove();
+    checkIsConvert();
 };
 
-function createRedirectLink(amount, from, to) {
-    return window.location.href + "/" + from + "-" + to + "?" + amount;
-}
 
 function getFullList(array) {
     var readyList = [];
 
-    $.each(array, function (indx) {
-        readyList.push("<li>" + array[indx] + "</li>");
-    });
+    for (var item in array) {
+        readyList.push("<li price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+    }
 
     return readyList;
 }
 
-function getReadyList(array, item) {
+function getReadyList(array, key) {
     var readyList = [];
 
-    $.each(array, function (indx) {
-        if (array[indx].indexOf(item) != -1) {
-            readyList.push("<li>" + array[indx] + "</li>");
+    for (var item in array) {
+        if(array[item].name.indexOf(key) != -1 ) {
+            readyList.push("<li price_usd='" + array[item].price_usd +"'>" + array[item].name + "</li>");
         }
-    });
-
+    }
     return readyList;
 }
 
 function putValuesToTable() {
-    //putFirstRow();
 
     $.each($("#crossRatesTable thead th"), function (key, value) {
 
