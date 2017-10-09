@@ -81,7 +81,9 @@ $(document).ready(function () {
     $("#calculatorTab").addClass("active");
     getExchangeRates();
     getGlobaldata();
-
+    $("#amount").on('change', function (event) {
+        checkIsConvert();
+    });
     $("#to, #from").on('keyup', function (event) {
         var currentItem = $(event.currentTarget);
         var ulSelected = $("#" + currentItem.attr('id') + "Auto");
@@ -108,6 +110,17 @@ $(document).ready(function () {
             appendSelectedItem(event);
         });
     });
+
+    $("#inversion").on('click', function (event) {
+        var from = $("#from");
+        var to = $("#to");
+        var temp = from.clone();
+        from.attr('price_usd', to.attr('price_usd'));
+        from.val(to.val());
+        to.attr('price_usd', temp.attr('price_usd'));
+        to.val(temp.val());
+        checkIsConvert();
+    });
 });
 function checkIsConvert() {
     var counter = 0;
@@ -126,10 +139,26 @@ function convert() {
     var to = parseFloat(document.getElementById("to").getAttribute('price_usd'));
 
     var result = 0;
-    if(from < to) {
-        result = amount * to * from;
-    } else {
-        result = amount / from;
+    if (from > to) {
+
+        if ( from <= 1 ) {
+            result = amount * from * to;
+        }
+        else {
+            result = amount / (from * to);
+        }
+
+    }
+
+    else {
+
+        if (from <= 1) {
+            result = amount / (from * to);
+        }
+        else {
+            result = amount * from * to;
+        }
+
     }
     document.getElementById("result").innerHTML = result;
 }
