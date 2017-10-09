@@ -63,7 +63,7 @@ var configDataTable = {
                     nTd.innerHTML = '$' + makeBeautyMoney(sData);
                     break;
                 case 3:
-                    nTd.innerHTML = '$' + sData;
+                    nTd.innerHTML = '$' + limitToSix(sData);
                     break;
                 case 4:
                     nTd.innerHTML = makeBeautyMoney(sData) + " " + oData.symbol;
@@ -74,7 +74,7 @@ var configDataTable = {
                 case 6:
                     var temp = "<span class='"
                     temp += sData >= 0 ? "makeItGreen" : "makeItRed";
-                    temp += "'>" + sData + "%</span>";
+                    temp += "'>" + limitToTwo(sData) + "%</span>";
                     nTd.innerHTML = temp;
                     break;
             }
@@ -129,7 +129,11 @@ $(document).ready(function () {
     $(".pointer").on('click', function (event) {
         dataCurrency = $(event.currentTarget).find('a').attr('data-currency');
         coefficient = currencyExchangeRates.attr('data-usd' + dataCurrency);
-        $("#currency-switch-button").text(dataCurrency.toUpperCase());
+        var switchButton = $("#currency-switch-button");
+
+        switchButton.text(dataCurrency.toUpperCase() + " ");
+        switchButton.append("<span class=\"caret\"></span>");
+
         //market_cap_usd
 
         table.find('tbody tr .market_cap_usd').each(function (indx, element) {
@@ -173,7 +177,12 @@ function mapShortCodetoSymbol(shortCode) {
     shortCode = shortCode.toLowerCase();
     return currency_symbols[shortCode];
 }
-
+function limitToSix(someMoney) {
+    return parseFloat(someMoney).toFixed(6);
+}
+function limitToTwo(someMoney) {
+    return parseFloat(someMoney).toFixed(2);
+}
 function makeBeautyMoney(someMoney) {
     return parseFloat(someMoney).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 }

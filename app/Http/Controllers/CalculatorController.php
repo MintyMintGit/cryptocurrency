@@ -10,7 +10,7 @@ class CalculatorController extends Controller
 {
     public static function index() {
         $scriptJs = 'calculator.js';
-        $bitcoinPrice = GlobalData::find('bitcoin')->get(['price_usd']);
+        $bitcoinPrice = GlobalData::find('bitcoin')->price_usd;
         return view('Calculator.index', compact( 'scriptJs', 'bitcoinPrice'));
     }
     public function calc() {

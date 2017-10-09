@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\ExchangeRate;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\CoinMarketCap;
 use App\GlobalData;
 use App\ExchangeRatesCap;
@@ -24,7 +22,7 @@ class UpdateDataController extends Controller
         foreach ($data as $item) {
 
 
-            $globalData = GlobalData::updateOrCreate(
+            GlobalData::updateOrCreate(
                 [
                     'id' => "{$item['id']}"
                 ] ,
@@ -72,9 +70,9 @@ class UpdateDataController extends Controller
     function updateValue($number) {
         $value = rand(0,1) == 1;
         if($value) {
-            $number = round($number + ($number * 0.05 / 100), 2);
+            $number = $number + ($number * 0.05 / 100);
         } else {
-            $number = round( $number - ($number * 0.05 / 100),2);
+            $number = $number - ($number * 0.05 / 100);
         }
         return $number;
     }

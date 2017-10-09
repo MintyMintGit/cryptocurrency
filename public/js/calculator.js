@@ -1,6 +1,7 @@
 var currencyExchangeRates = [];
 var hardcoded = ['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'BTC', 'ETH', 'XRP', 'BCH', 'LTC'];
-var crossRates = {'USD' : '', 'EUR' : '', 'GBP' : '', 'CAD' : '', 'AUD' : '', 'CHF' : '', 'INR' : '', 'CNY' : '', 'JPY' : ''};
+var crossRates = {'USD': '', 'EUR': '', 'GBP': '', 'CAD': '', 'AUD': '', 'CHF': '', 'INR': '', 'CNY': '', 'JPY': ''};
+
 function getExchangeRates() {
     $.ajax({
         url: $("#ExchangeRatesLink").val(),
@@ -42,10 +43,6 @@ $(document).ready(function () {
     getExchangeRates();
     getGlobaldata();
 
-    //$("")
-
-
-
     $("#to, #from").on('keyup', function (event) {
         var currentItem = $(event.currentTarget);
         var ulSelected = $("#" + currentItem.attr('id') + "Auto");
@@ -56,14 +53,7 @@ $(document).ready(function () {
         ulSelected.append(getReadyList(currencyExchangeRates, key));
 
         ulSelected.find('li').on('click', function (event) {
-            var selectedItem = $(event.currentTarget);
-            var id = selectedItem.parent().attr('id');
-
-            var inputSel = id.substring(0, id.indexOf('Auto'));
-
-            inputSel = $("#" + inputSel);
-            inputSel.val(selectedItem.text());
-            $("#fromAuto li,#toAuto li").remove();
+            appendSelectedItem(event);
         });
     });
 
@@ -75,7 +65,9 @@ $(document).ready(function () {
 
         ulSelected.append(getFullList(hardcoded));
         ulSelected.append(getFullList(currencyExchangeRates));
-
+        ulSelected.find('li').on('click', function (event) {
+            appendSelectedItem(event);
+        });
     });
 
     $("#inversion, #convert").on('click', function (event) {
@@ -96,6 +88,17 @@ $(document).ready(function () {
 
 
 });
+
+function appendSelectedItem(selectedItem) {
+    var selectedItem = $(event.currentTarget);
+    var id = selectedItem.parent().attr('id');
+
+    var inputSel = id.substring(0, id.indexOf('Auto'));
+
+    inputSel = $("#" + inputSel);
+    inputSel.val(selectedItem.text());
+    $("#fromAuto li,#toAuto li").remove();
+};
 
 function createRedirectLink(amount, from, to) {
     return window.location.href + "/" + from + "-" + to + "?" + amount;
@@ -122,20 +125,22 @@ function getReadyList(array, item) {
 
     return readyList;
 }
+
 function putValuesToTable() {
     //putFirstRow();
 
     $.each($("#crossRatesTable thead th"), function (key, value) {
 
-        if(key > 0) {
+        if (key > 0) {
             putFirstRow(key, value);
         }
     });
 }
+
 function putFirstRow(key, value) {
 
-        var body = $("#crossRatesTable tbody tr");
-        var currence = $(value).find('p').html();
-        var itemInVhichPutValue = $(body[0]).find('td')[key];
-        $(itemInVhichPutValue).text(crossRates[currence]);
+    var body = $("#crossRatesTable tbody tr");
+    var currence = $(value).find('p').html();
+    var itemInVhichPutValue = $(body[0]).find('td')[key];
+    $(itemInVhichPutValue).text(crossRates[currence]);
 }
