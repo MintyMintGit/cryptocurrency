@@ -90,6 +90,14 @@ $(document).ready(function () {
     $("#navigation li").removeClass('active');
     $("#homeTab").addClass("active");
 
+    $("#homeTab").on('click', function (event) {
+        event.preventDefault();
+        $("#secondPage").hide();
+        $("#firstPage").show();
+        $("#navigation li").removeClass('active');
+        $("#homeTab").addClass("active");
+    });
+
     $("#calculatorTab").on('click', function (event) {
         event.preventDefault();
         $("#firstPage").hide();
