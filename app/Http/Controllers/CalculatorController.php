@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ExchangeRate;
 use App\GlobalData;
-use Illuminate\Http\Request;
+use Request;
 
 class CalculatorController extends Controller
 {
@@ -14,8 +14,9 @@ class CalculatorController extends Controller
         return view('Calculator.index', compact( 'scriptJs', 'bitcoinPrice'));
     }
     public function calc() {
-        $scriptJs = 'converter.js';
-        return view('Calculator.converter',compact( 'scriptJs', 'exchange_rates'));
+        $scriptJs = 'convertor.js';
+        $bitcoinPrice = GlobalData::find('bitcoin')->price_usd;
+        return view('Calculator.converter',compact( 'scriptJs','bitcoinPrice'));
     }
 
 }

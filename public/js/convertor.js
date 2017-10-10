@@ -1,5 +1,16 @@
 var currencyExchangeRates = [];
-var hardcoded = {'USD' : {}, 'EUR': {}, 'GBP': {}, 'CAD': {}, 'AUD': {}, 'BTC': {}, 'ETH': {}, 'XRP': {}, 'BCH': {}, 'LTC': {}};
+var hardcoded = {
+    'USD': {},
+    'EUR': {},
+    'GBP': {},
+    'CAD': {},
+    'AUD': {},
+    'BTC': {},
+    'ETH': {},
+    'XRP': {},
+    'BCH': {},
+    'LTC': {}
+};
 var crossRates = {'USD': {}, 'EUR': {}, 'GBP': {}, 'CAD': {}, 'AUD': {}, 'CHF': {}, 'INR': {}, 'CNY': {}, 'JPY': {}};
 
 function getExchangeRates() {
@@ -8,12 +19,21 @@ function getExchangeRates() {
         dataType: "json",
         type: 'GET',
         success: function (data) {
+            var from = $("#from");
+            var to = $("#to");
             for (let i = 0; i < data['data'].length; i++) {
                 var name = data['data'][i].name_quotes.substring(3);
-
+                if(name == from.val()) {
+                    from.attr('is_crypto', false);
+                    from.attr('price_usd', data['data'][i].value_quotes);
+                }
+                if (name == to.val()) {
+                    to.attr('is_crypto', false);
+                    to.attr('price_usd', data['data'][i].value_quotes);
+                }
                 var flag = false;
                 for (var item in hardcoded) {
-                    if(item == name) {
+                    if (item == name) {
                         var obj = {};
                         obj.name = name;
                         obj.price_usd = data['data'][i].value_quotes;
@@ -23,7 +43,7 @@ function getExchangeRates() {
                         flag = true;
                     }
                 }
-                if(!flag) {
+                if (!flag) {
                     var obj = {};
                     obj.name = name;
                     obj.price_usd = data['data'][i].value_quotes;
@@ -32,7 +52,7 @@ function getExchangeRates() {
                     currencyExchangeRates.push(obj);
                 }
                 for (var item in crossRates) {
-                    if(item == name) {
+                    if (item == name) {
                         var obj = {};
                         obj.name = name;
                         obj.price_usd = data['data'][i].value_quotes;
@@ -40,6 +60,9 @@ function getExchangeRates() {
                         crossRates[name] = obj;
                     }
                 }
+                //need put values to convert table
+
+
             }
             putValuesToTable();
         }
@@ -52,7 +75,19 @@ function getGlobaldata() {
         dataType: "json",
         type: 'GET',
         success: function (data) {
+            var from = $("#from");
+            var to = $("#to");
             for (let i = 0; i < data.length; i++) {
+
+
+                if(data[i].symbol == from.val()) {
+                    from.attr('is_crypto', true);
+                    from.attr('price_usd', data[i].price_usd);
+                }
+                if (data[i].symbol == to.val()) {
+                    to.attr('is_crypto', true);
+                    to.attr('price_usd', data['data'][i].price_usd);
+                }
 
                 var flag = false;
 
@@ -67,7 +102,7 @@ function getGlobaldata() {
                         flag = true;
                     }
                 }
-                if(!flag) {
+                if (!flag) {
                     var obj = {};
                     obj.name = data[i].symbol;
                     obj.price_usd = data[i].price_usd;
@@ -81,6 +116,16 @@ function getGlobaldata() {
 }
 
 $(document).ready(function () {
+
+    var amountFromStorage = localStorage.getItem("amount");
+    var fromFromStorage = localStorage.getItem("from");
+    var toFromStorage = localStorage.getItem("to");
+    if(amountFromStorage && fromFromStorage && toFromStorage) {
+        $("#amount").val(amountFromStorage);
+        $("#from").val(toFromStorage);
+        $("#to").val(fromFromStorage);
+    }
+
     $("#navigation li").removeClass('active');
     $("#calculatorTab").addClass("active");
     getExchangeRates();
@@ -136,17 +181,19 @@ $(document).ready(function () {
         }
     });
 });
+
 function checkIsConvert() {
     var counter = 0;
     $.each($("#converterTable input"), function (key, element) {
-        if(element.value != '') {
+        if (element.value != '') {
             counter++;
         }
-        if(counter == 3) {
+        if (counter == 3) {
             convert();
         }
     });
 }
+
 function convert() {
     var amount = parseInt(document.getElementById("amount").value);
     var from = parseFloat(document.getElementById("from").getAttribute('price_usd'));
@@ -154,13 +201,14 @@ function convert() {
     var to = parseFloat(document.getElementById("to").getAttribute('price_usd'));
     var is_crypto_to = document.getElementById("to").getAttribute('is_crypto');
 
-    if(is_crypto_from == "true" || is_crypto_to == "true") {
+    if (is_crypto_from == "true" || is_crypto_to == "true") {
         var result = (amount * from) / to;
     } else {
         var result = (amount * to) / from;
     }
     document.getElementById("result").innerHTML = result;
 }
+
 function appendSelectedItem(selectedItem) {
     var selectedItem = $(event.currentTarget);
     var id = selectedItem.parent().attr('id');
@@ -192,15 +240,15 @@ function getReadyList(array, key) {
     var readyList = [];
 
     for (var item in array) {
-        if(array[item].name.indexOf(key) != -1 ) {
-            readyList.push("<li is_crypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd +"'>" + array[item].name + "</li>");
+        if (array[item].name.indexOf(key) != -1) {
+            readyList.push("<li is_crypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
         }
     }
     return readyList;
 }
 
 function putValuesToTable() {
-
+    checkIsConvert();
     $.each($("#crossRatesTable thead th"), function (key, value) {
 
         if (key > 0) {
@@ -222,6 +270,7 @@ function putFirstRow(key, value) {
     var itemInVhichPutValue = $(body[0]).find('td')[key];
     $(itemInVhichPutValue).text(crossRates[currence].price_usd);
 }
+
 function putSecondRow(key, value) {
     var body = $("#crossRatesTable tbody tr");
     var currence = $(value).find('p').html();
@@ -229,6 +278,7 @@ function putSecondRow(key, value) {
     var temp = 1 / crossRates[currence].price_usd;
     $(itemInVhichPutValue).text(temp.toFixed(5));
 }
+
 function putThirdRow(key, value) {
     var body = $("#crossRatesTable tbody tr");
     var currence = $(value).find('p').html();
@@ -237,6 +287,7 @@ function putThirdRow(key, value) {
     var temp = oneEuro * crossRates[currence].price_usd;
     $(itemInVhichPutValue).text(temp.toFixed(5));
 }
+
 function putFourthRow(key, value) {
     var body = $("#crossRatesTable tbody tr");
     var currence = $(value).find('p').html();
@@ -245,6 +296,7 @@ function putFourthRow(key, value) {
     var temp = 1 / (oneEuro * crossRates[currence].price_usd);
     $(itemInVhichPutValue).text(temp.toFixed(5));
 }
+
 function putFifthRow(key, value) {
     var body = $("#crossRatesTable tbody tr");
     var currence = $(value).find('p').html();
@@ -253,6 +305,7 @@ function putFifthRow(key, value) {
     var temp = oneGBP * crossRates[currence].price_usd;
     $(itemInVhichPutValue).text(temp.toFixed(5));
 }
+
 function putSeventhRow(key, value) {
     var body = $("#crossRatesTable tbody tr");
     var currence = $(value).find('p').html();
