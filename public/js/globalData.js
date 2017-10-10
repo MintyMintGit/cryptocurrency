@@ -1,4 +1,4 @@
-var currencyExchangeRates = $("#currency-exchange-rates");
+var currencyExchangeRatesSecond = $("#currency-exchange-rates");
 let currency_symbols = {
     "aud": "$",
     "brl": "R$",
@@ -84,10 +84,20 @@ var configDataTable = {
 };
 
 $(document).ready(function () {
-    getExchangeRates();
+    getExchangeRatesGlobal();
     var viewAll = $("#ViewAll");
+
     $("#navigation li").removeClass('active');
     $("#homeTab").addClass("active");
+
+    $("#calculatorTab").on('click', function (event) {
+        event.preventDefault();
+        $("#firstPage").hide();
+        $("#secondPage").show();
+        $("#navigation li").removeClass('active');
+        $("#calculatorTab").addClass("active");
+    });
+
     var table = $('#marketCapitalizations');
     configDataTable.ajax = $("#GlobalDataLink").val();
     table.on('xhr.dt', function (e, settings, json, xhr) {
@@ -128,7 +138,7 @@ $(document).ready(function () {
 
     $(".pointer").on('click', function (event) {
         dataCurrency = $(event.currentTarget).find('a').attr('data-currency');
-        coefficient = currencyExchangeRates.attr('data-usd' + dataCurrency);
+        coefficient = currencyExchangeRatesSecond.attr('data-usd' + dataCurrency);
         var switchButton = $("#currency-switch-button");
 
         switchButton.text(dataCurrency.toUpperCase() + " ");
@@ -186,14 +196,14 @@ function limitToTwo(someMoney) {
 function makeBeautyMoney(someMoney) {
     return parseFloat(someMoney).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 }
-function getExchangeRates(callback) {
+function getExchangeRatesGlobal(callback) {
     $.ajax({
         url: $("#ExchangeRatesLink").val(),
         dataType: "json",
         type: 'GET',
         success: function (data) {
             for (let i = 0; i < data['data'].length; i++) {
-                currencyExchangeRates.attr('data-' + data['data'][i].name_quotes, data['data'][i].value_quotes);
+                currencyExchangeRatesSecond.attr('data-' + data['data'][i].name_quotes, data['data'][i].value_quotes);
             }
         }
     });

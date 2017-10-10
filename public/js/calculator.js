@@ -1,4 +1,4 @@
-var currencyExchangeRates = [];
+var currencyExchangeRatesFirst = [];
 var hardcoded = {'USD' : {}, 'EUR': {}, 'GBP': {}, 'CAD': {}, 'AUD': {}, 'BTC': {}, 'ETH': {}, 'XRP': {}, 'BCH': {}, 'LTC': {}};
 var crossRates = {'USD': {}, 'EUR': {}, 'GBP': {}, 'CAD': {}, 'AUD': {}, 'CHF': {}, 'INR': {}, 'CNY': {}, 'JPY': {}};
 
@@ -29,7 +29,7 @@ function getExchangeRates() {
                     obj.price_usd = data['data'][i].value_quotes;
                     obj.fullName = "";
                     obj.is_crypto = false;
-                    currencyExchangeRates.push(obj);
+                    currencyExchangeRatesFirst.push(obj);
                 }
                 for (var item in crossRates) {
                     if(item == name) {
@@ -73,7 +73,7 @@ function getGlobaldata() {
                     obj.price_usd = data[i].price_usd;
                     obj.fullName = "";
                     obj.is_crypto = true;
-                    currencyExchangeRates.push(obj);
+                    currencyExchangeRatesFirst.push(obj);
                 }
             }
         }
@@ -81,8 +81,6 @@ function getGlobaldata() {
 }
 
 $(document).ready(function () {
-    $("#navigation li").removeClass('active');
-    $("#calculatorTab").addClass("active");
     getExchangeRates();
     getGlobaldata();
     $("#amount").on('change', function (event) {
@@ -95,7 +93,7 @@ $(document).ready(function () {
         var key = event.currentTarget.value.toUpperCase();
 
         ulSelected.append(getReadyList(hardcoded, key));
-        ulSelected.append(getReadyList(currencyExchangeRates, key));
+        ulSelected.append(getReadyList(currencyExchangeRatesFirst, key));
 
         ulSelected.find('li').on('click', function (event) {
             appendSelectedItem(event);
@@ -109,7 +107,7 @@ $(document).ready(function () {
         var ulSelected = $("#" + currentItem.attr('id') + "Auto");
 
         ulSelected.append(getFullList(hardcoded));
-        ulSelected.append(getFullList(currencyExchangeRates));
+        ulSelected.append(getFullList(currencyExchangeRatesFirst));
         ulSelected.find('li').on('click', function (event) {
             appendSelectedItem(event);
         });
@@ -281,5 +279,5 @@ function putSixthRow(key, value) {
 }
 
 function createRedirectLink(amount, from, to) {
-    return window.location.href + "/" + from + "-" + to + "?" + amount;
+    return window.location.href + "calculator/" + from + "-" + to + "?" + amount;
 }

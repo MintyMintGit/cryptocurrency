@@ -8,4 +8,12 @@
 
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="/js/scripts.js"></script>
-<script type="text/javascript" src="/js/{{ $scriptJs }}" ></script>
+<?php
+        if(is_array($scriptJs)) {
+            foreach ($scriptJs as $item) {
+                echo "<script type=\"text/javascript\" src=\"/js/". $item . "\" ></script>";
+            }
+        } else {
+            echo "<script type=\"text/javascript\" src=\"/js/". $scriptJs . "\" ></script>";
+        }
+?>

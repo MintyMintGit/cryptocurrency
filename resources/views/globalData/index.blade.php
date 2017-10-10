@@ -165,4 +165,11 @@ use \App\Http\Controllers\CalculatorController;
     </div>
 
 
+    <div class="row" id="secondPage">
+        <div class="col-xs-12">
+            @include('Calculator.index')
+        </div>
+
+    </div>
+
 @endsection
