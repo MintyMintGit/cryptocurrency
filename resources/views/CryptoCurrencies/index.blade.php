@@ -6,7 +6,7 @@
     <div class="row bottom-margin-1x">
         <div class="col-xs-6 col-sm-4 col-md-4">
             <h1 class="text-large">
-                <img src="https://files.coinmarketcap.com/static/img/coins/32x32/ethereum.png"
+                <img src="{{ $linkToIcon }}"
                      class="currency-logo-32x32" alt="Ethereum">
                 <small class="bold hidden-sm hidden-md hidden-lg">({{ $crypto['symbol'] }})</small>
                 {{ $crypto['name'] }}
@@ -105,5 +105,36 @@
             </ul>
         </div>
 
+    </div>
+
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Charts</a></li>
+        <li><a data-toggle="tab" href="#menu1">Social</a></li>
+        <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <h3>HOME</h3>
+            <p>Some content.</p>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <h3>Social</h3>
+            <p>Some content in menu 1.</p>
+            <div class="col-xs-6">
+                <a class="twitter-timeline" href="https://twitter.com/TwitterDev/timelines/539487832448843776?ref_src=twsrc%5Etfw">National Park Tweets - Curated tweets by TwitterDev</a>
+                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <div class="col-xs-6">
+                <div id="reddit">
+                    <script src="https://www.reddit.com/.embed?limit=5" type="text/javascript"></script>
+                </div>
+            </div>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Some content in menu 2.</p>
+        </div>
     </div>
 @endsection

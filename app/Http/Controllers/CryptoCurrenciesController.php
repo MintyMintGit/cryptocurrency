@@ -11,7 +11,8 @@ class CryptoCurrenciesController extends Controller
         $scriptJs = 'crypto.js';
         $crypto = GlobalData::findOrFail($id);
         $bitcoinPrice = GlobalData::find('bitcoin')->price_usd;
-        return view('CryptoCurrencies.index',compact( 'scriptJs','crypto', 'bitcoinPrice'));
+        $linkToIcon = "/img/icons/" . $crypto->id . ".png";
+        return view('CryptoCurrencies.index',compact( 'scriptJs','crypto', 'bitcoinPrice', 'linkToIcon'));
     }
     public function generateUrl() {
         $result = array();

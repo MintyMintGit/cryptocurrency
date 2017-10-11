@@ -15,6 +15,7 @@ class GlobalDataResource extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'rank' => $this->rank,
             'name' => $this->name,
             'symbol' => $this->symbol,

@@ -54,7 +54,7 @@ var configDataTable = {
             $(nTd).attr('data-usd', sData);
             switch (iCol) {
                 case 1:
-                    var linkCrypto = sData.toLowerCase();
+                    var linkCrypto = oData.id.toLowerCase();
                     linkCrypto = linkCrypto.split(" ").join("-");
                     var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
                     nTd.innerHTML = icon + '<a href="crypto/' + linkCrypto + '">' + nTd.innerHTML + '</a>';
