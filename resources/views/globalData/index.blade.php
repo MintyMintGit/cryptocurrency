@@ -1,6 +1,3 @@
-<?php
-use \App\Http\Controllers\CalculatorController;
-?>
 @extends('layouts.master')
 
 @section('content')

@@ -43,39 +43,39 @@
     <tr>
         <th></th>
         <th>
-            <img src="https://www.currency.wiki/images/flags/45/USD.png">
+            <img src="/img/flags/USD.png">
             <p>USD</p>
         </th>
         <th>
-            <img src="https://www.currency.wiki/images/flags/45/EUR.png">
+            <img src="/img/flags/EUR.png">
             <p>EUR</p>
         </th>
         <th>
-            <img src="https://www.currency.wiki/images/flags/45/GBP.png">
+            <img src="/img/flags/GBP.png">
             <p>GBP</p>
         </th>
         <th>
-            <img src="https://www.currency.wiki/images/flags/45/CAD.png">
+            <img src="/img/flags/CAD.png">
             <p>CAD</p>
         </th>
         <th>
-            <img src="https://www.currency.wiki/images/flags/45/CHF.png">
+            <img src="/img/flags/CHF.png">
             <p>CHF</p>
         </th>
         <th>
-            <img src="https://www.currency.wiki/images/flags/45/AUD.png">
+            <img src="/img/flags/AUD.png">
             <p>AUD</p>
         </th>
         <th>
-            <img src="https://www.currency.wiki/images/flags/45/INR.png">
+            <img src="/img/flags/INR.png">
             <p>INR</p>
         </th>
         <th>
-            <img src="https://www.currency.wiki/images/flags/45/CNY.png">
+            <img src="/img/flags/CNY.png">
             <p>CNY</p>
         </th>
         <th>
-            <img src="https://www.currency.wiki/images/flags/45/JPY.png">
+            <img src="/img/flags/JPY.png">
             <p>JPY</p>
         </th>
     </tr>

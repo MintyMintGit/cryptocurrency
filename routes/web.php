@@ -18,5 +18,7 @@ Route::get('/','GlobalDataController@index');
 Route::get('/crypto','CalculatorController@index');
 Route::get('/calculator/{id}','CalculatorController@calc');
 Route::get('/crypto/{id}','CryptoCurrenciesController@index');
+Route::get('/world','WorldController@index');
+Route::get('/world/{id}','WorldController@currency');
 Route::get('generateUrl','CryptoCurrenciesController@generateUrl');
 
