@@ -35,3 +35,7 @@ Route::get('/GlobalDataNames', function (Request $request) {
     $globalDatas = \App\GlobalData::get(['name', 'symbol', 'price_usd']);
     return $globalDatas;
 })->name('GlobalDataNames');
+
+Route::get('search/{id}', function ($id) {
+    return \App\Search\Base::searchInListSearch($id);
+})->name('searchIn');

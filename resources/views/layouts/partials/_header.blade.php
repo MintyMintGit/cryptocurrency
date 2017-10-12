@@ -10,10 +10,15 @@
             </button>
             <a class="navbar-brand" href="#">Project name</a>
         </div>
+        <input type="hidden" id="searchIn" value="{{ route('searchIn', '') }}">
         <div style="float: right">
-            <input type="text" id="search">
+            <input type="text" id="search" style="text-transform: uppercase;">
             <ul id="listSearch" style="    position: absolute;    z-index: 100;   background-color: red;">
-
+                @isset($exchange_pairs)
+                    @foreach ($exchange_pairs as $exchange_pair)
+                        <li class="{{ $exchange_pair['type'] }}" data-usd="{{ $exchange_pair['price_usd'] }}" >{{ $exchange_pair['id'] }}</li>
+                    @endforeach
+                @endisset
             </ul>
 
         </div>

@@ -17,7 +17,7 @@ body {
 #secondPage {
     display: none;
 }
-.exchangesDouble {
+.exchange_pair {
     background-color: black;
     color: red;
 }
@@ -25,7 +25,7 @@ body {
     background-color: black;
     color: green;
 }
-.notCrypto {
+.fiat {
     background-color: black;
     color: yellow;
 }

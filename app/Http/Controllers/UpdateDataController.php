@@ -6,6 +6,7 @@ use App\ExchangeRate;
 use App\CoinMarketCap;
 use App\GlobalData;
 use App\ExchangeRatesCap;
+use App\Search;
 
 class UpdateDataController extends Controller
 {
@@ -43,6 +44,7 @@ class UpdateDataController extends Controller
                 ]
             );
         }
+        $this->updateSearchTable();
         return 'Updated successfully';
     }
     /**
@@ -65,6 +67,7 @@ class UpdateDataController extends Controller
                 ]
             );
         }
+        $this->updateSearchTable();
         return 'Updated successfully';
     }
     function updateValue($number) {
@@ -75,5 +78,19 @@ class UpdateDataController extends Controller
             $number = $number - ($number * 0.05 / 100);
         }
         return $number;
+    }
+    public function updateSearchTable() {
+        $listElements = Search\Base::generateListElements();
+        foreach ($listElements as $listElement) {
+            Search::updateOrCreate(
+                [
+                    'id' => "{$listElement['name']}"
+                ],[
+                    "price_usd" => $listElement['price_usd'],
+                    "type" => $listElement['type']
+                ]
+            );
+        }
+
     }
 }

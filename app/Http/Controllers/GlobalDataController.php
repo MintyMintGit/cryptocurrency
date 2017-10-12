@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\GlobalData;
-use Illuminate\Http\Request;
 
 class GlobalDataController extends Controller
 {
