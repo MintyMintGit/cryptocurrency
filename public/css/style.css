@@ -17,3 +17,15 @@ body {
 #secondPage {
     display: none;
 }
+.exchangesDouble {
+    background-color: black;
+    color: red;
+}
+.crypto {
+    background-color: black;
+    color: green;
+}
+.notCrypto {
+    background-color: black;
+    color: yellow;
+}

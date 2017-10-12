@@ -15,6 +15,13 @@ function putValuesToTable() {
             }
         });
     }
+    if(currentCurrency == "") {
+        $.each(hardcoded, function(key, value){
+            if(value.name == currentCurrencyInput) {
+                currentCurrency = value;
+            }
+        });
+    }
 
     $.each($(".rate_lines th"), function (key, value) {
         putFirstRow(key, value.innerText.trim());

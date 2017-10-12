@@ -10,6 +10,13 @@
             </button>
             <a class="navbar-brand" href="#">Project name</a>
         </div>
+        <div style="float: right">
+            <input type="text" id="search">
+            <ul id="listSearch" style="    position: absolute;    z-index: 100;   background-color: red;">
+
+            </ul>
+
+        </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
