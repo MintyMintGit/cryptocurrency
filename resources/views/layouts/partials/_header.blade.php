@@ -16,7 +16,17 @@
             <ul id="listSearch" style="    position: absolute;    z-index: 100;   background-color: red;">
                 @isset($exchange_pairs)
                     @foreach ($exchange_pairs as $exchange_pair)
-                        <li class="{{ $exchange_pair['type'] }}" data-usd="{{ $exchange_pair['price_usd'] }}" >{{ $exchange_pair['id'] }}</li>
+                        <li
+                                exchange2="{{ $exchange2 or '' }}"
+                                exchange1="{{ $exchange1 or '' }}"
+                                data-content="{{ $exchange_pair['profile_long'] }}"
+                                class="{{ $exchange_pair['type'] }}"
+                                data-usd="{{ $exchange_pair['price_usd'] }}"
+                        >
+                            {{ $exchange_pair['id'] }}
+                        {{ strlen($exchange_pair['profile_long']) > 0 ? "-" : "" }}
+                            {{ $exchange_pair['profile_long'] or '' }}
+                        </li>
                     @endforeach
                 @endisset
             </ul>

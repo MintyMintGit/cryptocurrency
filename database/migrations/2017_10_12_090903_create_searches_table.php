@@ -18,6 +18,9 @@ class CreateSearchesTable extends Migration
             $table->double('price_usd');
             $table->integer('rate');
             $table->string('type');
+            $table->string('profile_long');
+            $table->string('exchange1');
+            $table->string('exchange2');
             $table->timestamps();
         });
     }

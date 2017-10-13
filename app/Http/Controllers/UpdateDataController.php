@@ -79,7 +79,7 @@ class UpdateDataController extends Controller
         }
         return $number;
     }
-    public function updateSearchTable() {
+    public static function updateSearchTable() {
         $listElements = Search\Base::generateListElements();
         foreach ($listElements as $listElement) {
             Search::updateOrCreate(
@@ -87,7 +87,8 @@ class UpdateDataController extends Controller
                     'id' => "{$listElement['name']}"
                 ],[
                     "price_usd" => $listElement['price_usd'],
-                    "type" => $listElement['type']
+                    "type" => $listElement['type'],
+                    "profile_long" => $listElement['profile_long'],
                 ]
             );
         }

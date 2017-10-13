@@ -12,5 +12,8 @@ class Search extends Model
         "price_usd",
         "rate",
         "type",
+        "profile_long",
+        "exchange1",
+        "exchange2"
     ];
 }
