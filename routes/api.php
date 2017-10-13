@@ -39,3 +39,5 @@ Route::get('/GlobalDataNames', function (Request $request) {
 Route::get('search/{id}', function ($id) {
     return \App\Search\Base::searchInListSearch($id);
 })->name('searchIn');
+
+Route::post('GlobalData/saveStatistic', 'GlobalDataController@saveStatistic')->name('saveStatistic');

@@ -120,11 +120,19 @@ $(document).ready(function () {
     var amountFromStorage = localStorage.getItem("amount").toUpperCase();
     var fromFromStorage = localStorage.getItem("from").toUpperCase();
     var toFromStorage = localStorage.getItem("to").toUpperCase();
-    if(amountFromStorage && fromFromStorage && toFromStorage) {
+    var convert = localStorage.getItem("convert");
+    if (convert == true) {
+        if(amountFromStorage && fromFromStorage && toFromStorage) {
+            $("#amount").val(amountFromStorage);
+            $("#from").val(toFromStorage);
+            $("#to").val(fromFromStorage);
+        }
+    } else if(amountFromStorage && fromFromStorage && toFromStorage) {
         $("#amount").val(amountFromStorage);
-        $("#from").val(toFromStorage);
-        $("#to").val(fromFromStorage);
+        $("#from").val(fromFromStorage);
+        $("#to").val(toFromStorage);
     }
+
 
     $("#navigation li").removeClass('active');
     $("#calculatorTab").addClass("active");

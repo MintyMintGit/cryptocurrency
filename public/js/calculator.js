@@ -123,6 +123,7 @@ $(document).ready(function () {
         localStorage.setItem("amount", amount);
         localStorage.setItem("from", from);
         localStorage.setItem("to", to);
+        localStorage.setItem("convert", true);
 
         switch (currentItem.attr("id")) {
             case "inversion" :

@@ -10,6 +10,7 @@
 
     <input type="hidden" id="bitcoinPrice" value="{{$bitcoinPrice}}">
     <input type="hidden" id="ethPrice" value="{{$ethPrice}}">
+    <input type="hidden" id="saveStatistic" value="{{ route('saveStatistic') }}">
 
 
 
