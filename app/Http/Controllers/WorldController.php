@@ -14,7 +14,9 @@ class WorldController extends Controller
         return view('World.index',compact( 'scriptJs', 'money'));
     }
     public function currency($id) {
-        $cc_profile = Cr_cc_profile::where('profile_short', $id)->get();
+        $id = str_replace('-exchange-rates','', $id);
+        $id = str_replace('-', ' ', $id);
+        $cc_profile = Cr_cc_profile::where('profile_long', $id)->get();
         $scriptJs = array("calculator.js", "worldCurrency.js");
         $bitcoinPrice = GlobalData::find('bitcoin')->price_usd;
 

@@ -33,7 +33,7 @@
 
         @foreach ($money as $value)
             <tr>
-                <td><a href="{{ "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . "/" . $value['profile_short'] }}">{{ $value['profile_long'] }}</a></td>
+                <td><a href="{{ "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . "/" . strtolower(str_replace(' ', '-', $value['profile_long'])) . '-exchange-rates' }}">{{ $value['profile_long'] }}</a></td>
                 <td>{{ $value['profile_short'] }}</td>
                 <td>{{ $value['profile_symbol'] }}</td>
                 <td>{{ $value['profile_central_bank_name'] }}</td>
