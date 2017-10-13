@@ -117,9 +117,9 @@ function getGlobaldata() {
 
 $(document).ready(function () {
 
-    var amountFromStorage = localStorage.getItem("amount");
-    var fromFromStorage = localStorage.getItem("from");
-    var toFromStorage = localStorage.getItem("to");
+    var amountFromStorage = localStorage.getItem("amount").toUpperCase();
+    var fromFromStorage = localStorage.getItem("from").toUpperCase();
+    var toFromStorage = localStorage.getItem("to").toUpperCase();
     if(amountFromStorage && fromFromStorage && toFromStorage) {
         $("#amount").val(amountFromStorage);
         $("#from").val(toFromStorage);
@@ -162,9 +162,9 @@ $(document).ready(function () {
 
     $("#inversion").on('click', function (event) {
         var currentItem = $(event.currentTarget);
-        var amount = $("#amount").val();
-        var from = $("#from").val();
-        var to = $("#to").val();
+        var amount = $("#amount").val().toLowerCase();
+        var from = $("#from").val().toLowerCase();
+        var to = $("#to").val().toLowerCase();
 
 
         localStorage.setItem("amount", amount);
@@ -334,5 +334,5 @@ function putSixthRow(key, value) {
 }
 
 function createRedirectLink(amount, from, to) {
-    return window.location.href + "/" + from + "-" + to + "?" + amount;
+    return window.location.origin + "/calculator/" + from + "-" + to + "?" + amount;
 }

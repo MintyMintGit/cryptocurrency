@@ -36,6 +36,6 @@ function generateListSearch(array) {
     });
     return readyList;
 }
-function createRedirectLink(amount, from, to) {
-    return window.location.href + "/" + from + "-" + to + "?" + amount;
-}
+// function createRedirectLink(amount, from, to) {
+//     return window.location.href + "/" + from + "-" + to + "?" + amount;
+// }

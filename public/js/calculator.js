@@ -115,9 +115,9 @@ $(document).ready(function () {
 
     $("#inversion").on('click', function (event) {
         var currentItem = $(event.currentTarget);
-        var amount = $("#amount").val();
-        var from = $("#from").val();
-        var to = $("#to").val();
+        var amount = $("#amount").val().toLowerCase();
+        var from = $("#from").val().toLowerCase();
+        var to = $("#to").val().toLowerCase();
 
 
         localStorage.setItem("amount", amount);
