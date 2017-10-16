@@ -86,7 +86,8 @@ function getGlobaldata() {
                 }
                 if (data[i].symbol == to.val()) {
                     to.attr('is_crypto', true);
-                    to.attr('price_usd', data['data'][i].price_usd);
+                    //to.attr('price_usd', data['data'][i].price_usd);
+                    to.attr('price_usd', data[i].price_usd);
                 }
 
                 var flag = false;
@@ -127,7 +128,7 @@ $(document).ready(function () {
             $("#from").val(toFromStorage);
             $("#to").val(fromFromStorage);
         }
-    } else if(amountFromStorage && fromFromStorage && toFromStorage) {
+    } else if(fromFromStorage && toFromStorage) {
         $("#amount").val(amountFromStorage);
         $("#from").val(fromFromStorage);
         $("#to").val(toFromStorage);

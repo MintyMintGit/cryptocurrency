@@ -40,3 +40,26 @@ function createRedirectLink(amount, from, to) {
     var location = $("#locationServ").val();
     return location + "/calculator/" + from + "-" + to + "?" + amount;
 }
+$('#fiat').DataTable({
+    "paging": false,
+    "ordering": false
+});
+
+$('#topTenCrypto').DataTable({
+    "paging": false,
+    "ordering": false
+});
+$(".updateLink").on('click', function (event) {
+    event.preventDefault();
+    var currentItem = $(event.currentTarget);
+
+    var from = currentItem.attr('data-from').toLowerCase();
+    var to = currentItem.attr('data-to').toLowerCase();
+
+    localStorage.setItem("amount", '');
+    localStorage.setItem("to", to);
+    localStorage.setItem("from", from);
+    localStorage.setItem("convert", false);
+
+    window.location = window.location.origin + "/calculator/" + from + "-" + to;
+});

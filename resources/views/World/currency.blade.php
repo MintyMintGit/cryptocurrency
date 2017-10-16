@@ -38,11 +38,70 @@
         </tbody>
     </table>
 
+
+    <h1>
+        {{ $cc_profile[0]['profile_short'] }} - {{ $cc_profile[0]['profile_long'] }}
+    </h1>
+
+    <table id="topTenCrypto">
+        <thead>
+        <tr>
+            <th>ISO</th>
+            <th>Name</th>
+            <th>Custom hyper link w/URL</th>
+            <th>Rates</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($topTenCrypto as $crypto)
+            <tr>
+                <td>{{ $crypto['symbol'] }}</td>
+                <td>{{ $crypto['name'] }}</td>
+                <td>
+                    <a data-from="{{ $cc_profile[0]['profile_short'] }}" data-to="{{ $crypto['symbol'] }}" class="updateLink" href="/calculator/{{ $cc_profile[0]['profile_short'] }}-to-{{ $crypto['symbol'] }}">Convert
+                        from {{ $cc_profile[0]['profile_long'] }} to {{ $crypto['name'] }}</a>
+                </td>
+                <td>
+                    {{ 1 / $crypto['price_usd'] }}
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
+
+
+    <table id="fiat">
+        <thead>
+        <tr>
+            <th>ISO</th>
+            <th>Name</th>
+            <th>Custom hyper link w/URL</th>
+            <th>Rates</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($moneyFiat as $fiat)
+            <tr>
+                <td>{{ $fiat['profile_short'] }}</td>
+                <td>{{ $fiat['profile_long'] }}</td>
+                <td>
+                    <a data-from="{{ $cc_profile[0]['profile_short'] }}" data-to="{{ $fiat['profile_short'] }}" class="updateLink" href="/calculator/{{ $cc_profile[0]['profile_short'] }}-to-{{ $fiat['profile_short'] }}">Convert
+                        from {{ $cc_profile[0]['profile_long'] }} to {{ $fiat['profile_long'] }}</a>
+                </td>
+                <td>
+                    @if ($fiat['value_quotes'] > 0)
+                        {{ 1 / $fiat['value_quotes'] }}
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
     <div id="content">
         <div class="currency currency-page">
-            <h1>
-                <span>{{ $cc_profile[0]['profile_short'] }} - {{ $cc_profile[0]['profile_long'] }}</span>
-            </h1>
+
             <div class="short-desc">
                 <p>The currency used by the {{ $cc_profile[0]['profile_country'] }} is known as
                     the {{ $cc_profile[0]['profile_long'] }},
@@ -57,14 +116,6 @@
                     You can find the most up-to-date {{ $cc_profile[0]['profile_long'] }} rates as well as a convenient
                     currency converter above.
                 </p>
-
-                {{--<p>The currency used by the {NAME_OF_THE_COUNTRY} is known as the {CURRENCY_NAME},--}}
-                {{--which is also written out in full as the {NAME_OF_THE_COUNTRY} {CURRENCY_TYPE}--}}
-                {{--and popular--}}
-                {{--<a href="converter/1{TOP_EXCHANGE}-{CURRENCY_ABBREVIATION}">exchange rate is {TOP_EXCHANGE} to {CURRENCY_ABBREVIATION}</a>.--}}
-                {{--The currency symbol for the {CURRENCY_NAME} is {CURRENCY_SYMBOL},--}}
-                {{--while the currency code is {CURRENCY_ABBREVIATION}. You might see either of these listed in any exchange rate.--}}
-                {{--You can find the most up-to-date {CURRENCY_NAME} rates as well as a convenient currency converter above.</p>--}}
             </div>
             <div class="top-rates">
                 <h2>Top {{ $cc_profile[0]['profile_short'] }} Cross Rates</h2>
@@ -94,7 +145,7 @@
                             <div class="flag"><img width="45" src="/img/flags/JPY.png"></div>
                             <p>JPY</p></th>
                     </tr>
-                    <tr class="rate_lines1" >
+                    <tr class="rate_lines1">
                         <td>
                             <b>1 {{ $cc_profile[0]['profile_short'] }}</b>
                         </td>
@@ -150,7 +201,8 @@
                     <li><b>Symbol:</b> {{ $cc_profile[0]['profile_symbol'] }} </li>
                     <li><b>Central Bank Rate:</b> {{ $cc_profile[0]['profile_central_bank_rate'] }} </li>
                     <li><b>Central Bank Name:</b> {{ $cc_profile[0]['profile_central_bank_name'] }} </li>
-                    <li><b>Central Bank Website:</b> <a href="{{ $cc_profile[0]['profile_central_bank_website'] }}" target="_blank">{{ $cc_profile[0]['profile_central_bank_website'] }}</a>
+                    <li><b>Central Bank Website:</b> <a href="{{ $cc_profile[0]['profile_central_bank_website'] }}"
+                                                        target="_blank">{{ $cc_profile[0]['profile_central_bank_website'] }}</a>
                     </li>
                     <li><b>Unit:</b> {{ $cc_profile[0]['profile_unit'] }}</li>
                     <li><b>Cent:</b> {{ $cc_profile[0]['profile_cent'] }}</li>
