@@ -20,8 +20,6 @@
                     class="text-large  negative_change">( {{ round($crypto['percent_change_24h'], 2) }}% )</span>
             <br>
             <small class="text-gray">{{ number_format($crypto['price_btc']) }} BTC</small>
-            {{--<small class="negative_change"> (0.00%)</small>--}}
-
         </div>
 
     </div>
@@ -71,21 +69,35 @@
         </div>
         <div class="col-sm-4 col-sm-pull-8">
             <ul class="list-unstyled">
+                @if ($social[0]->Website_1 != "")
                 <li><span class="glyphicon glyphicon-link text-gray" title="Website"></span> <a
-                            href="https://www.ethereum.org/" target="_blank">Website</a></li>
+                            href="{{ $social[0]->Website_1 or "Default Message"  }}" target="_blank">Website</a></li>
+                @endif
 
+                @if ($social[0]->Website_1 != "")
                 <li><span class="glyphicon glyphicon-search text-gray" title="Explorer"></span> <a
-                            href="https://live.ether.camp/" target="_blank">Explorer</a></li>
+                            href="{{ $social[0]->Explorer_1 or "Default Message"  }}" target="_blank">Explorer</a></li>
+                @endif
+
+
+                @if ($social[0]->Website_1 != "")
                 <li><span class="glyphicon glyphicon-search text-gray" title="Explorer"></span> <a
-                            href="https://etherscan.io/" target="_blank">Explorer 2</a></li>
+                            href="{{ $social[0]->Explorer_2 or "Default Message"  }}" target="_blank">Explorer 2</a></li>
+                @endif
+                @if ($social[0]->Website_1 != "")
                 <li><span class="glyphicon glyphicon-search text-gray" title="Explorer"></span> <a
-                            href="https://etherchain.org/" target="_blank">Explorer 3</a></li>
+                            href="{{ $social[0]->Explorer_3 or "Default Message"  }}" target="_blank">Explorer 3</a></li>
+                @endif
+                @if ($social[0]->Website_1 != "")
                 <li><span class="glyphicon glyphicon-list text-gray" title="Message Board"></span> <a
-                            href="https://forum.ethereum.org/" target="_blank">Message Board</a></li>
-
+                            href="{{ $social[0]->Message_board_1 or "Default Message"  }}" target="_blank">Message Board</a></li>
+                @endif
+                @if ($social[0]->Website_1 != "")
                 <li><span class="glyphicon glyphicon-bullhorn text-gray" title="Announcement"></span> <a
-                            href="https://bitcointalk.org/index.php?topic=428589.0" target="_blank">Announcement</a>
+                            href="{{ $social[0]->Message_board_2 or "Default Message"  }}" target="_blank">Announcement</a>
                 </li>
+                @endif
+
 
 
                 <li><span class="glyphicon glyphicon glyphicon-star text-gray" title="Rank"></span>
@@ -123,12 +135,13 @@
             <h3>Social</h3>
             <p>Some content in menu 1.</p>
             <div class="col-xs-6">
-                <a class="twitter-timeline" href="https://twitter.com/TwitterDev/timelines/539487832448843776?ref_src=twsrc%5Etfw">National Park Tweets - Curated tweets by TwitterDev</a>
+                <a class="twitter-timeline" href="{{ $social[0]->Twitter or "Default Message"  }}"></a>
                 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
             <div class="col-xs-6">
                 <div id="reddit">
-                    <script src="https://www.reddit.com/.embed?limit=5" type="text/javascript"></script>
+
+                    <script type="text/javascript" src="https://www.reddit.com/r/{{ str_replace(" ", "", $social[0]->Name) != "" ? str_replace(" ", "", $social[0]->Name) : "" }}.embed?limit=9"></script>
                 </div>
             </div>
         </div>

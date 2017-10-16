@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GlobalData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CryptoCurrenciesController extends Controller
 {
@@ -12,7 +13,8 @@ class CryptoCurrenciesController extends Controller
         $crypto = GlobalData::findOrFail($id);
         $bitcoinPrice = GlobalData::find('bitcoin')->price_usd;
         $linkToIcon = "/img/icons/" . $crypto->id . ".png";
-        return view('CryptoCurrencies.index',compact( 'scriptJs','crypto', 'bitcoinPrice', 'linkToIcon'));
+        $social = DB::select("select * from crypto_sidebar where Symbol like ?"  , [$crypto->symbol]);
+        return view('CryptoCurrencies.index',compact( 'scriptJs','crypto', 'bitcoinPrice', 'linkToIcon', 'social'));
     }
     public function generateUrl() {
         $result = array();
