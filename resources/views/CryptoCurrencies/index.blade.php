@@ -69,35 +69,38 @@
         </div>
         <div class="col-sm-4 col-sm-pull-8">
             <ul class="list-unstyled">
-                @if ($social[0]->Website_1 != "")
-                <li><span class="glyphicon glyphicon-link text-gray" title="Website"></span> <a
-                            href="{{ $social[0]->Website_1 or "Default Message"  }}" target="_blank">Website</a></li>
+                @if (!is_null($social[0]->Website_1))
+                    <li><span class="glyphicon glyphicon-link text-gray" title="Website"></span> <a
+                                href="{{ $social[0]->Website_1 or "Default Message"  }}" target="_blank">Website</a>
+                    </li>
                 @endif
 
-                @if ($social[0]->Website_1 != "")
-                <li><span class="glyphicon glyphicon-search text-gray" title="Explorer"></span> <a
-                            href="{{ $social[0]->Explorer_1 or "Default Message"  }}" target="_blank">Explorer</a></li>
+                @if ( !is_null($social[0]->Explorer_1))
+                    <li><span class="glyphicon glyphicon-search text-gray" title="Explorer"></span> <a
+                                href="{{ $social[0]->Explorer_1 or "Default Message"  }}" target="_blank">Explorer</a>
+                    </li>
                 @endif
 
-
-                @if ($social[0]->Website_1 != "")
-                <li><span class="glyphicon glyphicon-search text-gray" title="Explorer"></span> <a
-                            href="{{ $social[0]->Explorer_2 or "Default Message"  }}" target="_blank">Explorer 2</a></li>
+                @if (!is_null($social[0]->Explorer_2))
+                    <li><span class="glyphicon glyphicon-search text-gray" title="Explorer"></span> <a
+                                href="{{ $social[0]->Explorer_2 or "Default Message"  }}" target="_blank">Explorer 2</a>
+                    </li>
                 @endif
-                @if ($social[0]->Website_1 != "")
-                <li><span class="glyphicon glyphicon-search text-gray" title="Explorer"></span> <a
-                            href="{{ $social[0]->Explorer_3 or "Default Message"  }}" target="_blank">Explorer 3</a></li>
+                @if (!is_null($social[0]->Explorer_3))
+                    <li><span class="glyphicon glyphicon-search text-gray" title="Explorer"></span> <a
+                                href="{{ $social[0]->Explorer_3 or "Default Message"  }}" target="_blank">Explorer 3</a>
+                    </li>
                 @endif
-                @if ($social[0]->Website_1 != "")
-                <li><span class="glyphicon glyphicon-list text-gray" title="Message Board"></span> <a
-                            href="{{ $social[0]->Message_board_1 or "Default Message"  }}" target="_blank">Message Board</a></li>
+                @if (!is_null($social[0]->Message_board_1))
+                    <li><span class="glyphicon glyphicon-list text-gray" title="Message Board"></span> <a
+                                href="{{ $social[0]->Message_board_1 or "Default Message"  }}" target="_blank">Message
+                            Board</a></li>
                 @endif
-                @if ($social[0]->Website_1 != "")
-                <li><span class="glyphicon glyphicon-bullhorn text-gray" title="Announcement"></span> <a
-                            href="{{ $social[0]->Message_board_2 or "Default Message"  }}" target="_blank">Announcement</a>
-                </li>
+                @if (!is_null($social[0]->Message_board_2))
+                    <li><span class="glyphicon glyphicon-bullhorn text-gray" title="Announcement"></span> <a
+                                href="{{ $social[0]->Message_board_2 or "Default Message"  }}" target="_blank">Announcement</a>
+                    </li>
                 @endif
-
 
 
                 <li><span class="glyphicon glyphicon glyphicon-star text-gray" title="Rank"></span>
@@ -141,7 +144,8 @@
             <div class="col-xs-6">
                 <div id="reddit">
 
-                    <script type="text/javascript" src="https://www.reddit.com/r/{{ str_replace(" ", "", $social[0]->Name) != "" ? str_replace(" ", "", $social[0]->Name) : "" }}.embed?limit=9"></script>
+                    <script type="text/javascript"
+                            src="https://www.reddit.com/r/{{ str_replace(" ", "", $social[0]->Name) != "" ? str_replace(" ", "", $social[0]->Name) : "" }}.embed?limit=9"></script>
                 </div>
             </div>
         </div>
