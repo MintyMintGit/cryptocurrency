@@ -40,7 +40,7 @@
 
 
     <h1>
-        {{ $cc_profile[0]['profile_long'] }}
+        {{ $cc_profile[0]['profile_long'] }} exchange rates
     </h1>
 
     <table id="topTenCrypto">

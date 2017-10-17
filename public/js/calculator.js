@@ -264,16 +264,16 @@ function putSeventhRow(key, value) {
 function putEigthRow(key, value) {
     var body = $("#crossRatesTable tbody tr");
     var currence = $(value).find('p').html();
-    var oneBTC = 1 / hardcoded.BTC.price_usd;
+    var oneBTC = 1 / parseFloat($("#bitcoinPrice").val());
     var itemInVhichPutValue = $(body[6]).find('td')[key];
     var temp = oneBTC * crossRates[currence].price_usd;
-    $(itemInVhichPutValue).text(temp.toFixed(2));
+    $(itemInVhichPutValue).text(temp.toFixed(5));
 }
 
 function putSixthRow(key, value) {
     var body = $("#crossRatesTable tbody tr");
     var currence = $(value).find('p').html();
-    var oneBTC = 1 / hardcoded.BTC.price_usd;
+    var oneBTC = 1 / parseFloat($("#bitcoinPrice").val());
     var itemInVhichPutValue = $(body[7]).find('td')[key];
     var temp = 1 / (oneBTC * crossRates[currence].price_usd);
     $(itemInVhichPutValue).text(temp.toFixed(5));
