@@ -119,20 +119,19 @@ function getGlobaldata() {
 $(document).ready(function () {
 
     var amountFromStorage = localStorage.getItem("amount");
-    amountFromStorage != null ? amountFromStorage = amountFromStorage.toUpperCase() : "";
-    var fromFromStorage = localStorage.getItem("from").toUpperCase();
-    var toFromStorage = localStorage.getItem("to").toUpperCase();
+    var fromFromStorage = localStorage.getItem("from");
+    var toFromStorage = localStorage.getItem("to");
     var convert = localStorage.getItem("convert");
-    if (convert == true) {
+    if (convert == "true") {
         if(amountFromStorage && fromFromStorage && toFromStorage) {
-            $("#amount").val(amountFromStorage);
-            $("#from").val(toFromStorage);
-            $("#to").val(fromFromStorage);
+            $("#amount").val(amountFromStorage.toUpperCase());
+            $("#from").val(toFromStorage.toUpperCase());
+            $("#to").val(fromFromStorage.toUpperCase());
         }
     } else if(fromFromStorage && toFromStorage) {
-        $("#amount").val(amountFromStorage);
-        $("#from").val(fromFromStorage);
-        $("#to").val(toFromStorage);
+        $("#amount").val( amountFromStorage != null ? amountFromStorage.toUpperCase() : 1);
+        $("#from").val(fromFromStorage.toUpperCase());
+        $("#to").val(toFromStorage.toUpperCase());
     }
 
 
@@ -180,6 +179,7 @@ $(document).ready(function () {
         localStorage.setItem("amount", amount);
         localStorage.setItem("from", from);
         localStorage.setItem("to", to);
+        localStorage.setItem("convert", true);
 
         switch (currentItem.attr("id")) {
             case "inversion" :
