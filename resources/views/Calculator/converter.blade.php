@@ -4,6 +4,9 @@
 
 <input type="hidden" id="GlobalDataNames" value="{{ route('GlobalDataNames') }}">
 <input type="hidden" id="bitcoinPrice" value="{{ $bitcoinPrice }}">
+
+@include("Calculator.cloudOfCurrencies")
+
 <h1>Enter Currency Amount</h1>
 <table id="converterTable">
     <tbody>

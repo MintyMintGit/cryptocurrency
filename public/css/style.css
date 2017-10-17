@@ -29,3 +29,7 @@ body {
     background-color: black;
     color: yellow;
 }
+.topPopular {
+    font-weight:600;
+    background-color: #fecb17;
+}

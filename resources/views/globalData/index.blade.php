@@ -168,7 +168,7 @@
 
     <div class="row" id="secondPage">
         <div class="col-xs-12">
-            @include('Calculator.index')
+            @include('Calculator.index', $CloudsOfCurrencies)
         </div>
 
     </div>
