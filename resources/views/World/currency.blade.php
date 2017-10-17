@@ -40,7 +40,7 @@
 
 
     <h1>
-        {{ $cc_profile[0]['profile_short'] }} - {{ $cc_profile[0]['profile_long'] }}
+        {{ $cc_profile[0]['profile_long'] }}
     </h1>
 
     <table id="topTenCrypto">
@@ -58,7 +58,7 @@
                 <td>{{ $crypto['symbol'] }}</td>
                 <td>{{ $crypto['name'] }}</td>
                 <td>
-                    <a data-from="{{ $cc_profile[0]['profile_short'] }}" data-to="{{ $crypto['symbol'] }}" class="updateLink" href="/calculator/{{ $cc_profile[0]['profile_short'] }}-to-{{ $crypto['symbol'] }}">Convert
+                    <a data-from="{{ $cc_profile[0]['profile_short'] }}" data-to="{{ $crypto['symbol'] }}" class="updateLink" href="/calculator/{{ strtolower($cc_profile[0]['profile_short'])   }}-to-{{ strtolower($crypto['symbol']) }}">Convert
                         from {{ $cc_profile[0]['profile_long'] }} to {{ $crypto['name'] }}</a>
                 </td>
                 <td>
@@ -82,11 +82,12 @@
         </thead>
         <tbody>
         @foreach($moneyFiat as $fiat)
+            @if ($fiat['profile_short'] != $cc_profile[0]['profile_short'] )
             <tr>
                 <td>{{ $fiat['profile_short'] }}</td>
                 <td>{{ $fiat['profile_long'] }}</td>
                 <td>
-                    <a data-from="{{ $cc_profile[0]['profile_short'] }}" data-to="{{ $fiat['profile_short'] }}" class="updateLink" href="/calculator/{{ $cc_profile[0]['profile_short'] }}-to-{{ $fiat['profile_short'] }}">Convert
+                    <a data-from="{{ $cc_profile[0]['profile_short'] }}" data-to="{{ $fiat['profile_short'] }}" class="updateLink" href="/calculator/{{ strtolower($cc_profile[0]['profile_short']) }}-to-{{ strtolower($fiat['profile_short']) }}">Convert
                         from {{ $cc_profile[0]['profile_long'] }} to {{ $fiat['profile_long'] }}</a>
                 </td>
                 <td>
@@ -95,6 +96,7 @@
                     @endif
                 </td>
             </tr>
+            @endif
         @endforeach
         </tbody>
     </table>

@@ -56,16 +56,18 @@ class UpdateDataController extends Controller
     {
         $data = ExchangeRatesCap\Base::getExchangeRates();
         foreach ($data['quotes'] as $key => $item) {
-            ExchangeRate::updateOrCreate(
-                [
-                    'name_quotes' => $key
-                ] ,
-                [
-                    'value_quotes' => $item,
-                    'timestamp' => $data['timestamp'],
-                    'source' => $data['source']
-                ]
-            );
+            if ($key != "USDBTC") {
+                ExchangeRate::updateOrCreate(
+                    [
+                        'name_quotes' => $key
+                    ],
+                    [
+                        'value_quotes' => $item,
+                        'timestamp' => $data['timestamp'],
+                        'source' => $data['source']
+                    ]
+                );
+            }
         }
         $this->updateSearchTable();
         return 'Updated successfully';

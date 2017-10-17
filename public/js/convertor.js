@@ -118,7 +118,8 @@ function getGlobaldata() {
 
 $(document).ready(function () {
 
-    var amountFromStorage = localStorage.getItem("amount").toUpperCase();
+    var amountFromStorage = localStorage.getItem("amount");
+    amountFromStorage != null ? amountFromStorage = amountFromStorage.toUpperCase() : "";
     var fromFromStorage = localStorage.getItem("from").toUpperCase();
     var toFromStorage = localStorage.getItem("to").toUpperCase();
     var convert = localStorage.getItem("convert");
