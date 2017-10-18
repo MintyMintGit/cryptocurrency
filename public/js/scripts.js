@@ -1,5 +1,6 @@
 var listSearch = $("#listSearch");
 $(document).ready(function () {
+    loadingFullSearchList();
     $("#search").on('keyup', function (event) {
         $.ajax({
             url: $("#searchIn").val() + '/' + $(event.currentTarget).val(),
@@ -57,11 +58,14 @@ function generateListSearch(array) {
     var readyList = [];
 
     $.each(array, function (indx, element) {
-        var temp = " ( " + element.profile_long + " )";
+
         if (element['type'] == "exchange_pair") {
-            temp = "";
+            if (element.exchange2 != element.exchange1)
+                readyList.push("<li exchange2='" + element.exchange2 +"' exchange1='" + element.exchange1 +"' id='" + element['id']+"' " + " data-title='" + element.profile_long + "' class=" + element['type'] + " data-usd=" + element['price_usd'] + ">" + element['id'] + "</li>");
+        } else {
+            readyList.push("<li id='" + element['id']+"'" + " data-title='" + element.profile_long + "' class=" + element['type'] + " data-usd=" + element['price_usd'] + ">" + element['id'] + "(" + element.profile_long  + ")" + "</li>");
         }
-        readyList.push("<li id='" + element['id']+"'" + " data-title='" + element.profile_long + "' class=" + element['type'] + " data-usd=" + element['price_usd'] + ">" + element['id'] + ( temp ) + "</li>");
+
     });
     return readyList;
 }
@@ -74,6 +78,21 @@ function saveStatistic(attr) {
         data: attr
     });
 }
-// function createRedirectLink(amount, from, to) {
-//     return window.location.href + "/" + from + "-" + to + "?" + amount;
-// }
+
+function loadingFullSearchList() {
+    $.ajax({
+        url: $("#getFullListSearch").val(),
+        dataType: "json",
+        type: 'GET',
+        success: function (data) {
+            if (data.length > 0) {
+                listSearch.find('li').remove();
+                listSearch.append(generateListSearch(data));
+                $("#search").on('focusin', function (event) {
+                    $("#listSearch").show();
+                    runClick();
+                });
+            }
+        }
+    });
+}

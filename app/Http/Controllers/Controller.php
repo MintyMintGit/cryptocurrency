@@ -12,10 +12,4 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function __construct()
-    {
-        $exchange_pairs = Base::getFullListSearch();
-        View::share('exchange_pairs', $exchange_pairs);
-    }
 }

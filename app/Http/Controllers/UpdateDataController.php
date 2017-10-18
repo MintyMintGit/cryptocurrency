@@ -86,7 +86,7 @@ class UpdateDataController extends Controller
         foreach ($listElements as $listElement) {
             Search::updateOrCreate(
                 [
-                    'id' => "{$listElement['name']}"
+                    'id' => "{$listElement['id']}"
                 ],[
                     "price_usd" => $listElement['price_usd'],
                     "type" => $listElement['type'],

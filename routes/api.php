@@ -41,3 +41,7 @@ Route::get('search/{id}', function ($id) {
 })->name('searchIn');
 
 Route::post('GlobalData/saveStatistic', 'GlobalDataController@saveStatistic')->name('saveStatistic');
+
+Route::get('getFullListSearch', function () {
+    return App\Search\  Base::getFullListSearch();
+})->name('getFullListSearch');

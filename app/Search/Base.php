@@ -26,7 +26,7 @@ class Base
                 $profile_long[0]['profile_long'] = "";
             }
             $fiatCurrency[] = [
-                'name' => $name,
+                'id' => $name,
                 'price_usd' => $fiatValue['value_quotes'],
                 'type' => 'fiat',
                 'profile_long' => $profile_long[0]['profile_long']
@@ -51,46 +51,6 @@ class Base
 
     public static function generateListElements()
     {
-//        $fiatCurrency = [];
-//        $exchange_pairs = ExchangeRate::all()->toArray();
-//
-//        foreach ($exchange_pairs as $key => $exchange_pair) {
-//
-//
-//            $name = str_replace("USD", "", $exchange_pair['name_quotes']);
-//            if ($name == "") {
-//                $name = "USD";
-//            }
-//            $profile_long = Cr_cc_profile::where('profile_short', 'like', $name)->get();
-//
-//            if ($profile_long->isEmpty()) {
-//                $profile_long = array();
-//                $profile_long[0]['profile_long'] = "";
-//            }
-//
-//            $fiatCurrency[] = [
-//                'name' => $name,
-//                'price_usd' => $exchange_pair['value_quotes'],
-//                'type' => 'fiat',
-//                'profile_long' => $profile_long[0]['profile_long']
-//            ];
-//
-//        }
-//        $cryptoCurrency = array();
-//        $cryptoGlobalData = GlobalData::all()->toArray();
-//
-//        foreach ($cryptoGlobalData as $key => $item) {
-//
-//            $item['name'] = "USD" . $item['symbol'];
-//            $item['type'] = 'exchange_pair';
-//            $item['profile_long'] = '';
-//            $exchange_pairs[] = $item;
-//
-//            $cryptoGlobalData[$key]['type'] = 'crypto';
-//            $cryptoGlobalData[$key]['name'] = $cryptoGlobalData[$key]['symbol'];
-//            $cryptoGlobalData[$key]['profile_long'] = $cryptoGlobalData[$key]['name'];
-//            $cryptoCurrency[] = $cryptoGlobalData[$key];
-//        }
         $exchange_pairs = array();
         $exchange_pairs = array_merge($exchange_pairs, self::generateFiatExchange());
         $exchange_pairs = array_merge($exchange_pairs, self::generateCryptoExchange());
@@ -101,17 +61,6 @@ class Base
 
     public static function getFullListSearch()
     {
-//        $fiats = Search::where('type', 'fiat')->orderBy('rate', 'DESC')->get()->toArray();
-//        foreach ($fiats as $index => $fiat) {
-//            $fiat['name'] = 'USD' . $fiat['id'];
-//            $fiat['exchange1'] = 'USD';
-//            $fiat['exchange2'] = $fiat['id'];
-//            $exchange_pairs[] = $fiat;
-//        }
-
-        //$exchange_pairs = Search::where('type', 'exchange_pair')->orderBy('rate', 'DESC')->get()->toArray();
-
-
         $cryptoes = Search::where('type', 'crypto')->orderBy('rate', 'DESC')->get()->toArray();
         $fiats = Search::where('type', 'fiat')->orderBy('rate', 'DESC')->get()->toArray();
 

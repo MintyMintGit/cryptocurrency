@@ -11,24 +11,10 @@
             <a class="navbar-brand" href="#">Project name</a>
         </div>
         <input type="hidden" id="searchIn" value="{{ route('searchIn', '') }}">
+        <input type="hidden" id="getFullListSearch" value="{{ route('getFullListSearch') }}">
         <div style="float: right">
             <input type="text" id="search" style="text-transform: uppercase;">
-            <ul id="listSearch" style="    position: absolute;    z-index: 100;   background-color: red;">
-                @isset($exchange_pairs)
-                    @foreach ($exchange_pairs as $exchange_pair)
-                        <li id="{{ $exchange_pair['id'] }}"
-                                exchange2="{{ $exchange_pair['exchange2'] or '' }}"
-                                exchange1="{{ $exchange_pair['exchange1'] or '' }}"
-                                data-content="{{ $exchange_pair['profile_long'] }}"
-                                class="{{ $exchange_pair['type'] }}"
-                                data-usd="{{ $exchange_pair['price_usd'] }}"
-                        >
-                            {{ $exchange_pair['id'] }}
-                        {{ strlen($exchange_pair['profile_long']) > 0 ? "-" : "" }}
-                            {{ $exchange_pair['profile_long'] or '' }}
-                        </li>
-                    @endforeach
-                @endisset
+            <ul id="listSearch">
             </ul>
 
         </div>
