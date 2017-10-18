@@ -33,3 +33,9 @@ body {
     font-weight:600;
     background-color: #fecb17;
 }
+#listSearch {
+    display: none;
+}
+.lessPopular  {
+    font-weight: bold;
+}

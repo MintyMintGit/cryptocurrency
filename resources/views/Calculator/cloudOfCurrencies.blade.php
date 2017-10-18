@@ -9,7 +9,7 @@
         <tr>
             @endif
 
-            <td data-content="{{ $counter }}" class="{{ isset($Currenci['topPopular']) ? "topPopular":"" }}">
+            <td data-content="{{ $counter }}" class="{{ isset($Currenci['topPopular']) ? "topPopular":"" }} {{ isset($Currenci['lessPopular']) ? "lessPopular":"" }}">
 
                 @if ($Currenci['type'] == 'crypto' )
                     <a href="/crypto/{{ $Currenci['profile_long'] != "" ? strtolower(str_replace(' ', '-',$Currenci['profile_long'])) : strtolower(str_replace(' ', '-',$Currenci['id'])) }}">

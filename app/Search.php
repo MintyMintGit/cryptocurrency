@@ -34,5 +34,8 @@ class Search extends Model
         for($i = 0; $i< 5; $i++) {
             $collectionPopularCurrencies[$i]['topPopular'] = true;
         }
+        for($i = 5; $i< 10; $i++) {
+            $collectionPopularCurrencies[$i]['lessPopular'] = true;
+        }
     }
 }

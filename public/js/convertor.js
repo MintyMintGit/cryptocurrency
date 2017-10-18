@@ -64,7 +64,7 @@ function getExchangeRates() {
 
 
             }
-            putValuesToTable();
+
         }
     });
 }
@@ -112,6 +112,7 @@ function getGlobaldata() {
                     currencyExchangeRates.push(obj);
                 }
             }
+            putValuesToTable();
         }
     });
 }
@@ -329,17 +330,20 @@ function putEigthRow(key, value) {
     var body = $("#crossRatesTable tbody tr");
     var currence = $(value).find('p').html();
     var oneBTC = 1 / parseFloat($("#bitcoinPrice").val());
-    var itemInVhichPutValue = $(body[6]).find('td')[key];
-    var temp = oneBTC * crossRates[currence].price_usd;
+    var itemInVhichPutValue = $(body[7]).find('td')[key];
+    var temp = oneBTC / crossRates[currence].price_usd;
     $(itemInVhichPutValue).text(temp.toFixed(5));
 }
 
 function putSixthRow(key, value) {
     var body = $("#crossRatesTable tbody tr");
     var currence = $(value).find('p').html();
-    var oneBTC = 1 / parseFloat($("#bitcoinPrice").val());
-    var itemInVhichPutValue = $(body[7]).find('td')[key];
-    var temp = 1 / (oneBTC * crossRates[currence].price_usd);
+    var oneBTC = parseFloat($("#bitcoinPrice").val());
+    var itemInVhichPutValue = $(body[6]).find('td')[key];
+    //parseFloat($("#bitcoinPrice").val())/(1/crossRates.GBP.price_usd)
+    var temp = oneBTC / (1 / crossRates[currence].price_usd);
+    //parseFloat($("#bitcoinPrice").val())/(1/crossRates.GBP.price_usd)
+    //var temp = 1 / (oneBTC * crossRates[currence].price_usd);
     $(itemInVhichPutValue).text(temp.toFixed(5));
 }
 
