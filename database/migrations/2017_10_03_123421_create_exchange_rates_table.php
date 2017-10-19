@@ -17,6 +17,7 @@ class CreateExchangeRatesTable extends Migration
             $table->increments('id');
             $table->string('name_quotes');
             $table->double('value_quotes');
+            $table->double('value_quotesOld');
             $table->string('timestamp');
             $table->string('source');
         });

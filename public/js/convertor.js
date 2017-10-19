@@ -37,6 +37,7 @@ function getExchangeRates() {
                         var obj = {};
                         obj.name = name;
                         obj.price_usd = data['data'][i].value_quotes;
+                        obj.price_usdOld = data['data'][i].value_quotesOld;
                         obj.fullName = "";
                         obj.is_crypto = false;
                         hardcoded[item] = obj;
@@ -47,6 +48,7 @@ function getExchangeRates() {
                     var obj = {};
                     obj.name = name;
                     obj.price_usd = data['data'][i].value_quotes;
+                    obj.price_usdOld = data['data'][i].value_quotesOld;
                     obj.fullName = "";
                     obj.is_crypto = false;
                     currencyExchangeRates.push(obj);
@@ -57,6 +59,7 @@ function getExchangeRates() {
                         obj.name = name;
                         obj.price_usd = data['data'][i].value_quotes;
                         obj.fullName = "";
+                        obj.price_usdOld = data['data'][i].value_quotesOld;
                         crossRates[name] = obj;
                     }
                 }
@@ -64,11 +67,49 @@ function getExchangeRates() {
 
 
             }
+            runTrandingRates();
 
         }
     });
 }
+function runTrandingRates() {
+    /*try get from anothe is USD*/
+    var fromFromStorage = localStorage.getItem("from").toUpperCase();
+    if(fromFromStorage == 'USD') {
+        fromFromStorage = crossRates['USD'];
+    } else {
+        $.each(currencyExchangeRates, function (indx, element) {
+            if(element.name == fromFromStorage) {
+                fromFromStorage = element;
+            }
+        });
+        if(fromFromStorage.name == undefined) {
+            $.each(hardcoded, function (indx, element) {
+                if(element.name == fromFromStorage) {
+                    fromFromStorage = element;
+                }
+            });
+        }
+    }
+    $(".from").append(fromFromStorage.name);
+    $(".to").each(function(indx, element){
+        var parent = $(element).parents('.greyBlock');
+        var newPrice = TrandingRates(fromFromStorage.price_usd, crossRates[element.innerText].price_usd);
+        var oldPrice = TrandingRates(fromFromStorage.price_usdOld, crossRates[element.innerText].price_usdOld);
+        var result = calculatePercentage(oldPrice, newPrice);
+        var color = result > 1 ? "green" : "red";
+        parent.find('.trendingRates').append("<div class='green'>" + crossRates[element.innerText].price_usdOld + "</div>")
+        parent.find('.trendingRates').append("<div class='" + color + "'>" + result + "</div>");
+    });
 
+}
+
+function TrandingRates(from, to) {
+    return (from / to).toFixed(5);
+}
+function calculatePercentage(old, today) {
+    return (1 -(TrandingRates(old, today))).toFixed(5);
+}
 function getGlobaldata() {
     $.ajax({
         url: $("#GlobalDataNames").val(),
@@ -97,6 +138,7 @@ function getGlobaldata() {
                         var obj = {};
                         obj.name = data[i].symbol;
                         obj.price_usd = data[i].price_usd;
+                        obj.price_usdOld = data[i].price_usdOld;
                         obj.fullName = "";
                         obj.is_crypto = true;
                         hardcoded[item] = obj;
@@ -112,7 +154,7 @@ function getGlobaldata() {
                     currencyExchangeRates.push(obj);
                 }
             }
-            putValuesToTable();
+            //putValuesToTable();
         }
     });
 }

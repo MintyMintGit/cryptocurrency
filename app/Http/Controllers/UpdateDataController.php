@@ -52,24 +52,35 @@ class UpdateDataController extends Controller
      *
      * @return Response
      */
-    public function storeExchangeRates()
+    public static function storeExchangeRates()
     {
         $data = ExchangeRatesCap\Base::getExchangeRates();
         foreach ($data['quotes'] as $key => $item) {
             if ($key != "USDBTC") {
-                ExchangeRate::updateOrCreate(
-                    [
-                        'name_quotes' => $key
-                    ],
-                    [
-                        'value_quotes' => $item,
-                        'timestamp' => $data['timestamp'],
-                        'source' => $data['source']
-                    ]
-                );
+
+                $oldItem = ExchangeRate::where('name_quotes', 'like', $key)->get()->first();
+                if ($oldItem === null) {
+                    $exchange = new ExchangeRate;
+
+                    $exchange->name_quotes = $key;
+                    $exchange->value_quotes = $item;
+                    $exchange->value_quotesOld = $item;
+                    $exchange->source = $data['source'];
+
+                    $exchange->save();
+
+                    //need to creqate new one;
+                } else {
+                    //need to get old value_quotes an put to value_quotesOld
+                    //put new value_quotes
+                    $oldItem->value_quotesOld = $oldItem->value_quotes;
+                    $oldItem->value_quotes = $item;
+                    $oldItem->source = $data['source'];
+                    $oldItem->save();
+                }
             }
         }
-        $this->updateSearchTable();
+        self::updateSearchTable();
         return 'Updated successfully';
     }
     function updateValue($number) {

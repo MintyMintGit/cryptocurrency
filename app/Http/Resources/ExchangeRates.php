@@ -16,7 +16,8 @@ class ExchangeRates extends Resource
     {
         return [
             'name_quotes' => $this->name_quotes,
-            'value_quotes' => $this->value_quotes
+            'value_quotes' => $this->value_quotes,
+            'value_quotesOld' => $this->value_quotesOld,
         ];
     }
 }

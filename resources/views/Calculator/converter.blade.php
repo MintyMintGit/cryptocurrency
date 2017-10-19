@@ -39,8 +39,9 @@
     </tbody>
 </table>
 
+@include("Calculator.TrendingRates")
 
-<h1>Cross Rates</h1>
+{{--<h1>Cross Rates</h1>--}}
 <table width="100%" id="crossRatesTable">
     <thead>
     <tr>

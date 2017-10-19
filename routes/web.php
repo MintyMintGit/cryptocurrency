@@ -22,4 +22,3 @@ Route::get('/crypto/{id}','CryptoCurrenciesController@index');
 Route::get('/world','WorldController@index');
 Route::get('/world/{id}','WorldController@currency');
 Route::get('generateUrl','CryptoCurrenciesController@generateUrl');
-

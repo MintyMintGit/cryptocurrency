@@ -44,3 +44,21 @@ body {
     z-index: 100;
     background-color: red;
 }
+#crossRatesTable {
+    display: none;
+}
+#positionTartading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.greyBlock {
+    background-color: grey;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
+}
