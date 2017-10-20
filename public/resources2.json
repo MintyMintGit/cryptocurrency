@@ -1,0 +1,16 @@
+{
+  "chart": {
+    "type": "column"
+  },
+  "data": {
+    "csv": "csv"
+  },
+  "title": {
+    "text": "Fruit Consumption"
+  },
+  "yAxis": {
+    "title": {
+      "text": "Units"
+    }
+  }
+}

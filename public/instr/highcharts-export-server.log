@@ -1,0 +1,106 @@
+Fri Oct 20 2017 12:57:08 GMT+0300 (EEST) [error] no input specified {
+  "infile": false,
+  "outfile": false,
+  "options": false,
+  "styledMode": false,
+  "globalOptions": false,
+  "listenToProcessExits": true,
+  "allowFileResources": true,
+  "type": "png",
+  "scale": 1,
+  "resources": {
+    "infile": {
+      "title": {
+        "text": "Steep Chart"
+      },
+      "xAxis": {
+        "categories": [
+          "Jan",
+          "Feb",
+          "Mar"
+        ]
+      },
+      "series": [
+        {
+          "data": [
+            29.9,
+            71.5,
+            106.4
+          ]
+        }
+      ]
+    }
+  },
+  "callback": false,
+  "width": false,
+  "constr": "Chart",
+  "tmpdir": "tmp/",
+  "enableServer": false,
+  "sslOnly": false,
+  "host": false,
+  "port": 7801,
+  "rateLimit": false,
+  "logLevel": 2,
+  "workers": false,
+  "workLimit": 60,
+  "logDest": "instr",
+  "logFile": "highcharts-export-server.log",
+  "batch": false,
+  "sslPath": false,
+  "sslPort": 443,
+  "fromFile": false,
+  "async": true
+}
+Fri Oct 20 2017 12:57:19 GMT+0300 (EEST) [error] no input specified {
+  "infile": false,
+  "outfile": false,
+  "options": false,
+  "styledMode": false,
+  "globalOptions": false,
+  "listenToProcessExits": true,
+  "allowFileResources": true,
+  "type": "png",
+  "scale": 1,
+  "resources": {
+    "infile": {
+      "title": {
+        "text": "Steep Chart"
+      },
+      "xAxis": {
+        "categories": [
+          "Jan",
+          "Feb",
+          "Mar"
+        ]
+      },
+      "series": [
+        {
+          "data": [
+            29.9,
+            71.5,
+            106.4
+          ]
+        }
+      ]
+    }
+  },
+  "callback": false,
+  "width": false,
+  "constr": "Chart",
+  "tmpdir": "tmp/",
+  "enableServer": false,
+  "sslOnly": false,
+  "host": false,
+  "port": 7801,
+  "rateLimit": false,
+  "logLevel": 2,
+  "workers": false,
+  "workLimit": 60,
+  "logDest": "instr",
+  "logFile": "highcharts-export-server.log",
+  "batch": false,
+  "sslPath": false,
+  "sslPort": 443,
+  "fromFile": false,
+  "async": true
+}
