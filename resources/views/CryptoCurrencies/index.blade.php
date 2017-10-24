@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-
+    <input type="hidden" id="historicalData" value="{{ route('historicalData', $crypto['name']) }}">
 
     <div class="row bottom-margin-1x">
         <div class="col-xs-6 col-sm-4 col-md-4">
@@ -133,6 +133,8 @@
         <div id="home" class="tab-pane fade in active">
             <h3>HOME</h3>
             <p>Some content.</p>
+            <div id="container" style="height: 400px; min-width: 600px"></div>
+            <button id="button">Export chart</button>
         </div>
         <div id="menu1" class="tab-pane fade">
             <h3>Social</h3>

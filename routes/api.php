@@ -45,3 +45,23 @@ Route::post('GlobalData/saveStatistic', 'GlobalDataController@saveStatistic')->n
 Route::get('getFullListSearch', function () {
     return App\Search\  Base::getFullListSearch();
 })->name('getFullListSearch');
+
+Route::post('historicalData/{id}', function ($id) {
+    if($id != null && $id != "") {
+        $historicalData = \DB::connection('mysql2')->table($id)->get();
+        $newEmptyCollection = array();
+        $historicalData = collect($historicalData)->sortBy(function ($temp, $key) {
+            return Carbon\Carbon::parse($temp->Date)->getTimestamp();
+        });
+        //return \Psy\Util\Json::encode($newEmptyCollection);
+//        unset($historicalData->rooms['id']);
+  //      $property->rooms->values();
+        //$historicalData->forget('id');
+
+        $prices = $historicalData->pluck('High');
+        $prices->all();
+        return $prices->toJson();
+    }
+    return false;
+
+})->name('historicalData');

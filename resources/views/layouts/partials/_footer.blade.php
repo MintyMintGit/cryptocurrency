@@ -17,3 +17,9 @@
             echo "<script type=\"text/javascript\" src=\"/js/". $scriptJs . "\" ></script>";
         }
 ?>
+
+@if (isset($charts))
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script type="text/javascript" src="https://www.highcharts.com/samples/data/usdeur.js"></script>
+@endif
