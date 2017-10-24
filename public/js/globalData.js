@@ -49,7 +49,7 @@ var configDataTable = {
         {"data": ""}
     ],
     "aoColumnDefs": [{
-        "aTargets": [1, 2, 3, 4, 5, 6],
+        "aTargets": [1, 2, 3, 4, 5, 6, 7],
         "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
             $(nTd).attr('data-usd', sData);
             switch (iCol) {
@@ -76,6 +76,15 @@ var configDataTable = {
                     temp += sData >= 0 ? "makeItGreen" : "makeItRed";
                     temp += "'>" + limitToTwo(sData) + "%</span>";
                     nTd.innerHTML = temp;
+                    break;
+                case 7:
+                    var linkCrypto = oData.id.toLowerCase();
+                    linkCrypto = linkCrypto.split(" ").join("-");
+                    //var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
+                    var graph = "<img src='/img/crypto/" + linkCrypto  +".png'>";
+                    nTd.innerHTML = '<a href="crypto/' + linkCrypto + '">' + graph + '</a>';
+
+
                     break;
             }
         }

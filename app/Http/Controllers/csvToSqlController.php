@@ -11,27 +11,7 @@ class csvToSqlController extends Controller
 {
     public function index()
     {
-
-//        str_getcsv('public/db/crypto_history.csv');
-
-
-        $data = $this->csv_to_array($_SERVER['DOCUMENT_ROOT'] . 'db/crypto_history.csv');
-        foreach ($data as $datum) {
-            $a = 10;
-        }
-
-        /****************************************
-         * CSV FILE SAMPLE *
-         ****************************************/
-        // id,subdireccion_id,idInterno,area,deleted_at,created_at,updated_at
-        // ,1,4,AREA MALAGA OCC.,,2013/10/13 10:27:52,2013/10/13 10:27:52
-        // ,1,2,AREA MALAGA N/ORIENT,,2013/10/13 10:27:52,2013/10/13 10:27:52
-
-        $csvFile = public_path() . 'public/db/crypto_history.csv';
-
-
-        // Uncomment the below to run the seeder
-//        DB::table('crypto_history')->insert($areas);
+        $this->csv_to_array($_SERVER['DOCUMENT_ROOT'] . 'db/crypto_history.csv');
     }
 
     function csv_to_array($filename = '', $delimiter = ',')
@@ -42,22 +22,18 @@ class csvToSqlController extends Controller
         $header = NULL;
         $data = array();
         if (($handle = fopen($filename, 'r')) !== FALSE) {
-            $temp = "";
+            $nameCurrentTable = "";
             $counter = 0;
             while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE) {
                 if (!$header)
                     $header = $row;
                 else {
                     $data[] = array_combine($header, $row);
-                    if ($data[$counter]['Name'] != $temp) {
+                    if ($data[$counter]['Name'] != $nameCurrentTable) {
 
-//Name,Symbol,Date,High,Low,Close,Volume,Market,Cap
-                        if ($temp != "") {
-
-
-                            //GlobalData::find('')
+                        if ($nameCurrentTable != "") {
                             try {
-                                Schema::connection('mysql2')->create(quotemeta($temp), function ($table) {
+                                Schema::connection('mysql2')->create(quotemeta($nameCurrentTable), function ($table) {
                                     $table->increments('id');
                                     $table->string('Name');
                                     $table->string('Symbol');
@@ -71,9 +47,9 @@ class csvToSqlController extends Controller
                                 });
 
                             } catch (\Illuminate\Database\QueryException $e) {
-                                $temp = $data[$counter - 1]['Symbol'];
+                                $nameCurrentTable = $data[$counter - 1]['Symbol'];
 
-                                Schema::connection('mysql2')->create(quotemeta($temp), function ($table) {
+                                Schema::connection('mysql2')->create(quotemeta($nameCurrentTable), function ($table) {
                                     $table->increments('id');
                                     $table->string('Name');
                                     $table->string('Symbol');
@@ -90,8 +66,8 @@ class csvToSqlController extends Controller
                                 dd($e);
                             }
 
-                            for ($i = 0; $i < count($data - 1); $i++) {
-                                DB::connection('mysql2')->table(quotemeta($temp))->insert(
+                            for ($i = 0; $i < count($data)-1; $i++) {
+                                DB::connection('mysql2')->table(quotemeta($nameCurrentTable))->insert(
                                     [
                                         'Name' => $data[$i]['Name'],
                                         'Symbol' => $data[$i]['Symbol'],
@@ -106,14 +82,15 @@ class csvToSqlController extends Controller
                                 );
                             }
 
-                            $temp = $data[$counter]['Name'];
-                            $data = $data[$counter];
+                            $nameCurrentTable = $data[$counter]['Name'];
+                            $newTable = $data[$counter];
+                            $data = array();
+                            $data[] = $newTable;
                             $counter = 0;
-
                         }
 
                         if (count($data) > 0) {
-                            $temp = $data[$counter]['Name'];
+                            $nameCurrentTable = $data[$counter]['Name'];
                         }
 
                     }

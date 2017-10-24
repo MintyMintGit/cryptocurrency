@@ -31,7 +31,7 @@ class TestImageController extends Controller
         foreach ($allCryptoAPI as $index => $item) {
             $data = array();
             if (isset($item['crypto_history'])) {
-                foreach ($item['crypto_history'] as $crypto_history) {
+                foreach ($item['crypto_history'] as $item_cryptoHistory => $crypto_history) {
                     if ($this->IsLastWeek($crypto_history->Date)) {
                         $data[] = $crypto_history->High;
                     }
@@ -44,7 +44,7 @@ class TestImageController extends Controller
 
     public function createGraph($fileName)
     {
-        $runServer = 'highcharts-export-server --infile '. $_SERVER['DOCUMENT_ROOT'] .'/resources.json --outfile '. $_SERVER['DOCUMENT_ROOT'] .'/tmp/' . $fileName . '.png';
+        $runServer = 'highcharts-export-server --infile '. $_SERVER['DOCUMENT_ROOT'] .'/resources.json --outfile '. $_SERVER['DOCUMENT_ROOT'] .'/img/crypto/' . $fileName . '.png';
         $res = shell_exec($runServer);
         return $res;
     }
@@ -63,6 +63,5 @@ class TestImageController extends Controller
         if ($now->diffInWeeks(Carbon::parse($date)) <= 10) {
             return true;
         }
-        return false;
     }
 }
