@@ -15,12 +15,12 @@ class TestImageController extends Controller
         $allCryptoAPI = GlobalData::all()->toArray();
         foreach ($allCryptoAPI as $index => $item) {
             $name = $item['name'];
-            $symbol = $item['symbol'];
+            $id = $item['id'];
             try {
-                $crypto_history = \DB::connection('mysql2')->table($name)->get();
+                $crypto_history = \DB::connection('mysql2')->table($id)->get();
             } catch (\Illuminate\Database\QueryException $e) {
                 try {
-                    $crypto_history = \DB::connection('mysql2')->table($symbol)->get();
+                    $crypto_history = \DB::connection('mysql2')->table($name)->get();
                 } catch (\Illuminate\Database\QueryException $e) {
                     continue;
                 }
@@ -32,14 +32,15 @@ class TestImageController extends Controller
             $data = array();
             if (isset($item['crypto_history'])) {
                 foreach ($item['crypto_history'] as $item_cryptoHistory => $crypto_history) {
-                    if ($this->IsLastWeek($crypto_history->Date)) {
-                        $data[] = $crypto_history->High;
+                    if ($this->IsLastWeek($crypto_history->created_at)) {
+                        $data[] = $crypto_history->price_usd;
                     }
                 }
             }
             $this->saveToJson($data);
             $this->createGraph($item['id']);
         }
+        return "updated succsef";
     }
 
     public function createGraph($fileName)

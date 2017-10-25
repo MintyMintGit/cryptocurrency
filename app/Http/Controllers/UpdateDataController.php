@@ -7,6 +7,9 @@ use App\CoinMarketCap;
 use App\GlobalData;
 use App\ExchangeRatesCap;
 use App\Search;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class UpdateDataController extends Controller
 {
@@ -20,29 +23,27 @@ class UpdateDataController extends Controller
     {
         $data = CoinMarketCap\Base::getGlobalData();
 
-        foreach ($data as $item) {
+        foreach ($data as $key => $item) {
 
-
-            GlobalData::updateOrCreate(
-                [
-                    'id' => "{$item['id']}"
-                ] ,
-                [
-                    'name' => "{$item['name']}",
-                    'symbol' => "{$item['symbol']}",
-                    'rank' => "{$item['rank']}",
-                    'price_usd' => $this->updateValue($item['price_usd']),
-                    'price_btc' => $this->updateValue($item['price_btc']),
-                    'volume_usd_24h' => $this->updateValue($item['24h_volume_usd']),
-                    'market_cap_usd' => $this->updateValue($item['market_cap_usd']),
-                    'available_supply' => $this->updateValue($item['available_supply']),
-                    'total_supply' => $this->updateValue($item['total_supply']),
-                    'percent_change_1h' => $this->updateValue($item['percent_change_1h']),
-                    'percent_change_24h' => $this->updateValue($item['percent_change_24h']),
-                    'percent_change_7d' => $this->updateValue($item['percent_change_7d']),
-                    'last_updated' => $this->updateValue($item['last_updated'])
-                ]
-            );
+            GlobalData::updateOrCreate(['id' => "{$item['id']}"], ['name' => "{$item['name']}", 'symbol' => "{$item['symbol']}", 'rank' => "{$item['rank']}", 'price_usd' => $this->updateValue($item['price_usd']), 'price_btc' => $this->updateValue($item['price_btc']), 'volume_usd_24h' => $this->updateValue($item['24h_volume_usd']), 'market_cap_usd' => $this->updateValue($item['market_cap_usd']), 'available_supply' => $this->updateValue($item['available_supply']), 'total_supply' => $this->updateValue($item['total_supply']), 'percent_change_1h' => $this->updateValue($item['percent_change_1h']), 'percent_change_24h' => $this->updateValue($item['percent_change_24h']), 'percent_change_7d' => $this->updateValue($item['percent_change_7d']), 'last_updated' => $this->updateValue($item['last_updated'])]);
+            $tableName = str_replace(' ', '-', $item['id']);
+            //$tableName = "'" . $item['id'] . "'";
+            if (!Schema::connection('mysql2')->hasTable($tableName)) {
+                $tableName = str_replace(' ', '-', $item['name']);
+                //$tableName = "'" . $item['name'] . "'";
+                if (!Schema::connection('mysql2')->hasTable($tableName)) {
+                    try {
+                        $tableName = str_replace(' ', '-', $item['id']);
+                        $this->tryCreateTable($tableName);
+                    } catch (\Illuminate\Database\QueryException $e) {
+                        $tableName = str_replace(' ', '-', $item['name']);
+                        $this->tryCreateTable($tableName);
+                    } catch (PDOException $e) {
+                        dd($e);
+                    }
+                }
+            }
+            $this->insertToHistoryDB($tableName, $item);
         }
         $this->updateSearchTable();
         return 'Updated successfully';
@@ -106,5 +107,18 @@ class UpdateDataController extends Controller
             );
         }
 
+    }
+    function tryCreateTable($tableName) {
+        Schema::connection('mysql2')->create(quotemeta($tableName), function ($table) {
+            $table->increments('id');
+            $table->double('price_usd');
+            $table->dateTime('created_at');
+        });
+        return true;
+    }
+
+    function insertToHistoryDB($tableName, $data)
+    {
+        DB::connection('mysql2')->table(quotemeta($tableName))->insert(['price_usd' => $data['price_usd'], 'created_at' => Carbon::now()]);
     }
 }

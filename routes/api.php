@@ -47,18 +47,12 @@ Route::get('getFullListSearch', function () {
 })->name('getFullListSearch');
 
 Route::post('historicalData/{id}', function ($id) {
-    if($id != null && $id != "") {
+    if ($id != null && $id != "") {
         $historicalData = \DB::connection('mysql2')->table($id)->get();
-        $newEmptyCollection = array();
-        $historicalData = collect($historicalData)->sortBy(function ($temp, $key) {
-            return Carbon\Carbon::parse($temp->Date)->getTimestamp();
+        $historicalData = collect($historicalData)->sortBy(function ($temp) {
+            return Carbon\Carbon::parse($temp->created_at)->getTimestamp();
         });
-        //return \Psy\Util\Json::encode($newEmptyCollection);
-//        unset($historicalData->rooms['id']);
-  //      $property->rooms->values();
-        //$historicalData->forget('id');
-
-        $prices = $historicalData->pluck('High');
+        $prices = $historicalData->pluck('price_usd');
         $prices->all();
         return $prices->toJson();
     }
