@@ -39,14 +39,14 @@ var configDataTable = {
     "ajax": $("#viewAllLink").val(),
     "paging": false,
     "columns": [
-        {"data": "rank"},
-        {"data": "name"},
-        {"data": "market_cap_usd", "className": "market_cap_usd"},
+        {"data": "rank", "className": "num"},
+        {"data": "name", "className": "name"},
+        {"data": "market_cap_usd", "className": "marketcup"},
         {"data": "price_usd", "className": "price"},
-        {"data": "total_supply", "className": "total_supply"},
+        {"data": "total_supply", "className": "supply"},
         {"data": "volume_usd_24h", "className": "volume"},
-        {"data": "percent_change_24h"},
-        {"data": ""}
+        {"data": "percent_change_24h", "className": "change"},
+        {"data": "", "className": "graph"}
     ],
     "aoColumnDefs": [{
         "aTargets": [1, 2, 3, 4, 5, 6, 7],
@@ -73,7 +73,7 @@ var configDataTable = {
                     break;
                 case 6:
                     var temp = "<span class='"
-                    temp += sData >= 0 ? "makeItGreen" : "makeItRed";
+                    temp += sData >= 0 ? "green" : "red";
                     temp += "'>" + limitToTwo(sData) + "%</span>";
                     nTd.innerHTML = temp;
                     break;
@@ -93,6 +93,45 @@ var configDataTable = {
 };
 
 $(document).ready(function () {
+
+    $("#search_input").click(function() {
+        $('.search-dpopdown-list').slideToggle().animate({'opacity': 1},100);;
+    });
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest("#searchform").length) {
+            $('.search-dpopdown-list').fadeOut();
+        }
+        e.stopPropagation();
+    });
+
+    $("#search_input").click(function() {
+        $('#searchform').addClass('search-act');
+    });
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest("#search_input").length) {
+            $('#searchform').removeClass('search-act');
+        }
+        e.stopPropagation();
+    });
+
+    $(".search-dpopdown-list li a").click(function() {
+        $('.search-dpopdown-list').toggle();
+    });
+
+    $(".search-col > button").click(function() {
+        $('.menu-mask').prependTo('body');
+        $('.x').show();
+        $('.menu-mask .head-logo').show();
+        $('.menu-container').css('padding-top','0');
+    });
+
+    $(".x").click(function() {
+        $('.menu-mask').appendTo('body');
+        $('.x').hide();
+        $('.menu-mask .head-logo').hide();
+        $('.menu-container').css('padding-top','50px');
+    });
+
     getExchangeRatesGlobal();
     var viewAll = $("#ViewAll");
 
@@ -154,7 +193,7 @@ $(document).ready(function () {
 
 
     $(".pointer").on('click', function (event) {
-        dataCurrency = $(event.currentTarget).find('a').attr('data-currency');
+        dataCurrency = $(event.currentTarget).attr('data-currency');
         coefficient = currencyExchangeRatesSecond.attr('data-usd' + dataCurrency);
         var switchButton = $("#currency-switch-button");
 

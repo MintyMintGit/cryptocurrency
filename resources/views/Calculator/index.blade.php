@@ -4,6 +4,10 @@
 
 @include("Calculator.cloudOfCurrencies")
 
+<div class="container-fluid menu-container">
+
+</div>
+
 <h1>Enter Currency Amount</h1>
 <table id="converterTable">
     <tbody>

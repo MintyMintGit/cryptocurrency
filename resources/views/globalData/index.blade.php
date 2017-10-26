@@ -17,153 +17,413 @@
 
     <div class="row" id="firstPage">
         <div class="col-xs-12">
-            <div class="row">
-                <div class="hidden-xs hidden-sm col-md-4">
-                    <ul id="category-tabs" class="nav nav-tabs text-left" role="tablist">
-                        <li class="active">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> All <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/">Top 100</a></li>
-                                <li><a href="/all/views/all/">Full List</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Coins <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/coins/">Top 100</a></li>
-                                <li><a href="/coins/views/all/">Full List</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/coins/">Market Cap by Circulating Supply</a></li>
-                                <li><a href="/coins/views/market-cap-by-total-supply/">Market Cap by Total Supply</a></li>
-                                <li><a href="/coins/views/filter-non-mineable/">Filter Non-Mineable</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Tokens <span class="caret"></span> </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/tokens/">Top 100</a></li>
-                                <li><a href="/tokens/views/all/">Full List</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/tokens/">Market Cap by Circulating Supply</a></li>
-                                <li><a href="/tokens/views/market-cap-by-total-supply/">Market Cap by Total Supply</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
 
-                <div class="col-xs-4 col-md-4 text-left">
-                    <div id="currency-switch" class="btn-group">
-                        <button id="currency-switch-button" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            USD <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu text-center" role="menu">
+            <!--began work-->
+            <section class="content container-fluid">
+                <div class="filter-area">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12 left">
+                            <div class="btn-group bootstrap-select show-tick">
+                                <button type="button" class="btn dropdown-toggle bs-placeholder btn-default"
+                                        data-toggle="dropdown" role="button" title="Market Cap"><span
+                                            class="filter-option pull-left">Market Cap</span>&nbsp;<span
+                                            class="bs-caret"><span class="caret"></span></span></button>
+                                <div class="dropdown-menu open" role="combobox">
+                                    <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                                        <li data-original-index="0"><a tabindex="0" class="" data-tokens="null"
+                                                                       role="option" aria-disabled="false"
+                                                                       aria-selected="false"><span
+                                                        class="text">ALL</span><span
+                                                        class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                        <li data-original-index="1"><a tabindex="0" class="" data-tokens="null"
+                                                                       role="option" aria-disabled="false"
+                                                                       aria-selected="false"><span
+                                                        class="text">Crypto</span><span
+                                                        class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                    </ul>
+                                </div>
+                                <select class="selectpicker" multiple="" title="Market Cap" tabindex="-98">
+                                    <option>ALL</option>
+                                    <option>Crypto</option>
+                                </select></div>
+                            <div class="btn-group bootstrap-select show-tick">
+                                <button type="button" class="btn dropdown-toggle bs-placeholder btn-default"
+                                        data-toggle="dropdown" role="button" title="Tools"><span
+                                            class="filter-option pull-left">Tools</span>&nbsp;<span
+                                            class="bs-caret"><span class="caret"></span></span></button>
+                                <div class="dropdown-menu open" role="combobox">
+                                    <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                                        <li data-original-index="0"><a tabindex="0" class="" data-tokens="null"
+                                                                       role="option" aria-disabled="false"
+                                                                       aria-selected="false"><span class="text">Curency Converter Calculator</span><span
+                                                        class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                    </ul>
+                                </div>
+                                <select class="selectpicker" multiple="" title="Tools" tabindex="-98">
+                                    <option>Curency Converter Calculator</option>
+                                </select></div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-xs-12 right">
+                            <div class="currency-selector">
+                                <div class="btn-group bootstrap-select">
+                                    <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown"
+                                            role="button" title="USD DOLLAR">
+                                        <span id="currency-switch-button" class="filter-option pull-left">USD DOLLAR</span>&nbsp;<span class="bs-caret">
+                                            <span class="caret"></span></span>
+                                    </button>
+                                    <div class="dropdown-menu open" role="combobox">
+                                        <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                                            <!--start something-->
 
+                                            <!--end something -->
+                                            <li data-original-index="0" class="pointer selected">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#BTC" data-currency="btc"
+                                                                                            role="option"
+                                                                                            aria-disabled="false"
+                                                                                            aria-selected="true"><span
+                                                            class="text">BTC</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span></a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#ETH" data-currency="eth"
+                                                                           role="option" aria-disabled="false"
+                                                                           aria-selected="false"><span class="text">ETH</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#AUD" data-currency="aud"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">AUD</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#BRL" data-currency="brl"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">BRL</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#CAD" data-currency="cad"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">CAD</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
 
-                            <li class="pointer"><a href="#USD" class="price-toggle" data-currency="usd">USD</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#BTC" class="price-toggle" data-currency="btc">BTC</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#ETH" class="price-toggle" data-currency="eth">ETH</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#AUD" class="price-toggle" data-currency="aud">AUD</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#BRL" class="price-toggle" data-currency="brl">BRL</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#CAD" class="price-toggle" data-currency="cad">CAD</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#CHF" class="price-toggle" data-currency="chf">CHF</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#CLP" class="price-toggle" data-currency="clp">CLP</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#CNY" class="price-toggle" data-currency="cny">CNY</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#CZK" class="price-toggle" data-currency="czk">CZK</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#DKK" class="price-toggle" data-currency="dkk">DKK</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#EUR" class="price-toggle" data-currency="eur">EUR</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#GBP" class="price-toggle" data-currency="gbp">GBP</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#HKD" class="price-toggle" data-currency="hkd">HKD</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#HUF" class="price-toggle" data-currency="huf">HUF</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#IDR" class="price-toggle" data-currency="idr">IDR</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#ILS" class="price-toggle" data-currency="ils">ILS</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#INR" class="price-toggle" data-currency="inr">INR</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#JPY" class="price-toggle" data-currency="jpy">JPY</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#KRW" class="price-toggle" data-currency="krw">KRW</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#MXN" class="price-toggle" data-currency="mxn">MXN</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#MYR" class="price-toggle" data-currency="myr">MYR</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#NOK" class="price-toggle" data-currency="nok">NOK</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#NZD" class="price-toggle" data-currency="nzd">NZD</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#PHP" class="price-toggle" data-currency="php">PHP</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#PKR" class="price-toggle" data-currency="pkr">PKR</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#PLN" class="price-toggle" data-currency="pln">PLN</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#RUB" class="price-toggle" data-currency="rub">RUB</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#SEK" class="price-toggle" data-currency="sek">SEK</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#SGD" class="price-toggle" data-currency="sgd">SGD</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#THB" class="price-toggle" data-currency="thb">THB</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#TRY" class="price-toggle" data-currency="try">TRY</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#TWD" class="price-toggle" data-currency="twd">TWD</a></li>
-                            <li class="divider"></li>
-                            <li class="pointer"><a href="#ZAR" class="price-toggle" data-currency="zar">ZAR</a></li>
-                            <li class="divider"></li>
-                        </ul>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#CHF" data-currency="chf"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">CHF</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#CLP" data-currency="clp"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">CLP</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#CNY" data-currency="cny"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">CNY</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#CZK" data-currency="czk"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">CZK</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#DKK" data-currency="dkk"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">DKK</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#EUR" data-currency="eur"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">EUR</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#GBP" data-currency="gbp"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">GBP</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#HKD" data-currency="hkd"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">HKD</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#HUF" data-currency="huf"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">HKD</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#IDR" data-currency="idr"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">HKD</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#ILS" data-currency="ils"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">ILS</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#INR" data-currency="inr"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">INR</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#JPY" data-currency="jpy"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">JPY</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#KRW" data-currency="krw"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">KRW</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#MXN" data-currency="mxn"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">MXN</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#MYR" data-currency="myr"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">MYR</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#NOK" data-currency="nok"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">NOK</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null"href="#NZD" data-currency="nzd"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">NZD</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#PHP" data-currency="php"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">PHP</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#PKR" data-currency="pkr"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">PKR</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#PLN" data-currency="pln"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">PLN</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null"  href="#RUB" data-currency="rub"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">RUB</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#SEK" data-currency="sek"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">SEK</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#SGD" data-currency="sgd"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">SGD</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#THB" data-currency="thb"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">THB</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#TRY" data-currency="try"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">TRY</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#TWD" data-currency="twd"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">TWD</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                            <li data-original-index="1">
+                                                <a tabindex="0" class="pointer" data-tokens="null" href="#ZAR" data-currency="zar"
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">ZAR</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <select class="selectpicker" tabindex="-98">
+                                        <option>USD DOLLAR</option>
+                                        <option>EU EURO</option>
+                                        <option>RMB YUAN</option>
+                                        <option>UA HRYVHA</option>
+                                        <option>HK DOLLAAR</option>
+                                    </select></div>
+                            </div>
+                            <div class="form-group search-filter">
+                                <div class="icon-addon addon-lg">
+                                    <input type="search" placeholder="Search..." class="form-control"
+                                           id="search_filter_input">
+                                    <label for="search_filter_input" class="glyphicon glyphicon-search" rel="tooltip"
+                                           title="search"></label>
+                                </div>
+                            </div>
+                            <nav class="nav-filter">
+                                <a id="previousLink" href="1"><span class="next">← Previous 100</span></a>
+                                <a id="nextLink" href="3"><span class="next">Next 100 ⟶</span></a>
+                                <a id="ViewAll" href="/api/displayAll"><span class="viev-all">View All</span></a>
+
+                            </nav>
+                        </div>
                     </div>
                 </div>
+            </section>
+            <!--end work-->
+<section class="main-table">
+    <table id="marketCapitalizations">
+        <thead>
+        <tr>
+            <th class="num-h" scope="col">#</th>
+            <th class="name-h" scope="col">Name</th>
+            <th scope="col">Market Cap</th>
+            <th scope="col">Price</th>
+            <th class="supply-h">Circulating supply</th>
+            <th class="volume-h">Volume (24h)</th>
+            <th scope="col">% Change (24h)</th>
+            <th scope="col">Price Graph (7d)</th>
+        </tr>
+        </thead>
 
-                <div class="col-xs-8 col-md-4 text-right">
-                    <div class="clear"></div>
-                    <div class="pull-right">
-                        <ul class="pagination top-paginator">
+    </table>
+</section>
 
-                            <li><a id="previousLink" href="1">← Previous 100</a></li>
-
-
-                            <li><a id="nextLink" href="3">Next 100  →</a></li>
-
-                            <li><a id="ViewAll" href="/api/displayAll">View All</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <table id="marketCapitalizations">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Market Cap</th>
-                    <th>Price</th>
-                    <th>Circulating supply</th>
-                    <th>Volume (24h)</th>
-                    <th>% Change (24h)</th>
-                    <th>Price Graph (7d)</th>
-                </tr>
-                </thead>
-
-            </table>
         </div>
     </div>
+
+
+    <section class="menu-mask">
+        <a href="#">
+            <div class="head-logo">Crypto Converter</div>
+        </a>
+        <div class="x"></div>
+        <div class="container-fluid menu-container">
+            <div class="row">
+                <div class="col-md-4 nav">
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-calculator" aria-hidden="true"></i>Currency calculator<img class="arrow" width="27" height="19" src="img/arrow-right.png"></a></li>
+                        <li><a href="#"><i class="fa fa-btc" aria-hidden="true"></i>Crypto Currencies Profile<img class="arrow" width="27" height="19" src="img/arrow-right.png"></a></li>
+                        <li><a href="#"><i class="fa fa-globe" aria-hidden="true"></i>World Currencies profile<img class="arrow" width="27" height="19" src="img/arrow-right.png"></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h3>Convert:</h3>
+                    <ul>
+                        <li><a href="">EUR to USD</a></li>
+                        <li><a href="">EUR to USD</a></li>
+                        <li><a href="">EUR to USD</a></li>
+                        <li><a href="">EUR to USD</a></li>
+                        <li><a href="">EUR to USD</a></li>
+                        <li><a href="">EUR to USD</a></li>
+                        <li><a href="">EUR to USD</a></li>
+                        <li><a href="">EUR to USD</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h3>Cryptocurrency:</h3>
+                    <ul>
+                        <li><a href="">Bitcoin</a></li>
+                        <li><a href="">Bitcoin</a></li>
+                        <li><a href="">Bitcoin</a></li>
+                        <li><a href="">Bitcoin</a></li>
+                        <li><a href="">Bitcoin</a></li>
+                        <li><a href="">Bitcoin</a></li>
+                        <li><a href="">Bitcoin</a></li>
+                        <li><a href="">Bitcoin</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h3>Fiat currency:</h3>
+                    <ul>
+                        <li><a href="">USD - US Dollar</a></li>
+                        <li><a href="">USD - US Dollar</a></li>
+                        <li><a href="">USD - US Dollar</a></li>
+                        <li><a href="">USD - US Dollar</a></li>
+                        <li><a href="">USD - US Dollar</a></li>
+                        <li><a href="">USD - US Dollar</a></li>
+                        <li><a href="">USD - US Dollar</a></li>
+                        <li><a href="">USD - US Dollar</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        <footer class="menu-footer footer">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-xs-12 total">Total Market Cap: $172,759,034,864</div>
+                <div class="col-sm-6 col-md-6 col-xs-12 date">08:14pm 10.29.2017</div>
+            </div>
+        </footer>
+    </section>
 
 
     <div class="row" id="secondPage">

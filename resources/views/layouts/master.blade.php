@@ -18,6 +18,9 @@
     <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+
+    <link href="/css/bootstrap-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
 

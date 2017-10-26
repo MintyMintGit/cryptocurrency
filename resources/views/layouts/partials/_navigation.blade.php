@@ -1,10 +1,3 @@
-<!--Header-->
-<ul id="navigation" class="nav nav-tabs">
-    <li id="homeTab">
-        <a href="#">Home</a>
-    </li>
-    <li id="calculatorTab">
-        <a href="#">Calculator</a>
-    </li>
-</ul>
-<!--Header-->
+<div class="container-fluid nav-page">
+    <a class="currency-converner-head-btn"><i class="fa fa-calculator" aria-hidden="true"></i>Currency Converter</a>
+</div>
