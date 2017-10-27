@@ -13,6 +13,6 @@ class CalculatorController extends Controller
         $CloudsOfCurrencies = Search::getCloudsOfCurrencies();
         $scriptJs = 'convertor.js';
         $bitcoinPrice = GlobalData::find('bitcoin')->price_usd;
-        return view('Calculator.converter',compact( 'scriptJs','bitcoinPrice', 'CloudsOfCurrencies'));
+        return view('Calculator.converter',compact( 'scriptJs','bitcoinPrice', 'CloudsOfCurrencies' ));
     }
 }

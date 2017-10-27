@@ -13,8 +13,7 @@
     <input type="hidden" id="saveStatistic" value="{{ route('saveStatistic') }}">
 
 
-
-
+<div class="home">
     <div class="row" id="firstPage">
         <div class="col-xs-12">
 
@@ -78,16 +77,16 @@
                                             <!--end something -->
                                             <li data-original-index="0" class="pointer selected">
                                                 <a tabindex="0" class="pointer" data-tokens="null" href="#BTC" data-currency="btc"
-                                                                                            role="option"
-                                                                                            aria-disabled="false"
-                                                                                            aria-selected="true"><span
+                                                   role="option"
+                                                   aria-disabled="false"
+                                                   aria-selected="true"><span
                                                             class="text">BTC</span><span
                                                             class="glyphicon glyphicon-ok check-mark"></span></a>
                                             </li>
                                             <li data-original-index="1">
                                                 <a tabindex="0" class="pointer" data-tokens="null" href="#ETH" data-currency="eth"
-                                                                           role="option" aria-disabled="false"
-                                                                           aria-selected="false"><span class="text">ETH</span><span
+                                                   role="option" aria-disabled="false"
+                                                   aria-selected="false"><span class="text">ETH</span><span
                                                             class="glyphicon glyphicon-ok check-mark"></span>
                                                 </a>
                                             </li>
@@ -338,23 +337,23 @@
                 </div>
             </section>
             <!--end work-->
-<section class="main-table">
-    <table id="marketCapitalizations">
-        <thead>
-        <tr>
-            <th class="num-h" scope="col">#</th>
-            <th class="name-h" scope="col">Name</th>
-            <th scope="col">Market Cap</th>
-            <th scope="col">Price</th>
-            <th class="supply-h">Circulating supply</th>
-            <th class="volume-h">Volume (24h)</th>
-            <th scope="col">% Change (24h)</th>
-            <th scope="col">Price Graph (7d)</th>
-        </tr>
-        </thead>
+            <section class="main-table">
+                <table id="marketCapitalizations">
+                    <thead>
+                    <tr>
+                        <th class="num-h" scope="col">#</th>
+                        <th class="name-h" scope="col">Name</th>
+                        <th scope="col">Market Cap</th>
+                        <th scope="col">Price</th>
+                        <th class="supply-h">Circulating supply</th>
+                        <th class="volume-h">Volume (24h)</th>
+                        <th scope="col">% Change (24h)</th>
+                        <th scope="col">Price Graph (7d)</th>
+                    </tr>
+                    </thead>
 
-    </table>
-</section>
+                </table>
+            </section>
 
         </div>
     </div>
@@ -432,5 +431,8 @@
         </div>
 
     </div>
+</div>
+
+
 
 @endsection

@@ -93,45 +93,6 @@ var configDataTable = {
 };
 
 $(document).ready(function () {
-
-    $("#search_input").click(function() {
-        $('.search-dpopdown-list').slideToggle().animate({'opacity': 1},100);;
-    });
-    $(document).on('click', function(e) {
-        if (!$(e.target).closest("#searchform").length) {
-            $('.search-dpopdown-list').fadeOut();
-        }
-        e.stopPropagation();
-    });
-
-    $("#search_input").click(function() {
-        $('#searchform').addClass('search-act');
-    });
-    $(document).on('click', function(e) {
-        if (!$(e.target).closest("#search_input").length) {
-            $('#searchform').removeClass('search-act');
-        }
-        e.stopPropagation();
-    });
-
-    $(".search-dpopdown-list li a").click(function() {
-        $('.search-dpopdown-list').toggle();
-    });
-
-    $(".search-col > button").click(function() {
-        $('.menu-mask').prependTo('body');
-        $('.x').show();
-        $('.menu-mask .head-logo').show();
-        $('.menu-container').css('padding-top','0');
-    });
-
-    $(".x").click(function() {
-        $('.menu-mask').appendTo('body');
-        $('.x').hide();
-        $('.menu-mask .head-logo').hide();
-        $('.menu-container').css('padding-top','50px');
-    });
-
     getExchangeRatesGlobal();
     var viewAll = $("#ViewAll");
 
@@ -264,15 +225,3 @@ function getExchangeRatesGlobal(callback) {
         }
     });
 }
-// $.ajaxSetup({
-//     headers: {
-//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//     }
-// });
-// 'ajax': {
-//     'url': url,
-//         'type': 'GET',
-//         'beforeSend': function (request) {
-//         request.setRequestHeader("token", token);
-//     }
-// }

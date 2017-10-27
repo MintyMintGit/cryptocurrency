@@ -74,7 +74,16 @@ function getExchangeRates() {
 }
 function runTrandingRates() {
     /*try get from anothe is USD*/
-    var fromFromStorage = localStorage.getItem("from").toUpperCase();
+    var fromFromStorage = "";
+    if (localStorage.getItem("from") === null) {
+        fromFromStorage = $("#from").val();
+    } else {
+        fromFromStorage = localStorage.getItem("from").toUpperCase();
+    }
+    if (!fromFromStorage) {
+        return;
+    }
+
     if(fromFromStorage == 'USD') {
         fromFromStorage = crossRates['USD'];
     } else {
@@ -97,9 +106,11 @@ function runTrandingRates() {
         var newPrice = TrandingRates(fromFromStorage.price_usd, crossRates[element.innerText].price_usd);
         var oldPrice = TrandingRates(fromFromStorage.price_usdOld, crossRates[element.innerText].price_usdOld);
         var result = calculatePercentage(oldPrice, newPrice);
-        var color = result > 1 ? "green" : "red";
-        parent.find('.trendingRates').append("<div class='green'>" + crossRates[element.innerText].price_usdOld + "</div>")
-        parent.find('.trendingRates').append("<div class='" + color + "'>" + result + "</div>");
+        // var color = result > 1 ? "green" : "red";
+        // parent.find('.trendingRates').append("<div class='green'>" + crossRates[element.innerText].price_usdOld + "</div>")
+        parent.find('.someValue').text(crossRates[element.innerText].price_usdOld );
+        // parent.find('.trendingRates').append("<div class='" + color + "'>" + result + "</div>");
+        parent.find('.trendingRates').text(result);
     });
 
 }
@@ -155,6 +166,7 @@ function getGlobaldata() {
                 }
             }
             //putValuesToTable();
+            checkIsConvert();
         }
     });
 }
@@ -170,6 +182,10 @@ $(document).ready(function () {
             $("#amount").val(amountFromStorage.toUpperCase());
             $("#from").val(toFromStorage.toUpperCase());
             $("#to").val(fromFromStorage.toUpperCase());
+
+            $("#amountBlue").text(amountFromStorage.toUpperCase());
+            $("#amountToCurrency").text(fromFromStorage.toUpperCase());
+            $("#amountFromCurrency").text(toFromStorage.toUpperCase());
         }
     } else if(fromFromStorage && toFromStorage) {
         $("#amount").val( amountFromStorage != null ? amountFromStorage.toUpperCase() : 1);
@@ -184,6 +200,7 @@ $(document).ready(function () {
     getGlobaldata();
     $("#amount").on('change', function (event) {
         checkIsConvert();
+        $("#amountBlue").text($("#amount").val());
     });
     $("#to, #from").on('keyup', function (event) {
         var currentItem = $(event.currentTarget);
@@ -237,7 +254,7 @@ $(document).ready(function () {
 
 function checkIsConvert() {
     var counter = 0;
-    $.each($("#converterTable input"), function (key, element) {
+    $.each($(".filters.container input"), function (key, element) {
         if (element.value != '') {
             counter++;
         }
@@ -259,12 +276,32 @@ function convert() {
     } else {
         var result = (amount * to) / from;
     }
-    document.getElementById("result").innerHTML = result;
+
+    $("#inetgerNum").text(Math.floor(result));
+    result = result.toString();
+    var doubleIndex = result.indexOf('.');
+    if (doubleIndex > 0) {
+        $("#inetgerNum").text(Math.floor(result) + ".");
+        var decimal = result.charAt(doubleIndex + 1);
+        decimal += result.charAt(doubleIndex + 2);
+        $("#decimal").text(decimal);
+        var thousands =  result.charAt(doubleIndex + 3);
+        thousands +=  result.charAt(doubleIndex + 4);
+        thousands +=  result.charAt(doubleIndex + 5);
+        $("#thousands").text(thousands);
+    }
+    // $("#decimal").text()
+    // $("#thousands")
 }
 
 function appendSelectedItem(selectedItem) {
     var selectedItem = $(event.currentTarget);
     var id = selectedItem.parent().attr('id');
+    if (id == "toAuto") {
+        $("#amountToCurrency").text(selectedItem.text());
+    } else {
+        $("#amountFromCurrency").text(selectedItem.text());
+    }
     var price_usd = selectedItem.attr('price_usd');
     var is_crypto = selectedItem.attr('is_crypto');
     var inputSel = id.substring(0, id.indexOf('Auto'));
@@ -298,95 +335,6 @@ function getReadyList(array, key) {
         }
     }
     return readyList;
-}
-
-function putValuesToTable() {
-    checkIsConvert();
-    $.each($("#crossRatesTable thead th"), function (key, value) {
-
-        if (key > 0) {
-            putFirstRow(key, value);
-            putSecondRow(key, value);
-            putThirdRow(key, value);
-            putFourthRow(key, value);
-            putFifthRow(key, value);
-            putSixthRow(key, value);
-            putSeventhRow(key, value);
-            putEigthRow(key, value);
-        }
-    });
-}
-
-function putFirstRow(key, value) {
-    var body = $("#crossRatesTable tbody tr");
-    var currence = $(value).find('p').html();
-    var itemInVhichPutValue = $(body[0]).find('td')[key];
-    $(itemInVhichPutValue).text(crossRates[currence].price_usd);
-}
-
-function putSecondRow(key, value) {
-    var body = $("#crossRatesTable tbody tr");
-    var currence = $(value).find('p').html();
-    var itemInVhichPutValue = $(body[1]).find('td')[key];
-    var temp = 1 / crossRates[currence].price_usd;
-    $(itemInVhichPutValue).text(temp.toFixed(5));
-}
-
-function putThirdRow(key, value) {
-    var body = $("#crossRatesTable tbody tr");
-    var currence = $(value).find('p').html();
-    var oneEuro = 1 / crossRates.EUR.price_usd;
-    var itemInVhichPutValue = $(body[2]).find('td')[key];
-    var temp = oneEuro * crossRates[currence].price_usd;
-    $(itemInVhichPutValue).text(temp.toFixed(5));
-}
-
-function putFourthRow(key, value) {
-    var body = $("#crossRatesTable tbody tr");
-    var currence = $(value).find('p').html();
-    var oneEuro = 1 / crossRates.EUR.price_usd;
-    var itemInVhichPutValue = $(body[3]).find('td')[key];
-    var temp = 1 / (oneEuro * crossRates[currence].price_usd);
-    $(itemInVhichPutValue).text(temp.toFixed(5));
-}
-
-function putFifthRow(key, value) {
-    var body = $("#crossRatesTable tbody tr");
-    var currence = $(value).find('p').html();
-    var oneGBP = 1 / crossRates.GBP.price_usd;
-    var itemInVhichPutValue = $(body[4]).find('td')[key];
-    var temp = oneGBP * crossRates[currence].price_usd;
-    $(itemInVhichPutValue).text(temp.toFixed(5));
-}
-
-function putSeventhRow(key, value) {
-    var body = $("#crossRatesTable tbody tr");
-    var currence = $(value).find('p').html();
-    var oneGBP = 1 / crossRates.GBP.price_usd;
-    var itemInVhichPutValue = $(body[5]).find('td')[key];
-    var temp = 1 / (oneGBP * crossRates[currence].price_usd);
-    $(itemInVhichPutValue).text(temp.toFixed(5));
-}
-
-function putEigthRow(key, value) {
-    var body = $("#crossRatesTable tbody tr");
-    var currence = $(value).find('p').html();
-    var oneBTC = 1 / parseFloat($("#bitcoinPrice").val());
-    var itemInVhichPutValue = $(body[7]).find('td')[key];
-    var temp = oneBTC / crossRates[currence].price_usd;
-    $(itemInVhichPutValue).text(temp.toFixed(5));
-}
-
-function putSixthRow(key, value) {
-    var body = $("#crossRatesTable tbody tr");
-    var currence = $(value).find('p').html();
-    var oneBTC = parseFloat($("#bitcoinPrice").val());
-    var itemInVhichPutValue = $(body[6]).find('td')[key];
-    //parseFloat($("#bitcoinPrice").val())/(1/crossRates.GBP.price_usd)
-    var temp = oneBTC / (1 / crossRates[currence].price_usd);
-    //parseFloat($("#bitcoinPrice").val())/(1/crossRates.GBP.price_usd)
-    //var temp = 1 / (oneBTC * crossRates[currence].price_usd);
-    $(itemInVhichPutValue).text(temp.toFixed(5));
 }
 
 function createRedirectLink(amount, from, to) {
