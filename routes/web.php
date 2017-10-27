@@ -14,8 +14,8 @@
 
 Route::get('/storeAllFrom','UpdateDataController@storeAllFrom');
 Route::get('/storeExchangeRates','UpdateDataController@storeExchangeRates');
-Route::get('/','GlobalDataController@index');
-Route::get('/calculator','CalculatorController@calc');
+Route::get('/','GlobalDataController@index')->name('startPage');
+Route::get('/calculator','CalculatorController@calc')->name('calculator');
 Route::get('/calculator/{id}','CalculatorController@calc');
 Route::get('/crypto','GlobalDataController@index');
 Route::get('/crypto/{id}','CryptoCurrenciesController@index');

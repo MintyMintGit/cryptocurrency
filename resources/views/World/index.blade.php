@@ -3,6 +3,7 @@
 @section('content')
 
     @include('layouts.partials._navigation')
+
 <div class="world_currencies">
     <div class="container-fluid page-content">
         <h1>WORLD CURRENCIES</h1>
@@ -42,4 +43,5 @@
 
 </div>
 
+    @include('layouts.partials._menu')
 @endsection

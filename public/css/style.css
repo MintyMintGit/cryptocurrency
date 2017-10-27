@@ -984,7 +984,7 @@ th.name-h:before {
 }
 
 .exchange-pairs.container {
-    margin-top: -47px;
+    margin-top: -41px;
 }
 
 .exchange-pairs .line {
@@ -1004,10 +1004,19 @@ th.name-h:before {
 
 .exchange-pairs th.iso {
     width: 15%;
+    border-bottom: 0px !important;
 }
 
 .exchange-pairs th.name {
     width: 15%;
+    border: transparent;
+}
+
+.url.sorting_disabled {
+    border: transparent;
+}
+.rate.sorting_disabled {
+    border: transparent;
 }
 
 .exchange-pairs th.rate {

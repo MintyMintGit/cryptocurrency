@@ -42,12 +42,14 @@ function createRedirectLink(amount, from, to) {
 }
 $('#fiat').DataTable({
     "paging": false,
-    "ordering": false
+    "ordering": false,
+    "searching": false
 });
 
 $('#topTenCrypto').DataTable({
     "paging": false,
-    "ordering": false
+    "ordering": false,
+    "searching": false
 });
 $(".updateLink").on('click', function (event) {
     event.preventDefault();
