@@ -616,6 +616,7 @@ th.name-h:before {
     height: 100vh;
     margin-top: -6px;
     position: relative;
+    display: none;
 }
 
 .menu-mask .head-logo {

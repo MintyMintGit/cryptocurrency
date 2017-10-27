@@ -14,7 +14,6 @@
 
 
 <div class="home">
-    <div class="row" id="firstPage">
         <div class="col-xs-12">
 
             <!--began work-->
@@ -54,7 +53,7 @@
                                     <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
                                         <li data-original-index="0"><a tabindex="0" class="" data-tokens="null"
                                                                        role="option" aria-disabled="false"
-                                                                       aria-selected="false"><span class="text">Curency Converter Calculator</span><span
+                                                                       aria-selected="false"><span id="tab1" class="text">Curency Converter Calculator</span><span
                                                         class="glyphicon glyphicon-ok check-mark"></span></a></li>
                                     </ul>
                                 </div>
@@ -356,18 +355,11 @@
             </section>
 
         </div>
-    </div>
-
-
-    @include('layouts.partials._menu')
-
-    <div class="row" id="secondPage">
-        <div class="col-xs-12">
-            @include('Calculator.index', $CloudsOfCurrencies)
-        </div>
-
-    </div>
 </div>
+
+
+@include('Calculator.index', $CloudsOfCurrencies)
+
 
 
 

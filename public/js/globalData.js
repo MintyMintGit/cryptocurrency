@@ -80,11 +80,8 @@ var configDataTable = {
                 case 7:
                     var linkCrypto = oData.id.toLowerCase();
                     linkCrypto = linkCrypto.split(" ").join("-");
-                    //var icon = "<div class=\"s-s-" + linkCrypto + " currency-logo-sprite\"></div>";
                     var graph = "<img src='/img/crypto/" + linkCrypto  +".png'>";
                     nTd.innerHTML = '<a href="crypto/' + linkCrypto + '">' + graph + '</a>';
-
-
                     break;
             }
         }
@@ -94,7 +91,12 @@ var configDataTable = {
 
 $(document).ready(function () {
     getExchangeRatesGlobal();
+    $(".converter").hide();
     var viewAll = $("#ViewAll");
+    $("#tab1").on('click', function (event) {
+        $(".home").hide();
+        $(".converter").show();
+    });
 
     $("#navigation li").removeClass('active');
     $("#homeTab").addClass("active");
