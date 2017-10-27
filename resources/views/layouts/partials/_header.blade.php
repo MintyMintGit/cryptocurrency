@@ -3,7 +3,7 @@
 <header class="header container-fluid">
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-12 logo-col">
-            <a href="#">
+            <a href="{{ route('startPage') }}">
                 <div class="head-logo">Crypto Converter</div>
             </a>
         </div>

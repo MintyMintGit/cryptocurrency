@@ -33,7 +33,7 @@
                                                                        aria-selected="false"><span
                                                         class="text">ALL</span><span
                                                         class="glyphicon glyphicon-ok check-mark"></span></a></li>
-                                        <li data-original-index="1"><a tabindex="0" class="" data-tokens="null"
+                                        <li data-original-index="1"><a href="{{ route('startPage') }}" tabindex="0" class="" data-tokens="null"
                                                                        role="option" aria-disabled="false"
                                                                        aria-selected="false"><span
                                                         class="text">Crypto</span><span

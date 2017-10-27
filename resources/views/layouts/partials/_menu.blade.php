@@ -1,5 +1,5 @@
 <section class="menu-mask">
-    <a href="#">
+    <a href="{{ route('startPage') }}">
         <div class="head-logo">Crypto Converter</div>
     </a>
     <div class="x"></div>
