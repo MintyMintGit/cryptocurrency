@@ -8,7 +8,7 @@
                     {{ $Currenci['profile_long'] != "" ? $Currenci['profile_long'] : $Currenci['id'] }}
                 </a>
             @else
-                <a data-content="{{ $counter }}" class="{{ isset($Currenci['topPopular']) ? "topPopular":"" }} {{ isset($Currenci['lessPopular']) ? "lessPopular":"" }}" href="/world/{{ $Currenci['profile_long'] != "" ? strtolower(str_replace(' ', '-',$Currenci['profile_long'])) : strtolower(str_replace(' ', '-',$Currenci['id'])) }}-exchange-rates">
+                <a class="{{ isset($Currenci['topPopular']) ? "topPopular":"" }} {{ isset($Currenci['lessPopular']) ? "lessPopular":"" }}" href="/world/{{ $Currenci['profile_long'] != "" ? strtolower(str_replace(' ', '-',$Currenci['profile_long'])) : strtolower(str_replace(' ', '-',$Currenci['id'])) }}-exchange-rates">
                     {{ $Currenci['profile_long'] != "" ? $Currenci['profile_long'] : $Currenci['id'] }}
                 </a>
             @endif
