@@ -96,6 +96,7 @@ $(document).ready(function () {
     $("#tab1").on('click', function (event) {
         $(".home").hide();
         $(".converter").show();
+        event.preventDefault();
     });
 
     $("#navigation li").removeClass('active');
@@ -135,6 +136,15 @@ $(document).ready(function () {
             }
         }
     }).dataTable(configDataTable);
+    $('#marketCapitalizations input').addClass('form-control');
+
+    $('#example_filter input').addClass('yourclass');
+    $('#marketCapitalizations_wrapper input').attr('id', 'someCustomInpit');
+    //$("#marketCapitalizations_filter").text("");
+    $('#marketCapitalizations_wrapper input').attr('placeholder', 'Search...');
+    $('#marketCapitalizations_wrapper input').after("<label for=\"search_filter_input\" class=\"glyphicon glyphicon-search\" rel=\"tooltip\" title=\"search\"></label>");
+
+
     viewAll.on('click', function (event) {
         event.preventDefault();
         table.DataTable().destroy();

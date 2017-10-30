@@ -20,9 +20,15 @@ class GlobalDataController extends Controller
     {
         $input = Request::all();
         $rate = Search::find($input['id'])->rate;
-        if($rate > 0) {
+        if($rate >= 0) {
             $rate++;
             Search::where('id', $input['id'])->update(array('rate' => $rate));
+        } else if($rate['class'] == 'fiat') {
+            $search = new Search();
+            $search->id = $input['id'];
+            $search->type = $input['fiat'];
+            $search->rate = 1;
+            $search->save();
         }
     }
 }

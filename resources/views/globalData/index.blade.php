@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('layouts.partials._navigation')
+
 
 <link href="/css/cryptoIcons.css" rel="stylesheet" type="text/css">
     <input type="hidden" id="viewAllLink" value="{{route('displayAll')}}" >
@@ -14,6 +14,9 @@
 
 
 <div class="home">
+    <div class="container-fluid nav-page">
+        <a id="tab1" href="" class="currency-converner-head-btn"><i class="fa fa-calculator" aria-hidden="true"></i>Currency Converter</a>
+    </div>
         <div class="col-xs-12">
 
             <!--began work-->
@@ -51,10 +54,14 @@
                                             class="bs-caret"><span class="caret"></span></span></button>
                                 <div class="dropdown-menu open" role="combobox">
                                     <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
-                                        <li data-original-index="0"><a tabindex="0" class="" data-tokens="null"
+                                        <li data-original-index="0">
+                                            <a tabindex="0" class="" data-tokens="null"
                                                                        role="option" aria-disabled="false"
-                                                                       aria-selected="false"><span id="tab1" class="text">Curency Converter Calculator</span><span
-                                                        class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                                                       aria-selected="false">
+                                                <span class="text">Curency Converter Calculator</span>
+                                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <select class="selectpicker" multiple="" title="Tools" tabindex="-98">

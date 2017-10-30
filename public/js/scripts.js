@@ -1,7 +1,7 @@
 var listSearch = $("#listSearch");
 $(document).ready(function () {
     loadingFullSearchList();
-    $("#search").on('keyup', function (event) {
+    $("#search_input").on('keyup', function (event) {
         $.ajax({
             url: $("#searchIn").val() + '/' + $(event.currentTarget).val(),
             dataType: "json",
@@ -15,7 +15,7 @@ $(document).ready(function () {
             }
         });
     });
-    runClick();
+    //runClick();
 
 });
 
@@ -49,7 +49,7 @@ function collectParams(event) {
     var obj = {};
     obj.exchange2 = event.getAttribute("exchange2");
     obj.exchange1 = event.getAttribute("exchange1");
-    obj.dataContent = event.getAttribute("data-content");
+    obj.dataContent = event.getAttribute("data-title");
     obj.class = event.getAttribute("class");
     obj.id = event.getAttribute("id");
     return obj;
@@ -88,9 +88,20 @@ function loadingFullSearchList() {
             if (data.length > 0) {
                 listSearch.find('li').remove();
                 listSearch.append(generateListSearch(data));
-                $("#search").on('focusin', function (event) {
-                    $("#listSearch").show();
+                $("#search_input").on('focusin', function (event) {
+                    $('.search-dpopdown-list').slideToggle().animate({'opacity': 1},100);
+                    $('#searchform').addClass('search-act');
                     runClick();
+                    $(document).on('click', function(e) {
+                        if (!$(e.target).closest("#searchform").length) {
+                            $('.search-dpopdown-list').fadeOut();
+                            $('#searchform').removeClass('search-act');
+                        }
+                        //e.stopPropagation();
+                    });
+                    $(".search-dpopdown-list li a").click(function() {
+                        $('.search-dpopdown-list').toggle();
+                    });
                 });
             }
         }
@@ -98,25 +109,20 @@ function loadingFullSearchList() {
 }
 
 $(document).ready(function () {
-    $("#search_input").click(function() {
-        $('.search-dpopdown-list').slideToggle().animate({'opacity': 1},100);;
-    });
-    $(document).on('click', function(e) {
-        if (!$(e.target).closest("#searchform").length) {
-            $('.search-dpopdown-list').fadeOut();
-        }
-        e.stopPropagation();
-    });
+    // $("#search_input").click(function() {
+    //
+    // });
 
-    $("#search_input").click(function() {
-        $('#searchform').addClass('search-act');
-    });
-    $(document).on('click', function(e) {
-        if (!$(e.target).closest("#search_input").length) {
-            $('#searchform').removeClass('search-act');
-        }
-        e.stopPropagation();
-    });
+
+    // $("#search_input").click(function() {
+    //
+    // });
+    // $(document).on('click', function(e) {
+    //     if (!$(e.target).closest("#search_input").length) {
+    //         $('#searchform').removeClass('search-act');
+    //     }
+    //     e.stopPropagation();
+    // });
 
     $(".search-dpopdown-list li a").click(function() {
         $('.search-dpopdown-list').toggle();

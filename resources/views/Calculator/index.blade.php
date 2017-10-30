@@ -4,10 +4,13 @@
 
 
 <div class="converter">
-@include("Calculator.converterTable")
+    <div class="container-fluid nav-page">
+        <a id="tab1" href="" class="currency-converner-head-btn"><i class="fa fa-calculator" aria-hidden="true"></i>< Back to List</a>
+    </div>
+    @include("Calculator.converterTable")
 
-@include("Calculator.TrendingRates")
+    @include("Calculator.TrendingRates")
 
-@include("Calculator.cloudOfCurrencies")
+    @include("Calculator.cloudOfCurrencies")
     @include('layouts.partials._menu')
 </div>

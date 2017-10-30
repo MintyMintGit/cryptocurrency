@@ -277,18 +277,18 @@ function convert() {
         var result = (amount * to) / from;
     }
 
-    $("#inetgerNum").text(Math.floor(result));
+    $("#inetgerNum").text(Math.floor(result)).trim();
     result = result.toString();
     var doubleIndex = result.indexOf('.');
     if (doubleIndex > 0) {
         $("#inetgerNum").text(Math.floor(result) + ".");
         var decimal = result.charAt(doubleIndex + 1);
         decimal += result.charAt(doubleIndex + 2);
-        $("#decimal").text(decimal);
+        $("#decimal").text(decimal).trim();
         var thousands =  result.charAt(doubleIndex + 3);
         thousands +=  result.charAt(doubleIndex + 4);
         thousands +=  result.charAt(doubleIndex + 5);
-        $("#thousands").text(thousands);
+        $("#thousands").text(thousands).trim();
     }
     // $("#decimal").text()
     // $("#thousands")
@@ -320,7 +320,7 @@ function getFullList(array) {
     var readyList = [];
 
     for (var item in array) {
-        readyList.push("<li is_crypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+        readyList.push("<li class=" + 'textForDropDownMenu' + " is_crypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
     }
 
     return readyList;
@@ -331,7 +331,7 @@ function getReadyList(array, key) {
 
     for (var item in array) {
         if (array[item].name.indexOf(key) != -1) {
-            readyList.push("<li is_crypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+            readyList.push("<li class=" + 'textForDropDownMenu' + " is_crypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
         }
     }
     return readyList;

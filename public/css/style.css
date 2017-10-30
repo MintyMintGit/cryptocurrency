@@ -1,68 +1,3 @@
-/*body {*/
-/*padding-bottom: 20px;*/
-/*}*/
-
-/*.navbar {*/
-/*margin-bottom: 20px;*/
-/*}*/
-/*#marketCapitalizations {*/
-/*width: 100%*/
-/*}*/
-/*.makeItRed {*/
-/*color: #d14836;*/
-/*}*/
-/*.makeItGreen {*/
-/*color: #093;*/
-/*}*/
-/*#secondPage {*/
-/*display: none;*/
-/*}*/
-/*.exchange_pair {*/
-/*background-color: black;*/
-/*color: red;*/
-/*}*/
-/*.crypto {*/
-/*background-color: black;*/
-/*color: green;*/
-/*}*/
-/*.fiat {*/
-/*background-color: black;*/
-/*color: yellow;*/
-/*}*/
-/*.topPopular {*/
-/*font-weight:600;*/
-/*background-color: #fecb17;*/
-/*}*/
-/*#listSearch {*/
-/*display: none;*/
-/*}*/
-/*.lessPopular  {*/
-/*font-weight: bold;*/
-/*}*/
-/*#listSearch {*/
-/*position: absolute;*/
-/*z-index: 100;*/
-/*background-color: red;*/
-/*}*/
-/*#crossRatesTable {*/
-/*display: none;*/
-/*}*/
-/*#positionTartading {*/
-/*display: flex;*/
-/*flex-direction: row;*/
-/*justify-content: space-around;*/
-/*align-items: center;*/
-/*}*/
-/*.greyBlock {*/
-/*background-color: grey;*/
-/*}*/
-/*.green {*/
-/*color: green;*/
-/*}*/
-/*.red {*/
-/*color: red;*/
-/*}*/
-
 /*another content*/
 @font-face {
     font-family: "fontawesome";
@@ -1639,4 +1574,25 @@ th.name-h:before {
         font-size: 14px;
         padding-top: 8px;
     }
+}
+#someCustomInpit {
+    line-height: 1.33;
+    height: 34px;
+    font-size: 16px;
+    padding: 10px 16px 10px 40px;
+    color: #333333;
+    width: 149px;
+    border-radius: 30px;
+    font-family: "FiraSans-Light";
+}
+.textForDropDownMenu {
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+.textForDropDownMenu:hover, .textForDropDownMenu:focus {
+    background-color: #f9f9f9;
 }
