@@ -48,7 +48,7 @@ Route::get('getFullListSearch', function () {
 
 Route::post('historicalData/{id}', function ($id) {
     if ($id != null && $id != "") {
-        $historicalData = \DB::connection('mysql2')->table($id)->get();
+        $historicalData = \DB::connection('mysql2')->table(strtolower($id))->get();
         $historicalData = collect($historicalData)->sortBy(function ($temp) {
             return Carbon\Carbon::parse($temp->created_at)->getTimestamp();
         });
