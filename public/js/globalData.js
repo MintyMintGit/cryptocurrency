@@ -85,8 +85,8 @@ var configDataTable = {
                     break;
             }
         }
-    }]
 
+    }]
 };
 
 $(document).ready(function () {
@@ -136,14 +136,10 @@ $(document).ready(function () {
             }
         }
     }).dataTable(configDataTable);
-    $('#marketCapitalizations input').addClass('form-control');
 
-    $('#example_filter input').addClass('yourclass');
-    $('#marketCapitalizations_wrapper input').attr('id', 'someCustomInpit');
-    //$("#marketCapitalizations_filter").text("");
-    $('#marketCapitalizations_wrapper input').attr('placeholder', 'Search...');
-    $('#marketCapitalizations_wrapper input').after("<label for=\"search_filter_input\" class=\"glyphicon glyphicon-search\" rel=\"tooltip\" title=\"search\"></label>");
-
+    $('#search_filter_input').keyup(function(){
+        table.DataTable().search($(this).val()).draw() ;
+    });
 
     viewAll.on('click', function (event) {
         event.preventDefault();
