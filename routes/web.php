@@ -19,7 +19,7 @@ Route::get('/calculator','CalculatorController@calc')->name('calculator');
 Route::get('/calculator/{id}','CalculatorController@calc');
 Route::get('/crypto','GlobalDataController@crypto')->name('crypto');
 Route::get('/crypto/{id}','CryptoCurrenciesController@index');
-Route::get('/world','WorldController@index');
+Route::get('/world','WorldController@index')->name('world');
 Route::get('/world/{id}','WorldController@currency');
 Route::get('generateUrl','CryptoCurrenciesController@generateUrl');
 Route::get('/testImage','TestImageController@index');

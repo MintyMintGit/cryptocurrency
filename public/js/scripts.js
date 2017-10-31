@@ -114,7 +114,7 @@ function saveStatistic(attr) {
 // }
 
 $(document).ready(function () {
-
+    runClick();
     $("#search_input").on('focusin', function (event) {
         $('.search-dpopdown-list').slideToggle().animate({'opacity': 1}, 100);
         $('#searchform').addClass('search-act');
