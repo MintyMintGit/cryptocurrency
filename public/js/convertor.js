@@ -101,18 +101,20 @@ function runTrandingRates() {
         }
     }
     $(".from").append(fromFromStorage.name);
-    $(".to").each(function(indx, element){
+    $(".to").each(function (indx, element) {
         var parent = $(element).parents('.greyBlock');
         var newPrice = TrandingRates(fromFromStorage.price_usd, crossRates[element.innerText].price_usd);
         var oldPrice = TrandingRates(fromFromStorage.price_usdOld, crossRates[element.innerText].price_usdOld);
         var result = calculatePercentage(oldPrice, newPrice);
-        // var color = result > 1 ? "green" : "red";
-        // parent.find('.trendingRates').append("<div class='green'>" + crossRates[element.innerText].price_usdOld + "</div>")
-        parent.find('.someValue').text(crossRates[element.innerText].price_usdOld );
-        // parent.find('.trendingRates').append("<div class='" + color + "'>" + result + "</div>");
+        parent.find('.someValue').text(crossRates[element.innerText].price_usdOld);
         parent.find('.trendingRates').text(result);
     });
-
+    $(".linkGreyBlock").each(function(indx, element){
+        var from = $("#amountFromCurrency").text();
+        var linkTo = $(element).find('.to').text();
+        $(element).find('.from').text(from);
+        $(element).attr('href', '/calculator/' + from + "-" + linkTo);
+    });
 }
 
 function TrandingRates(from, to) {
@@ -191,6 +193,9 @@ $(document).ready(function () {
         $("#amount").val( amountFromStorage != null ? amountFromStorage.toUpperCase() : 1);
         $("#from").val(fromFromStorage.toUpperCase());
         $("#to").val(toFromStorage.toUpperCase());
+
+        $("#amountToCurrency").text(toFromStorage.toUpperCase());
+        $("#amountFromCurrency").text(fromFromStorage.toUpperCase());
     }
 
 
@@ -250,6 +255,14 @@ $(document).ready(function () {
                 break;
         }
     });
+
+    $(".linkGreyBlock").on('click', function (event) {
+        var from = $(event.currentTarget).find('.from').text();
+        var to = $(event.currentTarget).find('.to').text();
+        localStorage.setItem("from", from);
+        localStorage.setItem("to", to);
+        localStorage.setItem("convert", false);
+    });
 });
 
 function checkIsConvert() {
@@ -277,7 +290,8 @@ function convert() {
         var result = (amount * to) / from;
     }
 
-    $("#inetgerNum").text(Math.floor(result)).trim();
+    var tempResult = Math.floor(result) + '.';
+    $("#inetgerNum").text(tempResult);
     result = result.toString();
     var doubleIndex = result.indexOf('.');
     if (doubleIndex > 0) {
@@ -290,8 +304,6 @@ function convert() {
         thousands +=  result.charAt(doubleIndex + 5);
         $("#thousands").text(thousands).trim();
     }
-    // $("#decimal").text()
-    // $("#thousands")
 }
 
 function appendSelectedItem(selectedItem) {
@@ -301,6 +313,15 @@ function appendSelectedItem(selectedItem) {
         $("#amountToCurrency").text(selectedItem.text());
     } else {
         $("#amountFromCurrency").text(selectedItem.text());
+        /*update cross rates*/
+
+        $(".linkGreyBlock").each(function(indx, element){
+            var from = $("#amountFromCurrency").text();
+            var linkTo = $(element).find('.to').text();
+            $(element).find('.from').text(from);
+            $(element).attr('href', '/calculator/' + from + "-" + linkTo);
+        });
+        /**/
     }
     var price_usd = selectedItem.attr('price_usd');
     var is_crypto = selectedItem.attr('is_crypto');

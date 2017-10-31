@@ -18,7 +18,7 @@
         <a id="tab1" href="" class="currency-converner-head-btn"><i class="fa fa-calculator" aria-hidden="true"></i>Currency Converter</a>
     </div>
         <div class="col-xs-12">
-
+        @include('layouts.partials._menu')
             <!--began work-->
             <section class="content container-fluid">
                 <div class="filter-area">

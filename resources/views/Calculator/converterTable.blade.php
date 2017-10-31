@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
-                    <input type="number" class="form-control" id="amount" placeholder="1">
+                    <input type="number" class="form-control" value="1" id="amount" placeholder="1">
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12">

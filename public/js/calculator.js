@@ -90,6 +90,7 @@ $(document).ready(function () {
     getGlobaldata();
     $("#amount").on('change', function (event) {
         checkIsConvert();
+        $("#amountBlue").text($("#amount").val());
     });
     $("#to, #from").on('keyup', function (event) {
         var currentItem = $(event.currentTarget);
@@ -139,6 +140,14 @@ $(document).ready(function () {
                 break;
         }
     });
+
+    $(".linkGreyBlock").on('click', function (event) {
+        var from = $(event.currentTarget).find('.from').text();
+        var to = $(event.currentTarget).find('.to').text();
+        localStorage.setItem("from", from);
+        localStorage.setItem("to", to);
+        localStorage.setItem("convert", false);
+    });
 });
 function checkIsConvert() {
     var counter = 0;
@@ -168,6 +177,22 @@ function convert() {
 function appendSelectedItem(selectedItem) {
     var selectedItem = $(event.currentTarget);
     var id = selectedItem.parent().attr('id');
+    if (id == "toAuto") {
+        $("#amountToCurrency").text(selectedItem.text());
+    } else {
+        $("#amountFromCurrency").text(selectedItem.text());
+
+        /*update cross rates*/
+
+        $(".linkGreyBlock").each(function(indx, element){
+            var from = $("#amountFromCurrency").text();
+            var linkTo = $(element).find('.to').text();
+            $(element).find('.from').text(from);
+            $(element).attr('href', 'calculator/' + from + "-" + linkTo);
+        });
+        /**/
+    }
+
     var price_usd = selectedItem.attr('price_usd');
     var is_crypto = selectedItem.attr('is_crypto');
     var inputSel = id.substring(0, id.indexOf('Auto'));
