@@ -74,7 +74,9 @@ a:focus,
 h1 {
     font-family: "FiraSans-Medium";
 }
-
+.home > .col-xs-12{
+    padding: 0;
+}
 .container-fluid {
     padding-left: 20px;
     padding-right: 20px;
@@ -140,6 +142,8 @@ h1 {
     position: absolute;
     z-index: 9;
     opacity: 0.95;
+    max-height: 300px;
+    overflow: scroll;
 }
 
 .search-dpopdown-list .currency-block {
@@ -422,6 +426,8 @@ h1 {
 .filter-area .dropdown-menu {
     -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
+    max-height: 300px;
+    overflow: scroll;
 }
 
 .filter-area nav.nav-filter {
@@ -439,11 +445,11 @@ h1 {
 .filter-area nav.nav-filter a {
     display: inline-block;
     height: 100%;
-    width: 105px;
     text-align: center;
+    padding: 0 10px;
 }
 
-.filter-area nav.nav-filter span {
+.home .filter-area nav.nav-filter span {
     width: 100%;
     display: inline-block;
     height: 100%;
@@ -457,6 +463,9 @@ h1 {
 .filter-area .search-filter,
 .filter-area .currency-selector {
     margin-right: 18px;
+}
+#previousLink{
+    display: none;
 }
 
 .main-table {
@@ -483,7 +492,7 @@ table caption {
 }
 
 table td {
-    padding: 19px 0;
+    padding: 19px 0 !important;
 }
 
 table th,
@@ -495,6 +504,7 @@ table th {
     padding-right: 10px;
     padding-top: 13px;
     padding-bottom: 13px;
+    border-bottom: none !important;
 }
 
 th.name-h {
@@ -537,7 +547,28 @@ th.name-h:before {
 .main-table .volume {
     color: #5c9fd4;
 }
-
+.main-table table{
+    width: 100% !important;
+}
+.main-table .graph a img{
+    width: 100%;
+    padding-right: 15px !important;
+}
+.main-table .name {
+    position: relative;
+}
+.main-table .currency-logo-sprite {
+    position: absolute;
+}
+.main-table .name a {
+    padding-left: 20px !important;
+}
+.main-table tbody .name {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 56px;
+}
 .green {
     color: #27d067;
 }
@@ -1223,7 +1254,26 @@ th.name-h:before {
     .nav-btn {
         margin-top: -39px;
     }
-
+    .main-table td.price:before {
+        content: "Price";
+        color: #333;
+    }
+    .main-table td.change:before {
+        content: '% Change (24h)';
+    }
+    .main-table td.name:before {
+        content: 'Name';
+    }
+    .main-table tbody .name{
+        display: block;
+    }
+    .main-table .currency-logo-sprite {
+        position: absolute;
+        right: 15px;
+    }
+    .main-table .name a {
+        padding-right: 20px;
+    }
     table {
         border: 0;
     }
@@ -1244,7 +1294,7 @@ th.name-h:before {
     }
 
     table tr {
-        background: #f7f6f6;
+        background: #f7f6f6 !important;
         display: block;
         margin-bottom: 30px;
     }
@@ -1253,8 +1303,8 @@ th.name-h:before {
         border-bottom: 1px solid #ddd;
         display: block;
         text-align: right;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 15px !important;
+        padding-left: 15px !important;
     }
 
     table td:before {
