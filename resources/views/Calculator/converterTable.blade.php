@@ -56,7 +56,7 @@
                     </select></div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12 action">
-                <a id="inversion" href="#">Convert Currencies</a>
+                <a id="inversion" href="#">Invert currencies</a>
             </div>
         </div>
     </div>

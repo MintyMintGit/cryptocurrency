@@ -39,6 +39,6 @@
 <div id="currency-exchange-rates">
 </div>
 @include('layouts.partials._footer')
-
+@include('layouts.partials._menu')
 </body>
 </html>
