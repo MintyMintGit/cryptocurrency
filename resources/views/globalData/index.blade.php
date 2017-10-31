@@ -18,7 +18,7 @@
         <a id="tab1" href="" class="currency-converner-head-btn"><i class="fa fa-calculator" aria-hidden="true"></i>Currency Converter</a>
     </div>
         <div class="col-xs-12">
-        @include('layouts.partials._menu')
+
             <!--began work-->
             <section class="content container-fluid">
                 <div class="filter-area">
@@ -31,12 +31,12 @@
                                             class="bs-caret"><span class="caret"></span></span></button>
                                 <div class="dropdown-menu open" role="combobox">
                                     <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
-                                        <li data-original-index="0"><a tabindex="0" class="" data-tokens="null"
+                                        <li data-original-index="0"><a href="{{ route('startPage') }}" tabindex="0" class="" data-tokens="null"
                                                                        role="option" aria-disabled="false"
                                                                        aria-selected="false"><span
                                                         class="text">ALL</span><span
                                                         class="glyphicon glyphicon-ok check-mark"></span></a></li>
-                                        <li data-original-index="1"><a href="{{ route('startPage') }}" tabindex="0" class="" data-tokens="null"
+                                        <li data-original-index="1"><a href="{{ route('crypto') }}" tabindex="0" class="" data-tokens="null"
                                                                        role="option" aria-disabled="false"
                                                                        aria-selected="false"><span
                                                         class="text">Crypto</span><span
@@ -55,7 +55,7 @@
                                 <div class="dropdown-menu open" role="combobox">
                                     <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
                                         <li data-original-index="0">
-                                            <a tabindex="0" class="" data-tokens="null"
+                                            <a href="{{ route('calculator') }}" tabindex="0" class="" data-tokens="null"
                                                                        role="option" aria-disabled="false"
                                                                        aria-selected="false">
                                                 <span class="text">Curency Converter Calculator</span>
@@ -360,7 +360,7 @@
 
                 </table>
             </section>
-
+            @include('layouts.partials._menu')
         </div>
 </div>
 
