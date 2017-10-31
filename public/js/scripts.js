@@ -31,7 +31,7 @@ function runClick() {
         localStorage.setItem("from", param.exchange1);
         localStorage.setItem("to", param.exchange2);
         localStorage.setItem("convert", false);
-        window.location = window.location.origin + "/calculator/" + param.exchange1.toLowerCase() + param.exchange2.toLowerCase();
+        window.location = window.location.origin + "/calculator/" + param.exchange1.toLowerCase() + '-' + param.exchange2.toLowerCase();
     });
     $(".fiat").on('click', function (event) {
         var param = collectParams(event.currentTarget);
