@@ -42,46 +42,49 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row links">
-                        <div class="col-md-3 col-sm-3 col-xs-12 explore">
-                            @if (!is_null($social[0]->Website_1))
-                                    <li><a href="{{ $social[0]->Website_1 or "Default Message"  }}">Explore</a></li>
-                            @endif
-                                @if (!is_null($social[0]->Explorer_1))
-                                    <li><a href="{{ $social[0]->Explorer_1 or "Default Message"  }}">Explore</a></li>
+                    @if(isset($social[0]))
+                        <div class="row links">
+                            <div class="col-md-3 col-sm-3 col-xs-12 explore">
+                                @if (!is_null($social[0]->Website_1))
+                                        <li><a href="{{ $social[0]->Website_1 or "Default Message"  }}">Explore</a></li>
                                 @endif
-                        </div>
-                        <div class="col-md-3 col-sm-3 col-xs-12 website">
-                            @if (!is_null($social[0]->Explorer_2))
-                                <li>
-                                    <a href="{{ $social[0]->Explorer_2 or "Default Message"  }}" target="_blank">Explorer 2</a>
-                                </li>
-                            @endif
-                            @if (!is_null($social[0]->Explorer_3))
-                                <li>
-                                    <a href="{{ $social[0]->Explorer_3 or "Default Message"  }}" target="_blank">Explorer 3</a>
-                                </li>
-                            @endif
-                        </div>
-                        @if (!is_null($social[0]->Message_board_1))
-                            <div class="col-md-3 col-sm-3 col-xs-12 message">
-                                <li><a href="{{ $social[0]->Message_board_1 or "Default Message"  }}" target="blank">Message Board</a></li>
+                                    @if (!is_null($social[0]->Explorer_1))
+                                        <li><a href="{{ $social[0]->Explorer_1 or "Default Message"  }}">Explore</a></li>
+                                    @endif
                             </div>
-                        @endif
-                        @if (!is_null($social[0]->Message_board_2))
-                            <div class="col-md-3 col-sm-3 col-xs-12 announcement">
-                                <li>
-                                    <a href="{{ $social[0]->Message_board_2 or "Default Message"  }}" target="_blank">Announcement</a>
-                                </li>
+                            <div class="col-md-3 col-sm-3 col-xs-12 website">
+                                @if (!is_null($social[0]->Explorer_2))
+                                    <li>
+                                        <a href="{{ $social[0]->Explorer_2 or "Default Message"  }}" target="_blank">Explorer 2</a>
+                                    </li>
+                                @endif
+                                @if (!is_null($social[0]->Explorer_3))
+                                    <li>
+                                        <a href="{{ $social[0]->Explorer_3 or "Default Message"  }}" target="_blank">Explorer 3</a>
+                                    </li>
+                                @endif
                             </div>
-                        @endif
+                            @if (!is_null($social[0]->Message_board_1))
+                                <div class="col-md-3 col-sm-3 col-xs-12 message">
+                                    <li><a href="{{ $social[0]->Message_board_1 or "Default Message"  }}" target="blank">Message Board</a></li>
+                                </div>
+                            @endif
+                            @if (!is_null($social[0]->Message_board_2))
+                                <div class="col-md-3 col-sm-3 col-xs-12 announcement">
+                                    <li>
+                                        <a href="{{ $social[0]->Message_board_2 or "Default Message"  }}" target="_blank">Announcement</a>
+                                    </li>
+                                </div>
+                            @endif
 
-                    </div>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-md-2"></div>
             </div>
         </div>
-        <div id="exTab2" class="container-fluid bottom-tabs">
+        @if(isset($social[0]))
+            <div id="exTab2" class="container-fluid bottom-tabs">
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a href="#1" data-toggle="tab" aria-expanded="true">Charts</a>
@@ -92,8 +95,6 @@
             </ul>
             <div class="tab-content ">
                 <div class="tab-pane active" id="1">
-                    <h3>HOME</h3>
-                    <p>Some content.</p>
                     <div id="container" style="height: 400px; min-width: 600px"></div>
                     <button id="button">Export chart</button>
                 </div>
@@ -114,6 +115,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 
     @include('layouts.partials._menu')

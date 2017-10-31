@@ -326,40 +326,42 @@
         </div>
     </div>
 </section>
-
-<table id="allCrypto">
-    <thead>
-    <tr>
-        <td>#</td>
-        <td>Name</td>
-        <td>Symbol</td>
-        <td>Market Cap</td>
-        <td>Price</td>
-        <td>Circulation Supply</td>
-        <td>Volume (24h)</td>
-        <td>% 1h</td>
-        <td>% 24h</td>
-        <td>% 7d</td>
-    </tr>
-    </thead>
-    <tbody>
-        @foreach($allCrypto as $crypto)
-            <tr>
-                <td class="iso">{{ $crypto['symbol'] }}</td>
-                <td class="name">{{ $crypto['name'] }}</td>
-                <td class="iso">{{ $crypto['symbol'] }}</td>
-                <td class="name">{{ $crypto['market_cap_usd'] }}</td>
-                <td class="name">{{ $crypto['price_usd'] }}</td>
-                <td class="name">{{ $crypto['total_supply'] }}</td>
-                <td class="name">{{ $crypto['volume_usd_24h'] }}</td>
-                <td class="name">{{ $crypto['percent_change_1h'] }}</td>
-                <td class="name">{{ $crypto['percent_change_24h'] }}</td>
-                <td class="name">{{ $crypto['percent_change_7d'] }}</td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
-
+<section>
+    <table id="allCrypto" >
+        <thead>
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+            <td>Symbol</td>
+            <td>Market Cap</td>
+            <td>Price</td>
+            <td>Circulation Supply</td>
+            <td>Volume (24h)</td>
+            <td>% 1h</td>
+            <td>% 24h</td>
+            <td>% 7d</td>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach($allCrypto as $crypto)
+                <tr>
+                    <td class="iso">{{ $crypto['symbol'] }}</td>
+                    <td class="name"> <a href="crypto/{{ str_replace(' ', '-', strtolower($crypto['id'])) }}">{{ $crypto['name'] }}</a> </td>
+                    <td class="iso">
+                        {{--<div class="s-s-{{ str_replace(' ', '-', strtolower($crypto['id'])) }} currency-logo-sprite"></div>--}}
+                    </td>
+                    <td class="name">{{ $crypto['market_cap_usd'] }}</td>
+                    <td class="name">{{ $crypto['price_usd'] }}</td>
+                    <td class="name">{{ $crypto['total_supply'] }}</td>
+                    <td class="name">{{ $crypto['volume_usd_24h'] }}</td>
+                    <td class="name <?php echo $crypto['percent_change_1h'] >=0 ? "green": "red" ?>">{{ $crypto['percent_change_1h'] }}</td>
+                    <td class="name <?php echo $crypto['percent_change_24h'] >=0 ?"green":"red" ?>">{{ $crypto['percent_change_24h'] }}</td>
+                    <td class="name <?php echo $crypto['percent_change_7d'] >=0 ?"green":"red" ?>">{{ $crypto['percent_change_7d'] }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+<section>
 @include('layouts.partials._menu')
 
 @endsection

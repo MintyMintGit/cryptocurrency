@@ -112,8 +112,9 @@ $(document).ready(function () {
         $("#fromAuto li,#toAuto li").remove();
         var ulSelected = $("#" + currentItem.attr('id') + "Auto");
 
-        ulSelected.append(getFullList(hardcoded));
+
         ulSelected.append(getFullList(currencyExchangeRatesFirst));
+        ulSelected.append(getFullList(hardcoded));
         ulSelected.find('li').on('click', function (event) {
             appendSelectedItem(event);
         });
