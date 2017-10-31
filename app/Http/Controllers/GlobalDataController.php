@@ -33,8 +33,8 @@ class GlobalDataController extends Controller
     }
     public function crypto()
     {
-        $allCrypto = GlobalData::all()->get();
-
-
+        $allCrypto = GlobalData::all();
+        $scriptJs = "allCrypto.js";
+        return view('globalData.crypto', compact('allCrypto', 'scriptJs'));
     }
 }

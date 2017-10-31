@@ -23,7 +23,7 @@
             <section class="content container-fluid">
                 <div class="filter-area">
                     <div class="row">
-                        <div class="col-md-4 col-sm-12 col-xs-12 left" style="display: none;">
+                        <div class="col-md-4 col-sm-12 col-xs-12 left" >
                             <div class="btn-group bootstrap-select show-tick">
                                 <button type="button" class="btn dropdown-toggle bs-placeholder btn-default"
                                         data-toggle="dropdown" role="button" title="Market Cap"><span
