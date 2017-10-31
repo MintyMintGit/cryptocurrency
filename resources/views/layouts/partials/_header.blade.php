@@ -20,12 +20,6 @@
                 <div class="search-dpopdown-list">
                     <div class="currency-block">
                         <ul id="listSearch">
-                            <li><a href="#">USDCAT</a></li>
-                            <li><a href="#">USDEUS</a></li>
-                            <li><a href="#">USDCAT</a></li>
-                            <li><a href="#">USDEUS</a></li>
-                            <li><a href="#">USDCAT</a></li>
-                            <li><a href="#">USDEUS</a></li>
                         </ul>
                     </div>
                 </div>

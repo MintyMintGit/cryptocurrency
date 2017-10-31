@@ -1,16 +1,21 @@
 var listSearch = $("#listSearch");
 $(document).ready(function () {
-    loadingFullSearchList();
+    //loadingFullSearchList();
     $("#search_input").on('keyup', function (event) {
+        var valueSearchinput = $(event.currentTarget).val();
+        if(valueSearchinput <= 0) listSearch.hide();
         $.ajax({
-            url: $("#searchIn").val() + '/' + $(event.currentTarget).val(),
+            url: $("#searchIn").val() + '/' + valueSearchinput,
             dataType: "json",
             type: 'GET',
             success: function (data) {
                 if (data.length > 0) {
+                    listSearch.show();
                     listSearch.find('li').remove();
                     listSearch.append(generateListSearch(data));
                     runClick();
+                } else {
+                    listSearch.hide();
                 }
             }
         });
@@ -79,40 +84,51 @@ function saveStatistic(attr) {
     });
 }
 
-function loadingFullSearchList() {
-    $.ajax({
-        url: $("#getFullListSearch").val(),
-        dataType: "json",
-        type: 'GET',
-        success: function (data) {
-            if (data.length > 0) {
-                listSearch.find('li').remove();
-                listSearch.append(generateListSearch(data));
-                $("#search_input").on('focusin', function (event) {
-                    $('.search-dpopdown-list').slideToggle().animate({'opacity': 1},100);
-                    $('#searchform').addClass('search-act');
-                    runClick();
-                    $(document).on('click', function(e) {
-                        if (!$(e.target).closest("#searchform").length) {
-                            $('.search-dpopdown-list').fadeOut();
-                            $('#searchform').removeClass('search-act');
-                        }
-                        //e.stopPropagation();
-                    });
-                    $(".search-dpopdown-list li a").click(function() {
-                        $('.search-dpopdown-list').toggle();
-                    });
-                });
-            }
-        }
-    });
-}
+// function loadingFullSearchList() {
+//     $.ajax({
+//         url: $("#getFullListSearch").val(),
+//         dataType: "json",
+//         type: 'GET',
+//         success: function (data) {
+//             if (data.length > 0) {
+//                 listSearch.find('li').remove();
+//                 listSearch.append(generateListSearch(data));
+//                 $("#search_input").on('focusin', function (event) {
+//                     $('.search-dpopdown-list').slideToggle().animate({'opacity': 1},100);
+//                     $('#searchform').addClass('search-act');
+//                     runClick();
+//                     $(document).on('click', function(e) {
+//                         if (!$(e.target).closest("#searchform").length) {
+//                             $('.search-dpopdown-list').fadeOut();
+//                             $('#searchform').removeClass('search-act');
+//                         }
+//                         //e.stopPropagation();
+//                     });
+//                     $(".search-dpopdown-list li a").click(function() {
+//                         $('.search-dpopdown-list').toggle();
+//                     });
+//                 });
+//             }
+//         }
+//     });
+// }
 
 $(document).ready(function () {
-    // $("#search_input").click(function() {
-    //
-    // });
 
+    $("#search_input").on('focusin', function (event) {
+        $('.search-dpopdown-list').slideToggle().animate({'opacity': 1}, 100);
+        $('#searchform').addClass('search-act');
+    });
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest("#searchform").length) {
+            $('.search-dpopdown-list').fadeOut();
+            $('#searchform').removeClass('search-act');
+        }
+        //e.stopPropagation();
+    });
+    $(".search-dpopdown-list li a").click(function() {
+        $('.search-dpopdown-list').toggle();
+    });
 
     // $("#search_input").click(function() {
     //
