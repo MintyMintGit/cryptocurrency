@@ -31,4 +31,10 @@ class GlobalDataController extends Controller
             $search->save();
         }
     }
+    public function crypto()
+    {
+        $allCrypto = GlobalData::all()->get();
+
+
+    }
 }
