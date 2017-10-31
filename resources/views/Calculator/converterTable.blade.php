@@ -8,14 +8,8 @@
                         <span class="blue"> <span id="amountBlue"> 1.00 </span>  <span id="amountFromCurrency">USD</span></span>
                         =
                     </div>
-                    <span id="inetgerNum">
-0.
-                    </span>
-                </span>
-            <span class="blue" id="decimal">85</span>
-            <span class="gray" id="thousands">540</span>
-            <span id="amountToCurrency" class="cur">EUR</span>
-
+                    <span id="inetgerNum">0.</span>
+                </span><span class="blue" id="decimal">85</span><span class="gray" id="thousands">540</span><span id="amountToCurrency" class="cur">EUR</span>
         </div>
     </div>
 

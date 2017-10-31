@@ -148,6 +148,16 @@ $(document).ready(function () {
         localStorage.setItem("to", to);
         localStorage.setItem("convert", false);
     });
+
+    $(".desk, .updateLink").on('click', function (event) {
+        var currentTarget = $(event.currentTarget);
+        var datafrom = currentTarget.attr('data-from');
+        var datato = currentTarget.attr('data-to');
+        localStorage.setItem("from", datafrom);
+        localStorage.setItem("to", datato);
+        localStorage.setItem("convert", false);
+    });
+
 });
 function checkIsConvert() {
     var counter = 0;
