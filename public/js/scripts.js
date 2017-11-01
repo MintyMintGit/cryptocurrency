@@ -7,6 +7,7 @@ $(document).ready(function () {
         $.ajax({
             url: $("#searchIn").val() + '/' + valueSearchinput,
             dataType: "json",
+            async: true,
             type: 'GET',
             success: function (data) {
                 if (data.length > 0) {
@@ -146,7 +147,7 @@ $(document).ready(function () {
 
     $(".search-col > button").click(function() {
         $('.menu-mask').prependTo('body');
-        $('.menu-mask').show();
+        // $('.menu-mask').show();
         $('.x').show();
         $('.menu-mask .head-logo').show();
         $('.menu-container').css('padding-top','0');
@@ -154,7 +155,7 @@ $(document).ready(function () {
 
     $(".x").click(function() {
         $('.menu-mask').appendTo('body');
-        $('.menu-mask').hide();
+        // $('.menu-mask').hide();
         $('.x').hide();
         $('.menu-mask .head-logo').hide();
         $('.menu-container').css('padding-top','50px');

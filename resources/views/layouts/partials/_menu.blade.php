@@ -16,14 +16,6 @@
             <div class="col-md-2">
                 <h3>Convert:</h3>
                 <ul>
-                    {{--<li><a href="">EUR to USD</a></li>--}}
-                    {{--<li><a href="">EUR to USD</a></li>--}}
-                    {{--<li><a href="">EUR to USD</a></li>--}}
-                    {{--<li><a href="">EUR to USD</a></li>--}}
-                    {{--<li><a href="">EUR to USD</a></li>--}}
-                    {{--<li><a href="">EUR to USD</a></li>--}}
-                    {{--<li><a href="">EUR to USD</a></li>--}}
-                    {{--<li><a href="">EUR to USD</a></li>--}}
                     <li exchange2="EUR" exchange1="USD" id="USDEUR" data-title="" class="exchange_pair" data-usd="0">USD to EUR</li>
                     <li exchange2="BTC" exchange1="USD" id="USDBTC" data-title="" class="exchange_pair" data-usd="0">USD to BTC</li>
                     <li exchange2="USD" exchange1="BTC" id="BTCUSD" data-title="" class="exchange_pair" data-usd="0">BTC to USD</li>
