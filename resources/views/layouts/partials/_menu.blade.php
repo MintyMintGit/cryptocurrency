@@ -29,8 +29,8 @@
             <div class="col-md-2">
                 <h3>Cryptocurrency:</h3>
                 <ul>
-                    <li data-title="US Dollar" id="USD" class="fiat">USD (US Dollar)</li>
-                    <li data-title="Euro" id="EUR" class="fiat">EUR (Euro)</li>
+                    <li data-title="US Dollar" id="USD" class="fiat">US Dollar</li>
+                    <li data-title="Euro" id="EUR" class="fiat">Euro</li>
                     <li data-title="Canadian Dollar" id="CAD" class="fiat">Canadian Dollar</li>
                     <li data-title="Japanese Yen" id="JPY" class="fiat">Japanese Yen</li>
                     <li data-title="Australian Dollar" id="AUD" class="fiat">Australian Dollar</li>
