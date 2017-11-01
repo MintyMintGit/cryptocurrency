@@ -15,7 +15,7 @@
 
     @include("Calculator.cloudOfCurrencies")
 
-
+    @include('layouts.partials._menu')
 </div>
 
 @endsection

@@ -340,7 +340,7 @@
             </div>
         </div>
     </section>
-    <section class="ап">
+    <section class="main-table">
         <table id="marketCapitalizations">
             <thead>
             <tr>
@@ -357,8 +357,8 @@
 
         </table>
     </section>
-    @include('layouts.partials._menu')
 </div>
 @include('Calculator.index', $CloudsOfCurrencies)
 
+@include('layouts.partials._menu')
 @endsection
