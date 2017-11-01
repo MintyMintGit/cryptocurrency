@@ -30,7 +30,7 @@
                     <select class="selectpicker" multiple="" title="Market Cap" tabindex="-98">
                         <option>ALL</option>
                         <option>Crypto</option>
-                    </select></div>ё
+                    </select></div>
                 <div class="btn-group bootstrap-select show-tick">
                     <button type="button" class="btn dropdown-toggle bs-placeholder btn-default"
                             data-toggle="dropdown" role="button" title="Tools"><span
