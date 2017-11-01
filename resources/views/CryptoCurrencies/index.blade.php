@@ -99,8 +99,6 @@
                     <button id="button">Export chart</button>
                 </div>
                 <div class="tab-pane" id="2">
-                        <h3>Social</h3>
-                        <p>Some content in menu 1.</p>
                         <div class="col-xs-6">
                             <a class="twitter-timeline" href="{{ $social[0]->Twitter or "Default Message"  }}"></a>
                             <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
