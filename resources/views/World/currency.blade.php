@@ -39,7 +39,7 @@
                                         from {{ $cc_profile[0]['profile_long'] }} to {{ $crypto['name'] }}</a>
                                 </td>
                                 <td class="rate">
-                                    {{ 1 / $crypto['price_usd'] }}
+                                    {{ round(1 / $crypto['price_usd'], 6) }}
                                 </td>
                             </tr>
                         @endforeach
@@ -77,7 +77,7 @@
                                         </td>
                                         <td class="rate">
                                             @if ($fiat['value_quotes'] > 0)
-                                                {{ 1 / $fiat['value_quotes'] }}
+                                                {{ round(1 / $fiat['value_quotes'], 6) }}
                                             @endif
                                         </td>
                                     </tr>

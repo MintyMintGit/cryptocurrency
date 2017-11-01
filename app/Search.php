@@ -26,7 +26,7 @@ class Search extends Model
 
     public static function GetMost54PopularCurrencies()
     {
-        return self::where('type','!=','exchange_pair')->orderBy('rate','desc')->take(54)->get();
+        return self::where('type','=','fiat')->where('profile_long', '!=' ,'')->orderBy('rate','desc')->take(54)->get();
     }
 
     public static function selectMost5PopularCurrencies($collectionPopularCurrencies)

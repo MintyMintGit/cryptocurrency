@@ -36,6 +36,7 @@
 
 @yield('content')
 <input type="hidden" id="ExchangeRatesLink" value="{{route('getExchangeRates')}}" >
+<input type="hidden" id="saveStatistic" value="{{route('saveStatistic')}}" >
 <div id="currency-exchange-rates">
 </div>
 @include('layouts.partials._footer')

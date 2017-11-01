@@ -19,14 +19,27 @@ class GlobalDataController extends Controller
     public function saveStatistic()
     {
         $input = Request::all();
-        $rate = Search::find($input['id'])->rate;
-        if($rate >= 0) {
-            $rate++;
-            Search::where('id', $input['id'])->update(array('rate' => $rate));
-        } else if($rate['class'] == 'fiat') {
+
+        $item = Search::find($input['id']);
+        if($item != null) {
+            $rate = $item->rate;
+            if($rate >= 0) {
+                $rate++;
+                Search::where('id', $input['id'])->update(array('rate' => $rate));
+            } else if($rate['class'] == 'fiat') {
+                $search = new Search();
+                $search->id = $input['id'];
+                $search->type = $input['fiat'];
+                $search->rate = 1;
+                $search->save();
+            }
+        } else {
+            //need to create new;
             $search = new Search();
             $search->id = $input['id'];
-            $search->type = $input['fiat'];
+            $search->type = $input['class'];
+            $search->exchange2 = $input['exchange2'];
+            $search->exchange1 = $input['exchange1'];
             $search->rate = 1;
             $search->save();
         }
