@@ -3,7 +3,7 @@
 @section('content')
 
 @include('layouts.partials._navigation')
-
+<link href="/css/cryptoIcons.css" rel="stylesheet" type="text/css">
 <section class="content container-fluid">
     <div class="filter-area">
         <div class="row">
@@ -30,7 +30,7 @@
                     <select class="selectpicker" multiple="" title="Market Cap" tabindex="-98">
                         <option>ALL</option>
                         <option>Crypto</option>
-                    </select></div>
+                    </select></div>ё
                 <div class="btn-group bootstrap-select show-tick">
                     <button type="button" class="btn dropdown-toggle bs-placeholder btn-default"
                             data-toggle="dropdown" role="button" title="Tools"><span
@@ -348,7 +348,7 @@
                     <td class="iso">{{ $crypto['symbol'] }}</td>
                     <td class="name"> <a href="crypto/{{ str_replace(' ', '-', strtolower($crypto['id'])) }}">{{ $crypto['name'] }}</a> </td>
                     <td class="iso">
-                        {{--<div class="s-s-{{ str_replace(' ', '-', strtolower($crypto['id'])) }} currency-logo-sprite"></div>--}}
+                        <div class="s-s-{{ str_replace(' ', '-', strtolower($crypto['id'])) }} currency-logo-sprite"></div>
                     </td>
                     <td class="name">{{ $crypto['market_cap_usd'] }}</td>
                     <td class="name">{{ $crypto['price_usd'] }}</td>
