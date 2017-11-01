@@ -65,22 +65,22 @@
                         </thead>
                         <tbody>
                             @foreach($moneyFiat as $fiat)
-                                @if ($fiat['profile_short'] != $cc_profile[0]['profile_short'] )
-                                    <tr>
-                                        <td class="iso">{{ $fiat['profile_short'] }}</td>
-                                        <td class="name">{{ $fiat['profile_long'] }}</td>
-                                        <td class="url">
-                                            <a class="desk" data-from="{{ $cc_profile[0]['profile_short'] }}"
-                                               data-to="{{ $fiat['profile_short'] }}" class="updateLink"
-                                               href="/calculator/{{ strtolower($cc_profile[0]['profile_short']) }}-to-{{ strtolower($fiat['profile_short']) }}">Convert
-                                                from {{ $cc_profile[0]['profile_long'] }} to {{ $fiat['profile_long'] }}</a>
-                                        </td>
-                                        <td class="rate">
-                                            @if ($fiat['value_quotes'] > 0)
+                                @if($fiat['value_quotes'] > 0)
+                                    @if ($fiat['profile_short'] != $cc_profile[0]['profile_short'] )
+                                        <tr>
+                                            <td class="iso">{{ $fiat['profile_short'] }}</td>
+                                            <td class="name">{{ $fiat['profile_long'] }}</td>
+                                            <td class="url">
+                                                <a class="desk" data-from="{{ $cc_profile[0]['profile_short'] }}"
+                                                   data-to="{{ $fiat['profile_short'] }}" class="updateLink"
+                                                   href="/calculator/{{ strtolower($cc_profile[0]['profile_short']) }}-to-{{ strtolower($fiat['profile_short']) }}">Convert
+                                                    from {{ $cc_profile[0]['profile_long'] }} to {{ $fiat['profile_long'] }}</a>
+                                            </td>
+                                            <td class="rate">
                                                 {{ round(1 / $fiat['value_quotes'], 6) }}
-                                            @endif
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endif
                             @endforeach
                         </tbody>
