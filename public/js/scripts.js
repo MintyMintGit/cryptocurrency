@@ -160,4 +160,9 @@ $(document).ready(function () {
         $('.menu-mask .head-logo').hide();
         $('.menu-container').css('padding-top','50px');
     });
+        update();
 });
+function update() {
+    var date = moment(new Date())
+    $('#datetime').html(date.format('h:mm a, DD.MM.YYYY'));
+}

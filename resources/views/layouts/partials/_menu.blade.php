@@ -58,7 +58,7 @@
     <footer class="menu-footer footer">
         <div class="row">
             <div class="col-sm-6 col-md-6 col-xs-12 total">Total Market Cap: $172,759,034,864</div>
-            <div class="col-sm-6 col-md-6 col-xs-12 date">08:14pm 10.29.2017</div>
+            <div class="col-sm-6 col-md-6 col-xs-12 date" id="datetime"></div>
         </div>
     </footer>
 </section>
