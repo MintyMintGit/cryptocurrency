@@ -15,7 +15,7 @@
                 <span class="icon-bar"></span>
             </button>
             <form id="searchform">
-                <input id="search_input" type="search" name="search">
+                <input id="search_input" type="search" name="search" autocomplete="off">
                 <label for="search_input"></label>
                 <div class="search-dpopdown-list">
                     <div class="currency-block">
