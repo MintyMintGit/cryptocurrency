@@ -205,6 +205,7 @@ $(document).ready(function () {
                 element.innerHTML = mapShortCodetoSymbol(dataCurrency) + makeBeautyMoney(parseFloat(costInDollars) * coefficient);
             }
         });
+        event.preventDefault();
     });
 });
 
