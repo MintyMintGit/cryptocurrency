@@ -174,6 +174,11 @@ function getGlobaldata() {
 }
 
 $(document).ready(function () {
+    var dataModalWindow = $("#dataModalWindow");
+    var date = moment(new Date());
+    $("#dataModalWindowRight").html('week ' + date.week());
+    dataModalWindow.html(date.format('dddd, MMMM Do, YYYY'));
+
 
     var amountFromStorage = localStorage.getItem("amount");
     var fromFromStorage = localStorage.getItem("from");
@@ -188,6 +193,8 @@ $(document).ready(function () {
             $("#amountBlue").text(amountFromStorage.toUpperCase());
             $("#amountToCurrency").text(fromFromStorage.toUpperCase());
             $("#amountFromCurrency").text(toFromStorage.toUpperCase());
+            $("#fromThird").text(toFromStorage.toUpperCase());
+            $("#toThird").text(fromFromStorage.toUpperCase());
         }
     } else if(fromFromStorage && toFromStorage) {
         $("#amount").val( amountFromStorage != null ? amountFromStorage.toUpperCase() : 1);
@@ -196,6 +203,9 @@ $(document).ready(function () {
 
         $("#amountToCurrency").text(toFromStorage.toUpperCase());
         $("#amountFromCurrency").text(fromFromStorage.toUpperCase());
+
+        $("#fromThird").text(toFromStorage.toUpperCase());
+        $("#toThird").text(fromFromStorage.toUpperCase());
     } else {
         $("#to").val('EUR');
         $("#from").val('USD');
@@ -317,8 +327,10 @@ function appendSelectedItem(selectedItem) {
     var id = selectedItem.parent().attr('id');
     if (id == "toAuto") {
         $("#amountToCurrency").text(selectedItem.text());
+        $("#toThird").text(selectedItem[0].innerText);
     } else {
         $("#amountFromCurrency").text(selectedItem.text());
+        $("#fromThird").text(selectedItem[0].innerText);
         /*update cross rates*/
 
         $(".linkGreyBlock").each(function(indx, element){
@@ -337,6 +349,15 @@ function appendSelectedItem(selectedItem) {
     inputSel.val(selectedItem.text());
     inputSel.attr('price_usd', price_usd);
     inputSel.attr('is_crypto', is_crypto);
+
+    // $("#fromThird").text();
+    // function updateTopInfo(from, to, fromLong, toLong) {
+    //     $("#fromSecond").text(from);
+    //
+    //
+    //     $("#toSecond").text(to);
+    // }
+
 
     $("#fromAuto li,#toAuto li").remove();
     checkIsConvert();

@@ -1,5 +1,10 @@
 <div class="container-fluid page-content">
 
+    <div class="container-fluid top-info">
+        <h1><span id="fromSecond">US Dollar</span> to <span id="toSecond">Euro</span></h1>
+        <p><span id="fromThird">USD</span>/<span id="toThird">EURO</span> Currency Calculator<br>
+            Update: <a id="updatedLast" href="#">5 minutes ago</a></p>
+    </div>
 
     <div class="container main-info">
         <div class="big-num">
@@ -53,5 +58,11 @@
                 <a id="inversion" href="#">Invert currencies</a>
             </div>
         </div>
+    </div>
+
+    <div class="container-fluid date">
+        <h2 id="dataModalWindow">Wednesday, October 18, 2017, week 42</h2>
+        <span id="dataModalWindowRight"></span>
+        <p>Trending: Top Currency Pairs</p>
     </div>
 </div>
