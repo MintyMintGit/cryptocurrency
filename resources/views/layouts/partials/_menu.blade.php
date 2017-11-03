@@ -57,7 +57,7 @@
     </div>
     <footer class="menu-footer footer">
         <div class="row">
-            <div class="col-sm-6 col-md-6 col-xs-12 total">Total Market Cap: $172,759,034,864</div>
+            <div class="col-sm-6 col-md-6 col-xs-12 total">Total Market Cap: ${{ number_format(session()->get('totalMarketCap')) }}</div>
             <div class="col-sm-6 col-md-6 col-xs-12 date" id="datetime"></div>
         </div>
     </footer>

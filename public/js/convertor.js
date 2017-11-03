@@ -196,6 +196,11 @@ $(document).ready(function () {
 
         $("#amountToCurrency").text(toFromStorage.toUpperCase());
         $("#amountFromCurrency").text(fromFromStorage.toUpperCase());
+    } else {
+        $("#to").val('EUR');
+        $("#from").val('USD');
+        $("#to").click();
+        $("#from").click();
     }
 
 
@@ -299,11 +304,11 @@ function convert() {
         $("#inetgerNum").text(Math.floor(result) + ".");
         var decimal = result.charAt(doubleIndex + 1);
         decimal += result.charAt(doubleIndex + 2);
-        $("#decimal").text(decimal).trim();
+        $("#decimal").text(decimal);
         var thousands =  result.charAt(doubleIndex + 3);
         thousands +=  result.charAt(doubleIndex + 4);
         thousands +=  result.charAt(doubleIndex + 5);
-        $("#thousands").text(thousands).trim();
+        $("#thousands").text(thousands);
     }
 }
 

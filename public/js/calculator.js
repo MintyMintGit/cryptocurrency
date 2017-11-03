@@ -105,6 +105,14 @@ $(document).ready(function () {
             appendSelectedItem(event);
         });
     });
+    $("#to").val('EUR');
+    $("#from").val('USD');
+
+    $("#from").attr('price_usd',hardcoded.USD.price_usd);
+    $("#to").attr('price_usd',hardcoded.EUR.price_usd);
+
+    $("#to").click();
+    $("#from").click();
 
     //show all drop down list
     $("#to, #from").on('focusin', function (event) {
@@ -162,7 +170,7 @@ $(document).ready(function () {
 });
 function checkIsConvert() {
     var counter = 0;
-    $.each($("#converterTable input"), function (key, element) {
+    $.each($(".filters.container input"), function (key, element) {
         if(element.value != '') {
             counter++;
         }
@@ -183,7 +191,20 @@ function convert() {
     } else {
         var result = (amount * to) / from;
     }
-    document.getElementById("result").innerHTML = result;
+    var tempResult = Math.floor(result) + '.';
+    $("#inetgerNum").text(tempResult);
+    result = result.toString();
+    var doubleIndex = result.indexOf('.');
+    if (doubleIndex > 0) {
+        $("#inetgerNum").text(Math.floor(result) + ".");
+        var decimal = result.charAt(doubleIndex + 1);
+        decimal += result.charAt(doubleIndex + 2);
+        $("#decimal").text(decimal).trim();
+        var thousands =  result.charAt(doubleIndex + 3);
+        thousands +=  result.charAt(doubleIndex + 4);
+        thousands +=  result.charAt(doubleIndex + 5);
+        $("#thousands").text(thousands).trim();
+    }
 }
 function appendSelectedItem(selectedItem) {
     var selectedItem = $(event.currentTarget);

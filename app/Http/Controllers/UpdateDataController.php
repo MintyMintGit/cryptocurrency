@@ -7,6 +7,7 @@ use App\CoinMarketCap;
 use App\GlobalData;
 use App\ExchangeRatesCap;
 use App\Search;
+use App\TotalMarketCap;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
@@ -22,15 +23,14 @@ class UpdateDataController extends Controller
     public function storeAllFrom()
     {
         $data = CoinMarketCap\Base::getGlobalData();
-
+        $TotalMarketCap = 0;
         foreach ($data as $key => $item) {
-
+            $TotalMarketCap += $item['market_cap_usd'];
             GlobalData::updateOrCreate(['id' => "{$item['id']}"], ['name' => "{$item['name']}", 'symbol' => "{$item['symbol']}", 'rank' => "{$item['rank']}", 'price_usd' => $this->updateValue($item['price_usd']), 'price_btc' => $this->updateValue($item['price_btc']), 'volume_usd_24h' => $this->updateValue($item['24h_volume_usd']), 'market_cap_usd' => $this->updateValue($item['market_cap_usd']), 'available_supply' => $this->updateValue($item['available_supply']), 'total_supply' => $this->updateValue($item['total_supply']), 'percent_change_1h' => $this->updateValue($item['percent_change_1h']), 'percent_change_24h' => $this->updateValue($item['percent_change_24h']), 'percent_change_7d' => $this->updateValue($item['percent_change_7d']), 'last_updated' => $this->updateValue($item['last_updated'])]);
             $tableName = str_replace(' ', '-', $item['id']);
-            //$tableName = "'" . $item['id'] . "'";
+
             if (!Schema::connection('mysql2')->hasTable($tableName)) {
                 $tableName = str_replace(' ', '-', $item['name']);
-                //$tableName = "'" . $item['name'] . "'";
                 if (!Schema::connection('mysql2')->hasTable($tableName)) {
                     try {
                         $tableName = str_replace(' ', '-', $item['id']);
@@ -45,6 +45,7 @@ class UpdateDataController extends Controller
             }
             $this->insertToHistoryDB($tableName, $item);
         }
+        TotalMarketCap::updateOrCreate(['id' => 1 ], ['price' => $TotalMarketCap]);
         $this->updateSearchTable();
         return 'Updated successfully';
     }

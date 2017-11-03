@@ -13,7 +13,7 @@ class GlobalDataController extends Controller
         $CloudsOfCurrencies = Search::getCloudsOfCurrencies();
         $bitcoinPrice = GlobalData::findOrFail('bitcoin')->price_usd;
         $ethPrice = GlobalData::findOrFail('ethereum')->price_usd;
-        $scriptJs = array("globalData.js", "calculator.js");
+        $scriptJs = array("globalData.js", "convertor.js");
         return view('globalData.index', compact('bitcoinPrice', 'ethPrice', 'scriptJs', 'CloudsOfCurrencies'));
     }
     public function saveStatistic()

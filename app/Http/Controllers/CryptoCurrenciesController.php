@@ -17,12 +17,6 @@ class CryptoCurrenciesController extends Controller
         $linkToIcon = "/img/icons/" . $crypto->id . ".png";
         $social = DB::select("select * from crypto_sidebar where Symbol like ?"  , [$crypto->symbol]);
         $charts = true;
-//        $historicalData = \DB::connection('mysql2')->table($crypto['name'])->get();
-//        $historicalData2 = collect($historicalData)->sortBy(function ($temp, $key) {
-//            return Carbon::parse($temp->Date)->getTimestamp(); // if $temp['date'] is still a Carbon instance
-//        });
-//
-//        $historicalData3 = \Psy\Util\Json::encode($historicalData2->toArray());
         return view('CryptoCurrencies.index',compact( 'scriptJs', 'crypto', 'bitcoinPrice', 'linkToIcon', 'social' , 'charts'));
     }
     public function generateUrl() {
