@@ -27,6 +27,19 @@
                 </ul>
             </div>
             <div class="col-md-2">
+                <h3>World currency:</h3>
+                <ul>
+                    <li data-title="Bitcoin" id="BTC" class="crypto">Bitcoin</li>
+                    <li data-title="Ethereum" id="ETH" class="crypto">Ethereum</li>
+                    <li data-title="Ripple" id="XRP" class="crypto">Ripple</li>
+                    <li data-title="Bitcoin Cash" id="BCH" class="crypto">Bitcoin Cash</li>
+                    <li data-title="Litecoin" id="LTC" class="crypto">Litecoin</li>
+                    <li data-title="Dashcoin" id="DASH" class="crypto">Dashcoin</li>
+                    <li data-title="NEO" id="NEO" class="crypto">NEO</li>
+                    <li data-title="NEM" id="XEM" class="crypto">NEM</li>
+                </ul>
+            </div>
+            <div class="col-md-2">
                 <h3>Cryptocurrency:</h3>
                 <ul>
                     <li data-title="US Dollar" id="USD" class="fiat">US Dollar</li>
@@ -37,19 +50,6 @@
                     <li data-title="Swiss Franc" id="Swiss Franc" class="fiat">Swiss Franc</li>
                     <li data-title="Chinese Yuan Renminbi" id="CNY" class="fiat">Chinese Yuan Renminbi</li>
                     <li data-title="Croatian Kuna" id="HRK" class="fiat">Croatian Kuna</li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                <h3>Fiat currency:</h3>
-                <ul>
-                    <li data-title="Bitcoin" id="BTC" class="crypto">Bitcoin</li>
-                    <li data-title="Ethereum" id="ETH" class="crypto">Ethereum</li>
-                    <li data-title="Ripple" id="XRP" class="crypto">Ripple</li>
-                    <li data-title="Bitcoin Cash" id="BCH" class="crypto">Bitcoin Cash</li>
-                    <li data-title="Litecoin" id="LTC" class="crypto">Litecoin</li>
-                    <li data-title="Dashcoin" id="DASH" class="crypto">Dashcoin</li>
-                    <li data-title="NEO" id="NEO" class="crypto">NEO</li>
-                    <li data-title="NEM" id="XEM" class="crypto">NEM</li>
                 </ul>
             </div>
             <div class="col-md-2"></div>
