@@ -46,8 +46,10 @@ class GlobalDataController extends Controller
     }
     public function crypto()
     {
+        $bitcoinPrice = GlobalData::findOrFail('bitcoin')->price_usd;
+        $ethPrice = GlobalData::findOrFail('ethereum')->price_usd;
         $allCrypto = GlobalData::all();
-        $scriptJs = "allCrypto.js";
-        return view('globalData.crypto', compact('allCrypto', 'scriptJs'));
+        $scriptJs = array("allCrypto.js", "globalData.js");
+        return view('globalData.crypto', compact('allCrypto', 'scriptJs', 'ethPrice', 'bitcoinPrice'));
     }
 }

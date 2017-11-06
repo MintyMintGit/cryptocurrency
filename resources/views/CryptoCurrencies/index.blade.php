@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <input type="hidden" id="historicalData" value="{{ route('historicalData', $crypto['name']) }}">
+    <input type="hidden" id="historicalData" value="{{ route('historicalData', $crypto['id']) }}">
 
 
     <div class="container-fluid page-content">
