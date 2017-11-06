@@ -152,7 +152,7 @@ function getGlobaldata() {
                         obj.name = data[i].symbol;
                         obj.price_usd = data[i].price_usd;
                         obj.price_usdOld = data[i].price_usdOld;
-                        obj.fullName = "";
+                        obj.fullName = data[i].name;
                         obj.is_crypto = true;
                         hardcoded[item] = obj;
                         flag = true;
@@ -162,7 +162,7 @@ function getGlobaldata() {
                     var obj = {};
                     obj.name = data[i].symbol;
                     obj.price_usd = data[i].price_usd;
-                    obj.fullName = "";
+                    obj.fullName = data[i].name;
                     obj.is_crypto = true;
                     currencyExchangeRates.push(obj);
                 }
@@ -171,6 +171,24 @@ function getGlobaldata() {
             checkIsConvert();
         }
     });
+}
+
+function updateOneTopInfo(value, DestjQueryObj) {
+    var value = searchFullInfoCurrency(value);
+    if (value) {
+        DestjQueryObj.html(value.fullName);
+    }
+}
+
+
+function updateTopInfo(from, to, fromJQueryObj, toJQueryObj) {
+    var fromFull = searchFullInfoCurrency(from);
+    var toFull = searchFullInfoCurrency(to);
+    if (fromFull!= null && toFull!=null) {
+        /*need update code*/
+        fromJQueryObj.html(fromFull.fullName);
+        toJQueryObj.html(toFull.fullName);
+    }
 }
 
 $(document).ready(function () {
@@ -199,6 +217,8 @@ $(document).ready(function () {
             $("#amountFromCurrency").text(toFromStorage.toUpperCase());
             $("#fromThird").text(toFromStorage.toUpperCase());
             $("#toThird").text(fromFromStorage.toUpperCase());
+
+            // updateTopInfo(toFromStorage.toUpperCase(),fromFromStorage.toUpperCase(),$("#fromSecond"), $("#toSecond"));
         }
     } else if(fromFromStorage && toFromStorage) {
         $("#amount").val( amountFromStorage != null ? amountFromStorage.toUpperCase() : 1);
@@ -210,6 +230,7 @@ $(document).ready(function () {
 
         $("#fromThird").text(toFromStorage.toUpperCase());
         $("#toThird").text(fromFromStorage.toUpperCase());
+        // updateTopInfo(fromFromStorage.toUpperCase(), toFromStorage.toUpperCase(),$("#fromSecond"), $("#toSecond"));
     } else {
         $("#to").val('EUR');
         $("#from").val('USD');
@@ -239,14 +260,14 @@ $(document).ready(function () {
     });
 
     //show all drop down list
-    $("#to, #from").on('focusin', function (event) {
+    $("#to, #from").on('keyup', function (event) {
         var currentItem = $(event.currentTarget);
         $("#fromAuto li,#toAuto li").remove();
         var ulSelected = $("#" + currentItem.attr('id') + "Auto");
 
-
-        ulSelected.append(getFullList(currencyExchangeRates));
         ulSelected.append(getFullList(hardcoded));
+        ulSelected.append(getFullList(currencyExchangeRates));
+
         ulSelected.find('li').on('click', function (event) {
             appendSelectedItem(event);
         });
@@ -330,9 +351,11 @@ function appendSelectedItem(selectedItem) {
     if (id == "toAuto") {
         $("#amountToCurrency").text(selectedItem.text());
         $("#toThird").text(selectedItem[0].innerText);
+        // updateOneTopInfo(selectedItem[0].innerText, $("#toSecond"));
     } else {
         $("#amountFromCurrency").text(selectedItem.text());
         $("#fromThird").text(selectedItem[0].innerText);
+        // updateOneTopInfo(selectedItem[0].innerText, $("#fromSecond"));
         /*update cross rates*/
 
         $(".linkGreyBlock").each(function(indx, element){
