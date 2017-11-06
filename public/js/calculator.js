@@ -88,10 +88,8 @@ function getGlobaldata() {
 $(document).ready(function () {
     getExchangeRates();
     getGlobaldata();
-    $("#amount").on('change', function (event) {
-        checkIsConvert();
-        $("#amountBlue").text($("#amount").val());
-    });
+    changeAmount($("#amount"), $("#amountBlue"));
+
     $("#to, #from").on('keyup', function (event) {
         var currentItem = $(event.currentTarget);
         var ulSelected = $("#" + currentItem.attr('id') + "Auto");

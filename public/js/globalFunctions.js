@@ -1,6 +1,6 @@
 /*
 * drop down with сurrency
-* added
+* added click on currency
 * */
     function сurrencySwitcher(tableJsObj) {
     $(".pointer").on('click', function (event) {
@@ -49,6 +49,17 @@
         });
         event.preventDefault();
     })
+}
+
+/*
+* change amount on key Up
+*  set value from input to blue text on calc
+*/
+function changeAmount(amountJQueryObj, amountBlueJQueryObj) {
+    amountJQueryObj.on('keyup', function (event) {
+        amountBlueJQueryObj.val(amountJQueryObj.val());
+        checkIsConvert();
+    });
 }
 
 

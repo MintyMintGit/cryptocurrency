@@ -218,10 +218,8 @@ $(document).ready(function () {
     $("#calculatorTab").addClass("active");
     getExchangeRates();
     getGlobaldata();
-    $("#amount").on('change', function (event) {
-        checkIsConvert();
-        $("#amountBlue").text($("#amount").val());
-    });
+    changeAmount($("#amount"), $("#amountBlue"));
+
     $("#to, #from").on('keyup', function (event) {
         var currentItem = $(event.currentTarget);
         var ulSelected = $("#" + currentItem.attr('id') + "Auto");
@@ -349,15 +347,6 @@ function appendSelectedItem(selectedItem) {
     inputSel.val(selectedItem.text());
     inputSel.attr('price_usd', price_usd);
     inputSel.attr('is_crypto', is_crypto);
-
-    // $("#fromThird").text();
-    // function updateTopInfo(from, to, fromLong, toLong) {
-    //     $("#fromSecond").text(from);
-    //
-    //
-    //     $("#toSecond").text(to);
-    // }
-
 
     $("#fromAuto li,#toAuto li").remove();
     checkIsConvert();
