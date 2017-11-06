@@ -1,3 +1,5 @@
+var bitcoinDateUpdate = $("#bitcoinDateUpdate").val();
+
 /*
 * drop down with сurrency
 * added click on currency
@@ -61,5 +63,17 @@ function changeAmount(amountJQueryObj, amountBlueJQueryObj) {
         checkIsConvert();
     });
 }
+/*
+* set time last update
+* return int minutes
+* */
+function setTimeLastUpdateCryptoValues() {
+    var then = moment.unix(bitcoinDateUpdate);
+    // alert(moment.utc(moment(now).diff(moment(then))).format("HH:mm:ss"));
+    var now  = moment();
+    return moment.utc(moment(now).diff(moment(then))).format("mm");
+}
 
-
+function setTimeLastUpdateCryptoValuesMinutes() {
+    return setTimeLastUpdateCryptoValues() + ' minutes ago';
+}

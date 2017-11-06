@@ -174,6 +174,10 @@ function getGlobaldata() {
 }
 
 $(document).ready(function () {
+
+    $("#updatedLast").html(setTimeLastUpdateCryptoValuesMinutes());
+
+
     var dataModalWindow = $("#dataModalWindow");
     var date = moment(new Date());
     $("#dataModalWindowRight").html('week ' + date.week());

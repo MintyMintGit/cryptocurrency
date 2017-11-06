@@ -68,7 +68,7 @@ class UpdateDataController extends Controller
                     $exchange->value_quotes = $item;
                     $exchange->value_quotesOld = $item;
                     $exchange->source = $data['source'];
-
+                    $exchange->timestamp = \Carbon\Carbon::now();
                     $exchange->save();
 
                     //need to creqate new one;
@@ -78,6 +78,7 @@ class UpdateDataController extends Controller
                     $oldItem->value_quotesOld = $oldItem->value_quotes;
                     $oldItem->value_quotes = $item;
                     $oldItem->source = $data['source'];
+                    $oldItem->timestamp = \Carbon\Carbon::now();
                     $oldItem->save();
                 }
             }

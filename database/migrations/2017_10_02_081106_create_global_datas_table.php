@@ -27,7 +27,7 @@ class CreateGlobalDatasTable extends Migration
             $table->double('percent_change_1h')->default(null);
             $table->double('percent_change_24h')->default(null);
             $table->double('percent_change_7d')->default(null);
-            $table->string('last_updated')->default(null);
+            $table->integer('last_updated')->default(null);
         });
     }
 
