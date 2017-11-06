@@ -13,6 +13,8 @@ class CalculatorController extends Controller
     public function calc()
     {
         $CloudsOfCurrencies = Search::getCloudsOfCurrencies();
+        $from = "";
+        $to = "";
         /*check is contains crypto in links*/
         $position = strpos($_SERVER['REDIRECT_URL'], '-');
         if ($position > 0) {
@@ -21,9 +23,8 @@ class CalculatorController extends Controller
             if ($position > 0) {
                 $links = explode('-', $links);
                 if (count($links) > 0) {
-                    $from = Cr_cc_profile::where('profile_short', 'like', $links[0])->get();
-                    $to = = Cr_cc_profile::where('profile_short', 'like', $links[0])->get();
-                    SELECT * FROM `cr_cc_profiles` WHERE `profile_short` LIKE 'USD'
+                    $from = $this->findISOFullName($links[0]);
+                    $to = $this->findISOFullName($links[1]);
                 }
             }
         }
@@ -32,7 +33,7 @@ class CalculatorController extends Controller
         $bitcoinDateUpdate = $bitcoin->last_updated;
         $bitcoinPrice = $bitcoin->price_usd;
         $harcodedEur = "0.861602";
-        return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate', 'harcodedEur'));
+        return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate', 'harcodedEur', 'to', 'from'));
     }
 
     private function cutUrlIndex($str, $index)
@@ -42,15 +43,18 @@ class CalculatorController extends Controller
 
     private function findISOFullName($iso)
     {
-        $searchResult = findInCrypto($iso);
-        if(findInCrypto)
+        $searchResult = $this->findInCrypto($iso);
+        if($searchResult) {
+            return "ok";
+        }
+        return $this->findInFiat($iso);
     }
     private function findInCrypto($iso)
     {
-        return GlobalData::find($iso)->get();
+        return GlobalData::find($iso);
     }
     private function findInFiat($iso)
     {
-
+        return Cr_cc_profile::where('profile_short', 'like', $iso)->get();
     }
 }
