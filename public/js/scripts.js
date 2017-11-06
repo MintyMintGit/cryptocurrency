@@ -131,16 +131,6 @@ $(document).ready(function () {
         $('.search-dpopdown-list').toggle();
     });
 
-    // $("#search_input").click(function() {
-    //
-    // });
-    // $(document).on('click', function(e) {
-    //     if (!$(e.target).closest("#search_input").length) {
-    //         $('#searchform').removeClass('search-act');
-    //     }
-    //     e.stopPropagation();
-    // });
-
     $(".search-dpopdown-list li a").click(function() {
         $('.search-dpopdown-list').toggle();
     });
@@ -161,53 +151,6 @@ $(document).ready(function () {
         $('.menu-container').css('padding-top','50px');
     });
     update();
-
-    $(".pointer").on('click', function (event) {
-        dataCurrency = $(event.currentTarget).attr('data-currency');
-        coefficient = currencyExchangeRatesSecond.attr('data-usd' + dataCurrency);
-        var switchButton = $("#currency-switch-button");
-
-        switchButton.text(dataCurrency.toUpperCase() + " ");
-        switchButton.append("<span class=\"caret\"></span>");
-
-        //market_cap_usd
-
-        table.find('tbody tr .market_cap_usd').each(function (indx, element) {
-            if (dataCurrency == "btc") {
-                element.innerHTML = parseInt(parseFloat(element.getAttribute('data-usd')) / parseFloat($("#bitcoinPrice").val())) + " BTC";
-            } else if (dataCurrency == "eth") {
-                element.innerHTML = parseInt(parseFloat(element.getAttribute('data-usd')) / parseFloat($("#ethPrice").val())) + " ETH";
-            } else {
-                var costInDollars = $(element).attr('data-usd');
-                element.innerHTML = mapShortCodetoSymbol(dataCurrency) + makeBeautyMoney(parseFloat(costInDollars) * coefficient);
-            }
-        });
-
-        //price
-        table.find('tbody tr .price').each(function (indx, element) {
-            if (dataCurrency == "btc") {
-                element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#bitcoinPrice").val())).toFixed(8) + " BTC";
-            } else if (dataCurrency == "eth") {
-                element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#ethPrice").val())).toFixed(8) + " ETH";
-            } else {
-                var costInDollars = $(element).attr('data-usd');
-                element.innerHTML = mapShortCodetoSymbol(dataCurrency) + (parseFloat(costInDollars) * coefficient).toFixed(2);
-            }
-        });
-
-        //Volume
-        table.find('tbody tr .volume').each(function (indx, element) {
-            if (dataCurrency == "btc") {
-                element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#bitcoinPrice").val())).toFixed(3) + " BTC";
-            } else if (dataCurrency == "eth") {
-                element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#ethPrice").val())).toFixed(3) + " ETH";
-            } else {
-                var costInDollars = $(element).attr('data-usd');
-                element.innerHTML = mapShortCodetoSymbol(dataCurrency) + makeBeautyMoney(parseFloat(costInDollars) * coefficient);
-            }
-        });
-        event.preventDefault();
-    });
 });
 function update() {
     var date = moment(new Date())

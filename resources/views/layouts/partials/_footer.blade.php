@@ -9,6 +9,7 @@
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.js"></script>
 <script src="/js/scripts.js"></script>
+<script src="/js/globalFunctions.js"></script>
 <?php
         if(is_array($scriptJs)) {
             foreach ($scriptJs as $item) {

@@ -1,20 +1,12 @@
 var crypt;
 var prices = [];
 $(document).ready(function () {
-    /*
-    1. GET ALL CURRENCIES FROM COINMARKETCAP
-    */
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("POST", $("#historicalData").val(), false);
-    // xhr.send();
 
     $.ajax({
         url: $("#historicalData").val(),
         dataType: "json",
         type: 'POST',
         success: function (data) {
-            //crypt = data;
-
             createGraph(parseFloatPrices(data));
         }
     });
