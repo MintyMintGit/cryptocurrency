@@ -69,11 +69,41 @@ function changeAmount(amountJQueryObj, amountBlueJQueryObj) {
 * */
 function setTimeLastUpdateCryptoValues() {
     var then = moment.unix(bitcoinDateUpdate);
-    // alert(moment.utc(moment(now).diff(moment(then))).format("HH:mm:ss"));
     var now  = moment();
     return moment.utc(moment(now).diff(moment(then))).format("mm");
 }
 
 function setTimeLastUpdateCryptoValuesMinutes() {
     return setTimeLastUpdateCryptoValues() + ' minutes ago';
+}
+
+function findValueInCurrencyExchangeRates(name) {
+    var result = "";
+    $.each(currencyExchangeRates, function (key, value) {
+        if (value.name == name) {
+            return result = value
+        }
+    });
+    return result;
+}
+
+function findValueInCrossRates(name) {
+    return crossRates[name];
+}
+
+function findValueInHardCoded(name) {
+    return hardcoded[name];
+}
+
+function searchFullInfoCurrency(name) {
+    var fullInfo = findValueInCrossRates(name);
+    if (!fullInfo) {
+        fullInfo = findValueInHardCoded(name);
+    } else {
+        return fullInfo;
+    }
+    if (!fullInfo) {
+        fullInfo = findValueInCurrencyExchangeRates(name);
+    }
+    return fullInfo;
 }
