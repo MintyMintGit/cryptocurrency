@@ -11,7 +11,7 @@ var hardcoded = {
     'BCH': {},
     'LTC': {}
 };
-var crossRates = {'USD': {}, 'EUR': {}, 'GBP': {}, 'CAD': {}, 'AUD': {}, 'CHF': {}, 'INR': {}, 'CNY': {}, 'JPY': {}};
+var crossRates = {'USD': {}, 'EUR': {}, 'GBP': {}, 'CAD': {}, 'AUD': {}, 'CHF': {}, 'INR': {}, 'CNY': {}, 'JPY': {}, 'BRL': {}};
 
 function getExchangeRates() {
     $.ajax({
@@ -108,20 +108,29 @@ function runTrandingRates() {
         var result = calculatePercentage(oldPrice, newPrice);
         parent.find('.someValue').text(crossRates[element.innerText].price_usdOld);
         parent.find('.trendingRates').text(result);
-    });
-    $(".linkGreyBlock").each(function(indx, element){
-        var from = $("#amountFromCurrency").text();
-        var linkTo = $(element).find('.to').text();
-        $(element).find('.from').text(from);
-        $(element).attr('href', '/calculator/' + from + "-" + linkTo);
+        trandingRatesUpdate();
     });
 }
+
 
 function TrandingRates(from, to) {
     return (from / to).toFixed(5);
 }
 function calculatePercentage(old, today) {
     return (1 -(TrandingRates(old, today))).toFixed(5);
+}
+function trandingRatesUpdate() {
+    $(".linkGreyBlock").each(function(indx, element){
+        var from = $("#amountFromCurrency").text();
+        var linkTo = $(element).find('.to').text();
+        if(from == linkTo) {
+            $(element).hide();
+        } else {
+            $(element).show();
+            $(element).find('.from').text(from);
+            $(element).attr('href', '/calculator/' + from + "-" + linkTo);
+        }
+    });
 }
 function getGlobaldata() {
     $.ajax({
@@ -168,7 +177,14 @@ function getGlobaldata() {
                 }
             }
             //putValuesToTable();
+            appendFullListCrypto(from);
+            appendFullListCrypto(to);
+        // from.selectpicker('refresh');
+        // to.selectpicker('refresh');
+            // $("#to").refresh();
+            // $("#from").refresh();
             checkIsConvert();
+
         }
     });
 }
@@ -197,11 +213,17 @@ function checkIsUpdateTopInfo(updateJqueryObj, destinationJqueryObj) {
     }
 }
 
+function appendFullListCrypto(destinationJQueryObj) {
+    destinationJQueryObj.append(getFullList(hardcoded));
+    destinationJQueryObj.append(getFullList(currencyExchangeRates));
+    destinationJQueryObj.selectpicker('refresh');
+}
 $(document).ready(function () {
 
     $("#updatedLast").html(setTimeLastUpdateCryptoValuesMinutes());
     checkIsUpdateTopInfo($("#fromFullName"), $("#fromSecond"));
     checkIsUpdateTopInfo($("#toFullName"), $("#toSecond"));
+
 
     var dataModalWindow = $("#dataModalWindow");
     var date = moment(new Date());
@@ -252,33 +274,47 @@ $(document).ready(function () {
     getGlobaldata();
     changeAmount($("#amount"), $("#amountBlue"));
 
-    $("#to, #from").on('keyup', function (event) {
-        var currentItem = $(event.currentTarget);
-        var ulSelected = $("#" + currentItem.attr('id') + "Auto");
-        $("#fromAuto li,#toAuto li").remove();
-        var key = event.currentTarget.value.toUpperCase();
+    // $("#to, #from").on('', function (event) {
+    //appendDropDownList();
 
-        ulSelected.append(getReadyList(hardcoded, key));
-        ulSelected.append(getReadyList(currencyExchangeRates, key));
+    function appendDropDownList() {
+        //var currentItem = $(event.currentTarget);
+        // var ulSelected = $("#" + currentItem.attr('id') + "Auto");
+        // $("#fromAuto option,#toAuto option").remove();
+        //$("#to, #from").find('option').remove();
 
-        ulSelected.find('li').on('click', function (event) {
-            appendSelectedItem(event);
-        });
-    });
+        //var key = event.currentTarget.value.toUpperCase();
 
-    //show all drop down list
-    $("#to, #from").on('keyup', function (event) {
-        var currentItem = $(event.currentTarget);
-        $("#fromAuto li,#toAuto li").remove();
-        var ulSelected = $("#" + currentItem.attr('id') + "Auto");
+//        $("#to, #from").append(getReadyList(hardcoded, key));
+//        $("#to, #from").append(getReadyList(currencyExchangeRates, key));
+//         $("#to, #from").getFullList(hardcoded);
+//         $("#to, #from").getFullList(currencyExchangeRates);
+//         $("#to, #from").refresh();
 
-        ulSelected.append(getFullList(hardcoded));
-        ulSelected.append(getFullList(currencyExchangeRates));
+        // $("#from").append(getFullList(hardcoded));
+        // $("#from").append(getFullList(currencyExchangeRates));
+        // $("#from").refresh();
 
-        ulSelected.find('li').on('click', function (event) {
-            appendSelectedItem(event);
-        });
-    });
+        // currentItem.find('option').on('click',    function (event) {
+        //     appendSelectedItem(event);
+        // });
+    }
+
+
+
+    // //show all drop down list
+    // $("#to, #from").on('keyup', function (event) {
+    //     var currentItem = $(event.currentTarget);
+    //     $("#fromAuto li,#toAuto li").remove();
+    //     var ulSelected = $("#" + currentItem.attr('id') + "Auto");
+    //
+    //     ulSelected.append(getFullList(hardcoded));
+    //     ulSelected.append(getFullList(currencyExchangeRates));
+    //
+    //     ulSelected.find('li').on('click', function (event) {
+    //         appendSelectedItem(event);
+    //     });
+    // });
 
     $("#inversion").on('click', function (event) {
         var currentItem = $(event.currentTarget);
@@ -364,13 +400,17 @@ function appendSelectedItem(selectedItem) {
         $("#fromThird").text(selectedItem[0].innerText);
         // updateOneTopInfo(selectedItem[0].innerText, $("#fromSecond"));
         /*update cross rates*/
-
-        $(".linkGreyBlock").each(function(indx, element){
-            var from = $("#amountFromCurrency").text();
-            var linkTo = $(element).find('.to').text();
-            $(element).find('.from').text(from);
-            $(element).attr('href', '/calculator/' + from + "-" + linkTo);
-        });
+trandingRatesUpdate();
+        // $(".linkGreyBlock").each(function(indx, element){
+        //     var from = $("#amountFromCurrency").text();
+        //     var linkTo = $(element).find('.to').text();
+        //     if(from == linkTo) {
+        //         $(element).hide();
+        //     } else {
+        //         $(element).find('.from').text(from);
+        //         $(element).attr('href', '/calculator/' + from + "-" + linkTo);
+        //     }
+        // });
         /**/
     }
     var price_usd = selectedItem.attr('price_usd');
@@ -391,7 +431,7 @@ function getFullList(array) {
     var readyList = [];
 
     for (var item in array) {
-        readyList.push("<li class=" + 'textForDropDownMenu' + " is_crypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+        readyList.push("<option data-live-search=“true” class=" + 'textForDropDownMenu' + " is_crypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</option>");
     }
 
     return readyList;
@@ -402,7 +442,7 @@ function getReadyList(array, key) {
 
     for (var item in array) {
         if (array[item].name.indexOf(key) != -1) {
-            readyList.push("<li class=" + 'textForDropDownMenu' + " is_crypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+            readyList.push("<option data-live-search=“true” class=" + 'textForDropDownMenu' + " is_crypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</option>");
         }
     }
     return readyList;

@@ -83,37 +83,41 @@
                 <div class="col-md-2"></div>
             </div>
         </div>
-        @if(isset($social[0]))
+
             <div id="exTab2" class="container-fluid bottom-tabs">
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a href="#1" data-toggle="tab" aria-expanded="true">Charts</a>
                 </li>
-                <li class="">
-                    <a href="#2" data-toggle="tab" aria-expanded="false">Social</a>
-                </li>
+                @if(isset($social[0]))
+                    <li class="">
+                        <a href="#2" data-toggle="tab" aria-expanded="false">Social</a>
+                    </li>
+                @endif
             </ul>
             <div class="tab-content ">
                 <div class="tab-pane active" id="1">
                     <div id="container" style="height: 400px; min-width: 600px"></div>
                     <button id="button">Export chart</button>
                 </div>
-                <div class="tab-pane" id="2">
-                        <div class="col-xs-6">
-                            <a class="twitter-timeline" href="{{ $social[0]->Twitter or "Default Message"  }}"></a>
-                            <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-                        </div>
-                        <div class="col-xs-6">
-                            <div id="reddit">
-
-                                <script type="text/javascript"
-                                        src="https://www.reddit.com/r/{{ str_replace(" ", "", $social[0]->Name) != "" ? str_replace(" ", "", $social[0]->Name) : "" }}.embed?limit=9"></script>
+                @if(isset($social[0]))
+                    <div class="tab-pane" id="2">
+                            <div class="col-xs-6">
+                                <a class="twitter-timeline" href="{{ $social[0]->Twitter or "Default Message"  }}"></a>
+                                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                             </div>
-                        </div>
-                </div>
+                            <div class="col-xs-6">
+                                <div id="reddit">
+
+                                    <script type="text/javascript"
+                                            src="https://www.reddit.com/r/{{ str_replace(" ", "", $social[0]->Name) != "" ? str_replace(" ", "", $social[0]->Name) : "" }}.embed?limit=9"></script>
+                                </div>
+                            </div>
+                    </div>
+                @endif
             </div>
         </div>
-        @endif
+
     </div>
 
     @include('layouts.partials._menu')

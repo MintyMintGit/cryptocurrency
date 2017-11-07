@@ -26,33 +26,35 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <div class="btn-group bootstrap-select">
-                    <input id="from" class="btn dropdown-toggle btn-default" data-toggle="dropdown" is_crypto="false" price_usd = "1"
-                           role="button" title="USD"></input>
+                <select id="from" class="selectpicker" data-live-search="true">
+                </select>
+                {{--<div class="btn-group bootstrap-select">--}}
+                    {{--<input data-live-search=“true” id="from" class="btn dropdown-toggle btn-default" data-toggle="dropdown" is_crypto="false" price_usd = "1"--}}
+                           {{--role="button" title="USD"></input>--}}
 
-                    <div class="dropdown-menu open" role="combobox">
-                        <ul id="fromAuto" class="dropdown-menu inner" role="listbox" aria-expanded="false">
-                        </ul>
-                    </div>
-                    <select class="selectpicker" tabindex="-98">
-                        <option>EU to US Dollar</option>
-                        <option>EU to US Dollar</option>
-                        <option>EU to US Dollar</option>
-                    </select></div>
+                    {{--<div class="dropdown-menu open" role="combobox">--}}
+                        {{--<ul  class="dropdown-menu inner" role="listbox" aria-expanded="false">--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
+                    {{--<select id="fromAuto" class="selectpicker" tabindex="-98">--}}
+                    {{--</select></div>--}}
+
+
+
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <div class="btn-group bootstrap-select">
-                    <input id="to" class="btn dropdown-toggle btn-default" data-toggle="dropdown" is_crypto="false" price_usd = "{{ $harcodedEur }}"  role="button" title="EU to US Dollar"></input>
-                    <div class="dropdown-menu open" role="combobox">
-                        <ul id="toAuto" class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                <select id="to" class="selectpicker" data-live-search="true">
+                </select>
 
-                        </ul>
-                    </div>
-                    <select class="selectpicker" tabindex="-98">
-                        <option>EU to US Dollar</option>
-                        <option>EU to US Dollar</option>
-                        <option>EU to US Dollar</option>
-                    </select></div>
+                {{--<div class="btn-group bootstrap-select">--}}
+                    {{--<input data-live-search=“true” id="to" class="btn dropdown-toggle btn-default" data-toggle="dropdown" is_crypto="false" price_usd = "{{ $harcodedEur }}"  role="button" title="EU to US Dollar"></input>--}}
+                    {{--<div class="dropdown-menu open" role="combobox">--}}
+                        {{--<ul id="toAuto" class="dropdown-menu inner" role="listbox" aria-expanded="false">--}}
+
+                        {{--</ul>--}}
+                    {{--</div>--}}
+                    {{--<select id="toAuto" class="selectpicker" tabindex="-98">--}}
+                    {{--</select>--}}
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12 action">
                 <a id="inversion" href="#">Invert currencies</a>
