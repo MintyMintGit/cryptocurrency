@@ -44,17 +44,27 @@ class CalculatorController extends Controller
     private function findISOFullName($iso)
     {
         $searchResult = $this->findInCrypto($iso);
-        if($searchResult) {
-            return "ok";
+        if ($searchResult) {
+            return $searchResult;
         }
         return $this->findInFiat($iso);
     }
+
     private function findInCrypto($iso)
     {
-        return GlobalData::find($iso);
+        $temp = GlobalData::where('symbol', 'like', $iso)->first();
+        if ($temp) {
+            return $temp->name;
+        }
+        return null;
     }
+
     private function findInFiat($iso)
     {
-        return Cr_cc_profile::where('profile_short', 'like', $iso)->get();
+        $temp = Cr_cc_profile::where('profile_short', 'like', $iso)->first();
+        if ($temp) {
+            return $temp->profile_long;
+        }
+        return null;
     }
 }

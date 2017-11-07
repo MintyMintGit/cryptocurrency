@@ -190,11 +190,18 @@ function updateTopInfo(from, to, fromJQueryObj, toJQueryObj) {
         toJQueryObj.html(toFull.fullName);
     }
 }
+function checkIsUpdateTopInfo(updateJqueryObj, destinationJqueryObj) {
+    let temp = updateJqueryObj.val();
+    if(temp) {
+        destinationJqueryObj.html(temp);
+    }
+}
 
 $(document).ready(function () {
 
     $("#updatedLast").html(setTimeLastUpdateCryptoValuesMinutes());
-
+    checkIsUpdateTopInfo($("#fromFullName"), $("#fromSecond"));
+    checkIsUpdateTopInfo($("#toFullName"), $("#toSecond"));
 
     var dataModalWindow = $("#dataModalWindow");
     var date = moment(new Date());
