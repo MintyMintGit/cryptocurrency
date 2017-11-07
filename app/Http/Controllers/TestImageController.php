@@ -37,7 +37,11 @@ class TestImageController extends Controller
                     }
                 }
             }
+            foreach ($data as $key => $datum) {
+                $data[$key] = $datum * 10000000000;
+            }
             $this->saveToJson($data);
+
             $this->createGraph($item['id']);
         }
         return "updated succsef";
