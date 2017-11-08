@@ -37,9 +37,10 @@ class TestImageController extends Controller
                     }
                 }
             }
-            foreach ($data as $key => $datum) {
-                $data[$key] = $datum * 10000000000;
-            }
+            /*if code disabled - creates empty white graphs*/
+//            foreach ($data as $key => $datum) {
+//                $data[$key] = $datum * 100;
+//            }
             $this->saveToJson($data);
 
             $this->createGraph($item['id']);
@@ -65,7 +66,7 @@ class TestImageController extends Controller
     public function IsLastWeek($date)
     {
         $now = new Carbon();
-        if ($now->diffInWeeks(Carbon::parse($date)) <= 10) {
+        if ($now->diffInWeeks(Carbon::parse($date)) <= 1) {
             return true;
         }
     }
