@@ -87,6 +87,8 @@ class CalculatorController extends Controller
                     $this->amount = 1;
                 }
             }
+        } else {
+            $this->amount = 1;
         }
     }
 
