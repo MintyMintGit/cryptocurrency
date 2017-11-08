@@ -220,6 +220,16 @@ function checkIsUpdateTopInfo(updateJqueryObj, destinationJqueryObj) {
 // }
 $(document).ready(function () {
 
+    $( ".calc-custom-form .input-wrap" ).click(function() {
+        $( ".calc-custom-form .dropdown " ).toggle();
+    });
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest(".calc-custom-form .input-wrap").length) {
+            $('.calc-custom-form .dropdown').hide();
+        }
+        e.stopPropagation();
+    });
+
     $("#updatedLast").html(setTimeLastUpdateCryptoValuesMinutes());
     checkIsUpdateTopInfo($("#fromFullName"), $("#fromSecond"));
     checkIsUpdateTopInfo($("#toFullName"), $("#toSecond"));
