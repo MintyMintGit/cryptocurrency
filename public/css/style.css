@@ -1,3 +1,4 @@
+та/*another content*/
 @font-face {
     font-family: "fontawesome";
     src: url('../fonts/fontawesome-webfont.ttf') format("truetype");
@@ -555,7 +556,7 @@ td:first-child {
 .main-table .name {
     position: relative;
 }
-.main-table .currency-logo-sprite, #allCrypto_wrapper .currency-logo-sprite {
+.main-table .currency-logo-sprite {
     position: absolute;
     display: inline-block;
     margin: -1px 0px;
@@ -1101,7 +1102,7 @@ table#allCrypto {
 }
 .converter .filters .dropdown-menu.open {
     max-height: 300px;
-    overflow-y: scroll;
+    overflow-y: scroll; 
 }
 @media (min-width: 992px) {
 
@@ -1273,7 +1274,7 @@ table#allCrypto {
     text-align: center;
 }
 .linkGreyBlock:hover{
-    color: #3a3a3a;
+       color: #3a3a3a; 
 }
 .items-currency-bottom .item h4 {
     margin-bottom: 0;
@@ -1299,7 +1300,9 @@ table#allCrypto {
     max-height: 300px;
     overflow-y: scroll;
 }
-
+.filter-area .left .dropdown-menu.open{
+    overflow: visible;
+}
 
 
 @media screen and (max-width: 991px) {
@@ -1349,30 +1352,21 @@ table#allCrypto {
 }
 
 @media screen and (max-width: 767px) {
+
+
+
+
+
     table#allCrypto {
-        margin-top: 50px;
-    }
+    margin-top: 50px;
+}
+
+    
+#allCrypto td{
+    display: none;
+}
 
 
-    #allCrypto td{
-        display: none;
-    }
-    #allCrypto td:nth-child(9),
-    #allCrypto td:nth-child(5),
-    #allCrypto td:nth-child(2){
-        display: block;
-    }
-    #allCrypto td:nth-child(2):before{
-        content: 'NAME';
-        color: #333;
-    }
-    #allCrypto td:nth-child(5):before{
-        content: 'PRICE';
-        color: #333;
-    }
-    #allCrypto td:nth-child(9):before{
-        content: '% 24 CHANHE (24H)';
-    }
     .main-table tbody .name{
         height: auto;
     }
@@ -1383,22 +1377,10 @@ table#allCrypto {
     .nav-btn {
         margin-top: -39px;
     }
-    .main-table td.price:before {
-        content: "Price";
-        color: #333;
-    }
-    .main-table td.change:before {
-        content: '% Change (24h)';
-    }
-    .main-table td.name:before {
-        content: 'Name';
-    }
-    .main-table tbody .name{
-        display: block;
-    }
+
+
     .main-table .currency-logo-sprite {
         position: absolute;
-        right: 15px;
     }
     .main-table .name a {
         padding-right: 20px;
@@ -1452,12 +1434,16 @@ table#allCrypto {
         text-align: right;
         padding-right: 15px;
     }
-
-    .main-table .name {
-        border-top: 1px solid #ddd;
+    table .desk{
+        display: table-cell !important;  
     }
 
-    .main-table .num,
+
+
+table tr{
+    display: table-row;
+    background: transparent;
+}
     .main-table .graph,
     .main-table .volume,
     .main-table .supply,
@@ -1564,10 +1550,13 @@ table#allCrypto {
     .menu-container ul li a {
         margin-bottom: 5px;
     }
-
+    .converter .main-info .big-num .top-num{
+        top: -40px;
+    }
     .converter .main-info .big-num {
-        font-size: 70px !important;
-        margin-top: 60px;
+        font-size: 62px !important;
+        margin-top: 40px;
+        text-overflow: clip;
     }
 
     .bootstrap-select > .dropdown-toggle {
@@ -1740,6 +1729,73 @@ table#allCrypto {
     .exchange-pairs table .name {
         display: none;
     }
+
+#allCrypto table thead.
+        .main-table table thead{
+            position: relative;
+    }
+    
+    #allCrypto td:nth-child(1),
+    #allCrypto td:nth-child(2),
+    #allCrypto td:nth-child(5),
+    #allCrypto td:nth-child(6){
+         display: table-cell !important;
+    }
+    #allCrypto thead{
+        position: relative;
+    }
+
+    .main-table tbody .name,
+    .main-table tbody td{
+        display: table-cell;
+    }
+    .main-table td.num,
+.main-table th.num-h.num {
+    width: 9% !important;
+}
+.main-table td.name,
+.main-table th.name-h.name {
+    width: 33% !important;
+    text-align: left;
+}
+.main-table td.price,
+.main-table th.price {
+    width: 36% !important;
+}
+.main-table td.change,
+.main-table th.change {
+    width: 22% !important;
+}
+#allCrypto table tr,
+.main-table table tr{
+    margin-bottom: 0;
+}
+th.name-h{
+    background: transparent;
+}
+#allCrypto th,
+.main-table th{
+    font-size: 14px;
+    padding: 0 5px !important;
+    text-align: center !important; 
+    color: #000;
+
+}
+#allCrypto td,
+.main-table td{
+    font-size: 14px;
+    text-align: left !important;
+}
+#allCrypto tr,
+.main-table tr{
+    background: transparent !important;
+}
+#allCrypto td:nth-child(6),
+#allCrypto td:nth-child(5){
+    overflow: hidden;
+    text-overflow: clip;
+}
+
 }
 
 @media screen and (max-width: 359px) {
@@ -1779,39 +1835,44 @@ table#allCrypto {
 #allCrypto_filter{
     display: none;
 }
+div#marketCapitalizations_filter { display:none; }
 
-div#marketCapitalizations_filter {
-    display: none;
+@media screen and (max-width: 767px){
+span#amountToCurrency{
+    display: block;
 }
+
+}
+
 .calc-custom-form{
-    position: relative;
+	position: relative;
 }
 .calc-custom-form input {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    color: #000;
-    text-align: left;
-    width: 100%;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	color: #000;
+	text-align: left;
+	width: 100%;
 }
 .calc-custom-form span.bs-caret {
-    height: 32px !important;
+	height: 32px !important;
     top: 1px !important;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -1821,7 +1882,7 @@ div#marketCapitalizations_filter {
     cursor: pointer;
 }
 .calc-custom-form .dropdown{
-    position: absolute;
+	position: absolute;
     top: 100%;
     left: 0;
     z-index: 1000;
@@ -1846,7 +1907,7 @@ div#marketCapitalizations_filter {
     display: none;
 }
 .calc-custom-form .dropdown ul{
-    padding: 0;
+	padding: 0;
 }
 .calc-custom-form .dropdown li {
     display: block;
@@ -1858,6 +1919,17 @@ div#marketCapitalizations_filter {
     white-space: nowrap;
 }
 .calc-custom-form .dropdown li:hover{
-    background-color: #f9f9f9;
-    cursor: pointer;
+	background-color: #f9f9f9;
+	cursor: pointer;
+}
+.date.container-fluid{
+	text-align: left;
+}
+.date.container-fluid h2{
+    font-size: 32px;
+    font-family: "FiraSans-Light";
+    text-align: right;
+}
+.date.container-fluid p{
+	margin-top: -35px;
 }

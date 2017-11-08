@@ -1,8 +1,8 @@
 <div class="container-fluid page-content">
 
     <div class="container-fluid top-info">
-        <h1><span id="fromSecond">US Dollar</span> to <span id="toSecond">Euro</span></h1>
-        <p><span id="fromThird">USD</span>/<span id="toThird">EURO</span> Currency Calculator<br>
+        <h1><span id="fromSecond">{{ strtoupper($currencyFrom->fullName) }}</span> to <span id="toSecond">{{ strtoupper($currencyTo->fullName) }}</span></h1>
+        <p><span id="fromThird">{{ strtoupper($currencyFrom->shortName) }}</span>/<span id="toThird">{{ strtoupper($currencyTo->shortName) }}</span> Currency Calculator<br>
             Update: <a id="updatedLast" href="#">5 minutes ago</a></p>
     </div>
 
@@ -10,11 +10,11 @@
         <div class="big-num">
                 <span class="first">
                     <div class="top-num">
-                        <span class="blue"> <span id="amountBlue"> 1.00 </span>  <span id="amountFromCurrency">USD</span></span>
+                        <span class="blue"> <span id="amountBlue"> {{ $amount }} </span>  <span id="amountFromCurrency">{{ strtoupper($currencyFrom->shortName) }}</span></span>
                         =
                     </div>
                     <span id="inetgerNum">0.</span>
-                </span><span class="blue" id="decimal">85</span><span class="gray" id="thousands">540</span><span id="amountToCurrency" class="cur">EUR</span>
+                </span><span class="blue" id="decimal">85</span><span class="gray" id="thousands">540</span><span id="amountToCurrency" class="cur">{{ strtoupper($currencyTo->shortName) }}</span>
         </div>
     </div>
 
@@ -22,13 +22,13 @@
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
-                    <input type="number" class="form-control" value="1" id="amount" placeholder="1">
+                    <input type="number" class="form-control" value="{{ $amount }}" id="amount" placeholder="1">
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="calc-custom-form">
                     <div class="input-wrap">
-                        <input type="search">
+                        <input type="search" isCrypto="{{ $currencyFrom->isCrypto }}" id="from" value="{{ strtoupper($currencyFrom->shortName) }}" price_usd="{{ $currencyFrom->price_usd }}">
                         <span class="bs-caret"><span class="caret"></span></span>
                     </div>
                     <div class="dropdown">
@@ -44,7 +44,7 @@
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="calc-custom-form">
                     <div class="input-wrap">
-                        <input type="search">
+                        <input type="search" isCrypto="{{ $currencyTo->isCrypto }}" id="to" value="{{ strtoupper($currencyTo->shortName) }}" price_usd="{{ $currencyTo->price_usd }}">
                         <span class="bs-caret"><span class="caret"></span></span>
                     </div>
                     <div class="dropdown">
@@ -63,24 +63,10 @@
             </div>
         </div>
     </div>
-                {{--<div class="btn-group bootstrap-select">--}}
-                    {{--<input data-live-search=“true” id="to" class="btn dropdown-toggle btn-default" data-toggle="dropdown" is_crypto="false" price_usd = "{{ $harcodedEur }}"  role="button" title="EU to US Dollar"></input>--}}
-                    {{--<div class="dropdown-menu open" role="combobox">--}}
-                        {{--<ul id="toAuto" class="dropdown-menu inner" role="listbox" aria-expanded="false">--}}
-
-                        {{--</ul>--}}
-                    {{--</div>--}}
-                    {{--<select id="toAuto" class="selectpicker" tabindex="-98">--}}
-                    {{--</select>--}}
-            {{--</div>--}}
-            <div class="col-md-3 col-sm-3 col-xs-12 action">
-                <a id="inversion" href="#">Invert currencies</a>
-            </div>
-        </div>
-    </div>
+</div>
     <div class="container-fluid date">
-        <h2 id="dataModalWindow">Wednesday, October 18, 2017, week 42</h2>
-        <span id="dataModalWindowRight"></span>
+        <h2 id="dataModalWindow">Wednesday, October 18, 2017, week 42 <span id="dataModalWindowRight"></span></h2>
+
         <p>Trending: Top Currency Pairs</p>
     </div>
 </div>

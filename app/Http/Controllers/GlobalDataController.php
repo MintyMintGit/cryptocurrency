@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\GlobalData;
 use App\Search;
 use Request;
+use App\Currency;
 
 class GlobalDataController extends Controller
 {
@@ -15,8 +16,13 @@ class GlobalDataController extends Controller
         $bitcoinPrice = $bitcoin->price_usd;
         $bitcoinDateUpdate = $bitcoin->last_updated;
         $ethPrice = GlobalData::findOrFail('ethereum')->price_usd;
+
+        $currencyFrom = Currency::setDefaultValueFrom();
+        $currencyTo = Currency::setDefaultValueTo();
+        $amount = 1;
+
         $scriptJs = array("globalData.js", "convertor.js");
-        return view('globalData.index', compact('bitcoinPrice', 'ethPrice', 'scriptJs', 'CloudsOfCurrencies', 'bitcoinDateUpdate'));
+        return view('globalData.index', compact('bitcoinPrice', 'ethPrice', 'scriptJs', 'CloudsOfCurrencies', 'bitcoinDateUpdate', 'currencyFrom', 'currencyTo', 'amount'));
     }
     public function saveStatistic()
     {

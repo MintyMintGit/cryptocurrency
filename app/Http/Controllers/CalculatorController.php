@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cr_cc_profile;
+use App\Currency;
 use App\ExchangeRate;
 use App\GlobalData;
 use App\Search;
@@ -10,61 +11,102 @@ use Request;
 
 class CalculatorController extends Controller
 {
+    private $currencyFrom;
+    private $currencyTo;
+    private $amount;
+
+    function __construct()
+    {
+        $this->currencyFrom = new Currency();
+        $this->currencyTo = new Currency();
+    }
+
     public function calc()
     {
         $CloudsOfCurrencies = Search::getCloudsOfCurrencies();
-        $from = "";
-        $to = "";
-        /*check is contains crypto in links*/
-        $position = strpos($_SERVER['REDIRECT_URL'], '-');
-        if ($position > 0) {
-            $links = $this->cutUrlIndex($_SERVER['REDIRECT_URL'], $position);
-            $position = strpos($links, '-');
-            if ($position > 0) {
-                $links = explode('-', $links);
-                if (count($links) > 0) {
-                    $from = $this->findISOFullName($links[0]);
-                    $to = $this->findISOFullName($links[1]);
-                }
-            }
-        }
+        $this->getFromToAmountFromString($_SERVER['REQUEST_URI']);
         $scriptJs = 'convertor.js';
         $bitcoin = GlobalData::find('bitcoin');
         $bitcoinDateUpdate = $bitcoin->last_updated;
         $bitcoinPrice = $bitcoin->price_usd;
-        $harcodedEur = "0.861602";
-        return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate', 'harcodedEur', 'to', 'from'));
+        $to = 'usd';
+        $from = 'eur';
+
+        return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate','to', 'from'))
+            ->with('amount', $this->amount)
+            ->with('currencyTo', $this->currencyTo)
+            ->with('currencyFrom', $this->currencyFrom);
     }
 
-    private function cutUrlIndex($str, $index)
-    {
-        return substr($str, $index - 3);
-    }
+    /*
+     * get Amount, From, To param from string
+     * return array of values
+     *
+     * */
 
-    private function findISOFullName($iso)
+    private function getFromToAmountFromString($url)
     {
-        $searchResult = $this->findInCrypto($iso);
-        if ($searchResult) {
-            return $searchResult;
+        $this->getFromToFromString($url);
+        if ($this->currencyFrom->shortName != null && $this->currencyTo->shortName != null) {
+            $this->currencyFrom = $this->updateCurrency($this->currencyFrom);
+            $this->currencyTo = $this->updateCurrency($this->currencyTo);
+            $temp['amount'] = $this->getAmountFromString($url);
         }
-        return $this->findInFiat($iso);
     }
 
-    private function findInCrypto($iso)
+    private function getFromToFromString($url)
     {
-        $temp = GlobalData::where('symbol', 'like', $iso)->first();
-        if ($temp) {
-            return $temp->name;
+        /*check is contains crypto in links*/
+        $position = strpos($url, '-');
+        if ($position > 0) {
+            $links = substr($url, $position - 3);
+            $position = strpos($links, '-');
+            if ($position > 0) {
+                $links = explode('-', $links);
+                if (count($links) > 0) {
+                    if (strpos($links[1], '?') > 0) {
+                        $amount = strpos($links[1], '?');
+                        $links[1] = mb_substr($links[1], 0, $amount);
+                    }
+                    $this->currencyFrom->shortName = $links[0];
+                    $this->currencyTo->shortName = $links[1];
+                }
+            }
         }
-        return null;
     }
 
-    private function findInFiat($iso)
+    private function getAmountFromString($url)
     {
-        $temp = Cr_cc_profile::where('profile_short', 'like', $iso)->first();
-        if ($temp) {
-            return $temp->profile_long;
+        $position = strpos($url, '?');
+        if ($position > 0) {
+            $amountString = mb_substr($url, $position + 1);
+            if ($amountString != null) {
+                try {
+                    $this->amount = intval($amountString);
+                } catch (\Exception $e) {
+                    $this->amount = 1;
+                }
+            }
         }
-        return null;
     }
+
+    private function updateCurrency($currency)
+    {
+        $currency->fullName = Currency::searchFiatFullNameByISO($currency->shortName);
+        if ($currency->fullName == null) {
+            $currency->fullName = Currency::searchCryptoNameByISO($currency->shortName);
+            if ($currency->fullName == null) {
+                //set default value
+                $currency = Currency::setDefaultValueFrom();
+            } else {
+                $currency->price_usd = Currency::searchCryptoPriceByISO($currency->shortName);
+                $currency->isCrypto = true;
+            }
+        } else {
+            $currency->price_usd = Currency::searchFiatPriceByISO($currency->shortName);
+            $currency->isCrypto = false;
+        }
+        return $currency;
+    }
+
 }
