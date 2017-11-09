@@ -149,7 +149,7 @@ class Base
     {
         $cryptoes = Search::where('type', 'fiat')
             ->where('id', 'like', '%' . $str . '%')
-            ->orderBy('rate', 'DESC')->get()->toArray();
+            ->orderBy('rate', 'DESC')->take(2)->get()->toArray();
         return $cryptoes;
     }
 

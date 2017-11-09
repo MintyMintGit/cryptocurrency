@@ -294,10 +294,10 @@ $(document).ready(function () {
 
         switch (currentItem.attr("id")) {
             case "inversion" :
-                window.location = createRedirectLink(amount, to, from);
+                window.open(createRedirectLink(amount, to, from), '_blank');
                 break;
             case "convert":
-                window.location = createRedirectLink(amount, from, to);
+                window.open(createRedirectLink(amount, from, to), '_blank');
                 break;
         }
     });
