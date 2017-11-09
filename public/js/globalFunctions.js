@@ -4,7 +4,7 @@ var bitcoinDateUpdate = $("#bitcoinDateUpdate").val();
 * drop down with сurrency
 * added click on currency
 * */
-    function сurrencySwitcher(tableJsObj) {
+function сurrencySwitcher(tableJsObj) {
     $(".pointer").on('click', function (event) {
         dataCurrency = $(event.currentTarget).attr('data-currency');
         coefficient = currencyExchangeRatesSecond.attr('data-usd' + dataCurrency);
@@ -60,16 +60,17 @@ var bitcoinDateUpdate = $("#bitcoinDateUpdate").val();
 function changeAmount(amountJQueryObj, amountBlueJQueryObj) {
     amountJQueryObj.on('keyup', function (event) {
         amountBlueJQueryObj.val(amountJQueryObj.val());
-        checkIsConvert();
+        runConvertCurrencies();
     });
 }
+
 /*
 * set time last update
 * return int minutes
 * */
 function setTimeLastUpdateCryptoValues() {
     var then = moment.unix(bitcoinDateUpdate);
-    var now  = moment();
+    var now = moment();
     return moment.utc(moment(now).diff(moment(then))).format("mm");
 }
 

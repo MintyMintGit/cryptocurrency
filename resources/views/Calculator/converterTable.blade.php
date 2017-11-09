@@ -31,7 +31,7 @@
                         <input type="search" isCrypto="{{ $currencyFrom->isCrypto }}" id="from" value="{{ strtoupper($currencyFrom->shortName) }}" price_usd="{{ $currencyFrom->price_usd }}">
                         <span class="bs-caret"><span class="caret"></span></span>
                     </div>
-                    <div class="dropdown">
+                    <div class="dropdown" id="autoFrom">
                         <ul>
                             <li>UAH</li>
                             <li>USD</li>
@@ -47,7 +47,7 @@
                         <input type="search" isCrypto="{{ $currencyTo->isCrypto }}" id="to" value="{{ strtoupper($currencyTo->shortName) }}" price_usd="{{ $currencyTo->price_usd }}">
                         <span class="bs-caret"><span class="caret"></span></span>
                     </div>
-                    <div class="dropdown">
+                    <div class="dropdown" id="autoTo">
                         <ul>
                             <li>UAH</li>
                             <li>USD</li>
