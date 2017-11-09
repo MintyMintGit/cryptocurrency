@@ -38,9 +38,9 @@ class TestImageController extends Controller
                 }
             }
             /*if code disabled - creates empty white graphs*/
-//            foreach ($data as $key => $datum) {
-//                $data[$key] = $datum * 100;
-//            }
+            foreach ($data as $key => $datum) {
+                $data[$key] = doubleval($datum);
+            }
             $this->saveToJson($data);
 
             $this->createGraph($item['id']);
