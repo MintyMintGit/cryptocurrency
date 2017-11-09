@@ -138,7 +138,7 @@ function trandingRatesUpdate() {
         var from = $("#amountFromCurrency").text();
         var linkTo = $(element).find('.to').text();
         if (from == linkTo) {
-            $(element).hide();
+            $(element).parent().hide();
         } else {
             $(element).show();
             $(element).find('.from').text(from);
