@@ -4,7 +4,9 @@ function Currency() {
     this.price_usd = "";
     this.isCrypto = "";
 }
-
+/*
+* update top info
+* */
 function TopInfo(from, to, fromFullName, toFullName) {
     if (from) {
         $("#fromThird").text(from);
@@ -26,15 +28,9 @@ function updateBigNumHeader(from, to) {
     }
 }
 /*
-* update top info
 * update big num
 *
 * */
-// function updateCurrency(Currency) {
-//     TopInfo();
-//     trandingRatesUpdate();
-// }
-
 function updateBigNum(resultCalculateNum) {
     var inetgerNum = Math.floor(resultCalculateNum) + '.';
     $('#inetgerNum').text(inetgerNum);

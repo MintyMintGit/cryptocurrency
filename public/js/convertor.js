@@ -191,15 +191,6 @@ function getGlobaldata() {
                     currencyExchangeRates.push(obj);
                 }
             }
-            //putValuesToTable();
-            // appendFullListCrypto(from);
-            // appendFullListCrypto(to);
-            // from.selectpicker('refresh');
-            // to.selectpicker('refresh');
-            // $("#to").refresh();
-            // $("#from").refresh();
-            //checkIsConvert();
-
         }
     });
 }
@@ -229,17 +220,8 @@ function checkIsUpdateTopInfo(updateJqueryObj, destinationJqueryObj) {
     }
 }
 
-//
-// function appendFullListCrypto(destinationJQueryObj) {
-//     destinationJQueryObj.append(getFullList(hardcoded));
-//     destinationJQueryObj.append(getFullList(currencyExchangeRates));
-//     destinationJQueryObj.selectpicker('refresh');
-// }
 $(document).ready(function () {
 
-    // $( ".calc-custom-form .input-wrap" ).click(function() {
-    //     $( ".calc-custom-form .dropdown " ).toggle();
-    // });
     $(document).on('click', function (e) {
         if (!$(e.target).closest(".calc-custom-form .input-wrap").length) {
             if ($(e.target).is('li')) {
@@ -253,51 +235,10 @@ $(document).ready(function () {
     });
 
     $("#updatedLast").html(setTimeLastUpdateCryptoValuesMinutes());
-    //checkIsUpdateTopInfo($("#fromFullName"), $("#fromSecond"));
-    //checkIsUpdateTopInfo($("#toFullName"), $("#toSecond"));
-
 
     var dataModalWindow = $("#dataModalWindow");
     var date = moment(new Date());
     dataModalWindow.html(date.format('dddd, MMMM Do, YYYY') + ', ' + 'week ' + date.week());
-
-    //
-    // var amountFromStorage = localStorage.getItem("amount");
-    // var fromFromStorage = localStorage.getItem("from");
-    // var toFromStorage = localStorage.getItem("to");
-    // var convert = localStorage.getItem("convert");
-    // if (convert == "true") {
-    //     if(amountFromStorage && fromFromStorage && toFromStorage) {
-    //         $("#amount").val(amountFromStorage.toUpperCase());
-    //         $("#from").val(toFromStorage.toUpperCase());
-    //         $("#to").val(fromFromStorage.toUpperCase());
-    //
-    //         $("#amountBlue").text(amountFromStorage.toUpperCase());
-    //         $("#amountToCurrency").text(fromFromStorage.toUpperCase());
-    //         $("#amountFromCurrency").text(toFromStorage.toUpperCase());
-    //         $("#fromThird").text(toFromStorage.toUpperCase());
-    //         $("#toThird").text(fromFromStorage.toUpperCase());
-    //
-    //         // updateTopInfo(toFromStorage.toUpperCase(),fromFromStorage.toUpperCase(),$("#fromSecond"), $("#toSecond"));
-    //     }
-    // } else if(fromFromStorage && toFromStorage) {
-    //     $("#amount").val( amountFromStorage != null ? amountFromStorage.toUpperCase() : 1);
-    //     $("#from").val(fromFromStorage.toUpperCase());
-    //     $("#to").val(toFromStorage.toUpperCase());
-    //
-    //     $("#amountToCurrency").text(toFromStorage.toUpperCase());
-    //     $("#amountFromCurrency").text(fromFromStorage.toUpperCase());
-    //
-    //     $("#fromThird").text(toFromStorage.toUpperCase());
-    //     $("#toThird").text(fromFromStorage.toUpperCase());
-    //     // updateTopInfo(fromFromStorage.toUpperCase(), toFromStorage.toUpperCase(),$("#fromSecond"), $("#toSecond"));
-    // } else {
-    //     $("#to").val('EUR');
-    //     $("#from").val('USD');
-    //     $("#to").click();
-    //     $("#from").click();
-    // }
-
 
     $("#navigation li").removeClass('active');
     $("#calculatorTab").addClass("active");
@@ -327,15 +268,6 @@ $(document).ready(function () {
 
         }
 
-
-        // var ulSelected = $("#" + currentItem.attr('id') + "Auto");
-        // $("#fromAuto li,#toAuto li").remove();
-        // var key = event.currentTarget.value.toUpperCase();
-        //
-        //
-        // ulSelected.find('li').on('click', function (event) {
-        //     appendSelectedItem(event);
-        // });
     });
     //
     // //show all drop down list
@@ -353,50 +285,6 @@ $(document).ready(function () {
         });
     });
 
-    // $( ".calc-custom-form .input-wrap" ).click(function() {
-    //     $( ".calc-custom-form .dropdown " ).toggle();
-    // });
-    //     if (!$(e.target).closest(".calc-custom-form .input-wrap").length) {
-    //         $('.calc-custom-form .dropdown').hide();
-    //     }
-    function appendDropDownList() {
-        //var currentItem = $(event.currentTarget);
-        // var ulSelected = $("#" + currentItem.attr('id') + "Auto");
-        // $("#fromAuto option,#toAuto option").remove();
-        //$("#to, #from").find('option').remove();
-
-        //var key = event.currentTarget.value.toUpperCase();
-
-//        $("#to, #from").append(getReadyList(hardcoded, key));
-//        $("#to, #from").append(getReadyList(currencyExchangeRates, key));
-//         $("#to, #from").getFullList(hardcoded);
-//         $("#to, #from").getFullList(currencyExchangeRates);
-//         $("#to, #from").refresh();
-
-        // $("#from").append(getFullList(hardcoded));
-        // $("#from").append(getFullList(currencyExchangeRates));
-        // $("#from").refresh();
-
-        // currentItem.find('option').on('click',    function (event) {
-        //     appendSelectedItem(event);
-        // });
-    }
-
-
-    // //show all drop down list
-    // $("#to, #from").on('keyup', function (event) {
-    //     var currentItem = $(event.currentTarget);
-    //     $("#fromAuto li,#toAuto li").remove();
-    //     var ulSelected = $("#" + currentItem.attr('id') + "Auto");
-    //
-    //     ulSelected.append(getFullList(hardcoded));
-    //     ulSelected.append(getFullList(currencyExchangeRates));
-    //
-    //     ulSelected.find('li').on('click', function (event) {
-    //         appendSelectedItem(event);
-    //     });
-    // });
-
     $("#inversion").on('click', function (event) {
         var currentItem = $(event.currentTarget);
         var amount = $("#amount").val().toLowerCase();
@@ -413,59 +301,9 @@ $(document).ready(function () {
                 break;
         }
     });
-    //
-    // $(".linkGreyBlock").on('click', function (event) {
-    //     var from = $(event.currentTarget).find('.from').text();
-    //     var to = $(event.currentTarget).find('.to').text();
-    //     localStorage.setItem("from", from);
-    //     localStorage.setItem("to", to);
-    //     localStorage.setItem("convert", false);
-    // });
 });
 
-// function checkIsConvert() {
-//     var counter = 0;
-//     $.each($(".filters.container input"), function (key, element) {
-//         if (element.value != '') {
-//             counter++;
-//         }
-//         if (counter == 3) {
-//             convert();
-//         }
-//     });
-// }
 
-// function convert() {
-//     var amount = parseInt(document.getElementById("amount").value);
-//     var from = parseFloat(document.getElementById("from").getAttribute('price_usd'));
-//     var is_crypto_from = document.getElementById("from").getAttribute('is_crypto');
-//     var to = parseFloat(document.getElementById("to").getAttribute('price_usd'));
-//     var is_crypto_to = document.getElementById("to").getAttribute('is_crypto');
-//
-//     if (is_crypto_from == "true" || is_crypto_to == "true") {
-//         var result = (amount * from) / to;
-//     } else {
-//         var result = (amount * to) / from;
-//     }
-//
-//     var tempResult = Math.floor(result) + '.';
-//     $("#inetgerNum").text(tempResult);
-//     result = result.toString();
-//     var doubleIndex = result.indexOf('.');
-//     if (doubleIndex > 0) {
-//         $("#inetgerNum").text(Math.floor(result) + ".");
-//         var decimal = result.charAt(doubleIndex + 1);
-//         decimal += result.charAt(doubleIndex + 2);
-//         $("#decimal").text(decimal);
-//         var thousands =  result.charAt(doubleIndex + 3);
-//         thousands +=  result.charAt(doubleIndex + 4);
-//         thousands +=  result.charAt(doubleIndex + 5);
-//         $("#thousands").text(thousands);
-//     }
-// }
-function updateBlockFrom() {
-
-}
 
 function initalizeNewObject(Currency, selectedItem) {
     Currency.shortName = selectedItem.text().trim();
