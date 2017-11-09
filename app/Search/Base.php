@@ -116,7 +116,7 @@ class Base
     public static function searchInFiatValues($str)
     {
         $fiat = Search::where('type', 'fiat')
-            ->where('id', 'like', '%' . $str . '%')
+            ->where('id', 'like', '%' . $str)
             ->orderBy('rate', 'DESC')->take(2)->get()->toArray();
         return $fiat;
     }
@@ -147,8 +147,8 @@ class Base
 
     public static function searchInCryptoValues($str)
     {
-        $cryptoes = Search::where('type', 'fiat')
-            ->where('id', 'like', '%' . $str . '%')
+        $cryptoes = Search::where('type', 'crypto')
+            ->where('id', 'like', '%' . $str)
             ->orderBy('rate', 'DESC')->take(2)->get()->toArray();
         return $cryptoes;
     }

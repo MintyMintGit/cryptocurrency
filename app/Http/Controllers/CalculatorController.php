@@ -72,6 +72,10 @@ class CalculatorController extends Controller
                     $this->currencyTo->shortName = $links[1];
                 }
             }
+        } else {
+            /*set default params*/
+            $this->currencyFrom = Currency::setDefaultValueFrom();
+            $this->currencyTo = Currency::setDefaultValueTo();
         }
     }
 
