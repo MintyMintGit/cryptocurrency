@@ -291,6 +291,7 @@ $(document).ready(function () {
     });
 
     $("#inversion").on('click', function (event) {
+        event.preventDefault();
         var currentItem = $(event.currentTarget);
         var amount = $("#amount").val().toLowerCase();
         var from = $("#from").val().toLowerCase();
