@@ -43,6 +43,7 @@ class UpdateDataController extends Controller
                     }
                 }
             }
+            $item = $this->checkGlobalData($item);
             $this->insertToHistoryDB($tableName, $item);
         }
         TotalMarketCap::updateOrCreate(['id' => 1 ], ['price' => $TotalMarketCap]);
@@ -122,5 +123,19 @@ class UpdateDataController extends Controller
     function insertToHistoryDB($tableName, $data)
     {
         DB::connection('mysql2')->table(quotemeta($tableName))->insert(['price_usd' => $data['price_usd'], 'created_at' => Carbon::now()]);
+    }
+    function checkGlobalData($item)
+    {
+        $item['price_usd'] = $item['price_usd']==null ? 0 :$item['price_usd'];
+        $item['price_btc'] = $item['price_btc']==null ? 0 :$item['price_btc'];
+        $item['24h_volume_usd'] = $item['24h_volume_usd']==null ? 0 :$item['24h_volume_usd'];
+        $item['market_cap_usd'] = $item['market_cap_usd']==null ? 0 :$item['market_cap_usd'];
+        $item['available_supply'] = $item['available_supply']==null ? 0 :$item['available_supply'];
+        $item['total_supply'] = $item['total_supply']==null ? 0 :$item['total_supply'];
+        $item['percent_change_1h'] = $item['percent_change_1h']==null ? 0 :$item['percent_change_1h'];
+        $item['percent_change_24h'] = $item['percent_change_24h']==null ? 0 :$item['percent_change_24h'];
+        $item['percent_change_7d'] = $item['percent_change_7d']==null ? 0 :$item['percent_change_7d'];
+        $item['last_updated'] = $item['last_updated']==null ? 0 :$item['last_updated'];
+        return $item;
     }
 }

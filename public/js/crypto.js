@@ -1,5 +1,7 @@
 var crypt;
 var prices = [];
+// var pointStartInput = new Date($("#pointStart").val()).toISOString();
+// var selectedDate = moment(pointStartInput).format("YYYY-MM-DD HH:mm:ssZ")
 $(document).ready(function () {
 
     $.ajax({
@@ -29,7 +31,7 @@ function createGraph(data) {
         series: [{
             name: 'Price (USD)',
             data: data,
-            pointStart: Date.UTC(2006, 0, 01, 0, 0, 0, 0),
+            pointStart: Date.UTC(2017, 11, 09, 16, 45, 0, 0),
             pointInterval: 3600 * 500
         }],
 

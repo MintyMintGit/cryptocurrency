@@ -14,7 +14,8 @@
                         =
                     </div>
                     <span id="inetgerNum">0.</span>
-                </span><span class="blue" id="decimal">85</span><span class="gray" id="thousands">540</span><span id="amountToCurrency" class="cur">{{ strtoupper($currencyTo->shortName) }}</span>
+                </span><span class="blue" id="decimal">85</span><span class="gray" id="thousands">540</span>
+            <span id="amountToCurrency" class="cur">{{ strtoupper($currencyTo->shortName) }}</span>
         </div>
     </div>
 

@@ -9,7 +9,7 @@ class Base
     /**
      * @var string
      */
-    const API_URL = "https://api.coinmarketcap.com/v1/ticker/?limit=10";
+    const API_URL = "https://api.coinmarketcap.com/v1/ticker/";
     /**
      * Returns Ticker data.
      *
@@ -57,8 +57,8 @@ class Base
      * @return array
      */
     public static function getGlobalData($convert = "USD") {
-        return Request::exec(self::API_URL . "global/", [
-            'convert' => $convert
+        return Request::exec(self::API_URL, [
+            'limit' => 0
         ]);
     }
 }

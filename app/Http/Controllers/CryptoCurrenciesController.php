@@ -15,8 +15,15 @@ class CryptoCurrenciesController extends Controller
         $crypto = GlobalData::findOrFail($id);
         $bitcoinPrice = GlobalData::find('bitcoin')->price_usd;
         $linkToIcon = "/img/icons/" . $crypto->id . ".png";
-        $social = DB::select("select * from crypto_sidebar where Symbol like ?"  , [$crypto->symbol]);
+        $social = DB::select("select * from crypto_sidebar where Symbol like ?", [$crypto->symbol]);
         $charts = true;
+//        $pointStart = "";
+//        if (Schema::connection('mysql2')->hasTable('bitcoin')) {
+//            $temp = \DB::connection('mysql2')->table('bitcoin')->find(1);
+//            if($temp!= null) {
+//                $pointStart = $temp->created_at;
+//            }
+//        }
         return view('CryptoCurrencies.index',compact( 'scriptJs', 'crypto', 'bitcoinPrice', 'linkToIcon', 'social' , 'charts'));
     }
     public function generateUrl() {

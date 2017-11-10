@@ -2,6 +2,7 @@
 
 @section('content')
     <input type="hidden" id="historicalData" value="{{ route('historicalData', $crypto['id']) }}">
+    {{--<input type="hidden" id="pointStart" value="{{ $pointStart }}">--}}
 
 
     <div class="container-fluid page-content">

@@ -11,6 +11,8 @@ var hardcoded = {
     'BCH': {},
     'LTC': {}
 };
+var hardCodedCounterCrypto = 5;
+var hardCodedCounterFiat = 5;
 var crossRates = {
     'USD': {},
     'EUR': {},
@@ -245,13 +247,16 @@ $(document).ready(function () {
     getExchangeRates();
     getGlobaldata();
     changeAmount($("#amount"), $("#amountBlue"));
+    $("#amount").on('keyup', function (event) {
+        $("#amountBlue").text(event.currentTarget.value);
+    });
 
     $("#to, #from").on('keyup', function (event) {
         var currentItem = $(event.currentTarget);
         var dropDownList = currentItem.parent().siblings();
         dropDownList.find('li').remove();
         if (currentItem.val().length > 0) {
-            dropDownList.append(getReadyList(hardcoded, currentItem.val().toUpperCase()));
+            dropDownList.append(getFullListHarcoded(hardcoded, currentItem.val().toUpperCase()));
             dropDownList.append(getReadyList(currencyExchangeRates, currentItem.val().toUpperCase()));
             dropDownList.show();
             dropDownList.find('li').on('click', function (event) {
@@ -277,7 +282,7 @@ $(document).ready(function () {
         var dropDownList = currentItem.parent().siblings();
         dropDownList.find('li').remove();
 
-        dropDownList.append(getFullList(hardcoded));
+        dropDownList.append(getFullListHarcoded(hardcoded, currentItem.val().toUpperCase()));
         dropDownList.append(getFullList(currencyExchangeRates));
         dropDownList.show();
         dropDownList.find('li').on('click', function (event) {
@@ -346,15 +351,31 @@ function initalizeNewObject(Currency, selectedItem) {
     };
 
 
-    function getFullList(array) {
-        var readyList = [];
-
-        for (var item in array) {
+function getFullListHarcoded(array) {
+    var readyList = [];
+    var counter = 0;
+    for (var item in array)
+    {
+        counter++;
+        if (counter == hardCodedCounterFiat || counter == hardCodedCounterCrypto + hardCodedCounterFiat) {
+            readyList.push("<li class=" + "'borderLineBottom textForDropDownMenu'" + " iscrypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+        } else {
             readyList.push("<li class=" + 'textForDropDownMenu' + " iscrypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
         }
-
-        return readyList;
     }
+    return readyList;
+}
+
+function getFullList(array) {
+    var readyList = [];
+
+    for (var item in array) {
+        readyList.push("<li class=" + 'textForDropDownMenu' + " iscrypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+    }
+
+    return readyList;
+}
+
 
     function getReadyList(array, key) {
         var readyList = [];
