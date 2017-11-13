@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="currency-price">
-                        <span class="price">${{ number_format($crypto['price_usd']) }}<span class="gray"></span></span><span class="grow green">({{ round($crypto['percent_change_24h'], 2) }}%)</span>
+                        <span class="price">${{ number_format($crypto['price_usd']) }}<span class="gray"></span></span><span class="grow {{ round($crypto['percent_change_24h'], 2) >=0 ? "green" : "red" }}">({{ round($crypto['percent_change_24h'], 2) }}%)</span>
                     </div>
                     <div class="row blocks">
                         <div class="item col-md-4 col-sm-4 col-xs-12">

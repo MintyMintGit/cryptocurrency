@@ -300,10 +300,10 @@ $(document).ready(function () {
 
         switch (currentItem.attr("id")) {
             case "inversion" :
-                window.open(createRedirectLink(amount, to, from), '_blank');
+                window.location = createRedirectLink(amount, to, from);
                 break;
             case "convert":
-                window.open(createRedirectLink(amount, from, to), '_blank');
+                window.location = createRedirectLink(amount, from, to);
                 break;
         }
     });
