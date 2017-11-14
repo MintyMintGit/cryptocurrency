@@ -1,4 +1,4 @@
-<div class="container-fluid items-currency-bottom">
+<div class="converter container-fluid items-currency-bottom">
     <div class="row seven-cols">
         <div class="col-lg-1 col-md-1 col-sm-4 col-xs-6">
             <a class="linkGreyBlock">
