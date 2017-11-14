@@ -276,13 +276,15 @@ $(document).ready(function () {
     });
     //
     // //show all drop down list
-    $("#to, #from").on('click', function (event) {
+
+    $(".input-wrap").on('click', function (event) {
         var currentItem = $(event.currentTarget);
-        currentItem.val("");
-        var dropDownList = currentItem.parent().siblings();
+        var input = currentItem.find('input');
+        input.val("");
+        var dropDownList = currentItem.siblings();
         dropDownList.find('li').remove();
 
-        dropDownList.append(getFullListHarcoded(hardcoded, currentItem.val().toUpperCase()));
+        dropDownList.append(getFullListHarcoded(hardcoded, input.val().toUpperCase()));
         dropDownList.append(getFullList(currencyExchangeRates));
         dropDownList.show();
         dropDownList.find('li').on('click', function (event) {

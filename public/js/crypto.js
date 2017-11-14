@@ -31,7 +31,7 @@ function createGraph(data) {
         series: [{
             name: 'Price (USD)',
             data: data,
-            pointStart: Date.UTC(2017, 11, 09, 16, 45, 0, 0),
+            pointStart: Date.UTC(2017, 10, 10, 12, 15, 30, 0),
             pointInterval: 3600 * 500
         }],
 
