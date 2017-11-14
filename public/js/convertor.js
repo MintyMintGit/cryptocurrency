@@ -332,7 +332,7 @@ function initalizeNewObject(Currency, selectedItem) {
     }
 
     function appendSelectedItem(selectedItem) {
-        var selectedItem = $(event.currentTarget);
+        var selectedItem = $(selectedItem.currentTarget);
         var id = selectedItem.parent().attr('id');
         var newCurrency = new Currency();
         initalizeNewObject(newCurrency, selectedItem);
