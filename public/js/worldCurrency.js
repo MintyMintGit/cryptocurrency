@@ -58,10 +58,6 @@ $(".updateLink").on('click', function (event) {
     var from = currentItem.attr('data-from').toLowerCase();
     var to = currentItem.attr('data-to').toLowerCase();
 
-    localStorage.setItem("amount", '1');
-    localStorage.setItem("to", to);
-    localStorage.setItem("from", from);
-    localStorage.setItem("convert", false);
 
     window.location = window.location.origin + "/calculator/" + from + "-" + to;
 });

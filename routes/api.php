@@ -32,7 +32,7 @@ Route::get('/getExchangeRates', function (Request $request) {
 })->name('getExchangeRates');
 
 Route::get('/GlobalDataNames', function (Request $request) {
-    $globalDatas = \App\GlobalData::get(['name', 'symbol', 'price_usd']);
+    $globalDatas = \App\GlobalData::get(['name', 'symbol', 'price_usd', 'price_usdOld']);
     return $globalDatas;
 })->name('GlobalDataNames');
 

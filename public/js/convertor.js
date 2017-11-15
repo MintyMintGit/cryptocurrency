@@ -86,47 +86,6 @@ function getExchangeRates() {
     });
 }
 
-// function runTrandingRates() {
-//     /*try get from anothe is USD*/
-//     var fromFromStorage = "";
-//     if (localStorage.getItem("from") === null) {
-//         fromFromStorage = $("#from").val();
-//     } else {
-//         fromFromStorage = localStorage.getItem("from").toUpperCase();
-//     }
-//     if (!fromFromStorage) {
-//         return;
-//     }
-//
-//     if (fromFromStorage == 'USD') {
-//         fromFromStorage = crossRates['USD'];
-//     } else {
-//         $.each(currencyExchangeRates, function (indx, element) {
-//             if (element.name == fromFromStorage) {
-//                 fromFromStorage = element;
-//             }
-//         });
-//         if (fromFromStorage.name == undefined) {
-//             $.each(hardcoded, function (indx, element) {
-//                 if (element.name == fromFromStorage) {
-//                     fromFromStorage = element;
-//                 }
-//             });
-//         }
-//     }
-//     $(".from").append(fromFromStorage.name);
-//     $(".to").each(function (indx, element) {
-//         var parent = $(element).parents('.greyBlock');
-//         var newPrice = TrandingRates(fromFromStorage.price_usd, crossRates[element.innerText].price_usd);
-//         var oldPrice = TrandingRates(fromFromStorage.price_usdOld, crossRates[element.innerText].price_usdOld);
-//         var result = calculatePercentage(oldPrice, newPrice);
-//         parent.find('.someValue').text(crossRates[element.innerText].price_usdOld);
-//         parent.find('.trendingRates').text(result);
-//         trandingRatesUpdate();
-//     });
-// }
-
-
 function TrandingRates(from, to) {
     return (from / to).toFixed(5);
 }
@@ -352,6 +311,7 @@ function initalizeNewObject(Currency, selectedItem) {
         } else {
             updateToselected(newCurrency);
         }
+        runTrandingRates();
     };
 
 

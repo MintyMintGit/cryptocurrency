@@ -105,7 +105,7 @@ function runConvertCurrencies() {
         updateBigNum(resultCalculate)
 
     }
-
+    runTrandingRates();
 }
 
 $(document).ready(function () {

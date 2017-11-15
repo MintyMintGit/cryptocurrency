@@ -26,9 +26,64 @@ class UpdateDataController extends Controller
         $TotalMarketCap = 0;
         foreach ($data as $key => $item) {
             $TotalMarketCap += $item['market_cap_usd'];
-            GlobalData::updateOrCreate(['id' => "{$item['id']}"], ['name' => "{$item['name']}", 'symbol' => "{$item['symbol']}", 'rank' => "{$item['rank']}", 'price_usd' => $this->updateValue($item['price_usd']), 'price_btc' => $this->updateValue($item['price_btc']), 'volume_usd_24h' => $this->updateValue($item['24h_volume_usd']), 'market_cap_usd' => $this->updateValue($item['market_cap_usd']), 'available_supply' => $this->updateValue($item['available_supply']), 'total_supply' => $this->updateValue($item['total_supply']), 'percent_change_1h' => $this->updateValue($item['percent_change_1h']), 'percent_change_24h' => $this->updateValue($item['percent_change_24h']), 'percent_change_7d' => $this->updateValue($item['percent_change_7d']), 'last_updated' => $this->updateValue($item['last_updated'])]);
-            $tableName = str_replace(' ', '-', $item['id']);
+            $oldItem = GlobalData::find($item['id']);
+            if($oldItem == null) {
+                $newItem = new GlobalData;
+                $newItem->id = $item['id'];
+                $newItem->name = $item['name'];
+                $newItem->symbol = $item['symbol'];
+                $newItem->rank = $item['rank'];
+                $newItem->price_usd = $item['price_usd'];
+                $newItem->price_btc = $item['price_btc'];
+                $newItem->volume_usd_24h = $item['24h_volume_usd'];
+                $newItem->market_cap_usd = $item['market_cap_usd'];
+                $newItem->available_supply = $item['available_supply'];
+                $newItem->total_supply = $item['total_supply'];
+                $newItem->percent_change_1h = $item['percent_change_1h'];
+                $newItem->percent_change_24h = $item['percent_change_24h'];
+                $newItem->percent_change_7d = $item['percent_change_7d'];
+                $newItem->last_updated = $item['last_updated'];
+                $newItem->price_usdOld = $item['price_usd'];
+                $newItem = $this->checkGlobalData($newItem);
+                $newItem->save();
+            } else {
+                $oldItem->name = $item['name'];
+                $oldItem->symbol = $item['symbol'];
+                $oldItem->rank = $item['rank'];
+                $oldItem->price_usdOld = $oldItem->price_usd;
+                $oldItem->price_usd = $item['price_usd'];
+                $oldItem->price_btc = $item['price_btc'];
+                $oldItem->volume_usd_24h = $item['24h_volume_usd'];
+                $oldItem->market_cap_usd = $item['market_cap_usd'];
+                $oldItem->available_supply = $item['available_supply'];
+                $oldItem->total_supply = $item['total_supply'];
+                $oldItem->percent_change_1h = $item['percent_change_1h'];
+                $oldItem->percent_change_24h = $item['percent_change_24h'];
+                $oldItem->percent_change_7d = $item['percent_change_7d'];
+                $oldItem->last_updated = $item['last_updated'];
+                $oldItem = $this->checkGlobalData($oldItem);
+                $oldItem->save();
+            }
 
+
+            /*GlobalData::updateOrCreate(
+                ['id' => "{$item['id']}"],
+                ['name' => "{$item['name']}",
+                'symbol' => "{$item['symbol']}", 'rank' => "{$item['rank']}",
+                    'price_usd' => $this->updateValue($item['price_usd']),
+                    'price_btc' => $this->updateValue($item['price_btc']),
+                    'volume_usd_24h' => $this->updateValue($item['24h_volume_usd']),
+                    'market_cap_usd' => $this->updateValue($item['market_cap_usd']),
+                    'available_supply' => $this->updateValue($item['available_supply']),
+                    'total_supply' => $this->updateValue($item['total_supply']),
+                    'percent_change_1h' => $this->updateValue($item['percent_change_1h']),
+                    'percent_change_24h' => $this->updateValue($item['percent_change_24h']),
+                    'percent_change_7d' => $this->updateValue($item['percent_change_7d']),
+                    'last_updated' => $this->updateValue($item['last_updated'])]);*/
+
+
+
+            $tableName = str_replace(' ', '-', $item['id']);
             if (!Schema::connection('mysql2')->hasTable($tableName)) {
                 $tableName = str_replace(' ', '-', $item['name']);
                 if (!Schema::connection('mysql2')->hasTable($tableName)) {
@@ -43,7 +98,7 @@ class UpdateDataController extends Controller
                     }
                 }
             }
-            $item = $this->checkGlobalData($item);
+            $item = $this->checkGlobalDataForItemAPI($item);
             $this->insertToHistoryDB($tableName, $item);
         }
         TotalMarketCap::updateOrCreate(['id' => 1 ], ['price' => $TotalMarketCap]);
@@ -129,7 +184,21 @@ class UpdateDataController extends Controller
     {
         $item['price_usd'] = $item['price_usd']==null ? 0 :$item['price_usd'];
         $item['price_btc'] = $item['price_btc']==null ? 0 :$item['price_btc'];
-        $item['24h_volume_usd'] = $item['24h_volume_usd']==null ? 0 :$item['24h_volume_usd'];
+        $item['volume_usd_24h'] = $item['volume_usd_24h']==null ? 0 :$item['volume_usd_24h'];
+        $item['market_cap_usd'] = $item['market_cap_usd']==null ? 0 :$item['market_cap_usd'];
+        $item['available_supply'] = $item['available_supply']==null ? 0 :$item['available_supply'];
+        $item['total_supply'] = $item['total_supply']==null ? 0 :$item['total_supply'];
+        $item['percent_change_1h'] = $item['percent_change_1h']==null ? 0 :$item['percent_change_1h'];
+        $item['percent_change_24h'] = $item['percent_change_24h']==null ? 0 :$item['percent_change_24h'];
+        $item['percent_change_7d'] = $item['percent_change_7d']==null ? 0 :$item['percent_change_7d'];
+        $item['last_updated'] = $item['last_updated']==null ? 0 :$item['last_updated'];
+        return $item;
+    }
+    function checkGlobalDataForItemAPI($item)
+    {
+        $item['price_usd'] = $item['price_usd']==null ? 0 :$item['price_usd'];
+        $item['price_btc'] = $item['price_btc']==null ? 0 :$item['price_btc'];
+        $item['volume_usd_24h'] = $item['24h_volume_usd']==null ? 0 :$item['24h_volume_usd'];
         $item['market_cap_usd'] = $item['market_cap_usd']==null ? 0 :$item['market_cap_usd'];
         $item['available_supply'] = $item['available_supply']==null ? 0 :$item['available_supply'];
         $item['total_supply'] = $item['total_supply']==null ? 0 :$item['total_supply'];

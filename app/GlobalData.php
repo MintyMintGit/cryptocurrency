@@ -22,6 +22,7 @@ class GlobalData extends Model
         "percent_change_1h",
         "percent_change_24h",
         "percent_change_7d",
-        "last_updated"
+        "last_updated",
+        "price_usdOld"
     ];
 }

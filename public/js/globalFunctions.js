@@ -132,11 +132,18 @@ function runTrandingRates() {
         currencyFrom.price_usdOld = from.price_usdOld;
         currencyTo.price_usdOld = to.price_usdOld;
         currencyTo.price_usd = to.price_usd;
+        currencyTo.price_usdOld = to.price_usdOld;
 
 
         var parent = $(element).parents('.greyBlock');
-        var newPrice = TrandingRates(currencyFrom.price_usd, currencyTo.price_usd);
-        var oldPrice = TrandingRates(currencyFrom.price_usd, currencyTo.price_usdOld);
+        if (from.crypto == true) {
+            currencyTo.price_usd = 1 / currencyTo.price_usd;
+            currencyTo.price_usdOld = 1 / currencyTo.price_usdOld;
+        }
+        var newPrice = calculateConvertor(currencyFrom.price_usd, currencyTo.price_usd, 1, from.crypto);
+        var oldPrice = calculateConvertor(currencyFrom.price_usdOld, currencyTo.price_usdOld, 1, from.crypto);
+        //var newPrice = TrandingRates(currencyFrom.price_usd, currencyTo.price_usdOld);
+        //var oldPrice = TrandingRates(currencyFrom.price_usd, currencyTo.price_usdOld);
         var result = calculatePercentage(oldPrice, newPrice);
         // parent.find('.trendingRates').append("<div class='green'>" + crossRates[element.innerText].price_usdOld + "</div>")
         // parent.find('.trendingRates').append("<div class='" + color + "'>" + result + "</div>");
