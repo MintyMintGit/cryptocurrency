@@ -1,3 +1,4 @@
+
 та/*another content*/
 @font-face {
     font-family: "fontawesome";
@@ -146,7 +147,7 @@ h1 {
     z-index: 9;
     opacity: 0.95 !important;
     max-height: 300px;
-    /*overflow-y: scroll;*/
+    overflow-y: scroll;
 }
 
 .search-dpopdown-list .currency-block {
@@ -557,16 +558,16 @@ td:first-child {
     position: relative;
 }
 .main-table .currency-logo-sprite {
-    position: absolute;
+    
     display: inline-block;
     margin: -1px 0px;
 }
 .main-table .name a {
-    padding-left: 20px !important;
+    padding-left: 10px !important;
 }
 .main-table tbody .name {
     position: relative;
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     height: 56px;
 }
@@ -1100,6 +1101,12 @@ table#allCrypto {
     top: 0px;
     color: #fff;
 }
+.calc-custom-form{
+    position: relative;
+}
+.calc-custom-form .input-wrap{
+    position: relative !important;
+}
 .converter .filters .dropdown-menu.open {
     max-height: 300px;
     overflow-y: scroll; 
@@ -1173,7 +1180,7 @@ table#allCrypto {
     left: 4px;
 }
 .converter .page-content{
-    margin-top: 70px;
+    margin-top: 10px;
 }
 .converter .main-info {
     text-align: center;
@@ -1353,14 +1360,20 @@ table#allCrypto {
 
 @media screen and (max-width: 767px) {
 
-
-
+.filters .col-md-3:nth-child(2){
+    margin-bottom: 15px;
+}
+.converter .page-content {
+    margin-top: 0;
+}
 
 
     table#allCrypto {
     margin-top: 50px;
 }
-
+.date.container-fluid p {
+   margin-top: 0 !important;
+}
     
 #allCrypto td{
     display: none;
@@ -1384,6 +1397,7 @@ table#allCrypto {
     }
     .main-table .name a {
         padding-right: 20px;
+        padding-left: 20px !important;
     }
     table {
         border: 0;
@@ -1551,10 +1565,10 @@ table tr{
         margin-bottom: 5px;
     }
     .converter .main-info .big-num .top-num{
-        top: -40px;
+        top: -30px;
     }
     .converter .main-info .big-num {
-        font-size: 62px !important;
+        font-size: 70px !important;
         margin-top: 40px;
         text-overflow: clip;
     }
@@ -1751,7 +1765,7 @@ table tr{
     }
     .main-table td.num,
 .main-table th.num-h.num {
-    width: 9% !important;
+    width: 5% !important;
 }
 .main-table td.name,
 .main-table th.name-h.name {
@@ -1837,42 +1851,39 @@ th.name-h{
 }
 div#marketCapitalizations_filter { display:none; }
 
-@media screen and (max-width: 767px){
-span#amountToCurrency{
-    display: block;
-}
+
 
 }
 
 .calc-custom-form{
-	position: relative;
+    position: relative;
 }
 .calc-custom-form input {
-	display: inline-block;
-	padding: 6px 12px;
-	margin-bottom: 0;
-	font-size: 14px;
-	font-weight: normal;
-	line-height: 1.42857143;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	-ms-touch-action: manipulation;
-	touch-action: manipulation;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	background-image: none;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	color: #000;
-	text-align: left;
-	width: 100%;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #000;
+    text-align: left;
+    width: 100%;
 }
 .calc-custom-form span.bs-caret {
-	height: 32px !important;
+    height: 32px !important;
     top: 1px !important;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -1882,7 +1893,7 @@ span#amountToCurrency{
     cursor: pointer;
 }
 .calc-custom-form .dropdown{
-	position: absolute;
+    position: absolute;
     top: 100%;
     left: 0;
     z-index: 1000;
@@ -1907,7 +1918,7 @@ span#amountToCurrency{
     display: none;
 }
 .calc-custom-form .dropdown ul{
-	padding: 0;
+    padding: 0;
 }
 .calc-custom-form .dropdown li {
     display: block;
@@ -1919,11 +1930,11 @@ span#amountToCurrency{
     white-space: nowrap;
 }
 .calc-custom-form .dropdown li:hover{
-	background-color: #f9f9f9;
-	cursor: pointer;
+    background-color: #f9f9f9;
+    cursor: pointer;
 }
 .date.container-fluid{
-	text-align: left;
+    text-align: left;
 }
 .date.container-fluid h2{
     font-size: 32px;
@@ -1931,5 +1942,16 @@ span#amountToCurrency{
     text-align: right;
 }
 .date.container-fluid p{
-	margin-top: -35px;
+    margin-top: -35px;
+}
+.date.container-fluid p {
+text-align: right;
+margin-top: 0;
+}
+.borderLineBottom {
+    border-bottom: 1px solid #ccc; 
+}
+.linkStyle a{
+    padding: 0px!important;
+    margin-bottom: 0px!important;
 }

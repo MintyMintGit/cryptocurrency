@@ -135,14 +135,14 @@ function calculatePercentage(old, today) {
     return (1 - (TrandingRates(old, today))).toFixed(5);
 }
 
-function trandingRatesUpdate() {
+    function trandingRatesUpdate() {
     $(".linkGreyBlock").each(function (indx, element) {
         var from = $("#amountFromCurrency").text();
         var linkTo = $(element).find('.to').text();
         if (from == linkTo) {
             $(element).parent().hide();
         } else {
-            $(element).show();
+            $(element).parent().show();
             $(element).find('.from').text(from);
             $(element).attr('href', '/calculator/' + from + "-" + linkTo);
         }
