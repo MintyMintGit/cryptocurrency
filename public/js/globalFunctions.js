@@ -6,12 +6,22 @@ var bitcoinDateUpdate = $("#bitcoinDateUpdate").val();
 * */
 function сurrencySwitcher(tableJsObj) {
     $(".pointer").on('click', function (event) {
-        dataCurrency = $(event.currentTarget).attr('data-currency');
-        coefficient = currencyExchangeRatesSecond.attr('data-usd' + dataCurrency);
+        var dataCurrency = $(event.currentTarget).attr('data-currency');
         var switchButton = $("#currency-switch-button");
 
-        switchButton.text(dataCurrency.toUpperCase() + " ");
+
         switchButton.append("<span class=\"caret\"></span>");
+
+        if (dataCurrency == "usd dollar") {
+            switchButton.text(dataCurrency.toUpperCase() + " ");
+            dataCurrency = "usd";
+        } else {
+            switchButton.text(dataCurrency.toUpperCase() + " ");
+        }
+        var coefficient = currencyExchangeRatesSecond.attr('data-usd' + dataCurrency);
+
+
+
 
         //market_cap_usd
 
@@ -34,7 +44,7 @@ function сurrencySwitcher(tableJsObj) {
                 element.innerHTML = (parseFloat(element.getAttribute('data-usd')) / parseFloat($("#ethPrice").val())).toFixed(8) + " ETH";
             } else {
                 var costInDollars = $(element).attr('data-usd');
-                element.innerHTML = mapShortCodetoSymbol(dataCurrency) + (parseFloat(costInDollars) * coefficient).toFixed(2);
+                element.innerHTML = mapShortCodetoSymbol(dataCurrency) + (parseFloat(costInDollars) * coefficient).toFixed(6);
             }
         });
 

@@ -78,7 +78,14 @@
                             <div class="dropdown-menu open" role="combobox">
                                 <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
                                     <!--start something-->
-
+                                    <li data-original-index="0" class="pointer selected">
+                                        <a tabindex="0" class="pointer" data-tokens="null" href="#USD" data-currency="usd dollar"
+                                           role="option"
+                                           aria-disabled="false"
+                                           aria-selected="true"><span
+                                                    class="text">USD Dollar</span><span
+                                                    class="glyphicon glyphicon-ok check-mark"></span></a>
+                                    </li>
                                     <!--end something -->
                                     <li data-original-index="0" class="pointer selected">
                                         <a tabindex="0" class="pointer" data-tokens="null" href="#BTC" data-currency="btc"

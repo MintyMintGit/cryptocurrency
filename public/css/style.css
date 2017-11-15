@@ -1955,3 +1955,6 @@ margin-top: 0;
     padding: 0px!important;
     margin-bottom: 0px!important;
 }
+.somePadding {
+    padding: 0 15px!important;
+}
