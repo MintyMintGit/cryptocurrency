@@ -85,6 +85,7 @@ class UpdateDataController extends Controller
             }
         }
         self::updateSearchTable();
+        self::updateCssImg();
         return 'Updated successfully';
     }
     function updateValue($number) {
@@ -137,5 +138,28 @@ class UpdateDataController extends Controller
         $item['percent_change_7d'] = $item['percent_change_7d']==null ? 0 :$item['percent_change_7d'];
         $item['last_updated'] = $item['last_updated']==null ? 0 :$item['last_updated'];
         return $item;
+    }
+
+    static function updateCssImg() {
+        $returned_content = self::get_data('https://coinmarketcap.com/static/sprites/all_views_all_0.css');
+        if($returned_content != null) {
+            $file = $_SERVER['DOCUMENT_ROOT'] . '/css' . '/cryptoIcons.css';
+            file_put_contents($file, $returned_content);
+        }
+        $returned_content = self::get_data('https://coinmarketcap.com/static/sprites/all_views_all_0.png');
+        if($returned_content != null) {
+            $file = $_SERVER['DOCUMENT_ROOT'] . '/css' . '/all_views_all_0.png';
+            file_put_contents($file, $returned_content);
+        }
+    }
+    static function get_data($url) {
+        $ch = curl_init();
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
     }
 }
