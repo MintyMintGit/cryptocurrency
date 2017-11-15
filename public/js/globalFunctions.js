@@ -108,3 +108,29 @@ function searchFullInfoCurrency(name) {
     }
     return fullInfo;
 }
+function runTrandingRates() {
+    /*try get from anothe is USD*/
+    $(".to").each(function (indx, element) {
+
+        var currencyFrom = new Currency();
+        currencyFrom.shortName = element;
+        initalizeFromObject(currencyFrom);
+        var currencyTo = new Currency();
+        currencyFrom.shortName = element;
+        initalizeToObject(currencyTo);
+        var from = searchFullInfoCurrency(currencyFrom.shortName);
+        var to = searchFullInfoCurrency(currencyTo.shortName);
+        currencyFrom.price_usdOld = from.price_usdOld;
+        currencyTo.price_usdOld = to.price_usdOld;
+
+
+        var parent = $(element).parents('.greyBlock');
+        var newPrice = TrandingRates(currencyFrom.price_usd, currencyTo.price_usd);
+        var oldPrice = TrandingRates(currencyFrom.price_usdOld, currencyTo.price_usdOld);
+        var result = calculatePercentage(oldPrice, newPrice);
+        // parent.find('.trendingRates').append("<div class='green'>" + crossRates[element.innerText].price_usdOld + "</div>")
+        // parent.find('.trendingRates').append("<div class='" + color + "'>" + result + "</div>");
+        parent.find('.someValue').text(newPrice);
+        parent.find('.trendingRates').text(result);
+    });
+}

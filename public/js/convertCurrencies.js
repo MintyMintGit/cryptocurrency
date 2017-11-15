@@ -53,7 +53,7 @@ function updateBigNum(resultCalculateNum) {
 * return num value
 * */
 function calculateConvertor(priceUSDFrom, priceUSDTo, numAmount, isCrypto) {
-    if (isCrypto == "true") {
+    if (isCrypto === "true" || isCrypto == true) {
         return (numAmount * priceUSDFrom) / priceUSDTo;
     } else {
         return (numAmount * priceUSDTo) / priceUSDFrom;
@@ -63,14 +63,14 @@ function calculateConvertor(priceUSDFrom, priceUSDTo, numAmount, isCrypto) {
 function initalizeFromObject(Currency) {
     Currency.shortName = $("#from").val();
     Currency.price_usd = $("#from").attr('price_usd');
-    Currency.isCrypto = $("#from").attr('isCrypto') ? "true" : "false";
+    Currency.isCrypto = $("#from").attr('is_crypto');
     Currency.fullName = $("#fromSecond").val();
 }
 
 function initalizeToObject(Currency) {
     Currency.shortName = $("#to").val();
     Currency.price_usd = $("#to").attr('price_usd');
-    Currency.isCrypto = $("#to").attr('isCrypto') ? "true" : "false";
+    Currency.isCrypto = $("#to").attr('is_crypto');
     Currency.fullName = $("#toSecond");
 }
 
@@ -81,11 +81,25 @@ function runConvertCurrencies() {
     var currencyTo = new Currency();
     initalizeToObject(currencyTo);
     var amount = parseInt($("#amount").val());
+
+    if (currencyTo.isCrypto == "true") {
+        if (currencyFrom.isCrypto == "false") {
+            currencyFrom.price_usd = 1 / currencyFrom.price_usd;
+        }
+    }
+    if (currencyFrom.isCrypto == "true") {
+        if (currencyTo.isCrypto == "false") {
+            currencyTo.price_usd = 1 / currencyTo.price_usd;
+        }
+    }
+
     var flag = currencyFrom.isCrypto;
     if(currencyTo.isCrypto == "true") {
-        flag = true;
+        flag = "true";
     }
+
     var resultCalculate = calculateConvertor(currencyFrom.price_usd, currencyTo.price_usd, amount, flag);
+
     if (Boolean(resultCalculate)) {
         /*update values*/
         updateBigNum(resultCalculate)

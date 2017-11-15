@@ -343,38 +343,6 @@ function putSixthRow(key, value) {
 function createRedirectLink(amount, from, to) {
     return window.location.href + "calculator/" + from + "-" + to + "?" + amount;
 }
-function runTrandingRates() {
-    /*try get from anothe is USD*/
-    if (localStorage.getItem("from") !== null) {
-        var fromFromStorage = localStorage.getItem("from").toUpperCase();
-        if(fromFromStorage == 'USD') {
-            fromFromStorage = crossRates['USD'];
-        } else {
-            $.each(currencyExchangeRatesFirst, function (indx, element) {
-                if(element.name == fromFromStorage) {
-                    fromFromStorage = element;
-                }
-            });
-            if(fromFromStorage.name == undefined) {
-                $.each(hardcoded, function (indx, element) {
-                    if(element.name == fromFromStorage) {
-                        fromFromStorage = element;
-                    }
-                });
-            }
-        }
-        $(".from").append(fromFromStorage.name);
-        $(".to").each(function(indx, element){
-            var parent = $(element).parents('.greyBlock');
-            var newPrice = TrandingRates(fromFromStorage.price_usd, crossRates[element.innerText].price_usd);
-            var oldPrice = TrandingRates(fromFromStorage.price_usdOld, crossRates[element.innerText].price_usdOld);
-            var result = calculatePercentage(oldPrice, newPrice);
-            var color = result > 1 ? "green" : "red";
-            parent.find('.trendingRates').append("<div class='green'>" + crossRates[element.innerText].price_usdOld + "</div>")
-            parent.find('.trendingRates').append("<div class='" + color + "'>" + result + "</div>");
-        });
-    }
-}
 
 function TrandingRates(from, to) {
     return (from / to).toFixed(5);

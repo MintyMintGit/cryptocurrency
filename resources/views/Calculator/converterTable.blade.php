@@ -29,7 +29,7 @@
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="calc-custom-form">
                     <div class="input-wrap">
-                        <input type="search" isCrypto="{{ $currencyFrom->isCrypto }}" id="from" value="{{ strtoupper($currencyFrom->shortName) }}" price_usd="{{ $currencyFrom->price_usd }}">
+                        <input type="search" is_crypto="{{ $currencyFrom->isCrypto }}" id="from" value="{{ strtoupper($currencyFrom->shortName) }}" price_usd="{{ $currencyFrom->price_usd }}">
                         <span class="bs-caret"><span class="caret"></span></span>
                     </div>
                     <div class="dropdown" id="autoFrom">
@@ -45,7 +45,7 @@
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="calc-custom-form">
                     <div class="input-wrap">
-                        <input type="search" isCrypto="{{ $currencyTo->isCrypto }}" id="to" value="{{ strtoupper($currencyTo->shortName) }}" price_usd="{{ $currencyTo->price_usd }}">
+                        <input type="search" is_crypto="{{ $currencyTo->isCrypto }}" id="to" value="{{ strtoupper($currencyTo->shortName) }}" price_usd="{{ $currencyTo->price_usd }}">
                         <span class="bs-caret"><span class="caret"></span></span>
                     </div>
                     <div class="dropdown" id="autoTo">
