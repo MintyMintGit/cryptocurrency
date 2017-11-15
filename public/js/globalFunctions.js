@@ -110,6 +110,7 @@ function searchFullInfoCurrency(name) {
 }
 function runTrandingRates() {
     /*try get from anothe is USD*/
+    setTimeout(1000);
     $(".to").each(function (indx, element) {
 
         var currencyFrom = new Currency();
@@ -131,5 +132,6 @@ function runTrandingRates() {
         // parent.find('.trendingRates').append("<div class='" + color + "'>" + result + "</div>");
         parent.find('.someValue').text(newPrice);
         parent.find('.trendingRates').text(result);
+        trandingRatesUpdate();
     });
 }

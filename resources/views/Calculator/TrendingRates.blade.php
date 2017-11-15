@@ -4,9 +4,7 @@
             <a class="linkGreyBlock">
                 <div class="item greyBlock">
                     <h4>
-                        <span class="from">{{ strtoupper($currencyFrom->shortName) }}</span>
-                        /
-                        <span class="to">USD</span>
+                        <span class="from">{{ strtoupper($currencyFrom->shortName) }}</span>/<span class="to">USD</span>
                     </h4>
                     <p class="someValue">1,45431</p>
                     <span class="trendingRates">-1.1777971%</span>

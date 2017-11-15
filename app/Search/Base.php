@@ -113,11 +113,11 @@ class Base
         }
     }
 
-    public static function searchInFiatValues($str)
+    public static function searchInFiatValues($str, $len)
     {
         $fiat = Search::where('type', 'fiat')
             ->where('id', 'like', '%' . $str)
-            ->orderBy('rate', 'DESC')->take(2)->get()->toArray();
+            ->orderBy('rate', 'DESC')->take($len)->get()->toArray();
         return $fiat;
     }
     public static function getAllFiatValues() {
@@ -145,29 +145,76 @@ class Base
         return $result;
     }
 
-    public static function searchInCryptoValues($str)
+    public static function searchInCryptoValues($str, $len)
     {
         $cryptoes = Search::where('type', 'crypto')
             ->where('id', 'like', '%' . $str)
-            ->orderBy('rate', 'DESC')->take(2)->get()->toArray();
+            ->orderBy('rate', 'DESC')->take($len)->get()->toArray();
         return $cryptoes;
     }
 
     public static function searchInPair($str)
     {
         $allFiat = self::getAllFiatValues();
-        $searchFiat = self::searchInFiatValues($str);
+        $searchFiat = self::searchInFiatValues($str, 2);
         $fiat = self::mergeSearchWithAll($searchFiat, $allFiat);
 
         $allCrypto = self::getAllCryptoValues();
-        $searchCrypto = self::searchInCryptoValues($str);
+        $searchCrypto = self::searchInCryptoValues($str, 2);
         $crypto = self::mergeSearchWithAll($searchCrypto, $allCrypto);
 
         $pairsExchange1 = Search::where('type', 'exchange_pair')->where('exchange1','like', '%' . $str. '%')->orderBy('rate', 'DESC')->get()->toArray();
         $result = self::mergeFromDBandGenerated($pairsExchange1, array_merge($fiat, $crypto));
         $result = array_merge($result, $searchFiat);
         $result = array_merge($result, $searchCrypto);
+
+
+        if (count($result) == 0) {
+            for ($i = 1; $i < strlen($str); $i++) {
+                $strSearch = substr($str, 0, strlen($str) - $i);
+                $searchResultFirst = self::searchRecursion($strSearch, 1);
+                if ($searchResultFirst != false) {
+                    //need to search second result
+                    $searchResultSecondArr = self::searchRecursion(substr($str, strlen($strSearch), strlen($str)), 2);
+                    if (count($searchResultSecondArr) > 0) {
+
+                        foreach ($searchResultSecondArr as $item) {
+                            $temp = self::generateCryptoPair($searchResultFirst, $item);
+                            array_push($result, $temp);
+                        }
+                        return $result;
+                    }
+
+                }
+            }
+
+        }
         return $result;
+    }
+
+    private static function searchRecursion($str, $len)
+    {
+        $searchFiat = self::searchInFiatValues($str, $len);
+        if (count($searchFiat) == 0) {
+            $searchCrypto = self::searchInCryptoValues($str, $len);
+            if (count($searchCrypto) == 0) {
+                return false;
+            } else {
+                return $searchCrypto;
+            }
+        } else {
+            return $searchFiat;
+        }
+    }
+
+    private static function generateCryptoPair($exchange1, $exchange2)
+    {
+        $exchange2['type'] = "exchange_pair";
+        $exchange2['rate'] = 0;
+        $exchange2['exchange2'] = $exchange2['id'];
+        $exchange2['exchange1'] = $exchange1[0]['id'];
+        $exchange2['id'] = $exchange1[0]['id'] . $exchange2['id'];
+        return $exchange2;
     }
 
     public static function searchInListSearch($str)
