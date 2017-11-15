@@ -50,7 +50,13 @@ class CalculatorController extends Controller
         if ($this->currencyFrom->shortName != null && $this->currencyTo->shortName != null) {
             $this->currencyFrom = $this->updateCurrency($this->currencyFrom);
             $this->currencyTo = $this->updateCurrency($this->currencyTo);
-            $temp['amount'] = $this->getAmountFromString($url);
+            $this->getAmountFromString($url);
+
+            if ($this->currencyTo->fullName == null || $this->currencyFrom->fullName == null) {
+                /*set default params*/
+                $this->currencyFrom = Currency::setDefaultValueFrom();
+                $this->currencyTo = Currency::setDefaultValueTo();
+            }
         }
     }
 
@@ -59,23 +65,19 @@ class CalculatorController extends Controller
         /*check is contains crypto in links*/
         $position = strpos($url, '-');
         if ($position > 0) {
-            $links = substr($url, $position - 3);
-            $position = strpos($links, '-');
-            if ($position > 0) {
-                $links = explode('-', $links);
-                if (count($links) > 0) {
-                    if (strpos($links[1], '?') > 0) {
-                        $amount = strpos($links[1], '?');
-                        $links[1] = mb_substr($links[1], 0, $amount);
+            $arrayExp = explode('/', $url);
+            foreach ($arrayExp as $expl) {
+                if (strpos($expl, '-') > 0 && strpos($expl, '?') > 0) {
+                    $links = explode('?', $expl);
+                    foreach ($links as $link) {
+                        if(strpos($link, '-') > 0) {
+                            $arrayCurrencies = explode('-', $link);
+                            $this->currencyFrom->shortName = $arrayCurrencies[0];
+                            $this->currencyTo->shortName = $arrayCurrencies[1];
+                        }
                     }
-                    $this->currencyFrom->shortName = $links[0];
-                    $this->currencyTo->shortName = $links[1];
                 }
             }
-        } else {
-            /*set default params*/
-            $this->currencyFrom = Currency::setDefaultValueFrom();
-            $this->currencyTo = Currency::setDefaultValueTo();
         }
     }
 
