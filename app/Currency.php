@@ -14,7 +14,7 @@ class Currency
     public $shortName;
     public $fullName;
     public $price_usd;
-    public $isCrypto;
+    public $crypto;
 
 
     /*
@@ -82,7 +82,7 @@ class Currency
         $currencyFrom->shortName = 'usd';
         $currencyFrom->fullName = Currency::searchFiatFullNameByISO($currencyFrom->shortName);
         $currencyFrom->price_usd = 1;
-        $currencyFrom->isCrypto = false;
+        $currencyFrom->crypto = false;
         return $currencyFrom;
     }
 
@@ -96,7 +96,7 @@ class Currency
         $currencyTo->shortName = 'eur';
         $currencyTo->fullName = Currency::searchFiatFullNameByISO($currencyTo->shortName);
         $currencyTo->price_usd = Currency::searchFiatPriceByISO($currencyTo->shortName);
-        $currencyTo->isCrypto = false;
+        $currencyTo->crypto = false;
         return $currencyTo;
     }
 }

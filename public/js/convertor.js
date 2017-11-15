@@ -37,11 +37,11 @@ function getExchangeRates() {
             for (let i = 0; i < data['data'].length; i++) {
                 var name = data['data'][i].name_quotes.substring(3);
                 if (name == from.val()) {
-                    from.attr('is_crypto', false);
+                    from.attr('crypto', false);
                     from.attr('price_usd', data['data'][i].value_quotes);
                 }
                 if (name == to.val()) {
-                    to.attr('is_crypto', false);
+                    to.attr('crypto', false);
                     to.attr('price_usd', data['data'][i].value_quotes);
                 }
                 var flag = false;
@@ -52,7 +52,7 @@ function getExchangeRates() {
                         obj.price_usd = data['data'][i].value_quotes;
                         obj.price_usdOld = data['data'][i].value_quotesOld;
                         obj.fullName = "";
-                        obj.is_crypto = false;
+                        obj.crypto = false;
                         hardcoded[item] = obj;
                         flag = true;
                     }
@@ -63,7 +63,7 @@ function getExchangeRates() {
                     obj.price_usd = data['data'][i].value_quotes;
                     obj.price_usdOld = data['data'][i].value_quotesOld;
                     obj.fullName = "";
-                    obj.is_crypto = false;
+                    obj.crypto = false;
                     currencyExchangeRates.push(obj);
                 }
                 for (var item in crossRates) {
@@ -161,11 +161,11 @@ function getGlobaldata() {
 
 
                 if (data[i].symbol == from.val()) {
-                    from.attr('is_crypto', true);
+                    from.attr('crypto', true);
                     from.attr('price_usd', data[i].price_usd);
                 }
                 if (data[i].symbol == to.val()) {
-                    to.attr('is_crypto', true);
+                    to.attr('crypto', true);
                     //to.attr('price_usd', data['data'][i].price_usd);
                     to.attr('price_usd', data[i].price_usd);
                 }
@@ -179,7 +179,7 @@ function getGlobaldata() {
                         obj.price_usd = data[i].price_usd;
                         obj.price_usdOld = data[i].price_usdOld;
                         obj.fullName = data[i].name;
-                        obj.is_crypto = true;
+                        obj.crypto = true;
                         hardcoded[item] = obj;
                         flag = true;
                     }
@@ -189,7 +189,7 @@ function getGlobaldata() {
                     obj.name = data[i].symbol;
                     obj.price_usd = data[i].price_usd;
                     obj.fullName = data[i].name;
-                    obj.is_crypto = true;
+                    obj.crypto = true;
                     currencyExchangeRates.push(obj);
                 }
             }
@@ -317,7 +317,7 @@ $(document).ready(function () {
 function initalizeNewObject(Currency, selectedItem) {
     Currency.shortName = selectedItem.text().trim();
     Currency.price_usd = selectedItem.attr('price_usd');
-    Currency.isCrypto = selectedItem.attr('isCrypto');
+    Currency.crypto = selectedItem.attr('crypto');
     Currency.fullName = "";
 }
 
@@ -345,7 +345,7 @@ function initalizeNewObject(Currency, selectedItem) {
         inputSel = $("#" + inputSel);
         inputSel.val(selectedItem.text());
         inputSel.attr('price_usd', newCurrency.price_usd);
-        inputSel.attr('iscrypto', newCurrency.isCrypto);
+        inputSel.attr('crypto', newCurrency.crypto);
 
         if (id == "autoFrom") {
             updateFromselected(newCurrency);
@@ -362,9 +362,9 @@ function getFullListHarcoded(array) {
     {
         counter++;
         if (counter == hardCodedCounterFiat || counter == hardCodedCounterCrypto + hardCodedCounterFiat) {
-            readyList.push("<li class=" + "'borderLineBottom textForDropDownMenu'" + " iscrypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+            readyList.push("<li class=" + "'borderLineBottom textForDropDownMenu'" + " crypto='" + array[item].crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
         } else {
-            readyList.push("<li class=" + 'textForDropDownMenu' + " iscrypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+            readyList.push("<li class=" + 'textForDropDownMenu' + " crypto='" + array[item].crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
         }
     }
     return readyList;
@@ -374,7 +374,7 @@ function getFullList(array) {
     var readyList = [];
 
     for (var item in array) {
-        readyList.push("<li class=" + 'textForDropDownMenu' + " iscrypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+        readyList.push("<li class=" + 'textForDropDownMenu' + " crypto='" + array[item].crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
     }
 
     return readyList;
@@ -386,7 +386,7 @@ function getFullList(array) {
 
         for (var item in array) {
             if (array[item].name.indexOf(key) != -1) {
-                readyList.push("<li class=" + 'textForDropDownMenu' + " iscrypto='" + array[item].is_crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
+                readyList.push("<li class=" + 'textForDropDownMenu' + " crypto='" + array[item].crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
             }
         }
         return readyList;

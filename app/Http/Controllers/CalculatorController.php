@@ -67,7 +67,7 @@ class CalculatorController extends Controller
         if ($position > 0) {
             $arrayExp = explode('/', $url);
             foreach ($arrayExp as $expl) {
-                if (strpos($expl, '-') > 0 && strpos($expl, '?') > 0) {
+                if (strpos($expl, '-') > 0) {
                     $links = explode('?', $expl);
                     foreach ($links as $link) {
                         if(strpos($link, '-') > 0) {
@@ -108,11 +108,11 @@ class CalculatorController extends Controller
                 $currency = Currency::setDefaultValueFrom();
             } else {
                 $currency->price_usd = Currency::searchCryptoPriceByISO($currency->shortName);
-                $currency->isCrypto = true;
+                $currency->crypto = true;
             }
         } else {
             $currency->price_usd = Currency::searchFiatPriceByISO($currency->shortName);
-            $currency->isCrypto = false;
+            $currency->crypto = false;
         }
         return $currency;
     }
