@@ -12,12 +12,13 @@ function сurrencySwitcher(tableJsObj) {
 
         switchButton.append("<span class=\"caret\"></span>");
 
-        if (dataCurrency == "usd dollar") {
-            switchButton.text(dataCurrency.toUpperCase() + " ");
-            dataCurrency = "usd";
-        } else {
-            switchButton.text(dataCurrency.toUpperCase() + " ");
-        }
+        // if (dataCurrency == "usd dollar") {
+        //     switchButton.text(dataCurrency.toUpperCase() + " ");
+        //     dataCurrency = "usd";
+        // } else {
+        //     switchButton.text(dataCurrency.toUpperCase() + " ");
+        // }
+        switchButton.text(dataCurrency.toUpperCase() + " ");
         var coefficient = currencyExchangeRatesSecond.attr('data-usd' + dataCurrency);
 
 

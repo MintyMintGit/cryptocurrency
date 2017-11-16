@@ -58,19 +58,19 @@
                 <div class="currency-selector">
                     <div class="btn-group bootstrap-select">
                         <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown"
-                                role="button" title="USD DOLLAR">
-                            <span id="currency-switch-button" class="filter-option pull-left">USD DOLLAR</span>&nbsp;<span class="bs-caret">
+                                role="button" title="USD">
+                            <span id="currency-switch-button" class="filter-option pull-left">USD</span>&nbsp;<span class="bs-caret">
                                             <span class="caret"></span></span>
                         </button>
                         <div class="dropdown-menu open" role="combobox">
                             <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
                                 <!--start something-->
                                 <li data-original-index="0" class="pointer selected">
-                                    <a tabindex="0" class="pointer" data-tokens="null" href="#USD" data-currency="usd dollar"
+                                    <a tabindex="0" class="pointer" data-tokens="null" href="#USD" data-currency="usd"
                                        role="option"
                                        aria-disabled="false"
                                        aria-selected="true"><span
-                                                class="text">USD Dollar</span><span
+                                                class="text">USD</span><span
                                                 class="glyphicon glyphicon-ok check-mark"></span></a>
                                 </li>
                                 <!--end something -->
