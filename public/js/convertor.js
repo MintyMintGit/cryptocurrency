@@ -216,8 +216,9 @@ $(document).ready(function () {
         var dropDownList = currentItem.parent().siblings();
         dropDownList.find('li').remove();
         if (currentItem.val().length > 0) {
-            dropDownList.append(getFullListHarcoded(hardcoded, currentItem.val().toUpperCase()));
+            //dropDownList.append(getFullListHarcoded(hardcoded, currentItem.val().toUpperCase()));
             dropDownList.append(getReadyList(currencyExchangeRates, currentItem.val().toUpperCase()));
+            dropDownList.append(getReadyList(hardcoded, currentItem.val().toUpperCase()));
             dropDownList.show();
             dropDownList.find('li').on('click', function (event) {
                 appendSelectedItem(event);
@@ -345,7 +346,8 @@ function getFullList(array) {
         var readyList = [];
 
         for (var item in array) {
-            if (array[item].name.indexOf(key) != -1) {
+            if(array[item].name.substring(0, key.length) == key) {
+            //if (array[item].name.indexOf(key) != -1) {
                 readyList.push("<li class=" + 'textForDropDownMenu' + " crypto='" + array[item].crypto + "' price_usd='" + array[item].price_usd + "'>" + array[item].name + "</li>");
             }
         }

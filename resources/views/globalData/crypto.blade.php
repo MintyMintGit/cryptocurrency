@@ -365,13 +365,13 @@
                         ${{ number_format($crypto['market_cap_usd'], 2) }}</td>
                     <td data-usd="{{ $crypto['price_usd'] }}" class="price">${{ $crypto['price_usd'] }}</td>
                     <td data-usd="{{ $crypto['total_supply'] }}"
-                        class="supply">{{  number_format($crypto['total_supply'], 2) }} BTC
+                        class="supply">{{  number_format($crypto['total_supply'], 2) }} {{ $crypto['symbol'] }}
                     </td>
                     <td data-usd="{{ $crypto['volume_usd_24h'] }}" class="volume">
                         ${{ number_format($crypto['total_supply'], 2) }}</td>
-                    <td class="somePadding <?php echo $crypto['percent_change_1h'] >= 0 ? "green" : "red" ?>">{{ $crypto['percent_change_1h'] }}</td>
-                    <td class=" <?php echo $crypto['percent_change_24h'] >= 0 ? "green" : "red" ?>">{{ $crypto['percent_change_24h'] }}</td>
-                    <td class=" <?php echo $crypto['percent_change_7d'] >= 0 ? "green" : "red" ?>">{{ $crypto['percent_change_7d'] }}</td>
+                    <td class="somePadding <?php echo $crypto['percent_change_1h'] >= 0 ? "green" : "red" ?>">{{ $crypto['percent_change_1h'] }}%</td>
+                    <td class=" <?php echo $crypto['percent_change_24h'] >= 0 ? "green" : "red" ?>">{{ $crypto['percent_change_24h'] }}%</td>
+                    <td class=" <?php echo $crypto['percent_change_7d'] >= 0 ? "green" : "red" ?>">{{ $crypto['percent_change_7d'] }}%</td>
                 </tr>
             @endforeach
         </tbody>
