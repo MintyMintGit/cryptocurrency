@@ -148,7 +148,7 @@ function runTrandingRates() {
         var result = calculatePercentage(oldPrice, newPrice);
         // parent.find('.trendingRates').append("<div class='green'>" + crossRates[element.innerText].price_usdOld + "</div>")
         // parent.find('.trendingRates').append("<div class='" + color + "'>" + result + "</div>");
-        parent.find('.someValue').text(newPrice);
+        parent.find('.someValue').text(newPrice.toFixed(2));
         parent.find('.trendingRates').text(result);
         trandingRatesUpdate();
     });
