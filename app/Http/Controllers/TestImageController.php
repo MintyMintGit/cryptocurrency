@@ -45,6 +45,7 @@ class TestImageController extends Controller
 
             $this->createGraph($item['id']);
         }
+        self::updateCssImg();
         return "updated succsef";
     }
 
@@ -60,7 +61,10 @@ class TestImageController extends Controller
         $file = $_SERVER['DOCUMENT_ROOT'] . '/resources.json';
         $json = json_decode(file_get_contents($file), TRUE);
         $json['series'] = [ array("data" => $data, "type" => "line")];
-        file_put_contents($file, json_encode($json));
+        if (file_put_contents($file, json_encode($json)) == false) {
+            return "resources.json can not write";
+        }
+
     }
 
     public function IsLastWeek($date)
@@ -69,5 +73,27 @@ class TestImageController extends Controller
         if ($now->diffInWeeks(Carbon::parse($date)) <= 1) {
             return true;
         }
+    }
+    static function updateCssImg() {
+        $returned_content = self::get_data('https://coinmarketcap.com/static/sprites/all_views_all_0.css');
+        if($returned_content != null) {
+            $file = $_SERVER['DOCUMENT_ROOT'] . '/css' . '/cryptoIcons.css';
+            file_put_contents($file, $returned_content);
+        }
+        $returned_content = self::get_data('https://coinmarketcap.com/static/sprites/all_views_all_0.png');
+        if($returned_content != null) {
+            $file = $_SERVER['DOCUMENT_ROOT'] . '/css' . '/all_views_all_0.png';
+            file_put_contents($file, $returned_content);
+        }
+    }
+    static function get_data($url) {
+        $ch = curl_init();
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
     }
 }
