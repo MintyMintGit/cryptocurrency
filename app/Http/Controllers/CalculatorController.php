@@ -51,12 +51,11 @@ class CalculatorController extends Controller
             $this->currencyFrom = $this->updateCurrency($this->currencyFrom);
             $this->currencyTo = $this->updateCurrency($this->currencyTo);
             $this->getAmountFromString($url);
-
-            if ($this->currencyTo->fullName == null || $this->currencyFrom->fullName == null) {
-                /*set default params*/
-                $this->currencyFrom = Currency::setDefaultValueFrom();
-                $this->currencyTo = Currency::setDefaultValueTo();
-            }
+        }
+        if ($this->currencyTo->fullName == null || $this->currencyFrom->fullName == null) {
+            /*set default params*/
+            $this->currencyFrom = Currency::setDefaultValueFrom();
+            $this->currencyTo = Currency::setDefaultValueTo();
         }
     }
 
