@@ -352,15 +352,13 @@
         </tr>
         </thead>
         <tbody>
-            @foreach($allCrypto as $crypto)
+            @foreach($allCrypto as $key => $crypto)
                 <tr>
-                    <td data-usd="{{ $crypto['symbol'] }}" class="iso">{{ $crypto['symbol'] }}</td>
-                    <td data-usd="{{ $crypto['name'] }}" class="name"><a
+                    <td>{{ $key + 1 }}</td>
+                    <td data-usd="{{ $crypto['name'] }}" class="name"><div class="s-s-{{ str_replace(' ', '-', strtolower($crypto['id'])) }} currency-logo-sprite"></div><a
                                 href="crypto/{{ str_replace(' ', '-', strtolower($crypto['id'])) }}">{{ $crypto['name'] }}</a>
                     </td>
-                    <td data-usd="{{ str_replace(' ', '-', strtolower($crypto['id'])) }}" class="iso">
-                        <div class="s-s-{{ str_replace(' ', '-', strtolower($crypto['id'])) }} currency-logo-sprite"></div>
-                    </td>
+                    <td data-usd="{{ $crypto['symbol'] }}" class="iso">{{ $crypto['symbol'] }}</td>
                     <td data-usd="{{ $crypto['market_cap_usd'] }}" class="market_cap_usd">
                         ${{ number_format($crypto['market_cap_usd'], 2) }}</td>
                     <td data-usd="{{ $crypto['price_usd'] }}" class="price">${{ $crypto['price_usd'] }}</td>

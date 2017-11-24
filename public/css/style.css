@@ -1,5 +1,4 @@
-
-та/*another content*/
+/*another content*/
 @font-face {
     font-family: "fontawesome";
     src: url('../fonts/fontawesome-webfont.ttf') format("truetype");
@@ -33,6 +32,7 @@
 body {
     font-family: "FiraSans-Regular";
     font-size: 18px;
+    overflow-x: hidden;
 }
 
 a {
@@ -146,8 +146,8 @@ h1 {
     position: absolute;
     z-index: 9;
     opacity: 0.95 !important;
-    max-height: 300px;
-    overflow-y: scroll;
+    max-height: 293px;
+    overflow-y: auto;
 }
 
 .search-dpopdown-list .currency-block {
@@ -399,7 +399,7 @@ h1 {
     line-height: 1.33;
     height: 34px;
     font-size: 16px;
-    padding: 10px 16px 10px 40px;
+    padding: 9px 16px 10px 40px;
     color: #333333;
     width: 149px;
     border-radius: 30px;
@@ -409,7 +409,7 @@ h1 {
     font-size: 13px;
     margin-left: 0;
     left: 11px;
-    top: 1px;
+    top: 0px;
 }
 .filter-area .search-filter .form-control:focus {
     border-color: #ccc;
@@ -546,6 +546,7 @@ td:first-child {
 .main-table .supply,
 .main-table .volume {
     color: #5c9fd4;
+    text-align: center;
 }
 .main-table table{
     width: 100% !important;
@@ -557,12 +558,12 @@ td:first-child {
 .main-table .name {
     position: relative;
 }
-.main-table .currency-logo-sprite {
+.main-table .currency-logo-sprite, #allCrypto .currency-logo-sprite {
     
     display: inline-block;
     margin: -1px 0px;
 }
-.main-table .name a {
+.main-table .name a, #allCrypto .name a {
     padding-left: 10px !important;
 }
 .main-table tbody .name {
@@ -579,7 +580,7 @@ td:first-child {
 }
 
 #allCrypto thead td:nth-child(5){
-    width: 21% !important;
+    width: 17% !important;
 }
 #allCrypto thead td:nth-child(6){
     width: 21% !important;
@@ -590,6 +591,12 @@ td:first-child {
 #allCrypto td:nth-child(2){
     color: #5c9fd4;
 }
+#allCrypto td:nth-child(3){
+    width: 9% !important;
+}
+#allCrypto td:nth-child(4){
+    width: 18% !important; 
+}
 #allCrypto td:nth-child(5){
     color: #5c9fd4;
 }
@@ -598,6 +605,19 @@ td:first-child {
 }
 #allCrypto td:nth-child(7){
     color: #5c9fd4;
+    width: 20% !important;
+}
+#allCrypto td:nth-child(8){
+    width: 9% !important;
+    text-align: center;
+}
+#allCrypto td:nth-child(9){
+    width: 9% !important;
+    text-align: center;
+}
+#allCrypto td:nth-child(10){
+    width: 9% !important;
+    text-align: center;
 }
 table.dataTable thead td{
     border-bottom: none !important;
@@ -605,9 +625,14 @@ table.dataTable thead td{
 table#allCrypto {
     width: 100% !important;
 }
-
-
-
+td.change .red
+{ margin-left: -6px; }
+th.change.sorting {
+    text-align: center;
+}
+td.change {
+    text-align: center;
+}
 
 
 .green {
@@ -1111,7 +1136,50 @@ table#allCrypto {
     max-height: 300px;
     overflow-y: scroll; 
 }
+
+@media (max-width: 1024px){
+#allCrypto table thead{
+    position: relative;
+}
+#allCrypto td:nth-child(1),
+#allCrypto td:nth-child(2),
+#allCrypto td:nth-child(5),
+#allCrypto td:nth-child(6){
+     display: table-cell !important;
+}
+#allCrypto thead{
+    position: relative;}
+#allCrypto table tr{
+margin-bottom: 0;
+}
+#allCrypto th{
+font-size: 14px;
+padding: 0 5px !important;
+text-align: center !important; 
+color: #000;
+}
+#allCrypto td{
+font-size: 18px;
+text-align: left !important;
+}
+#allCrypto tr{
+background: transparent !important;
+}
+#allCrypto td:nth-child(6),
+#allCrypto td:nth-child(5){
+overflow: hidden;
+text-overflow: clip;
+}
+#allCrypto td{
+display: none;
+}
+
+}
+
+
 @media (min-width: 992px) {
+
+
 
     .seven-cols .col-md-1,
     .seven-cols .col-sm-1,
