@@ -103,7 +103,7 @@ function calculatePercentage(old, today) {
         } else {
             $(element).parent().show();
             $(element).find('.from').text(from);
-            $(element).attr('href', '/calculator/' + from + "-" + linkTo);
+            $(element).attr('href', '/calculator/' + from.toLowerCase() + "-" + linkTo.toLowerCase());
         }
     });
 }
