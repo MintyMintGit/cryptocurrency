@@ -46,12 +46,13 @@ class TestImageController extends Controller
             $this->createGraph($item['id']);
         }
         self::updateCssImg();
+        $this->updateIconsCrypto();
         return "updated succsef";
     }
 
     public function createGraph($fileName)
     {
-        $runServer = 'highcharts-export-server --infile '. $_SERVER['DOCUMENT_ROOT'] .'/resources.json --outfile '. $_SERVER['DOCUMENT_ROOT'] .'/img/crypto/' . $fileName . '.png';
+        $runServer = 'highcharts-export-server --infile ' . $_SERVER['DOCUMENT_ROOT'] . '/resources.json --outfile ' . $_SERVER['DOCUMENT_ROOT'] . '/img/crypto/' . $fileName . '.png';
         $res = shell_exec($runServer);
         return $res;
     }
@@ -60,7 +61,7 @@ class TestImageController extends Controller
     {
         $file = $_SERVER['DOCUMENT_ROOT'] . '/resources.json';
         $json = json_decode(file_get_contents($file), TRUE);
-        $json['series'] = [ array("data" => $data, "type" => "line")];
+        $json['series'] = [array("data" => $data, "type" => "line")];
         if (file_put_contents($file, json_encode($json)) == false) {
             return "resources.json can not write";
         }
@@ -74,19 +75,23 @@ class TestImageController extends Controller
             return true;
         }
     }
-    static function updateCssImg() {
+
+    static function updateCssImg()
+    {
         $returned_content = self::get_data('https://coinmarketcap.com/static/sprites/all_views_all_0.css');
-        if($returned_content != null) {
+        if ($returned_content != null) {
             $file = $_SERVER['DOCUMENT_ROOT'] . '/css' . '/cryptoIcons.css';
             file_put_contents($file, $returned_content);
         }
         $returned_content = self::get_data('https://coinmarketcap.com/static/sprites/all_views_all_0.png');
-        if($returned_content != null) {
+        if ($returned_content != null) {
             $file = $_SERVER['DOCUMENT_ROOT'] . '/css' . '/all_views_all_0.png';
             file_put_contents($file, $returned_content);
         }
     }
-    static function get_data($url) {
+
+    static function get_data($url)
+    {
         $ch = curl_init();
         $timeout = 5;
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -95,5 +100,29 @@ class TestImageController extends Controller
         $data = curl_exec($ch);
         curl_close($ch);
         return $data;
+    }
+
+    public function updateIconsCrypto()
+    {
+        $allCryptoAPI = GlobalData::all()->toArray();
+        foreach ($allCryptoAPI as $index => $item) {
+            $name = $item['name'];
+            $id = $item['id'];
+            try {
+                $returned_content = self::get_data('https://files.coinmarketcap.com/static/img/coins/32x32/' . "$id" . '.png');
+                if ($returned_content != null) {
+                    $file = $_SERVER['DOCUMENT_ROOT'] . '/img/icons/' . "$id" . '.png';
+                    file_put_contents($file, $returned_content);
+                } else {
+                    $returned_content = self::get_data('https://files.coinmarketcap.com/static/img/coins/32x32/' . "$name" . '.png');
+                    if ($returned_content != null) {
+                        $file = $_SERVER['DOCUMENT_ROOT'] . '/img/icons/' . "$name" . '.png';
+                        file_put_contents($file, $returned_content);
+                    }
+                }
+            } catch (\Illuminate\Database\QueryException $e) {
+
+            }
+        }
     }
 }
