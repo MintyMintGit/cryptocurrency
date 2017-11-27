@@ -143,12 +143,9 @@ function runTrandingRates() {
         }
         var newPrice = calculateConvertor(currencyFrom.price_usd, currencyTo.price_usd, 1, from.crypto);
         var oldPrice = calculateConvertor(currencyFrom.price_usdOld, currencyTo.price_usdOld, 1, from.crypto);
-        //var newPrice = TrandingRates(currencyFrom.price_usd, currencyTo.price_usdOld);
-        //var oldPrice = TrandingRates(currencyFrom.price_usd, currencyTo.price_usdOld);
         var result = calculatePercentage(oldPrice, newPrice);
-        // parent.find('.trendingRates').append("<div class='green'>" + crossRates[element.innerText].price_usdOld + "</div>")
-        // parent.find('.trendingRates').append("<div class='" + color + "'>" + result + "</div>");
-        parent.find('.someValue').text(newPrice.toFixed(2));
+
+        parent.find('.someValue').text(parseFloat(newPrice).toFixed(2));
         parent.find('.trendingRates').text(result);
         trandingRatesUpdate();
     });

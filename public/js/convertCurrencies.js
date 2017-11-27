@@ -45,6 +45,9 @@ function updateBigNum(resultCalculateNum) {
         thousands += resultCalculateNum.charAt(doubleIndex + 4);
         thousands += resultCalculateNum.charAt(doubleIndex + 5);
         $("#thousands").text(thousands);
+    } else {
+        $("#decimal").text('00');
+        $("#thousands").text('000');
     }
 }
 
@@ -53,23 +56,28 @@ function updateBigNum(resultCalculateNum) {
 * return num value
 * */
 function calculateConvertor(priceUSDFrom, priceUSDTo, numAmount, crypto) {
+    var bigNumAmount = new Big(numAmount);
     if (crypto === "true" || crypto == true) {
-        return (numAmount * priceUSDFrom) / priceUSDTo;
+        var multiplyResult = bigNumAmount.times(new Big(priceUSDFrom)).div(new Big(priceUSDTo));
+        return multiplyResult.toFixed(6);
+        //return (numAmount * priceUSDFrom) / priceUSDTo;
     } else {
-        return (numAmount * priceUSDTo) / priceUSDFrom;
+        var multiplyResult = bigNumAmount.times(new Big(priceUSDTo)).div(new Big(priceUSDFrom));
+        return multiplyResult.toFixed(6);
+        //return (numAmount * priceUSDTo) / priceUSDFrom;
     }
 }
 
 function initalizeFromObject(Currency) {
     Currency.shortName = $("#from").val();
-    Currency.price_usd = $("#from").attr('price_usd');
+    Currency.price_usd = parseFloat($("#from").attr('price_usd'));
     Currency.crypto = $("#from").attr('crypto') == "" ? "false": $("#from").attr('crypto') == "1" ? "true": $("#from").attr('crypto');
     Currency.fullName = $("#fromSecond").text();
 }
 
 function initalizeToObject(Currency) {
     Currency.shortName = $("#to").val();
-    Currency.price_usd = $("#to").attr('price_usd');
+    Currency.price_usd = parseFloat($("#to").attr('price_usd'));
     Currency.crypto = $("#to").attr('crypto') == "" ? "false": $("#to").attr('crypto') == "1" ? "true" :$("#to").attr('crypto');
     Currency.fullName = $("#toSecond").text();
 }
@@ -98,7 +106,7 @@ function runConvertCurrencies() {
         flag = "true";
     }
 
-    var resultCalculate = calculateConvertor(currencyFrom.price_usd, currencyTo.price_usd, amount, flag);
+    var resultCalculate = calculateConvertor(parseFloat(currencyFrom.price_usd), parseFloat(currencyTo.price_usd), amount, flag);
 
     if (Boolean(resultCalculate)) {
         /*update values*/
