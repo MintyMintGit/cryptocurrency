@@ -1189,8 +1189,7 @@ display: none;
     }
 }
 
-.crypto .currency-converner-head-btn .fa,
-.converter .currency-converner-head-btn .fa {
+.crypto .currency-converner-head-btn .fa {
     display: none;
 }
 
@@ -2025,4 +2024,7 @@ margin-top: 0;
 }
 .somePadding {
     padding: 0 15px!important;
+}
+#page-top .nav-tabs {
+    border-bottom: 1px solid transparent;
 }

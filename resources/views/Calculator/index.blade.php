@@ -4,9 +4,7 @@
 
 
 <div class="converter">
-    <div class="container-fluid nav-page">
-        <a id="tab1" href="" class="currency-converner-head-btn"><i class="fa fa-calculator" aria-hidden="true"></i>< Back to List</a>
-    </div>
+
     @include("Calculator.converterTable", ['harcodedEur' => 'harcodedEur'])
 
     @include("Calculator.TrendingRates")

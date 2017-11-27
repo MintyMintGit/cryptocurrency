@@ -90,33 +90,43 @@ var configDataTable = {
 };
 
 $(document).ready(function () {
+    //$(".converter").hide();
     getExchangeRatesGlobal();
-    $(".converter").hide();
     var viewAll = $("#ViewAll");
-    $("#tab1").on('click', function (event) {
-        $(".home").hide();
-        $(".converter").show();
-        event.preventDefault();
+    $(".tab1").on('click', function (event) {
+        $(".tab1").hide();
+        $(".tab2").show();
+    //     $(".home").toggle();
+    //     $(".converter").toggle();
+    //     event.preventDefault();
     });
 
-    $("#navigation li").removeClass('active');
-    $("#homeTab").addClass("active");
-
-    $("#homeTab").on('click', function (event) {
-        event.preventDefault();
-        $("#secondPage").hide();
-        $("#firstPage").show();
-        $("#navigation li").removeClass('active');
-        $("#homeTab").addClass("active");
+    $(".tab2").on('click', function (event) {
+        $(".tab2").hide();
+        $(".tab1").show();
+        //     $(".home").toggle();
+        //     $(".converter").toggle();
+        //     event.preventDefault();
     });
 
-    $("#calculatorTab").on('click', function (event) {
-        event.preventDefault();
-        $("#firstPage").hide();
-        $("#secondPage").show();
-        $("#navigation li").removeClass('active');
-        $("#calculatorTab").addClass("active");
-    });
+    // $("#navigation li").removeClass('active');
+    // $("#homeTab").addClass("active");
+    //
+    // $("#homeTab").on('click', function (event) {
+    //     event.preventDefault();
+    //     $("#secondPage").hide();
+    //     $("#firstPage").show();
+    //     $("#navigation li").removeClass('active');
+    //     $("#homeTab").addClass("active");
+    // });
+    //
+    // $("#calculatorTab").on('click', function (event) {
+    //     event.preventDefault();
+    //     $("#firstPage").hide();
+    //     $("#secondPage").show();
+    //     $("#navigation li").removeClass('active');
+    //     $("#calculatorTab").addClass("active");
+    // });
 
     var table = $('#marketCapitalizations');
     configDataTable.ajax = $("#GlobalDataLink").val();

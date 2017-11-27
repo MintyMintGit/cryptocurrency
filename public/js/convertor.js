@@ -202,8 +202,8 @@ $(document).ready(function () {
     var date = moment(new Date());
     dataModalWindow.html(date.format('dddd, MMMM Do, YYYY') + ', ' + 'week ' + date.week());
 
-    $("#navigation li").removeClass('active');
-    $("#calculatorTab").addClass("active");
+    // $("#navigation li").removeClass('active');
+    // $("#calculatorTab").addClass("active");
     getExchangeRates();
     getGlobaldata();
     changeAmount($("#amount"), $("#amountBlue"));
