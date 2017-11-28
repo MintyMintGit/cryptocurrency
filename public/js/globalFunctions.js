@@ -126,6 +126,8 @@ function runTrandingRates() {
 
         var currencyFrom = new Currency();
         initalizeFromObject(currencyFrom);
+        var from = searchFullInfoCurrency(currencyFrom.shortName);
+        currencyFrom.fullName = from.fullName;
         var currencyTo = new Currency();
         //initalizeToObject(currencyTo);
         currencyTo.shortName = element.innerHTML;
@@ -138,12 +140,12 @@ function runTrandingRates() {
         if (currencyFrom['shortName'] == "USD") {
             currencyFrom.price_usdOld = 1;
         } else {
-            currencyFrom.price_usdOld = currencyExchangeRatesHistory[currencyFrom['shortName']].price_old;
+            currencyFrom.price_usdOld = currencyExchangeRatesHistory[currencyFrom['fullName'].toLowerCase()].price_old;
         }
         if (currencyTo['shortName'] == "USD") {
             currencyTo.price_usdOld = 1;
         } else {
-            currencyTo.price_usdOld = currencyExchangeRatesHistory[currencyTo['shortName']].price_old;
+            currencyTo.price_usdOld = currencyExchangeRatesHistory[currencyTo['fullName'].toLowerCase()].price_old;
         }
 
         // currencyTo.price_usdOld = to.price_usdOld;

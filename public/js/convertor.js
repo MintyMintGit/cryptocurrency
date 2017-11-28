@@ -37,6 +37,7 @@ function getExchangeRatesHistory() {
                 currencyExchangeRatesHistory[data[i].name] = data[i];
             }
             changeAmount($("#amount"), $("#amountBlue"));
+            runConvertCurrencies();
         }
     });
 }

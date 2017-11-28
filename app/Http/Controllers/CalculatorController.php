@@ -62,6 +62,7 @@ class CalculatorController extends Controller
     private function getFromToFromString($url)
     {
         /*check is contains crypto in links*/
+        $url = strtolower($url);
         $position = strpos($url, '-');
         if ($position > 0) {
             $arrayExp = explode('/', $url);

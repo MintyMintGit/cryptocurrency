@@ -48,6 +48,7 @@ class TestImageController extends Controller
         }
         self::updateCssImg();
         $this->updateIconsCrypto();
+        $this->currencyPerDay();
         return "updated succsef";
     }
 
@@ -129,19 +130,19 @@ class TestImageController extends Controller
 
     public function currencyPerDay()
     {
-        $data = \App\ExchangeRatesCap\Base::getExchangeRates();
-        foreach ($data['quotes'] as $key => $datum) {
-            $name = str_replace('USD', '', $key);
-            currencyHistory::updateOrCreate(
-                [
-                    'name' => "{$name}"
-                ],
-                [
-                    'price_old' => "{$datum}",
-                    'crypto' => 0
-                ]
-            );
-        }
+//        $data = \App\ExchangeRatesCap\Base::getExchangeRates();
+//        foreach ($data['quotes'] as $key => $datum) {
+//            $name = str_replace('USD', '', $key);
+//            currencyHistory::updateOrCreate(
+//                [
+//                    'name' => "{$name}"
+//                ],
+//                [
+//                    'price_old' => "{$datum}",
+//                    'crypto' => 0
+//                ]
+//            );
+//        }
         $data = \App\CoinMarketCap\Base::getGlobalData();
         foreach ($data as $key => $item) {
             currencyHistory::updateOrCreate(
