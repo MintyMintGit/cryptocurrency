@@ -24,4 +24,5 @@ Route::get('/world/{id}','WorldController@currency');
 Route::get('generateUrl','CryptoCurrenciesController@generateUrl');
 Route::get('/testImage','TestImageController@index');
 Route::get('/updateIconsCrypto','TestImageController@updateIconsCrypto');
+Route::get('/currencyPerDay','TestImageController@currencyPerDay');
 Route::get('/csvToSql','csvToSqlController@index');

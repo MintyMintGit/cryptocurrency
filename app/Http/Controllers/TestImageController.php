@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\currencyHistory;
 
 class TestImageController extends Controller
 {
@@ -123,6 +124,35 @@ class TestImageController extends Controller
             } catch (\Illuminate\Database\QueryException $e) {
 
             }
+        }
+    }
+
+    public function currencyPerDay()
+    {
+        $data = \App\ExchangeRatesCap\Base::getExchangeRates();
+        foreach ($data['quotes'] as $key => $datum) {
+            $name = str_replace('USD', '', $key);
+            currencyHistory::updateOrCreate(
+                [
+                    'name' => "{$name}"
+                ],
+                [
+                    'price_old' => "{$datum}",
+                    'crypto' => 0
+                ]
+            );
+        }
+        $data = \App\CoinMarketCap\Base::getGlobalData();
+        foreach ($data as $key => $item) {
+            currencyHistory::updateOrCreate(
+                [
+                    'name' => "{$item['id']}"
+                ],
+                [
+                    'price_old' => "{$item['price_usd']}",
+                    'crypto' => 1
+                ]
+            );
         }
     }
 }

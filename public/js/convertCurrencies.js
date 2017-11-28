@@ -60,11 +60,9 @@ function calculateConvertor(priceUSDFrom, priceUSDTo, numAmount, crypto) {
     if (crypto === "true" || crypto == true) {
         var multiplyResult = bigNumAmount.times(new Big(priceUSDFrom)).div(new Big(priceUSDTo));
         return multiplyResult.toFixed(6);
-        //return (numAmount * priceUSDFrom) / priceUSDTo;
     } else {
         var multiplyResult = bigNumAmount.times(new Big(priceUSDTo)).div(new Big(priceUSDFrom));
         return multiplyResult.toFixed(6);
-        //return (numAmount * priceUSDTo) / priceUSDFrom;
     }
 }
 
@@ -116,6 +114,6 @@ function runConvertCurrencies() {
     runTrandingRates();
 }
 
-$(document).ready(function () {
-    runConvertCurrencies();
-});
+// $(document).ready(function () {
+//     runConvertCurrencies();
+// });
