@@ -170,6 +170,15 @@ class Base
 
 
         if (count($result) == 0) {
+            $begin_time = time() - 1272000000 + floatval(microtime());
+
+            $temp = GlobalData::where('name', $str)->take(2)->get()->toArray();
+            $temp2 = Cr_cc_profile::where('profile_type', $str)->take(2)->get()->toArray();
+
+
+            $end_time = time() - 1272000000 + floatval(microtime()) - $begin_time;
+
+            $te = 10;
             for ($i = 1; $i < strlen($str); $i++) {
                 $strSearch = substr($str, 0, strlen($str) - $i);
                 $searchResultFirst = self::searchRecursion($strSearch, 1);
@@ -182,7 +191,7 @@ class Base
                             $temp = self::generateCryptoPair($searchResultFirst, $item);
                             array_push($result, $temp);
                         }
-                        return $result;
+                        $result;
                     }
 
                 }

@@ -127,13 +127,28 @@ function runTrandingRates() {
         var currencyFrom = new Currency();
         initalizeFromObject(currencyFrom);
         var currencyTo = new Currency();
+        //initalizeToObject(currencyTo);
         currencyTo.shortName = element.innerHTML;
-        var from = searchFullInfoCurrency(currencyFrom.shortName);
         var to = searchFullInfoCurrency(currencyTo.shortName);
-        currencyFrom.price_usdOld = from.price_usdOld;
-        currencyTo.price_usdOld = to.price_usdOld;
         currencyTo.price_usd = to.price_usd;
-        currencyTo.price_usdOld = to.price_usdOld;
+
+        // var from = searchFullInfoCurrency(currencyFrom.shortName);
+        // var to = searchFullInfoCurrency(currencyTo.shortName);
+
+        if (currencyFrom['shortName'] == "USD") {
+            currencyFrom.price_usdOld = 1;
+        } else {
+            currencyFrom.price_usdOld = currencyExchangeRatesHistory[currencyFrom['shortName']].price_old;
+        }
+        if (currencyTo['shortName'] == "USD") {
+            currencyTo.price_usdOld = 1;
+        } else {
+            currencyTo.price_usdOld = currencyExchangeRatesHistory[currencyTo['shortName']].price_old;
+        }
+
+        // currencyTo.price_usdOld = to.price_usdOld;
+        // currencyTo.price_usd = to.price_usd;
+        // currencyTo.price_usdOld = to.price_usdOld;
 
 
         var parent = $(element).parents('.greyBlock');
@@ -141,8 +156,8 @@ function runTrandingRates() {
             currencyTo.price_usd = 1 / currencyTo.price_usd;
             currencyTo.price_usdOld = 1 / currencyTo.price_usdOld;
         }
-        var newPrice = calculateConvertor(currencyFrom.price_usd, currencyTo.price_usd, 1, from.crypto);
-        var oldPrice = calculateConvertor(currencyFrom.price_usdOld, currencyTo.price_usdOld, 1, from.crypto);
+        var newPrice = calculateConvertor(currencyFrom.price_usd, currencyTo.price_usd, 1, currencyFrom.crypto);
+        var oldPrice = calculateConvertor(currencyFrom.price_usdOld, currencyTo.price_usdOld, 1, currencyFrom.crypto);
         var result = calculatePercentage(oldPrice, newPrice);
 
         parent.find('.someValue').text(parseFloat(newPrice).toFixed(2));

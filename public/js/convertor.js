@@ -1,4 +1,5 @@
 var currencyExchangeRates = [];
+var currencyExchangeRatesHistory = {};
 var hardcoded = {
     'USD': {},
     'EUR': {},
@@ -25,6 +26,21 @@ var crossRates = {
     'JPY': {},
     'BRL': {}
 };
+
+function getExchangeRatesHistory() {
+    $.ajax({
+        url: '/api/getExchangeRatesHistory',
+        dataType: "json",
+        type: 'GET',
+        success: function (data) {
+            for (let i = 0; i < data.length; i++) {
+                currencyExchangeRatesHistory[data[i].name] = data[i];
+            }
+            changeAmount($("#amount"), $("#amountBlue"));
+        }
+    });
+}
+
 
 function getExchangeRates() {
     $.ajax({
@@ -152,7 +168,7 @@ function getGlobaldata() {
                     currencyExchangeRates.push(obj);
                 }
             }
-            runTrandingRates();
+
         }
     });
 }
@@ -206,7 +222,8 @@ $(document).ready(function () {
     // $("#calculatorTab").addClass("active");
     getExchangeRates();
     getGlobaldata();
-    changeAmount($("#amount"), $("#amountBlue"));
+    getExchangeRatesHistory();
+
     $("#amount").on('keyup', function (event) {
         $("#amountBlue").text(event.currentTarget.value);
     });
@@ -256,10 +273,10 @@ $(document).ready(function () {
     $("#inversion").on('click', function (event) {
         event.preventDefault();
         var currentItem = $(event.currentTarget);
-        var amount = $("#amount").val().toLowerCase();
-        var from = $("#from").val().toLowerCase();
-        var to = $("#to").val().toLowerCase();
 
+        var amount = document.getElementById("amount").getAttribute('value').toLowerCase();
+        var from = document.getElementById("from").getAttribute('value').toLowerCase();
+        var to = document.getElementById("to").getAttribute('value').toLowerCase();
 
         switch (currentItem.attr("id")) {
             case "inversion" :
@@ -303,6 +320,7 @@ function initalizeNewObject(Currency, selectedItem) {
         var inputSel = id.substring(4).toLowerCase();
 
         inputSel = $("#" + inputSel);
+        inputSel.attr('value', selectedItem.text());
         inputSel.val(selectedItem.text());
         inputSel.attr('price_usd', newCurrency.price_usd);
         inputSel.attr('crypto', newCurrency.crypto);

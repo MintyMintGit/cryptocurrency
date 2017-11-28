@@ -128,9 +128,15 @@ $(document).ready(function () {
 
     $("#inversion").on('click', function (event) {
         var currentItem = $(event.currentTarget);
-        var amount = $("#amount").val().toLowerCase();
-        var from = $("#from").val().toLowerCase();
-        var to = $("#to").val().toLowerCase();
+
+        var amount = document.getElementById("amount").getAttribute('value');
+        var from = document.getElementById("from").getAttribute('value');
+        var to = document.getElementById("to").getAttribute('value');
+
+
+        // var amount = $("#amount").val().toLowerCase();
+        // var from = $("#from").val().toLowerCase();
+        // var to = $("#to").val().toLowerCase();
 
 
         localStorage.setItem("amount", amount);

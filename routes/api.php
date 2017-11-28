@@ -59,3 +59,7 @@ Route::post('historicalData/{id}', function ($id) {
     return false;
 
 })->name('historicalData');
+
+Route::get('/getExchangeRatesHistory', function (Request $request) {
+     return \App\currencyHistory::all();
+})->name('getExchangeRatesHistory');
