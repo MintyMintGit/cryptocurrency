@@ -5,7 +5,7 @@
 @include('layouts.partials._navigation')
 <input type="hidden" id="bitcoinPrice" value="{{$bitcoinPrice}}">
 <input type="hidden" id="ethPrice" value="{{$ethPrice}}">
-<link href="/css/cryptoIcons.css" rel="stylesheet" type="text/css">
+<link href="/css/cryptoicons.css" rel="stylesheet" type="text/css">
 <section class="content container-fluid">
     <div class="filter-area">
         <div class="row">

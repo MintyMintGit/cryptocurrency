@@ -61,6 +61,10 @@ function calculateConvertor(priceUSDFrom, priceUSDTo, numAmount, crypto) {
         var multiplyResult = bigNumAmount.times(new Big(priceUSDFrom)).div(new Big(priceUSDTo));
         return multiplyResult.toFixed(6);
     } else {
+        console.log('priceUSDFrom' + priceUSDFrom);
+        console.log('priceUSDTo' + priceUSDTo);
+        console.log('numAmount' + numAmount);
+        console.log('crypto' + crypto);
         var multiplyResult = bigNumAmount.times(new Big(priceUSDTo)).div(new Big(priceUSDFrom));
         return multiplyResult.toFixed(6);
     }

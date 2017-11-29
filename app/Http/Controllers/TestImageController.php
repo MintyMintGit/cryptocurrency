@@ -82,7 +82,7 @@ class TestImageController extends Controller
     {
         $returned_content = self::get_data('https://coinmarketcap.com/static/sprites/all_views_all_0.css');
         if ($returned_content != null) {
-            $file = $_SERVER['DOCUMENT_ROOT'] . '/css' . '/cryptoIcons.css';
+            $file = $_SERVER['DOCUMENT_ROOT'] . '/css' . '/cryptoicons.css';
             file_put_contents($file, $returned_content);
         }
         $returned_content = self::get_data('https://coinmarketcap.com/static/sprites/all_views_all_0.png');
@@ -130,19 +130,19 @@ class TestImageController extends Controller
 
     public function currencyPerDay()
     {
-//        $data = \App\ExchangeRatesCap\Base::getExchangeRates();
-//        foreach ($data['quotes'] as $key => $datum) {
-//            $name = str_replace('USD', '', $key);
-//            currencyHistory::updateOrCreate(
-//                [
-//                    'name' => "{$name}"
-//                ],
-//                [
-//                    'price_old' => "{$datum}",
-//                    'crypto' => 0
-//                ]
-//            );
-//        }
+        $data = \App\ExchangeRatesCap\Base::getExchangeRates();
+        foreach ($data['quotes'] as $key => $datum) {
+            $name = str_replace('USD', '', $key);
+            currencyHistory::updateOrCreate(
+                [
+                    'name' => "{$name}"
+                ],
+                [
+                    'price_old' => "{$datum}",
+                    'crypto' => 0
+                ]
+            );
+        }
         $data = \App\CoinMarketCap\Base::getGlobalData();
         foreach ($data as $key => $item) {
             currencyHistory::updateOrCreate(

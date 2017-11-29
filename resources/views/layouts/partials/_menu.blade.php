@@ -8,9 +8,9 @@
             <div class="col-md-4 nav">
                 <h3>Menu</h3>
                 <ul>
-                    <li><a href="{{ route('calculator') }}"><i class="fa fa-calculator" aria-hidden="true"></i>Currency calculator<img class="arrow" width="27" height="19" src="img/arrow-right.png"></a></li>
-                    <li><a href="{{ route('crypto') }}"><i class="fa fa-btc" aria-hidden="true"></i>Crypto Currencies Profile<img class="arrow" width="27" height="19" src="img/arrow-right.png"></a></li>
-                    <li><a href="{{ route('world') }}"><i class="fa fa-globe" aria-hidden="true"></i>World Currencies profile<img class="arrow" width="27" height="19" src="img/arrow-right.png"></a></li>
+                    <li><a href="{{ route('calculator') }}"><i class="fa fa-calculator" aria-hidden="true"></i>Currency calculator<img class="arrow" width="27" height="19" src="{{ route('startPage') }}/img/arrow-right.png"></a></li>
+                    <li><a href="{{ route('crypto') }}"><i class="fa fa-btc" aria-hidden="true"></i>Crypto Currencies Profile<img class="arrow" width="27" height="19" src="{{ route('startPage') }}/img/arrow-right.png"></a></li>
+                    <li><a href="{{ route('world') }}"><i class="fa fa-globe" aria-hidden="true"></i>World Currencies profile<img class="arrow" width="27" height="19" src="{{ route('startPage') }}/img/arrow-right.png"></a></li>
                 </ul>
             </div>
             <div class="col-md-2 linkStyle">

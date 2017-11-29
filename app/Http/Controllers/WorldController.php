@@ -11,7 +11,7 @@ class WorldController extends Controller
 {
     public function index()
     {
-        $scriptJs = 'worldIndex.js';
+        $scriptJs = 'worldindex.js';
         $money = Cr_cc_profile::all()->toArray();
         return view('World.index', compact('scriptJs', 'money'));
     }
@@ -21,7 +21,7 @@ class WorldController extends Controller
         $id = str_replace('-exchange-rates', '', $id);
         $id = str_replace('-', ' ', $id);
         $cc_profile = Cr_cc_profile::where('profile_long', $id)->get();
-        $scriptJs = array("calculator.js", "worldCurrency.js");
+        $scriptJs = array("calculator.js", "worldcurrency.js");
         $bitcoinPrice = GlobalData::find('bitcoin')->price_usd;
         $topTenCrypto = GlobalData::orderBy('market_cap_usd', 'DESC')->take(10)->get()->toArray();
         $moneyFiat = Cr_cc_profile::all()->toArray();

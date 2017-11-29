@@ -29,7 +29,7 @@ var crossRates = {
 
 function getExchangeRatesHistory() {
     $.ajax({
-        url: '/api/getExchangeRatesHistory',
+        url: '/api/getexchangerateshistory',
         dataType: "json",
         type: 'GET',
         success: function (data) {

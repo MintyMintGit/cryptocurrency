@@ -21,7 +21,7 @@ class GlobalDataController extends Controller
         $currencyTo = Currency::setDefaultValueTo();
         $amount = 1;
 
-        $scriptJs = array("globalData.js", "convertor.js");
+        $scriptJs = array("globaldata.js", "convertor.js");
         return view('globalData.index', compact('bitcoinPrice', 'ethPrice', 'scriptJs', 'CloudsOfCurrencies', 'bitcoinDateUpdate', 'currencyFrom', 'currencyTo', 'amount'));
     }
     public function saveStatistic()
@@ -57,7 +57,7 @@ class GlobalDataController extends Controller
         $bitcoinPrice = GlobalData::findOrFail('bitcoin')->price_usd;
         $ethPrice = GlobalData::findOrFail('ethereum')->price_usd;
         $allCrypto = GlobalData::all();
-        $scriptJs = array("allCrypto.js", "globalData.js");
+        $scriptJs = array("allcrypto.js", "globaldata.js");
         return view('globalData.crypto', compact('allCrypto', 'scriptJs', 'ethPrice', 'bitcoinPrice'));
     }
 }

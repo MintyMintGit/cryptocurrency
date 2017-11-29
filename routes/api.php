@@ -17,21 +17,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/GlobalDataApi', function (Request $request) {
+Route::get('/globaldataapi', function (Request $request) {
     $globalDatas = \App\GlobalData::orderBy('market_cap_usd', 'DESC')->paginate(100);
     return GlobalDataResource::collection($globalDatas);
 })->name('getGlobalDataApi');
-Route::get('/displayAll', function (Request $request) {
+Route::get('/displayall', function (Request $request) {
     $globalDatas = \App\GlobalData::orderBy('market_cap_usd', 'DESC')->get();
     return GlobalDataResource::collection($globalDatas);
 })->name('displayAll');
 
-Route::get('/getExchangeRates', function (Request $request) {
+Route::get('/getexchangerates', function (Request $request) {
     $all = \App\ExchangeRate::all();
     return \App\Http\Resources\ExchangeRates::collection($all);
 })->name('getExchangeRates');
 
-Route::get('/GlobalDataNames', function (Request $request) {
+Route::get('/globaldatanames', function (Request $request) {
     $globalDatas = \App\GlobalData::get(['name', 'symbol', 'price_usd', 'price_usdOld']);
     return $globalDatas;
 })->name('GlobalDataNames');
@@ -40,13 +40,13 @@ Route::get('search/{id}', function ($id) {
     return \App\Search\Base::searchInListSearch($id);
 })->name('searchIn');
 
-Route::post('GlobalData/saveStatistic', 'GlobalDataController@saveStatistic')->name('saveStatistic');
+Route::post('globaldata/savestatistic', 'GlobalDataController@saveStatistic')->name('saveStatistic');
 
-Route::get('getFullListSearch', function () {
+Route::get('getfulllistsearch', function () {
     return App\Search\  Base::getFullListSearch();
 })->name('getFullListSearch');
 
-Route::post('historicalData/{id}', function ($id) {
+Route::post('historicaldata/{id}', function ($id) {
     if ($id != null && $id != "") {
         $historicalData = \DB::connection('mysql2')->table(strtolower($id))->get();
         $historicalData = collect($historicalData)->sortBy(function ($temp) {
@@ -60,6 +60,6 @@ Route::post('historicalData/{id}', function ($id) {
 
 })->name('historicalData');
 
-Route::get('/getExchangeRatesHistory', function (Request $request) {
+Route::get('/getexchangerateshistory', function (Request $request) {
      return \App\currencyHistory::all();
 })->name('getExchangeRatesHistory');

@@ -6,27 +6,27 @@
 
 @font-face {
     font-family: "FiraSans-Light";
-    src: url('../fonts/FiraSans-Light.ttf') format("truetype");
+    src: url('../fonts/firasans-light.ttf') format("truetype");
 }
 
 @font-face {
     font-family: "FiraSans-Medium";
-    src: url('../fonts/FiraSans-Medium.ttf') format("truetype");
+    src: url('../fonts/firasans-medium.ttf') format("truetype");
 }
 
 @font-face {
     font-family: "FiraSans-Regular";
-    src: url('../fonts/FiraSans-Regular.ttf') format("truetype");
+    src: url('../fonts/firasans-regular.ttf') format("truetype");
 }
 
 @font-face {
     font-family: "Lato-Regular";
-    src: url('../fonts/Lato-Regular.ttf') format("truetype");
+    src: url('../fonts/lato-regular.ttf') format("truetype");
 }
 
 @font-face {
     font-family: "SegoeUI-Black";
-    src: url('../fonts/SegoeUI-Black.ttf') format("truetype");
+    src: url('../fonts/segoeui-black.ttf') format("truetype");
 }
 
 body {
@@ -868,7 +868,7 @@ td.change {
 }
 
 .currency-details .buy-btn a:before {
-    content: url(img/buy-ico.svg);
+    content: url(/img/buy-ico.svg);
     height: 18px;
     width: 18px;
     display: block;

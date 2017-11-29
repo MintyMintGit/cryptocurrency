@@ -31,7 +31,7 @@ class CalculatorController extends Controller
         $bitcoinPrice = $bitcoin->price_usd;
         $to = 'usd';
         $from = 'eur';
-
+//        echo \URL::to('/yourpath');
         return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate','to', 'from'))
             ->with('amount', $this->amount)
             ->with('currencyTo', $this->currencyTo)

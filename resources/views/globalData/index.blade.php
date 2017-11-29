@@ -4,7 +4,7 @@
 
 
 
-<link href="/css/cryptoIcons.css" rel="stylesheet" type="text/css">
+<link href="/css/cryptoicons.css" rel="stylesheet" type="text/css">
     <input type="hidden" id="viewAllLink" value="{{route('displayAll')}}" >
     <input type="hidden" id="GlobalDataLink" value="{{route('getGlobalDataApi')}}" >
 
