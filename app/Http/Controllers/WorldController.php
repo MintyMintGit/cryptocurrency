@@ -24,6 +24,10 @@ class WorldController extends Controller
         $scriptJs = array("calculator.js", "worldcurrency.js");
         $bitcoinPrice = GlobalData::find('bitcoin')->price_usd;
         $topTenCrypto = GlobalData::orderBy('market_cap_usd', 'DESC')->take(10)->get()->toArray();
+        $selectedFiat = ExchangeRate::where('name_quotes', 'like', 'USD' . $cc_profile->toArray()[0]['profile_short'])->select('value_quotes')->first();
+        if( isset($selectedFiat->value_quotes)) {
+            $selectedFiat = $selectedFiat->value_quotes;
+        }
         $moneyFiat = Cr_cc_profile::all()->toArray();
         foreach ($moneyFiat as $key => $fiat) {
             if ($fiat['profile_short'] == 'USD') {
@@ -33,6 +37,6 @@ class WorldController extends Controller
                 $moneyFiat[$key]['value_quotes'] = isset($value_quotes->value_quotes) ? $value_quotes->value_quotes : '';
             }
         }
-        return view('World.currency', compact('scriptJs', 'cc_profile', 'bitcoinPrice', 'topTenCrypto', 'moneyFiat'));
+        return view('World.currency', compact('scriptJs', 'cc_profile', 'bitcoinPrice', 'topTenCrypto', 'moneyFiat', 'selectedFiat'));
     }
 }

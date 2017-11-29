@@ -35,11 +35,11 @@
                                 <td class="url">
                                     <a data-from="{{ $cc_profile[0]['profile_short'] }}"
                                        data-to="{{ $crypto['symbol'] }}" class="updateLink"
-                                       href="/calculator/{{ strtolower($cc_profile[0]['profile_short'])   }}-to-{{ strtolower($crypto['symbol']) }}">Convert
+                                       href="/calculator/{{ strtolower($cc_profile[0]['profile_short'])   }}-{{ strtolower($crypto['symbol']) }}">Convert
                                         from {{ $cc_profile[0]['profile_long'] }} to {{ $crypto['name'] }}</a>
                                 </td>
-                                <td class="rate">
-                                    {{ round(1 / $crypto['price_usd'], 6) }}
+                                <td price_usd="{{$crypto['price_usd']}}" selectedFiat="{{$selectedFiat}}" class="rate">
+                                    {{ round(1 / $selectedFiat / $crypto['price_usd'], 6) }}
                                 </td>
                             </tr>
                         @endforeach
@@ -73,11 +73,11 @@
                                             <td class="url">
                                                 <a class="desk" data-from="{{ $cc_profile[0]['profile_short'] }}"
                                                    data-to="{{ $fiat['profile_short'] }}" class="updateLink"
-                                                   href="/calculator/{{ strtolower($cc_profile[0]['profile_short']) }}-to-{{ strtolower($fiat['profile_short']) }}">Convert
+                                                   href="/calculator/{{ strtolower($cc_profile[0]['profile_short']) }}-{{ strtolower($fiat['profile_short']) }}">Convert
                                                     from {{ $cc_profile[0]['profile_long'] }} to {{ $fiat['profile_long'] }}</a>
                                             </td>
-                                            <td class="rate">
-                                                {{ round(1 / $fiat['value_quotes'], 6) }}
+                                            <td data-content="{{$selectedFiat}}" value_quotes="{{$fiat['value_quotes']}}" class="rate">
+                                                {{ round( $fiat['value_quotes'] / $selectedFiat, 6) }}
                                             </td>
                                         </tr>
                                     @endif
