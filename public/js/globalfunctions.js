@@ -136,7 +136,10 @@ function runTrandingRates() {
 
         // var from = searchFullInfoCurrency(currencyFrom.shortName);
         // var to = searchFullInfoCurrency(currencyTo.shortName);
-
+        if(jQuery.isEmptyObject(currencyExchangeRates) == true) {
+            console.log("wait");
+            setTimeout(1000);
+        }
         if (currencyFrom['shortName'] == "USD") {
             currencyFrom.price_usdOld = 1;
         } else {
@@ -149,15 +152,17 @@ function runTrandingRates() {
         }
         if (currencyTo['shortName'] == "USD") {
             currencyTo.price_usdOld = 1;
+            currencyTo.price_usd = 1;
         } else {
             if(currencyTo['fullName'] != "") {
                 currencyTo.price_usdOld = currencyExchangeRatesHistory[currencyTo['fullName'].toLowerCase()].price_old;
             } else {
                 currencyTo.price_usdOld = currencyExchangeRatesHistory[currencyTo['shortName']].price_old;
             }
-
         }
-
+        // if(currencyTo.price_usd == undefined) {
+        //     alert(currencyExchangeRates.length);
+        // }
         // currencyTo.price_usdOld = to.price_usdOld;
         // currencyTo.price_usd = to.price_usd;
         // currencyTo.price_usdOld = to.price_usdOld;
@@ -168,9 +173,14 @@ function runTrandingRates() {
             currencyTo.price_usd = 1 / currencyTo.price_usd;
             currencyTo.price_usdOld = 1 / currencyTo.price_usdOld;
         }
-        console.log("currencyFrom=" + currencyFrom.price_usd + "currencyTo.price_usd " + currencyTo.price_usd + "currencyTo.shortName " + currencyTo.shortName + "currencyFrom.crypto " + currencyFrom.crypto );
+        console.log("indx " + indx);
+        console.log("runTrandingRates currencyFrom=" + currencyFrom.price_usd);
+        console.log("runTrandingRates currencyTo.price_usd " + currencyTo.price_usd);
+        console.log("runTrandingRates currencyTo.shortName " + currencyTo.shortName);
+        console.log("runTrandingRates currencyFrom.crypto " + currencyFrom.crypto);
 
         var newPrice = calculateConvertor(currencyFrom.price_usd, currencyTo.price_usd, 1, currencyFrom.crypto);
+        console.log("runOldConverter");
         var oldPrice = calculateConvertor(currencyFrom.price_usdOld, currencyTo.price_usdOld, 1, currencyFrom.crypto);
         var result = calculatePercentage(oldPrice, newPrice);
 

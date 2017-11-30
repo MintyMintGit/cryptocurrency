@@ -27,23 +27,7 @@ var crossRates = {
     'BRL': {}
 };
 
-function getExchangeRatesHistory() {
-    $.ajax({
-        url: '/api/getexchangerateshistory',
-        dataType: "json",
-        type: 'GET',
-        success: function (data) {
-            for (let i = 0; i < data.length; i++) {
-                currencyExchangeRatesHistory[data[i].name] = data[i];
-            }
-            changeAmount($("#amount"), $("#amountBlue"));
-            runConvertCurrencies();
-        }
-    });
-}
-
-
-function getExchangeRates() {
+$.when(
     $.ajax({
         url: $("#ExchangeRatesLink").val(),
         dataType: "json",
@@ -100,32 +84,7 @@ function getExchangeRates() {
 
 
         }
-    });
-}
-
-function TrandingRates(from, to) {
-    return (from / to).toFixed(5);
-}
-
-function calculatePercentage(old, today) {
-    return (1 - (TrandingRates(old, today))).toFixed(5);
-}
-
-    function trandingRatesUpdate() {
-    $(".linkGreyBlock").each(function (indx, element) {
-        var from = $("#amountFromCurrency").text();
-        var linkTo = $(element).find('.to').text();
-        if (from == linkTo) {
-            $(element).parent().hide();
-        } else {
-            $(element).parent().show();
-            $(element).find('.from').text(from);
-            $(element).attr('href', '/calculator/' + from.toLowerCase() + "-" + linkTo.toLowerCase());
-        }
-    });
-}
-
-function getGlobaldata() {
+    }),
     $.ajax({
         url: $("#GlobalDataNames").val(),
         dataType: "json",
@@ -171,8 +130,56 @@ function getGlobaldata() {
             }
 
         }
+    }),
+    $.ajax({
+        url: '/api/getexchangerateshistory',
+        dataType: "json",
+        type: 'GET',
+        success: function (data) {
+            for (let i = 0; i < data.length; i++) {
+                currencyExchangeRatesHistory[data[i].name] = data[i];
+            }
+
+        }
+    })
+).then(function() {
+    changeAmount($("#amount"), $("#amountBlue"));
+    runConvertCurrencies();
+});
+
+function getExchangeRatesHistory() {
+
+}
+
+
+function getExchangeRates() {
+
+}
+
+function TrandingRates(from, to) {
+    return (from / to).toFixed(5);
+}
+
+function calculatePercentage(old, today) {
+    return (1 - (TrandingRates(old, today))).toFixed(5);
+}
+
+    function trandingRatesUpdate() {
+    $(".linkGreyBlock").each(function (indx, element) {
+        var from = $("#amountFromCurrency").text();
+        var linkTo = $(element).find('.to').text();
+        if (from == linkTo) {
+            $(element).parent().hide();
+        } else {
+            $(element).parent().show();
+            $(element).find('.from').text(from);
+            $(element).attr('href', '/calculator/' + from.toLowerCase() + "-" + linkTo.toLowerCase());
+        }
     });
 }
+
+function getGlobaldata() {
+   }
 
 function updateOneTopInfo(value, DestjQueryObj) {
     var value = searchFullInfoCurrency(value);
@@ -221,9 +228,9 @@ $(document).ready(function () {
 
     // $("#navigation li").removeClass('active');
     // $("#calculatorTab").addClass("active");
-    getExchangeRates();
-    getGlobaldata();
-    getExchangeRatesHistory();
+    // getExchangeRates();
+    // getGlobaldata();
+    // getExchangeRatesHistory();
 
     $("#amount").on('keyup', function (event) {
         $("#amountBlue").text(event.currentTarget.value);
@@ -331,9 +338,22 @@ function initalizeNewObject(Currency, selectedItem) {
         } else {
             updateToselected(newCurrency);
         }
+        var obj = getFromTotext();
+        updateLinkInvert(obj.textFrom, obj.textTo);
         runTrandingRates();
     };
 
+function getFromTotext() {
+    var obj = {};
+    obj.textTo = $("#to").attr('value').toLowerCase();
+    obj.textFrom = $("#from").attr('value').toLowerCase();
+    return obj;
+}
+
+function updateLinkInvert(textFrom, textTo) {
+    var result = 'calculator/'+ textFrom + "-" + textTo;
+    $("#inversion").attr('href', result);
+}
 
 function getFullListHarcoded(array) {
     var readyList = [];

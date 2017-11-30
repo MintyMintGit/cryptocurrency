@@ -60,7 +60,7 @@
             </div>
 
             <div class="col-md-3 col-sm-3 col-xs-12 action">
-                <a id="inversion" href="calculator/{{ $currencyFrom->shortName }}/{{ $currencyTo->shortName }}?{{ $amount }}">Invert currencies</a>
+                <a id="inversion" href="calculator/{{ $currencyFrom->shortName }}-{{ $currencyTo->shortName }}?{{ $amount }}">Invert currencies</a>
             </div>
         </div>
     </div>

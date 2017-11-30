@@ -90,7 +90,8 @@ function runConvertCurrencies() {
     initalizeFromObject(currencyFrom);
     var currencyTo = new Currency();
     initalizeToObject(currencyTo);
-    var amount = parseInt($("#amount").val());
+    // var amount = parseInt($("#amount").val());
+    var amount = parseFloat($("#amount").val());
 
     if (currencyTo.crypto == "true") {
         if (currencyFrom.crypto == "false") {

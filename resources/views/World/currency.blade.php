@@ -39,7 +39,7 @@
                                         from {{ $cc_profile[0]['profile_long'] }} to {{ $crypto['name'] }}</a>
                                 </td>
                                 <td price_usd="{{$crypto['price_usd']}}" selectedFiat="{{$selectedFiat}}" class="rate">
-                                    {{ round(1 / $selectedFiat / $crypto['price_usd'], 6) }}
+                                    {{ round(exp(1 / $selectedFiat / $crypto['price_usd']), 6) }}
                                 </td>
                             </tr>
                         @endforeach
