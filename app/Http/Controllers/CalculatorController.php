@@ -23,6 +23,7 @@ class CalculatorController extends Controller
 
     public function calc()
     {
+        $this->amount = 1;
         $CloudsOfCurrencies = Search::getCloudsOfCurrencies();
         $this->getFromToAmountFromString($_SERVER['REQUEST_URI']);
         $scriptJs = 'convertor.js';
@@ -83,7 +84,6 @@ class CalculatorController extends Controller
 
     private function getAmountFromString($url)
     {
-        $this->amount = 1;
         $position = strpos($url, '?');
         if ($position > 0) {
             $amountString = mb_substr($url, $position + 1);
@@ -94,6 +94,8 @@ class CalculatorController extends Controller
                     $this->amount = 1;
                 }
             }
+        } else {
+            $this->amount = 1;
         }
     }
 
