@@ -13,7 +13,7 @@
         <div class="container-fluid page-content">
             <h1>{{ $cc_profile[0]['profile_long'] }} EXCHANGE PAIRS</h1>
             <div class="table-1">
-                <h3>Top-10 euro to crypto exchange pairs</h3>
+                <h3>Top-10 {{ $cc_profile[0]['profile_long'] }} to crypto exchange pairs</h3>
                 <div class="line"></div>
                 <section class="exchange-pairs container">
                     <table id="topTenCrypto">
@@ -39,7 +39,9 @@
                                         from {{ $cc_profile[0]['profile_long'] }} to {{ $crypto['name'] }}</a>
                                 </td>
                                 <td price_usd="{{$crypto['price_usd']}}" selectedFiat="{{$selectedFiat}}" class="rate">
-                                    {{ round(exp(1 / $selectedFiat / $crypto['price_usd']), 6) }}
+                                    {{ number_format((float)1 / $selectedFiat / $crypto['price_usd'], 6, '.', '') }}
+{{--                                    {{ round(exp(1 / $selectedFiat / $crypto['price_usd']), 6) }}--}}
+                                    {{--{{ round(exp(1 / $selectedFiat / $crypto['price_usd']), 6) }}--}}
                                 </td>
                             </tr>
                         @endforeach
@@ -48,7 +50,7 @@
                 </section>
             </div>
             <div class="table-2">
-                <h3>Top-10 euro to crypto exchange pairs</h3>
+                <h3>Top-10 {{ $cc_profile[0]['profile_long'] }} to fiat exchange pairs</h3>
                 <div class="line"></div>
                 <section class="exchange-pairs container">
                     <table id="fiat">
