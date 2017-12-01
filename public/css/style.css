@@ -969,6 +969,9 @@ td.change {
     text-align: center;
     margin-bottom: 40px;
 }
+.exchange-pairs h1 {
+    font-size: 68px;
+}
 
 .world-currencies-table th.name {
     width: 9%;
@@ -1221,7 +1224,14 @@ display: none;
     text-decoration: none;
     border-bottom: none;
 }
-
+.exchange-pairs thead .desk,
+.exchange-pairs thead .iso,
+.exchange-pairs thead .name,
+.exchange-pairs thead .url,
+.exchange-pairs thead .rate {
+    font-size: 22px;
+    line-height: 21px;
+}
 .blue {
     color: #5c9fd4;
 }

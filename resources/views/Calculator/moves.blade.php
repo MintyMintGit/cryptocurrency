@@ -1,849 +1,117 @@
-<div class="container-fluid moves">
-    <div class="container-fluid moves-heading">
-        <div class="container">
-            <h1>Moves</h1>
-        </div>
-    </div>
-    <div class="container-fluid moves-sub-heading">
-        <div class="container">
-            <ul>
-                <li><h5><a href="#writing">Writing</a></h5></li>
-                <li><h5><a href="#research">Research</a></h5></li>
-                <li><h5><a href="#drafting">Drafting and Editing</a></h5></li>
-                <li><h5><a href="#oralAdvocacy">Oral Advocacy</a></h5></li>
-                <li><h5><a href="#immutableRules">Immutable Rules</a></h5></li>
-            </ul>
-        </div>
-    </div>
-    <div class="container-fluid moves-block" id="writing">
-        <div class="container">
-            <h2>Writing</h2>
-            <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-12">
+<div class="container-fluid subcategory-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12 page-bread">
+                <h5 style="font-weight: 300 !important;"><a href="/courses">All</a></h5> <h5>
+                    &nbsp;&nbsp;>&nbsp;&nbsp;{{ current_school.name }}</h5>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 filters">
+                <div class="category-filter" id="heading-category-select">
+                    <div class="category-select">
+                        {% if current_school.name %}
+                        {{ current_school.name }}
+                        {% endif %}
+                        <i class="fa fa-caret-down" aria-hidden="true">
 
-
-                    <h4>{{ courses[0].name }}</h4>
-                    {% for lecture in courses[0].lecture_sections %}
-                    <uL>
-                        {% for lec in lecture.lectures limit:9 %}
+                        </i>
+                    </div>
+                    <div class="dropdown">
+                        <ul>
+                            {% for category in current_school.categories %}
+                            {% if category.is_published and category.course_count > 0 %}
                             <li>
-                                <a href="{{lec.url}}">{{lec.name}}</a>
-                            </li>
-                        {% endfor %}
-                    </uL>
-                    {% endfor %}
+                                <a href="{{ school.url }}/courses/category/{{ category.name }}">{{ category.name | replace: '-', ' ' }}
+                                    ({{category.course_count}})</a></li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
+                <div class="search-filter">
+                    <form method="get" action="/courses">
+                        <div class="input-group">
+                            <label for="search-courses" class="sr-only">{{'courses.search_prompt' | i18n}}</label>
+                            <input class='form-control search input-lg' data-list='.list' id='search-courses' name="query"
+                                   placeholder="{{'courses.search_prompt' | i18n}}" type='text'>
+                            <span class="input-group-btn">
+                          <label for="search-course-button" class="sr-only">Search Courses</label>
+                          <button id="search-course-button" class="btn search btn-default btn-lg"
+                                  type="submit">{{'courses.search_button'|i18n}}</button>
+                        </span>
+                        </div>
+                    </form>
+                </div>
+
+                <script>
+                    $("#search-courses").on('keyup', function (event) {
+                        var lectureArray = $(".lecture li");
+                        lectureArray.removeClass('hiddenclass');
+                        $('.container-fluid.line').removeClass('hiddenclass');
+                        var elSearch = $(event.currentTarget).val();
+                        findElementsHide(elSearch, lectureArray);
+                    });
+
+                    function findElementsHide(elSearch, lectureArray) {
+                        var elSearch = elSearch.toLowerCase();
+                        $.each(lectureArray, function (index, value) {
+                            if (-1 == value.innerText.toLowerCase().indexOf(elSearch)) {
+                                $(value).addClass('hiddenclass');
+                                hideCourse(value);
+                            }
+                        });
+                    }
+
+                    function hideCourse(valueJS) {
+                        var courser = $(valueJS).parent();
+                        if ( courser.find('.hiddenclass').length == courser.find('li').length ) {
+                            $(courser.parents('.container-fluid.line')).addClass('hiddenclass');
+                        }
+                    }
+
+                    $(document).on('click', function(event) {
+                        if (!$(event.target).closest('#heading-category-select').length) {
+                            $('#heading-category-select .dropdown').hide();
+                            $('#heading-category-select .category-select').removeClass('open');
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>
-    <div class="container-fluid moves-block" id="research">
+</div>
+<style>
+    .exclusive {
+        width: 52px;
+        height: 49px;
+    }
+    .hiddenclass {
+        display: none;
+    }
+</style>
+<div class="container-fluid home-writing sub-category">
+    <div class="container"><h2>Style Moves</h2></div>
+    {% for course in courses %}
+    <div class="container-fluid line">
         <div class="container">
-            <h2>Research</h2>
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-12">
-
-
-                    <h4>{{ courses[1].name }}</h4>
-                    {% for lecture in courses[1].lecture_sections %}
-                    <uL>
-                        {% for lec in lecture.lectures limit:9 %}
-                        <li>
-                            <a href="{{lec.url}}">{{lec.name}}</a>
-                        </li>
-                        {% endfor %}
-                    </uL>
-                    {% endfor %}
+                    <div class="item">
+                        <img class="exclusive" src="{{ course.safe_image_url }}" alt="">
+                        <h4><a href="{{ course.url }}">{{ course.name }}</a></h4>
+                        <span>{{ course.heading }}</span>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid moves-block" id="drafting">
-        <div class="container">
-            <h2>Drafting and Editing</h2>
-            <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <h4>{{ courses[2].name }}</h4>
-                    {% for lecture in courses[2].lecture_sections %}
-                    <uL>
-                        {% for lec in lecture.lectures limit:9 %}
-                        <li>
-                            <a href="{{lec.url}}">{{lec.name}}</a>
-                        </li>
-                        {% endfor %}
-                    </uL>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid moves-block" id="oralAdvocacy">
-        <div class="container">
-            <h2>Oral Advocacy</h2>
-            <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <h4>Passive Voice</h4>
+                <div class="col-md-9 col-sm-9 col-xs-12 lecture">
                     <ul>
-                        <li><a href="#">Avoid Passive Voice</a></li>
-                        <li><a href="#">Use passive voice tactically </a></li>
-                        <li><a href="#">Parallel sentence structure</a></li>
-                        <li><a href="#">Avoid Passive Voice</a></li>
-                        <li><a href="#">Use passive voice tactically </a></li>
-                        <li><a href="#">Parallel sentence structure</a></li>
+                        {% for lecture in course.lecture_sections %}
+                        {% for lec in lecture.lectures limit:9 %}
+                        <li><a href="{{lec.url}}">{{lec.name}}</li></p>
+                        {% endfor %}
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
-
-    {{--<div class="container-fluid moves-block" id="research">--}}
-        {{--<div class="container">--}}
-            {{--<h2>Research</h2>--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-
-                    {{--</ul><h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="container-fluid moves-block" id="drafting">--}}
-        {{--<div class="container">--}}
-            {{--<h2>Drafting and Editing</h2>--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-
-                    {{--</ul><h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="container-fluid moves-block" id="oralAdvocacy">--}}
-        {{--<div class="container">--}}
-            {{--<h2>Oral Advocacy</h2>--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-
-                    {{--</ul><h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="container-fluid moves-block" id="immutableRules">--}}
-        {{--<div class="container">--}}
-            {{--<h2>Immutable Rules</h2>--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-
-                    {{--</ul><h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-3 col-sm-3 col-xs-12">--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                    {{--<h4>Passive Voice</h4>--}}
-                    {{--<ul>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                        {{--<li><a href="#">Avoid Passive Voice</a></li>--}}
-                        {{--<li><a href="#">Use passive voice tactically </a></li>--}}
-                        {{--<li><a href="#">Parallel sentence structure</a></li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-
+    {% endfor %}
 </div>

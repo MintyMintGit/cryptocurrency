@@ -184,7 +184,7 @@ function runTrandingRates() {
         var oldPrice = calculateConvertor(currencyFrom.price_usdOld, currencyTo.price_usdOld, 1, currencyFrom.crypto);
         var result = calculatePercentage(oldPrice, newPrice);
 
-        parent.find('.someValue').text(parseFloat(newPrice).toFixed(2));
+        parent.find('.someValue').text(parseFloat(newPrice).toFixed(5));
         parent.find('.trendingRates').text(result);
         trandingRatesUpdate();
     });

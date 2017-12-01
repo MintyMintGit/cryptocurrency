@@ -155,5 +155,6 @@ class TestImageController extends Controller
                 ]
             );
         }
+        return $data;
     }
 }
