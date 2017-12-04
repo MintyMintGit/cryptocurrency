@@ -22,7 +22,7 @@ Route::get('/crypto/{id}','CryptoCurrenciesController@index')->middleware('lower
 Route::get('/world','WorldController@index')->name('world')->middleware('lowercase');
 Route::get('/world/{id}','WorldController@currency')->middleware('lowercase');
 Route::get('generateurl','CryptoCurrenciesController@generateUrl')->middleware('lowercase');
-Route::get('/testImage','TestImageController@index')->middleware('lowercase');
+Route::get('/testimage','TestImageController@index')->middleware('lowercase');
 Route::get('/updateiconscrypto','TestImageController@updateIconsCrypto')->middleware('lowercase');
 Route::get('/currencyperday','TestImageController@currencyPerDay')->middleware('lowercase');
 Route::get('/csvToSql','csvToSqlController@index')->middleware('lowercase');

@@ -12,14 +12,14 @@ class CallRoute extends Command
      *
      * @var string
      */
-    protected $signature = 'route:call/storeAllFrom';
+    protected $signature = 'route:call/storeallfrom';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Call route from CLI /storeAllFrom';
+    protected $description = 'Call route from CLI /storeallfrom';
 
     /**
      * Create a new command instance.
@@ -38,9 +38,9 @@ class CallRoute extends Command
      */
     public function handle()
     {
-        $request = Request::create('/storeAllFrom', 'GET');
+        $request = Request::create('/storeallfrom', 'GET');
         $this->info(app()->make(\Illuminate\Contracts\Http\Kernel::class)->handle($request));
-        $request = Request::create('/storeExchangeRates', 'GET');
+        $request = Request::create('/storeexchangerates', 'GET');
         $this->info(app()->make(\Illuminate\Contracts\Http\Kernel::class)->handle($request));
     }
 }

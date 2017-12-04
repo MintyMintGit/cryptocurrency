@@ -12,14 +12,14 @@ class CallImage extends Command
      *
      * @var string
      */
-    protected $signature = 'route:callImage';
+    protected $signature = 'route:callimage';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Call route from CLI /testImage';
+    protected $description = 'Call route from CLI /testimage';
 
     /**
      * Create a new command instance.
@@ -38,7 +38,7 @@ class CallImage extends Command
      */
     public function handle()
     {
-        $request = Request::create('/testImage', 'GET');
+        $request = Request::create('/testimage', 'GET');
         $this->info(app()->make(\Illuminate\Contracts\Http\Kernel::class)->handle($request));
     }
 }
