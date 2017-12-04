@@ -17,6 +17,11 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
+    @if (isset($canonical))
+        <link rel="canonical" href="{{ $canonical }}"/>
+    @else
+        <link rel="canonical" href="{{ $_SERVER['APP_URL'].$_SERVER['REQUEST_URI'] }}"/>
+    @endif
     <!-- Custom styles for this template -->
 
     <link href="/css/bootstrap-select.css" rel="stylesheet">

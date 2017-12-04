@@ -35,7 +35,7 @@
                     <li data-title="Japanese Yen" id="JPY" class="fiat"><a href="/world/japanese-yen-exchange-rates">Japanese Yen</a></li>
                     <li data-title="Australian Dollar" id="AUD" class="fiat"><a href="/world/australian-dollar-exchange-rates">Australian Dollar</a></li>
                     <li data-title="Swiss Franc" id="Swiss Franc" class="fiat"><a href="/world/swiss-franc-exchange-rates">Swiss Franc</a></li>
-                    <li data-title="Chinese Yuan Renminbi" id="CNY" class="fiat"><a href="/world/chinese-yuan renminbi-exchange-rates">Chinese Yuan Renminbi</a></li>
+                    <li data-title="Chinese Yuan Renminbi" id="CNY" class="fiat"><a href="/world/chinese-yuan-renminbi-exchange-rates">Chinese Yuan Renminbi</a></li>
                     <li data-title="Croatian Kuna" id="HRK" class="fiat"><a href="/world/croatian-kuna-exchange-rates">Croatian Kuna</a></li>
                 </ul>
             </div>
