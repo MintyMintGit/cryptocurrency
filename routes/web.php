@@ -12,8 +12,8 @@
 */
 
 
-Route::get('/storeAllFrom','UpdateDataController@storeAllFrom')->middleware('lowercase');
-Route::get('/storeExchangeRates','UpdateDataController@storeExchangeRates')->middleware('lowercase');
+Route::get('/storeallfrom','UpdateDataController@storeAllFrom')->middleware('lowercase');
+Route::get('/storeexchangerates','UpdateDataController@storeExchangeRates')->middleware('lowercase');
 Route::get('/','GlobalDataController@index')->name('startPage')->middleware('lowercase');
 Route::get('/calculator','CalculatorController@calc')->name('calculator')->middleware('lowercase');
 Route::get('/calculator/{id}','CalculatorController@calc')->middleware('lowercase');

@@ -79,7 +79,8 @@
                                                     from {{ $cc_profile[0]['profile_long'] }} to {{ $fiat['profile_long'] }}</a>
                                             </td>
                                             <td data-content="{{$selectedFiat}}" value_quotes="{{$fiat['value_quotes']}}" class="rate">
-                                                {{ round( $fiat['value_quotes'] / $selectedFiat, 6) }}
+                                                {{--{{ round( $fiat['value_quotes'] / $selectedFiat, 6) }}--}}
+                                                {{ number_format((float) $fiat['value_quotes'] / $selectedFiat, 6, '.', '') }}
                                             </td>
                                         </tr>
                                     @endif
