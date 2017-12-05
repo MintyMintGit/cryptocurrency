@@ -22,8 +22,7 @@
                             <th class="iso" scope="col">ISO</th>
                             <th class="name" scope="col">Name</th>
                             <th class="url" scope="col"><span
-                                        class="desk">Custom hyper link {{ $cc_profile[0]['profile_long'] }}
-                                    /URL</span><span class="mob">URL</span></th>
+                                        class="desk">Convert {{ $cc_profile[0]['profile_long'] }}</span><span class="mob">URL</span></th>
                             <th class="rate" scope="col">Rates</th>
                         </tr>
                         </thead>
@@ -59,7 +58,7 @@
                             <th class="iso" scope="col">ISO</th>
                             <th class="name" scope="col">Name</th>
                             <th class="url" scope="col">
-                                <span class="desk">Custom hyper link w/URL</span>
+                                <span class="desk">Convert {{ $cc_profile[0]['profile_long'] }}</span>
                                 <span class="mob">URL</span>
                             </th>
                             <th class="rate" scope="col">Rates</th>
