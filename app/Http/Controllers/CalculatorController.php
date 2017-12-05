@@ -32,7 +32,15 @@ class CalculatorController extends Controller
         $bitcoinPrice = $bitcoin->price_usd;
         $to = 'usd';
         $from = 'eur';
-        $canonical = $_SERVER['APP_URL']. '/calculator/' .$this->currencyFrom->shortName. '-' . $this->currencyTo->shortName . '?1';
+
+        if ($this->currencyTo->fullName == null || $this->currencyFrom->fullName == null) {
+            $canonical = $_SERVER['APP_URL']. '/calculator';
+            $this->currencyFrom = Currency::setDefaultValueFrom();
+            $this->currencyTo = Currency::setDefaultValueTo();
+        } else {
+            $canonical = $_SERVER['APP_URL'] . '/calculator/' . $this->currencyFrom->shortName . '-' . $this->currencyTo->shortName . '?1';
+        }
+
         return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate','to', 'from', 'canonical'))
             ->with('amount', $this->amount)
             ->with('currencyTo', $this->currencyTo)
@@ -53,11 +61,7 @@ class CalculatorController extends Controller
             $this->currencyTo = $this->updateCurrency($this->currencyTo);
             $this->getAmountFromString($url);
         }
-        if ($this->currencyTo->fullName == null || $this->currencyFrom->fullName == null) {
-            /*set default params*/
-            $this->currencyFrom = Currency::setDefaultValueFrom();
-            $this->currencyTo = Currency::setDefaultValueTo();
-        }
+
     }
 
     private function getFromToFromString($url)
