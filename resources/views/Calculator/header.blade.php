@@ -198,6 +198,8 @@
                 $(".navbar-brand.header-logo img").css('filter', 'none');
             }
             if (window.location.href == "https://writelaw.teachable.com/") {
+                var element = $(".navbar");
+                element.hasClass('hide-nav-background-color') ? "": element.addClass('hide-nav-background-color');
                 $(".navbar-brand.header-logo img").attr('src','https://www.filepicker.io/api/file/jXo9z9avSQi4GZUk2bXu');
             }
             if (window.location.href.indexOf('p/about-us') > 0) {
@@ -208,8 +210,9 @@
             }
             if (window.location.href.indexOf('courses') > 0) {
                 var element = $(".navbar");
-                element.removeClass("hide-nav-background-color");
-                element.addClass('show-nav-background-color');
+//                element.removeClass("hide-nav-background-color");
+                element.addClass('hide-nav-background-color');
+                $(".navbar-brand.header-logo img").attr('src','https://www.filepicker.io/api/file/jXo9z9avSQi4GZUk2bXu');
                 $(".navbar-brand.header-logo img").css('filter', 'none');
             }
         </script>

@@ -2038,3 +2038,13 @@ margin-top: 0;
 #page-top .nav-tabs {
     border-bottom: 1px solid transparent;
 }
+#conversionTable .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    border: none;
+}
+#conversionTable .table>tbody>tr>td, #conversionTable .table>tbody>tr>th,
+#conversionTable .table>thead>tr>td, #conversionTable .table>thead>tr>th {
+    text-align: center;
+}
+#conversionTable .table tr td:nth-child(2) {
+    color: #5b9ed3;
+}

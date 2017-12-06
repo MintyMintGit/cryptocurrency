@@ -14,6 +14,7 @@ class CalculatorController extends Controller
     private $currencyFrom;
     private $currencyTo;
     private $amount;
+    private $arrayConversionTable = [1, 2, 5, 10, 20, 25, 50, 100, 1000, 5000, 50000];
 
     function __construct()
     {
@@ -41,7 +42,14 @@ class CalculatorController extends Controller
             $canonical = $_SERVER['APP_URL'] . '/calculator/' . $this->currencyFrom->shortName . '-' . $this->currencyTo->shortName . '?1';
         }
 
-        return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate','to', 'from', 'canonical'))
+        if ($this->currencyTo->crypto == true) {
+            $conversionTable = $this->getEachConversionCrypto(1 / $this->currencyTo->price_usd, $this->currencyFrom->price_usd);
+        } else if ($this->currencyFrom->crypto == true) {
+            $conversionTable = $this->getEachConversionCrypto($this->currencyTo->price_usd, 1 / $this->currencyFrom->price_usd);
+        } else {
+            $conversionTable = $this->getEachConversionFiat($this->currencyTo->price_usd, $this->currencyFrom->price_usd);
+        }
+        return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate','to', 'from', 'canonical', 'conversionTable'))
             ->with('amount', $this->amount)
             ->with('currencyTo', $this->currencyTo)
             ->with('currencyFrom', $this->currencyFrom);
@@ -121,5 +129,44 @@ class CalculatorController extends Controller
         }
         return $currency;
     }
-
+    private function convertCrypto($amount, $priceUsdTo, $priceUsdFrom)
+    {
+        return number_format((float) $amount * ($priceUsdTo / $priceUsdFrom), 2, '.', '');
+    }
+    private function convertAmountCrypto($result, $priceUsdTo, $priceUsdFrom)
+    {
+        return number_format((float) $result / ($priceUsdTo / $priceUsdFrom), 2, '.', '');
+    }
+    private function convertFiat($amount, $priceUsdTo, $priceUsdFrom)
+    {
+        return number_format((float) $amount * $priceUsdTo / $priceUsdFrom, 2, '.', '');
+    }
+    private function convertAmount($result, $priceUsdTo, $priceUsdFrom)
+    {
+        return number_format((float) $result * $priceUsdFrom / $priceUsdTo , 2, '.', '');
+    }
+    private function makeItemConversionTableFiat($amount, $priceUsdTo, $priceUsdFrom)
+    {
+        return array($amount, $this->convertFiat($amount, $priceUsdTo, $priceUsdFrom), $this->convertAmount($amount, $priceUsdTo, $priceUsdFrom));
+    }
+    private function makeItemConversionTableCrypto($amount, $priceUsdTo, $priceUsdFrom)
+    {
+        return array($amount, $this->convertCrypto($amount, $priceUsdTo, $priceUsdFrom), $this->convertAmountCrypto($amount, $priceUsdTo, $priceUsdFrom));
+    }
+    private function getEachConversionFiat($priceUsdTo, $priceUsdFrom)
+    {
+        $conversionTable = array();
+        foreach ($this->arrayConversionTable as $index => $item) {
+            array_push($conversionTable, $this->makeItemConversionTableFiat($item, $priceUsdTo, $priceUsdFrom));
+        }
+        return $conversionTable;
+    }
+    private function getEachConversionCrypto($priceUsdTo, $priceUsdFrom)
+    {
+        $conversionTable = array();
+        foreach ($this->arrayConversionTable as $index => $item) {
+            array_push($conversionTable, $this->makeItemConversionTableCrypto($item, $priceUsdTo, $priceUsdFrom));
+        }
+        return $conversionTable;
+    }
 }
