@@ -27,7 +27,7 @@
                 </ul>
             </div>
             <div class="col-md-2 linkStyle">
-                <h3>World currency:</h3>
+                <h3>World Currency:</h3>
                 <ul>
                     <li data-title="US Dollar" id="USD" class="fiat"><a href="/world/us-dollar-exchange-rates">US Dollar</a></li>
                     <li data-title="Euro" id="EUR" class="fiat"><a href="/world/euro-exchange-rates">Euro</a></li>

@@ -121,5 +121,5 @@ $(document).ready(function () {
 });
 function update() {
     var date = moment(new Date())
-    $('#datetime').html(date.format('h:mm a, DD.MM.YYYY'));
+    $('#datetime').html(date.format('h:mm A, DD/MM/YYYY'));
 }
