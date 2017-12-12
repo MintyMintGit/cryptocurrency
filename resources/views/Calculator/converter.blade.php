@@ -18,9 +18,11 @@
 
     @include("Calculator.cloudOfCurrencies")
 
-    @isset($conversionTable)
-        @include("Calculator.conversionTable")
-    @endisset
+    @if(boolval($showConversionTable))
+        @isset($conversionTable)
+            @include("Calculator.conversionTable")
+        @endisset
+    @endif
 
     @include('layouts.partials._menu')
 </div>

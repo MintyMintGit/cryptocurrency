@@ -14,7 +14,7 @@ class CalculatorController extends Controller
     private $currencyFrom;
     private $currencyTo;
     private $amount;
-    private $arrayConversionTable = [1, 2, 5, 10, 20, 25, 50, 100, 1000, 5000, 50000];
+    private $arrayConversionTable = [1, 10, 20, 25, 30, 50, 100, 250, 500, 1000, 2000];
 
     function __construct()
     {
@@ -33,11 +33,14 @@ class CalculatorController extends Controller
         $bitcoinPrice = $bitcoin->price_usd;
         $to = 'usd';
         $from = 'eur';
-
+        /*show conversion table*/
+        $showConversionTable = true;
         if ($this->currencyTo->fullName == null || $this->currencyFrom->fullName == null) {
             $canonical = $_SERVER['APP_URL']. '/calculator';
             $this->currencyFrom = Currency::setDefaultValueFrom();
             $this->currencyTo = Currency::setDefaultValueTo();
+            /*disable conversion table*/
+            $showConversionTable = false;
         } else {
             $canonical = $_SERVER['APP_URL'] . '/calculator/' . $this->currencyFrom->shortName . '-' . $this->currencyTo->shortName . '?1';
         }
@@ -49,7 +52,7 @@ class CalculatorController extends Controller
         } else {
             $conversionTable = $this->getEachConversionFiat($this->currencyTo->price_usd, $this->currencyFrom->price_usd);
         }
-        return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate','to', 'from', 'canonical', 'conversionTable'))
+        return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate','to', 'from', 'canonical', 'conversionTable', 'showConversionTable'))
             ->with('amount', $this->amount)
             ->with('currencyTo', $this->currencyTo)
             ->with('currencyFrom', $this->currencyFrom);
@@ -125,6 +128,12 @@ class CalculatorController extends Controller
             }
         } else {
             $currency->price_usd = Currency::searchFiatPriceByISO($currency->shortName);
+            $currency->symbol = Cr_cc_profile::where('profile_short', 'like', $currency->shortName)->get();
+            if (isset($currency->symbol[0]->profile_symbol)) {
+                $currency->symbol = $currency->symbol[0]->profile_symbol;
+            } else {
+                $currency->symbol = null;
+            }
             $currency->crypto = false;
         }
         return $currency;
