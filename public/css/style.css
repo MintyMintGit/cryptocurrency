@@ -1824,3 +1824,11 @@ div#marketCapitalizations_filter {
     }
 }
 #conversionTable { font-weight: 700; }
+#updatedLast {
+    color: #3a3a3a;
+    border-bottom: 1px solid;
+}
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}

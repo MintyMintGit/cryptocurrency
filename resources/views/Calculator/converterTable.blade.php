@@ -1,9 +1,23 @@
 <div class="container-fluid page-content">
 
+    {{--<div class="container-fluid top-info">--}}
+        {{--<h1 class="text-uppercase">convert <span id="fromSecond">{{ $currencyFrom->fullName }}</span> to <span id="toSecond">{{ $currencyTo->fullName }}</span></h1>--}}
+        {{--<p><span id="fromThird">{{ strtoupper($currencyFrom->shortName) }}</span>/<span id="toThird">{{ strtoupper($currencyTo->shortName) }}</span> Currency Calculator<br>--}}
+            {{--Update: <a id="updatedLast" href="#">5 minutes ago</a></p>--}}
+    {{--</div>--}}
+
     <div class="container-fluid top-info">
-        <h1><span id="fromSecond">{{ strtoupper($currencyFrom->fullName) }}</span> to <span id="toSecond">{{ strtoupper($currencyTo->fullName) }}</span></h1>
-        <p><span id="fromThird">{{ strtoupper($currencyFrom->shortName) }}</span>/<span id="toThird">{{ strtoupper($currencyTo->shortName) }}</span> Currency Calculator<br>
-            Update: <a id="updatedLast" href="#">5 minutes ago</a></p>
+        @if ($showHardcodedHeader != false)
+            <h1 class="text-uppercase">{{$showHardcodedHeader}}</h1>
+            @if ($showHardcodedHeaderSecond != false)
+                <p class="text-capitalize nopadding">{{ $showHardcodedHeaderSecond }}</p>
+            @endif
+        @else
+            <h1 class="text-uppercase">convert <span id="fromSecond">{{ $currencyFrom->fullName }}</span> to <span id="toSecond">{{ $currencyTo->fullName }}</span></h1>
+            <p><span id="fromThird">{{ strtoupper($currencyFrom->shortName) }}</span>/<span id="toThird">{{ strtoupper($currencyTo->shortName) }}</span> Currency Calculator<br>
+
+        @endif
+                Update: <a id="updatedLast" href="#">5 minutes ago</a></p>
     </div>
 
     <div class="container main-info">

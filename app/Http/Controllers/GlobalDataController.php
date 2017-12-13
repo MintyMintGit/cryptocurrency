@@ -20,9 +20,13 @@ class GlobalDataController extends Controller
         $currencyFrom = Currency::setDefaultValueFrom();
         $currencyTo = Currency::setDefaultValueTo();
         $amount = 1;
-
+        $title = "Cryptocurrency Market & Exchange Rates &mdash; CoinStatz";
+        $description = "Latest cryptocurrency (digital asset) data from 'coinmarketcap' with sortable table to display price, ranking, charts,converter, and exchange rate between fiat and cryptocurrency.";
         $scriptJs = array("globaldata.js", "convertor.js");
-        return view('globalData.index', compact('bitcoinPrice', 'ethPrice', 'scriptJs', 'CloudsOfCurrencies', 'bitcoinDateUpdate', 'currencyFrom', 'currencyTo', 'amount'));
+        $showHardcodedHeader = false;
+        $showHardcodedHeaderSecond = false;
+
+        return view('globalData.index', compact('bitcoinPrice', 'ethPrice', 'scriptJs', 'CloudsOfCurrencies', 'bitcoinDateUpdate', 'currencyFrom', 'currencyTo', 'amount', 'title', 'description', 'showHardcodedHeader', 'showHardcodedHeaderSecond'));
     }
     public function saveStatistic()
     {
@@ -58,6 +62,9 @@ class GlobalDataController extends Controller
         $ethPrice = GlobalData::findOrFail('ethereum')->price_usd;
         $allCrypto = GlobalData::all();
         $scriptJs = array("allcrypto.js", "globaldata.js");
-        return view('globalData.crypto', compact('allCrypto', 'scriptJs', 'ethPrice', 'bitcoinPrice'));
+        $title = "Crypto Currencies &mdash; List Of All Coins";
+        $description = "Sortable list of coins by name, market cap, price, and circulating supply.";
+
+        return view('globalData.crypto', compact('allCrypto', 'scriptJs', 'ethPrice', 'bitcoinPrice','title', 'description'));
     }
 }

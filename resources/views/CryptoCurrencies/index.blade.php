@@ -2,7 +2,6 @@
 
 @section('content')
     <input type="hidden" id="historicalData" value="{{ route('historicalData', $crypto['id']) }}">
-    {{--<input type="hidden" id="pointStart" value="{{ $pointStart }}">--}}
 
 
     <div class="container-fluid page-content">
@@ -13,11 +12,11 @@
                     <div class="row top-info">
                         <div class="col-md-6 col-sm-6 col-xs-12 currency-name">
                             <img src="{{ $linkToIcon }}" class="currency-icon bitcoin" alt="icon">
-                            <span class="name">{{ $crypto['name'] }}</span>
-                            <span class="short">{{ $crypto['symbol'] }}</span>
+                            <H1 style="display: inline-block" class="name">{{ $crypto['name'] }} Price {{ $crypto['symbol'] }}</H1>
+                            {{--<span class="short"></span>--}}
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12 buy-btn">
-                            <a href="#">Buy instantly with credit card</a>
+                            <a href="#">Buy {{ $crypto['name'] }} Instantly</a>
                         </div>
                     </div>
                     <div class="currency-price">

@@ -25,11 +25,11 @@
                 <tbody>
                 @foreach ($money as $value)
                     <tr>
-                        <td class="name"><a href="{{ "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . "/" . strtolower(str_replace(' ', '-', $value['profile_long'])) . '-exchange-rates' }}">{{ $value['profile_long'] }}</a></td>
+                        <td class="name"><a href="{{ "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . "/" . strtolower(str_replace(' ', '-', $value['profile_long'])) . '-exchange-rates' }}">{{ $value['profile_long'] }} Exchange Rates</a></td>
                         <td class="iso">{{ $value['profile_short'] }}</td>
                         <td class="symbol">{{ $value['profile_symbol'] }}</td>
                         <td class="bank-name">{{ $value['profile_central_bank_name'] }}</td>
-                        <td class="bank-site">{{ $value['profile_central_bank_website'] }}</td>
+                        <td class="bank-site"><a href="http://{{ $value['profile_central_bank_website'] }}">{{ $value['profile_central_bank_website'] }}</a> </td>
                         <td class="unit">{{ $value['profile_unit'] }}</td>
                         <td class="cent">{{ $value['profile_cent'] }}</td>
                         <td class="coin">{{ $value['profile_coins'] }}</td>

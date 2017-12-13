@@ -173,7 +173,7 @@ function calculatePercentage(old, today) {
         } else {
             $(element).parent().show();
             $(element).find('.from').text(from);
-            $(element).attr('href', '/calculator/' + from.toLowerCase() + "-" + linkTo.toLowerCase());
+            $(element).attr('href', '/calculator/' + from.toLowerCase() + "-" + linkTo.toLowerCase() + '?' + $("#amount").val());
         }
     });
 }
@@ -224,7 +224,7 @@ $(document).ready(function () {
 
     var dataModalWindow = $("#dataModalWindow");
     var date = moment(new Date());
-    dataModalWindow.html(date.format('dddd, MMMM Do, YYYY') + ', ' + 'week ' + date.week());
+    dataModalWindow.html(date.format('dddd, MMMM Do, YYYY') + ', ' + 'Week ' + date.week());
 
     // $("#navigation li").removeClass('active');
     // $("#calculatorTab").addClass("active");
@@ -351,7 +351,7 @@ function getFromTotext() {
 }
 
 function updateLinkInvert(textFrom, textTo) {
-    var result = 'calculator/'+ textFrom + "-" + textTo;
+    var result = 'calculator/'+ textFrom + "-" + textTo + '?' + $("#amount").val();
     $("#inversion").attr('href', result);
 }
 

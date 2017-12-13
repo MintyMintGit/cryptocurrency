@@ -35,14 +35,26 @@ class CalculatorController extends Controller
         $from = 'eur';
         /*show conversion table*/
         $showConversionTable = true;
+        $showHardcodedHeader = "currency calculator";
+        $showHardcodedHeaderSecond = "currency converter";
+        $title = "Currency Calculator &mdash; Live Conversion";
+        $description = "Unique exchange rate calculator that is easy to use on mobile, desktop, and tablet";
+
         if ($this->currencyTo->fullName == null || $this->currencyFrom->fullName == null) {
             $canonical = $_SERVER['APP_URL']. '/calculator';
             $this->currencyFrom = Currency::setDefaultValueFrom();
             $this->currencyTo = Currency::setDefaultValueTo();
             /*disable conversion table*/
             $showConversionTable = false;
+
+
         } else {
+            /*here link is /calc/usd-eur?1*/
             $canonical = $_SERVER['APP_URL'] . '/calculator/' . $this->currencyFrom->shortName . '-' . $this->currencyTo->shortName . '?1';
+            $title = $this->currencyFrom->fullName . " to " . $this->currencyTo->fullName . " Exchange Rate &mdash; " . $this->currencyFrom->shortName . "/" . $this->currencyTo->shortName . " Instant Conversion";
+            $description = $this->currencyFrom->fullName . " to " . $this->currencyTo->fullName . " conversion on the fly without using the convert button";
+            $showHardcodedHeader = false;
+            $showHardcodedHeaderSecond = false;
         }
 
         if ($this->currencyTo->crypto == true) {
@@ -52,7 +64,12 @@ class CalculatorController extends Controller
         } else {
             $conversionTable = $this->getEachConversionFiat($this->currencyTo->price_usd, $this->currencyFrom->price_usd);
         }
-        return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate','to', 'from', 'canonical', 'conversionTable', 'showConversionTable'))
+
+
+
+
+        return view('Calculator.converter', compact('scriptJs', 'bitcoinPrice', 'CloudsOfCurrencies', 'bitcoinDateUpdate','to', 'from',
+            'canonical', 'conversionTable', 'showConversionTable', 'title', 'description', 'showHardcodedHeader', 'showHardcodedHeaderSecond'))
             ->with('amount', $this->amount)
             ->with('currencyTo', $this->currencyTo)
             ->with('currencyFrom', $this->currencyFrom);

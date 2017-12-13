@@ -11,7 +11,7 @@
     <input type="hidden" id="locationServ" value="{{ "http://$_SERVER[HTTP_HOST]" }}">
     <div class="exchange-pairs">
         <div class="container-fluid page-content">
-            <h1>{{ $cc_profile[0]['profile_long'] }} EXCHANGE PAIRS</h1>
+            <h1>{{ $cc_profile[0]['profile_long'] }} EXCHANGE RATES</h1>
             <div class="table-1">
                 <h3>Top-10 {{ $cc_profile[0]['profile_long'] }} to crypto exchange pairs</h3>
                 <div class="line"></div>
@@ -35,7 +35,7 @@
                                     <a data-from="{{ $cc_profile[0]['profile_short'] }}"
                                        data-to="{{ $crypto['symbol'] }}" class="updateLink"
                                        href="/calculator/{{ strtolower($cc_profile[0]['profile_short'])   }}-{{ strtolower($crypto['symbol']) }}">Convert
-                                        from {{ $cc_profile[0]['profile_long'] }} to {{ $crypto['name'] }}</a>
+                                        {{ $cc_profile[0]['profile_long'] }} to {{ $crypto['name'] }}</a>
                                 </td>
                                 <td price_usd="{{$crypto['price_usd']}}" selectedFiat="{{$selectedFiat}}" class="rate">
                                     {{ number_format((float)1 / $selectedFiat / $crypto['price_usd'], 6, '.', '') }}
@@ -49,7 +49,7 @@
                 </section>
             </div>
             <div class="table-2">
-                <h3>Top-10 {{ $cc_profile[0]['profile_long'] }} to fiat exchange pairs</h3>
+                <h3>All {{ $cc_profile[0]['profile_long'] }} to fiat exchange pairs</h3>
                 <div class="line"></div>
                 <section class="exchange-pairs container">
                     <table id="fiat">
@@ -75,7 +75,7 @@
                                                 <a class="desk" data-from="{{ $cc_profile[0]['profile_short'] }}"
                                                    data-to="{{ $fiat['profile_short'] }}" class="updateLink"
                                                    href="/calculator/{{ strtolower($cc_profile[0]['profile_short']) }}-{{ strtolower($fiat['profile_short']) }}">Convert
-                                                    from {{ $cc_profile[0]['profile_long'] }} to {{ $fiat['profile_long'] }}</a>
+                                                    {{ $cc_profile[0]['profile_long'] }} to {{ $fiat['profile_long'] }}</a>
                                             </td>
                                             <td data-content="{{$selectedFiat}}" value_quotes="{{$fiat['value_quotes']}}" class="rate">
                                                 {{--{{ round( $fiat['value_quotes'] / $selectedFiat, 6) }}--}}

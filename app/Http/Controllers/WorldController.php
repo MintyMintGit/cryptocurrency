@@ -13,7 +13,9 @@ class WorldController extends Controller
     {
         $scriptJs = 'worldindex.js';
         $money = Cr_cc_profile::all()->toArray();
-        return view('World.index', compact('scriptJs', 'money'));
+        $title = "World Currencies &mdash; Sortable List";
+        $description = "Sortable list of circulating currencies by name, iso-4217, and symbol.";
+        return view('World.index', compact('scriptJs', 'money', 'description', 'title'));
     }
 
     public function currency($id)
@@ -37,6 +39,11 @@ class WorldController extends Controller
                 $moneyFiat[$key]['value_quotes'] = isset($value_quotes->value_quotes) ? $value_quotes->value_quotes : '';
             }
         }
-        return view('World.currency', compact('scriptJs', 'cc_profile', 'bitcoinPrice', 'topTenCrypto', 'moneyFiat', 'selectedFiat'));
+
+        $title = $cc_profile[0]->profile_short . " Exchange Rates &mdash; ". strtoupper($cc_profile[0]->profile_short);
+        $description = "Compare ". $cc_profile[0]->profile_short ." rates to other listed currencies.";
+
+        return view('World.currency', compact('scriptJs', 'cc_profile', 'bitcoinPrice', 'topTenCrypto',
+            'moneyFiat', 'selectedFiat', 'title', 'description'));
     }
 }

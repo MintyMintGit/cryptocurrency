@@ -372,7 +372,7 @@
                         <th class="name-h" scope="col">Name</th>
                         <th scope="col">Market Cap</th>
                         <th scope="col">Price</th>
-                        <th class="supply-h">Circulating supply</th>
+                        <th class="supply-h">Circulating Supply</th>
                         <th class="volume-h">Volume (24h)</th>
                         <th scope="col">% Change (24h)</th>
                         <th scope="col">Price Graph (7d)</th>

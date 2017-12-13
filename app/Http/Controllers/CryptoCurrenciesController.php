@@ -17,23 +17,10 @@ class CryptoCurrenciesController extends Controller
         $linkToIcon = "/img/icons/" . $crypto->id . ".png";
         $social = DB::select("select * from crypto_sidebar where Symbol like ?", [$crypto->symbol]);
         $charts = true;
-//        $pointStart = "";
-//        if (Schema::connection('mysql2')->hasTable('bitcoin')) {
-//            $temp = \DB::connection('mysql2')->table('bitcoin')->find(1);
-//            if($temp!= null) {
-//                $pointStart = $temp->created_at;
-//            }
-//        }
-        return view('CryptoCurrencies.index',compact( 'scriptJs', 'crypto', 'bitcoinPrice', 'linkToIcon', 'social' , 'charts'));
-    }
-    public function generateUrl() {
-        $result = array();
-        $temp = GlobalData::all()->toArray();
-        foreach ($temp as $key => $value) {
-            $str = "https://files.coinmarketcap.com/static/img/coins/32x32/" . str_replace(' ','-',$value['id']) .".png";
+        $title = $crypto->name . "/" . $crypto->symbol ." Price (Digital Asset) &mdash; How To Buy " . $crypto->name;
+        $description = $crypto->name . " price in United States Dollar and Euro. View charts, market cap, volume, social, and more.";
 
-            array_push($result, $str);
-        }
-        return view('CryptoCurrencies.generateUrl', compact('result'));
+        return view('CryptoCurrencies.index',compact( 'scriptJs', 'crypto',
+            'bitcoinPrice', 'linkToIcon', 'social' , 'charts', 'title', 'description'));
     }
 }
