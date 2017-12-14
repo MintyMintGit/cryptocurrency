@@ -351,7 +351,7 @@ function getFromTotext() {
 }
 
 function updateLinkInvert(textFrom, textTo) {
-    var result = 'calculator/'+ textFrom + "-" + textTo + '?' + $("#amount").val();
+    var result = '/calculator/'+ textTo.toLowerCase() + "-" + textFrom.toLowerCase() + '?' + $("#amount").val();
     $("#inversion").attr('href', result);
 }
 

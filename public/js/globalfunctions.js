@@ -70,6 +70,7 @@ function сurrencySwitcher(tableJsObj) {
 */
 function changeAmount(amountJQueryObj, amountBlueJQueryObj) {
     amountJQueryObj.on('keyup', function (event) {
+        updateLinkInvert($("#from").val(), $("#to").val());
         amountBlueJQueryObj.val(amountJQueryObj.val());
         runConvertCurrencies();
     });
