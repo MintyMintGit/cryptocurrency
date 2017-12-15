@@ -13,7 +13,7 @@
         <div class="container-fluid page-content">
             <h1>{{ $cc_profile[0]['profile_long'] }} EXCHANGE RATES</h1>
             <div class="table-1">
-                <h3>Top-10 {{ $cc_profile[0]['profile_long'] }} to crypto exchange pairs</h3>
+                <h3>All {{ $cc_profile[0]['profile_long'] }} to crypto exchange rates</h3>
                 <div class="line"></div>
                 <section class="exchange-pairs container">
                     <table id="topTenCrypto">
@@ -49,7 +49,7 @@
                 </section>
             </div>
             <div class="table-2">
-                <h3>All {{ $cc_profile[0]['profile_long'] }} to fiat exchange pairs</h3>
+                <h3>All {{ $cc_profile[0]['profile_long'] }} to fiat exchange rates</h3>
                 <div class="line"></div>
                 <section class="exchange-pairs container">
                     <table id="fiat">

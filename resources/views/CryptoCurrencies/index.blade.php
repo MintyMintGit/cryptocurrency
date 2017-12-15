@@ -7,15 +7,15 @@
     <div class="container-fluid page-content">
         <div class="container currency-details">
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
                     <div class="row top-info">
-                        <div class="col-md-6 col-sm-6 col-xs-12 currency-name">
+                        <div class="col-md-9 col-sm-9 col-xs-12 currency-name">
                             <img src="{{ $linkToIcon }}" class="currency-icon bitcoin" alt="icon">
                             <H1 style="display: inline-block" class="name">{{ $crypto['name'] }} Price {{ $crypto['symbol'] }}</H1>
                             {{--<span class="short"></span>--}}
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12 buy-btn">
+                        <div class="col-md-3 col-sm-3 col-xs-12 buy-btn">
                             <a href="#">Buy {{ $crypto['name'] }} Instantly</a>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
             </div>
         </div>
 

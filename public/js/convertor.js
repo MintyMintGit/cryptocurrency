@@ -224,7 +224,7 @@ $(document).ready(function () {
 
     var dataModalWindow = $("#dataModalWindow");
     var date = moment(new Date());
-    dataModalWindow.html(date.format('dddd, MMMM Do, YYYY') + ', ' + 'Week ' + date.week());
+    dataModalWindow.html(date.format('dddd, MMMM Do, YYYY') + ', ' + 'week ' + date.week());
 
     // $("#navigation li").removeClass('active');
     // $("#calculatorTab").addClass("active");
