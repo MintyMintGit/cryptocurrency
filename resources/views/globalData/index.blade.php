@@ -38,52 +38,52 @@
             <section class="content container-fluid">
                 <div class="filter-area">
                     <div class="row">
-                        <div class="col-md-4 col-sm-12 col-xs-12 left" >
-                            <div class="btn-group bootstrap-select show-tick">
-                                <button type="button" class="btn dropdown-toggle bs-placeholder btn-default"
-                                        data-toggle="dropdown" role="button" title="Market Cap"><span
-                                            class="filter-option pull-left">Market Cap</span>&nbsp;<span
-                                            class="bs-caret"><span class="caret"></span></span></button>
-                                <div class="dropdown-menu open" role="combobox">
-                                    <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
-                                        <li data-original-index="0"><a href="{{ route('startPage') }}" tabindex="0" class="" data-tokens="null"
-                                                                       role="option" aria-disabled="false"
-                                                                       aria-selected="false"><span
-                                                        class="text">ALL</span><span
-                                                        class="glyphicon glyphicon-ok check-mark"></span></a></li>
-                                        <li data-original-index="1"><a href="{{ route('crypto') }}" tabindex="0" class="" data-tokens="null"
-                                                                       role="option" aria-disabled="false"
-                                                                       aria-selected="false"><span
-                                                        class="text">Crypto</span><span
-                                                        class="glyphicon glyphicon-ok check-mark"></span></a></li>
-                                    </ul>
-                                </div>
-                                <select class="selectpicker" multiple="" title="Market Cap" tabindex="-98">
-                                    <option>ALL</option>
-                                    <option>Crypto</option>
-                                </select></div>
-                            <div class="btn-group bootstrap-select show-tick">
-                                <button type="button" class="btn dropdown-toggle bs-placeholder btn-default"
-                                        data-toggle="dropdown" role="button" title="Tools"><span
-                                            class="filter-option pull-left">Tools</span>&nbsp;<span
-                                            class="bs-caret"><span class="caret"></span></span></button>
-                                <div class="dropdown-menu open" role="combobox">
-                                    <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
-                                        <li data-original-index="0">
-                                            <a href="{{ route('calculator') }}" tabindex="0" class="" data-tokens="null"
-                                               role="option" aria-disabled="false"
-                                               aria-selected="false">
-                                                <span class="text">Curency Converter Calculator</span>
-                                                <span class="glyphicon glyphicon-ok check-mark"></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <select class="selectpicker" multiple="" title="Tools" tabindex="-98">
-                                    <option>Curency Converter Calculator</option>
-                                </select></div>
-                        </div>
-                        <div class="col-md-8 col-sm-12 col-xs-12 right">
+                        {{--<div class="col-md-4 col-sm-12 col-xs-12 left" style="display: none">--}}
+                            {{--<div class="btn-group bootstrap-select show-tick">--}}
+                                {{--<button type="button" class="btn dropdown-toggle bs-placeholder btn-default"--}}
+                                        {{--data-toggle="dropdown" role="button" title="Market Cap"><span--}}
+                                            {{--class="filter-option pull-left">Market Cap</span>&nbsp;<span--}}
+                                            {{--class="bs-caret"><span class="caret"></span></span></button>--}}
+                                {{--<div class="dropdown-menu open" role="combobox">--}}
+                                    {{--<ul class="dropdown-menu inner" role="listbox" aria-expanded="false">--}}
+                                        {{--<li data-original-index="0"><a href="{{ route('startPage') }}" tabindex="0" class="" data-tokens="null"--}}
+                                                                       {{--role="option" aria-disabled="false"--}}
+                                                                       {{--aria-selected="false"><span--}}
+                                                        {{--class="text">ALL</span><span--}}
+                                                        {{--class="glyphicon glyphicon-ok check-mark"></span></a></li>--}}
+                                        {{--<li data-original-index="1"><a href="{{ route('crypto') }}" tabindex="0" class="" data-tokens="null"--}}
+                                                                       {{--role="option" aria-disabled="false"--}}
+                                                                       {{--aria-selected="false"><span--}}
+                                                        {{--class="text">Crypto</span><span--}}
+                                                        {{--class="glyphicon glyphicon-ok check-mark"></span></a></li>--}}
+                                    {{--</ul>--}}
+                                {{--</div>--}}
+                                {{--<select class="selectpicker" multiple="" title="Market Cap" tabindex="-98">--}}
+                                    {{--<option>ALL</option>--}}
+                                    {{--<option>Crypto</option>--}}
+                                {{--</select></div>--}}
+                            {{--<div class="btn-group bootstrap-select show-tick">--}}
+                                {{--<button type="button" class="btn dropdown-toggle bs-placeholder btn-default"--}}
+                                        {{--data-toggle="dropdown" role="button" title="Tools"><span--}}
+                                            {{--class="filter-option pull-left">Tools</span>&nbsp;<span--}}
+                                            {{--class="bs-caret"><span class="caret"></span></span></button>--}}
+                                {{--<div class="dropdown-menu open" role="combobox">--}}
+                                    {{--<ul class="dropdown-menu inner" role="listbox" aria-expanded="false">--}}
+                                        {{--<li data-original-index="0">--}}
+                                            {{--<a href="{{ route('calculator') }}" tabindex="0" class="" data-tokens="null"--}}
+                                               {{--role="option" aria-disabled="false"--}}
+                                               {{--aria-selected="false">--}}
+                                                {{--<span class="text">Curency Converter Calculator</span>--}}
+                                                {{--<span class="glyphicon glyphicon-ok check-mark"></span>--}}
+                                            {{--</a>--}}
+                                        {{--</li>--}}
+                                    {{--</ul>--}}
+                                {{--</div>--}}
+                                {{--<select class="selectpicker" multiple="" title="Tools" tabindex="-98">--}}
+                                    {{--<option>Curency Converter Calculator</option>--}}
+                                {{--</select></div>--}}
+                        {{--</div>--}}
+                        <div class="col-md-12 col-sm-12 col-xs-12 right">
                             <div class="currency-selector">
                                 <div class="btn-group bootstrap-select">
                                     <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown"

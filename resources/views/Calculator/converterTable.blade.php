@@ -17,7 +17,7 @@
             <p><span id="fromThird">{{ strtoupper($currencyFrom->shortName) }}</span>/<span id="toThird">{{ strtoupper($currencyTo->shortName) }}</span> Currency Calculator<br>
 
         @endif
-                Updated: <a id="updatedLast" href="#">5 minutes ago</a></p>
+                Update: <a id="updatedLast" href="#">5 minutes ago</a></p>
     </div>
 
     <div class="container main-info">
@@ -82,6 +82,6 @@
     <div class="container-fluid date">
         <h2 id="dataModalWindow">Wednesday, October 18, 2017, week 42 <span id="dataModalWindowRight"></span></h2>
 
-        <p>Trending: {{ strtoupper($currencyFrom->shortName) }} exchange rates for the last 24 hours</p>
+        <p>Trending: <span id="currencyFromTrending">{{ strtoupper($currencyFrom->shortName) }}</span> exchange rates for the last 24 hours</p>
     </div>
 </div>

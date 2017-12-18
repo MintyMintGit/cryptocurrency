@@ -753,12 +753,13 @@ td.change {
     border-radius: 3px;
     background-color: #5c9fd4;
     color: #fff;
-    margin-top: 17px;
+    margin-top: 28px;
     display: block;
     position: relative;
-    padding-top: 4px;
+    padding-top: 5px;
     padding-left: 22px;
     float: right;
+    text-align: center;
 }
 .currency-details .buy-btn a:hover {
     text-decoration: none;
@@ -849,31 +850,38 @@ td.change {
     font-size: 68px;
 }
 .world-currencies-table th.name {
-    width: 9%;
-    padding-left: 20px;
+    width: 13% !important;
+    padding-left: 20px !important;
     position: relative;
     background: #eee;
+    text-align: left !important;
+}
+.world-currencies-table th,
+.world-currencies-table td{
+    text-align: center !important; 
+    padding: 10px 5px !important;
 }
 .world-currencies-table th.iso {
-    width: 5%;
+    width: 5% !important;
 }
 .world-currencies-table th.symbol {
-    width: 8%;
+    width: 7% !important;
 }
 .world-currencies-table th.bank-name {
-    width: 20%;
+    width: 17% !important;
 }
 .world-currencies-table th.bank-site {
-    width: 22%;
+    width: 22% !important;
 }
 .world-currencies-table th.unit {
-    width: 5%;
+    width: 5% !important;
 }
 .world-currencies-table th.cent {
-    width: 5%;
+    width: 8% !important;
 }
 .world-currencies-table td.name {
     padding-left: 20px !important;
+    text-align: left !important;
 }
 .world-currencies-table td.coin {
     padding-right: 15px !important;
@@ -893,6 +901,15 @@ td.change {
     position: absolute;
     left: 7px;
     top: 32%;
+}
+.world-currencies-table .bank-site{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #5c9fd7;
+}
+.world-currencies-table .banknotes {
+    padding-right: 15px !important;
 }
 .exchange-pairs.container {
     margin-top: -41px;
@@ -1365,11 +1382,9 @@ div#marketCapitalizations_filter {
 }
 #conversionTable thead td {
     font-size: 70px;
-    font-family: "FiraSans-Bold"
 }
 #conversionTable tbody td {
     font-size: 2.6vw;
-    font-family: "FiraSans-Bold"
 }
 #conversionTable thead {
     background: #fff;
@@ -1811,6 +1826,21 @@ div#marketCapitalizations_filter {
         overflow: hidden;
         text-overflow: clip;
     }
+    .currency-price {
+        margin-bottom: 70px;
+        text-align: center;
+    }
+    .currency-details .price{
+        margin-right: 0;
+    }
+    .currency-details .currency-icon{
+        position: absolute;
+    top: 57px;
+    }
+    .currency-details .name {
+    padding-left: 46px;
+    text-align: left;
+}
 }
 @media screen and (max-width: 359px) {
     .head-logo {
@@ -1823,7 +1853,19 @@ div#marketCapitalizations_filter {
         padding-top: 8px;
     }
 }
-#conversionTable { font-weight: 700; }
+
+#conversionTable {
+    font-family: "FiraSans-Medium" !important;
+}
+
+.filter-area .bootstrap-select {
+    display: none
+}
+
+.disableViewAll .filter-area nav.nav-filter {
+    display: none
+}
+
 #updatedLast {
     color: #3a3a3a;
     border-bottom: 1px solid;

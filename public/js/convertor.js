@@ -325,6 +325,8 @@ function initalizeNewObject(Currency, selectedItem) {
         var newCurrency = new Currency();
         initalizeNewObject(newCurrency, selectedItem);
 
+        $("#currencyFromTrending").text(newCurrency.shortName);
+
         var inputSel = id.substring(4).toLowerCase();
 
         inputSel = $("#" + inputSel);
