@@ -39,15 +39,16 @@ var configDataTable = {
     "ajax": $("#viewAllLink").val(),
     "paging": false,
     "columns": [
-        {"data": "rank", "className": "num"},
+        {"data": null, "className": "num"},
         {"data": "name", "className": "name"},
         {"data": "market_cap_usd", "className": "marketcup"},
         {"data": "price_usd", "className": "price"},
         {"data": "total_supply", "className": "supply"},
         {"data": "volume_usd_24h", "className": "volume"},
         {"data": "percent_change_24h", "className": "change"},
-        {"data": "", "className": "graph"}
+        {"data": null, "className": "graph"}
     ],
+    "order": [[ 0, 'asc' ]],
     "aoColumnDefs": [{
         "aTargets": [1, 2, 3, 4, 5, 6, 7],
         "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
@@ -96,41 +97,21 @@ $(document).ready(function () {
     $(".tab1").on('click', function (event) {
         $(".tab1").hide();
         $(".tab2").show();
-    //     $(".home").toggle();
-    //     $(".converter").toggle();
-    //     event.preventDefault();
     });
 
     $(".tab2").on('click', function (event) {
         $(".tab2").hide();
         $(".tab1").show();
-        //     $(".home").toggle();
-        //     $(".converter").toggle();
-        //     event.preventDefault();
     });
-
-    // $("#navigation li").removeClass('active');
-    // $("#homeTab").addClass("active");
-    //
-    // $("#homeTab").on('click', function (event) {
-    //     event.preventDefault();
-    //     $("#secondPage").hide();
-    //     $("#firstPage").show();
-    //     $("#navigation li").removeClass('active');
-    //     $("#homeTab").addClass("active");
-    // });
-    //
-    // $("#calculatorTab").on('click', function (event) {
-    //     event.preventDefault();
-    //     $("#firstPage").hide();
-    //     $("#secondPage").show();
-    //     $("#navigation li").removeClass('active');
-    //     $("#calculatorTab").addClass("active");
-    // });
 
     var table = $('#marketCapitalizations');
     configDataTable.ajax = $("#GlobalDataLink").val();
+    var indexCell = 1;
     table.on('xhr.dt', function (e, settings, json, xhr) {
+        if(typeof json.meta !== 'undefined') {
+            indexCell = json.meta.from;
+        }
+
         if (typeof json.links != 'undefined') {
             if (json.links.next != null) {
                 $("#nextLink").show();
@@ -147,15 +128,24 @@ $(document).ready(function () {
         }
     }).dataTable(configDataTable);
 
+    table.DataTable().on( 'order.dt search.dt', function () {
+        table.DataTable().column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i + indexCell;
+        } );
+    } ).draw();
+
     $('#search_filter_input').keyup(function(){
         table.DataTable().search($(this).val()).draw() ;
     });
 
     viewAll.on('click', function (event) {
+        indexCell = 1;
         event.preventDefault();
         table.DataTable().destroy();
-        configDataTable.ajax = $("#viewAllLink").val();
+        configDataTable.ajax = {"url":$("#viewAllLink").val(),"dataSrc":""}
+        // configDataTable.ajax = $("#viewAllLink").val();
         table.dataTable(configDataTable);
+
     });
     $("#nextLink").on('click', function (event) {
         event.preventDefault();

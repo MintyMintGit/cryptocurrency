@@ -23,7 +23,7 @@ Route::get('/globaldataapi', function (Request $request) {
 })->name('getGlobalDataApi');
 Route::get('/displayall', function (Request $request) {
     $globalDatas = \App\GlobalData::orderBy('market_cap_usd', 'DESC')->get();
-    return GlobalDataResource::collection($globalDatas);
+    return $globalDatas;
 })->name('displayAll');
 
 Route::get('/getexchangerates', function (Request $request) {
